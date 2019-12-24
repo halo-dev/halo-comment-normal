@@ -1,24 +1,8 @@
-# halo-comment-normal
+<h1 align="center"><a href="https://github.com/halo-dev" target="_blank">halo-comment-normal</a></h1>
+> 适用于 Halo 的评论组件。
 
-## Project setup
-```
-npm install
-```
+### 使用指南
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+1. 进入后台 -> 系统 -> 博客设置 -> 评论设置
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+2. 将 `评论模块 JS` 修改为：

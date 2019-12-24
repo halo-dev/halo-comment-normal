@@ -1,0 +1,519 @@
+.halo-comment {
+    position: relative;
+    font-family: PingFang SC, Hiragino Sans GB, Microsoft YaHei, STHeiti, WenQuanYi Micro Hei, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.8;
+    margin: 0 auto;
+    color: #313131;
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    a {
+        text-decoration: none;
+        color: $color;
+    }
+
+    input::-webkit-input-placeholder,
+    textarea::-webkit-input-placeholder {
+        color: #cccccc
+    }
+
+    a,
+    abbr,
+    acronym,
+    address,
+    applet,
+    big,
+    blockquote,
+    body,
+    caption,
+    cite,
+    code,
+    dd,
+    del,
+    dfn,
+    div,
+    dl,
+    dt,
+    em,
+    fieldset,
+    figure,
+    form,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    html,
+    iframe,
+    ins,
+    kbd,
+    label,
+    legend,
+    li,
+    object,
+    ol,
+    p,
+    pre,
+    q,
+    s,
+    samp,
+    small,
+    span,
+    strike,
+    strong,
+    sub,
+    sup,
+    table,
+    tbody,
+    td,
+    tfoot,
+    th,
+    thead,
+    tr,
+    tt,
+    ul,
+    var {
+        border: 0;
+        font-size: 100%;
+        font-style: inherit;
+        font-weight: inherit;
+        margin: 0;
+        outline: 0;
+        padding: 0;
+        vertical-align: baseline;
+    }
+
+    button,
+    input,
+    textarea {
+        -webkit-appearance: none;
+        outline: none;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    button:focus,
+    input:focus,
+    textarea:focus {
+        outline: none;
+    }
+
+    ol,
+    ul {
+        list-style: none;
+    }
+
+    .middle {
+        display: inline-block;
+        vertical-align: middle
+    }
+
+    .avatar {
+        display: block;
+        object-fit: cover;
+        border-radius: 100%;
+        width: 48px;
+        height: 48px;
+        cursor: pointer;
+        transition: all 0.8s;
+
+        &:hover {
+            transform: rotate(360deg);
+        }
+    }
+
+    .comment-editor {
+        position: relative;
+        z-index: 1;
+        // background-color: #fafafa;
+        animation: top20 500ms;
+
+        .inner {
+            margin: auto;
+            padding: 20px 0;
+        }
+    }
+
+    .comment-form {
+        margin-left: 56px;
+    }
+
+    .comment-form input,
+    .comment-form textarea {
+        box-shadow: none;
+        border: 1px solid #e1e8ed;
+        border-radius: 5px;
+        box-sizing: border-box;
+        padding: 10px;
+        resize: vertical;
+        color: #657786;
+    }
+
+    .comment-form input:focus,
+    .comment-form textarea:focus {
+        border-color: #cccccc;
+    }
+
+    .commentator {
+        position: relative;
+        float: left;
+    }
+
+    .author-info {
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 10px;
+
+        input {
+            float: left;
+            width: 32%;
+            margin-right: 2%;
+        }
+
+        input#authorUrl {
+            margin: 0;
+        }
+    }
+
+    .comment-textarea {
+        position: relative;
+        width: 100%;
+
+        textarea {
+            font-size: 13px;
+            line-height: 18px;
+            width: 100%;
+            min-height: 90px;
+            overflow: hidden;
+            transition: all .15s ease-in-out;
+            color: #000;
+        }
+    }
+
+    .comment-preview {
+        position: relative;
+        width: 100%;
+        min-height: 90px;
+        box-shadow: none;
+        border: 1px solid #e1e8ed;
+        border-radius: 5px;
+        box-sizing: border-box;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .comment-buttons {
+        font-size: 14px;
+        text-align: right;
+
+        .button-submit,
+        .button-preview-edit {
+            animation: bottom20 500ms;
+            border: none;
+            background: $color;
+            color: #fff;
+            font-weight: 500;
+            padding: 6px 18px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            display: inline-block;
+            transition: all 0.3s ease 0s;
+
+            &:hover {
+                color: #404040;
+                font-weight: 700;
+                letter-spacing: 3px;
+                background: none;
+                -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+                -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+                box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+                transition: all 0.3s ease 0s;
+            }
+        }
+    }
+
+    .comment-loader-container {
+        animation: top20 500ms;
+        position: relative;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        margin: 30px 0;
+
+        .comment-loader {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: space-between;
+            width: 30px;
+
+            span {
+                width: 4px;
+                height: 15px;
+                background-color: #3b83ee;
+
+                &:nth-of-type(1) {
+                    animation: grow 1s -0.45s ease-in-out infinite;
+                }
+
+                &:nth-of-type(2) {
+                    animation: grow 1s -0.3s ease-in-out infinite;
+                }
+
+                &:nth-of-type(3) {
+                    animation: grow 1s -0.15s ease-in-out infinite;
+                }
+
+                &:nth-of-type(4) {
+                    animation: grow 1s ease-in-out infinite;
+                }
+            }
+
+            @keyframes grow {
+
+                0%,
+                100% {
+                    transform: scaleY(1);
+                }
+
+                50% {
+                    transform: scaleY(2);
+                }
+            }
+        }
+    }
+
+    .comment-nodes {
+
+        animation: top20 1000ms;
+
+        position: relative;
+
+        .comment-editor {
+            animation: bottom20 500ms;
+
+            .inner {
+                padding: 7px 0 12px;
+            }
+        }
+    }
+
+    .comment-load-button {
+        margin: 30px 0;
+        text-align: center;
+    }
+
+    .comment-empty {
+        margin: 30px 0;
+        text-align: center;
+        color: #8899a6;
+    }
+
+    .comment-page {
+        margin-top: 30px;
+        text-align: center;
+        border-top: 3px solid #f5f8fa;
+
+        .page {
+            display: inline-block;
+            padding: 10px 0;
+            margin: 0;
+
+            li {
+                display: inline;
+                margin-right: 5px;
+            }
+
+            button {
+                margin-bottom: 8px;
+                position: relative;
+                font-size: inherit;
+                font-family: inherit;
+                padding: 5px 10px;
+                border: 1px solid #d9d9d9;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: all 0.8s;
+                font-weight: normal;
+                color: rgba(0, 0, 0, .65);
+                background-color: #fff;
+
+                &:hover {
+                    color: #1890ff;
+                    border-color: #1890ff;
+                }
+            }
+
+            .active {
+                color: #1890ff;
+                border-color: #1890ff;
+            }
+        }
+    }
+
+    .comment-nodes .index-1 {
+        overflow: hidden;
+        margin-top: 30px;
+        padding-bottom: 20px;
+        border-bottom: 3px solid #f5f8fa;
+    }
+
+    .comment-nodes li:last-child {
+        border: 0;
+    }
+
+    .comment-nodes .commentator a:after,
+    .comment-nodes .commentator a:before {
+        display: none;
+    }
+
+    .comment-body {
+        position: relative;
+        margin: 0 auto;
+        padding: 0;
+
+        &:hover {
+            .comment-reply {
+                display: block;
+            }
+        }
+    }
+
+    .children {
+        .comment-body {
+            &:before {
+                content: "";
+                width: 2px;
+                height: 500%;
+                background: $color;
+                left: 23px;
+                top: -500%;
+                position: absolute;
+            }
+        }
+    }
+
+    .comment-avatar {
+        position: relative;
+        z-index: 1;
+        float: left;
+        padding: 0;
+    }
+
+    .contain-main {
+        margin-left: 58px;
+    }
+
+    .comment-meta {
+        line-height: 1;
+
+        .useragent-info {
+            margin-top: 6px;
+            font-size: 10px;
+            color: #657786;
+        }
+    }
+
+    .comment-author {
+        font-size: 14px;
+
+        .author-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #666;
+        }
+    }
+
+    .is-admin {
+        margin-left: 4px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+
+    .comment-time {
+        display: inline-block;
+        margin-top: 6px;
+        font-size: 12px;
+        color: #657786;
+    }
+
+    .comment-id {
+        display: block;
+        float: right;
+        margin-top: 6px;
+        font-size: 12px;
+        color: #657786;
+    }
+
+    .comment-content {
+        padding: 20px 20px 19px 0;
+        font-size: 13px;
+        color: #111111;
+
+        p {
+            margin: 0;
+
+            img {
+                width: 50%;
+            }
+        }
+    }
+
+    .comment-content,
+    .comment-preview {
+        // TODO
+    }
+
+    .comment-reply {
+        display: none;
+        float: right;
+        font-size: 12px;
+        color: #ffffff;
+        padding: 1px 5px;
+        border-radius: 3px;
+        line-height: 1.5;
+        background: #898c7b;
+        transition: all .2s ease-in-out;
+
+        a {
+            color: #ffffff;
+
+            &:hover {
+                color: #ffffff;
+            }
+        }
+    }
+
+    @media only screen and (max-width:900px) {
+        .comment-reply {
+            display: block;
+        }
+    }
+
+    @keyframes top20 {
+        0% {
+            opacity: 0;
+            transform: translateY(-20px)
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0)
+        }
+    }
+
+    @keyframes bottom20 {
+        0% {
+            opacity: 0;
+            transform: translateY(20px)
+        }
+
+        100% {
+            opacity: 1;
+            transform: translateY(0)
+        }
+    }
+}
