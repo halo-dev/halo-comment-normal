@@ -1,7 +1,7 @@
 {
   "name": "halo-comment-normal",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.1.0",
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -44,5 +44,17 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "description": "<h1 align=\"center\"><a href=\"https://github.com/halo-dev\" target=\"_blank\">halo-comment-normal</a></h1> > 适用于 Halo 的评论组件。",
+  "main": "babel.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/halo-dev/halo-comment-normal.git"
+  },
+  "author": "Ryan Wang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/halo-dev/halo-comment-normal/issues"
+  },
+  "homepage": "https://github.com/halo-dev/halo-comment-normal#readme"
 }
