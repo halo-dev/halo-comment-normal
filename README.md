@@ -5,4 +5,4 @@
 
 1. 进入后台 -> 系统 -> 博客设置 -> 评论设置
 
-2. 将 `评论模块 JS` 修改为：https://cdn.jsdelivr.net/npm/halo-comment-normal@1.1.0/dist/halo-comment.min.js
+2. 将 `评论模块 JS` 修改为：`https://cdn.jsdelivr.net/npm/halo-comment-normal@1.1.0/dist/halo-comment.min.js`
