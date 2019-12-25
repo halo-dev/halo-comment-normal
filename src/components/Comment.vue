@@ -12,7 +12,7 @@
 
     <div
       class="comment-load-button"
-      v-if="!configs.autoLoad && !loaded"
+      v-if="!mergedConfigs.autoLoad && !loaded"
     >
       <a
         class="button-load"
@@ -34,7 +34,7 @@
           :target="target"
           :comment="comment"
           :options="options"
-          :configs="configs"
+          :configs="mergedConfigs"
           :key="index"
         />
       </template>
@@ -100,12 +100,6 @@ export default {
       },
       commentLoading: false,
       loaded: false,
-      editorVisiable: false,
-      alertVisiable: false,
-      editingComment: {},
-      infoes: [],
-      warnings: [],
-      successes: [],
       repliedSuccess: null,
       replyingComment: null,
       options: {
@@ -117,10 +111,19 @@ export default {
     target() {
       // pluralize it
       return `${this.type}s`;
+    },
+    mergedConfigs() {
+      return Object.assign(
+        {
+          autoLoad: true,
+          showUserAgent: true
+        },
+        this.configs
+      );
     }
   },
   created() {
-    if (this.configs.autoLoad) {
+    if (this.mergedConfigs.autoLoad) {
       this.loadComments();
     }
     this.loadOptions();

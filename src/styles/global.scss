@@ -487,6 +487,45 @@
         }
     }
 
+    .alert {
+        animation: top20 500ms;
+        border-radius: 4px;
+        padding: 8px 16px;
+        background-color: #f44336;
+        color: white;
+        opacity: 1;
+        transition: opacity 0.6s;
+        margin-bottom: 15px;
+
+        &.success {
+            background-color: #4caf50;
+        }
+
+        &.info {
+            background-color: #2196f3;
+        }
+
+        &.warning {
+            background-color: #ff9800;
+        }
+
+        .closebtn {
+            margin-left: 15px;
+            color: #fff;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+
+            &:hover {
+                color: black;
+            }
+        }
+
+    }
+
     @media only screen and (max-width:900px) {
         .comment-reply {
             display: block;

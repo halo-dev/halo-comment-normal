@@ -82,11 +82,60 @@
         </ul>
       </form>
     </div>
+    <div class="comment-alert">
+      <!-- Info -->
+      <template v-if="infoAlertVisiable">
+        <div
+          class="alert info"
+          v-for="(info, index) in infoes"
+          :key="index"
+        >
+          <span
+            class="closebtn"
+            @click="clearAlertClose"
+          >&times;</span>
+          <strong>{{ info }}</strong>
+        </div>
+      </template>
+
+      <!-- Success -->
+      <template v-if="successAlertVisiable">
+        <div
+          class="alert success"
+          v-for="(success, index) in successes"
+          :key="index"
+        >
+          <span
+            class="closebtn"
+            @click="clearAlertClose"
+          >&times;</span>
+          <strong>{{ success }}</strong>
+        </div>
+      </template>
+
+      <!-- Warning -->
+      <template v-if="warningAlertVisiable">
+        <div
+          class="alert warning"
+          v-for="(warning, index) in warnings"
+          :key="index"
+        >
+          <span
+            class="closebtn"
+            @click="clearAlertClose"
+          >&times;</span>
+          <strong>{{ warning }}</strong>
+        </div>
+      </template>
+
+    </div>
   </section>
 </template>
 <script>
 import marked from "marked";
 import md5 from "md5";
+import { isEmpty, isObject } from "../utils/util";
+import { validEmail } from "../utils/util";
 import commentApi from "../api/comment";
 export default {
   name: "CommentEditor",
@@ -122,7 +171,10 @@ export default {
         email: null,
         content: ""
       },
-      previewMode: false
+      previewMode: false,
+      infoes: [],
+      warnings: [],
+      successes: []
     };
   },
   computed: {
@@ -130,7 +182,7 @@ export default {
       return this.comment.content ? marked(this.comment.content) : "";
     },
     avatar() {
-      if (!this.comment.email) {
+      if (!this.comment.email || !validEmail(this.comment.email)) {
         return (
           "//cdn.v2ex.com/gravatar?d=" + this.options.comment_gravatar_default
         );
@@ -140,6 +192,22 @@ export default {
         `//cdn.v2ex.com/gravatar/${gravatarMd5}?s=256&d=` +
         this.options.comment_gravatar_default
       );
+    },
+    commentValid() {
+      return (
+        !isEmpty(this.comment.author) &&
+        !isEmpty(this.comment.email) &&
+        !isEmpty(this.comment.content)
+      );
+    },
+    infoAlertVisiable() {
+      return this.infoes !== null && this.infoes.length > 0;
+    },
+    warningAlertVisiable() {
+      return this.warnings !== null && this.warnings.length > 0;
+    },
+    successAlertVisiable() {
+      return this.successes !== null && this.successes.length > 0;
     }
   },
   created() {
@@ -153,6 +221,18 @@ export default {
   },
   methods: {
     handleSubmitClick() {
+      if (isEmpty(this.comment.author)) {
+        this.warnings.push("评论者昵称不能为空");
+        return;
+      }
+      if (isEmpty(this.comment.email)) {
+        this.warnings.push("邮箱不能为空");
+        return;
+      }
+      if (isEmpty(this.comment.content)) {
+        this.warnings.push("评论内容不能为空");
+        return;
+      }
       // Submit the comment
       this.comment.postId = this.targetId;
       if (this.replyComment) {
@@ -172,14 +252,50 @@ export default {
 
           // Emit a created event
           this.$emit("created", response.data.data);
+          this.handleCommentCreated(response.data.data);
           this.$emit("close", false);
         })
         .catch(error => {
           this.$emit("failed", error.response);
+          this.handleFailedToCreateComment(error.response);
         });
     },
     handlePreviewContent() {
       this.previewMode = !this.previewMode;
+    },
+    handleCommentCreated(createdComment) {
+      this.clearAlertClose();
+
+      if (createdComment.status === "PUBLISHED") {
+        this.loadComments();
+        this.successes.push("评论成功！");
+      } else {
+        // Show tips
+        this.infoes.push("您的评论已经投递至博主，等待博主审核！");
+      }
+
+      this.repliedSuccess = null;
+    },
+    handleFailedToCreateComment(response) {
+      this.clearAlertClose();
+      this.repliedSuccess = null;
+
+      if (response.status === 400) {
+        this.warnings.push(response.data.message);
+        if (response.data) {
+          const errorDetail = response.data.data;
+          if (isObject(errorDetail)) {
+            Object.keys(errorDetail).forEach(key => {
+              this.warnings.push(errorDetail[key]);
+            });
+          }
+        }
+      }
+    },
+    clearAlertClose() {
+      this.infoes = [];
+      this.warnings = [];
+      this.successes = [];
     }
   }
 };

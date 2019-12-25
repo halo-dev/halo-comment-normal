@@ -71,3 +71,8 @@ export function isEmpty(content) {
 export function isObject(value) {
     return value && typeof value === 'object' && value.constructor === Object
 }
+
+export function validEmail(email) {
+    var re = /^[A-Za-z1-9]+([-_.][A-Za-z1-9]+)*@([A-Za-z1-9]+[-.])+[A-Za-z]{2,8}$/
+    return re.test(email);
+}
