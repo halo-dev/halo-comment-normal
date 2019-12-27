@@ -20,7 +20,8 @@ export default {
     return {
       configs: {
         autoLoad: true,
-        showUserAgent: true
+        showUserAgent: true,
+        gravatarSource: '//cdn.v2ex.com/gravatar'
       }
     };
   }

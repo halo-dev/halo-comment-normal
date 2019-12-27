@@ -161,6 +161,10 @@ export default {
     options: {
       required: false,
       default: []
+    },
+    configs: {
+      type: Object,
+      required: true
     }
   },
   data() {
@@ -184,12 +188,15 @@ export default {
     avatar() {
       if (!this.comment.email || !validEmail(this.comment.email)) {
         return (
-          "//cdn.v2ex.com/gravatar?d=" + this.options.comment_gravatar_default
+          this.configs.gravatarSource +
+          "?d=" +
+          this.options.comment_gravatar_default
         );
       }
       const gravatarMd5 = md5(this.comment.email);
       return (
-        `//cdn.v2ex.com/gravatar/${gravatarMd5}?s=256&d=` +
+        this.configs.gravatarSource +
+        `/${gravatarMd5}?s=256&d=` +
         this.options.comment_gravatar_default
       );
     },

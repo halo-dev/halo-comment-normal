@@ -8,6 +8,7 @@
       :targetId="id"
       :target="target"
       :options="options"
+      :configs="mergedConfigs"
     />
 
     <div
@@ -84,7 +85,8 @@ export default {
       default: () => ({
         // auto load comment,default true
         autoLoad: true,
-        showUserAgent: true
+        showUserAgent: true,
+        gravatarSource: "//cdn.v2ex.com/gravatar"
       })
     }
   },
@@ -116,7 +118,8 @@ export default {
       return Object.assign(
         {
           autoLoad: true,
-          showUserAgent: true
+          showUserAgent: true,
+          gravatarSource: "//cdn.v2ex.com/gravatar"
         },
         this.configs
       );

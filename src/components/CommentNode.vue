@@ -40,7 +40,10 @@
               :style="editing?'display:block;':''"
               @click="handleReplyClick"
             >{{ editing?'取消回复':'回复' }}</span>
-            <span v-if="comment.isAdmin" class="is-admin">
+            <span
+              v-if="comment.isAdmin"
+              class="is-admin"
+            >
               <svg
                 class="icon"
                 viewBox="0 0 1024 1024"
@@ -85,6 +88,7 @@
       :target="target"
       :replyComment="comment"
       :options="options"
+      :configs="configs"
     />
     <ol
       v-if="comment.children"
@@ -151,7 +155,8 @@ export default {
   computed: {
     avatar() {
       return (
-        `//cdn.v2ex.com/gravatar/${this.comment.gravatarMd5}?s=256&d=` +
+        this.configs.gravatarSource +
+        `/${this.comment.gravatarMd5}?s=256&d=` +
         this.options.comment_gravatar_default
       );
     },
