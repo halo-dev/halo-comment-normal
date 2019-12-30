@@ -43,8 +43,7 @@
           v-if="!previewMode"
         >
           <textarea
-            cols="45"
-            rows="1"
+            ref="commentTextarea"
             required="required"
             aria-required="true"
             tabindex="4"
@@ -137,6 +136,8 @@ import md5 from "md5";
 import { isEmpty, isObject } from "../utils/util";
 import { validEmail } from "../utils/util";
 import commentApi from "../api/comment";
+import autosize from "autosize";
+
 export default {
   name: "CommentEditor",
   props: {
@@ -225,6 +226,10 @@ export default {
     this.comment.author = author ? author : "";
     this.comment.authorUrl = authorUrl ? authorUrl : "";
     this.comment.email = email ? email : "";
+  },
+  mounted() {
+    // autosize(this.$refs.commentTextArea);
+    autosize(document.querySelector("textarea"));
   },
   methods: {
     handleSubmitClick() {

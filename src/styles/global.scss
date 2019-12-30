@@ -187,9 +187,10 @@
             line-height: 18px;
             width: 100%;
             min-height: 90px;
-            overflow: hidden;
             transition: all .15s ease-in-out;
             color: #000;
+            overflow: hidden;
+            overflow-wrap: break-word;
         }
     }
 
@@ -203,6 +204,12 @@
         box-sizing: border-box;
         padding: 10px;
         margin-bottom: 10px;
+
+        overflow-wrap: break-word;
+
+        img {
+            max-width: 100%;
+        }
     }
 
     .comment-buttons {
