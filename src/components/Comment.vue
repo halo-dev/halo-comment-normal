@@ -163,4 +163,5 @@ export default {
 <style lang="scss">
 $color: #898c7b;
 @import "../styles/global";
+@import '../styles/github-markdown'
 </style>

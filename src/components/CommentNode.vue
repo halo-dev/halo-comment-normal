@@ -75,7 +75,7 @@
           >#{{ comment.id }}</a>
         </div>
         <div
-          class="comment-content"
+          class="comment-content markdown-body"
           itemprop="description"
           v-html="compileContent"
         >
@@ -97,6 +97,8 @@
       <template v-for="(children, index) in comment.children">
         <CommentNode
           :isChild="true"
+          :targetId="targetId"
+          :target="target"
           :comment="children"
           :options="options"
           :configs="configs"

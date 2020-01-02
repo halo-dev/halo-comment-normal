@@ -52,7 +52,7 @@
           ></textarea>
         </div>
         <div
-          class="comment-preview"
+          class="comment-preview markdown-body"
           v-else
           v-html="renderedContent"
         ></div>
@@ -69,6 +69,17 @@
               @click="handlePreviewContent"
             >{{previewMode?'编辑':'预览'}}</a>
           </li>
+          <!-- <li
+            class="middle"
+            style="margin-right:5px"
+          >
+            <a
+              class="button-preview-edit"
+              href="javascript:void(0)"
+              rel="nofollow noopener"
+              @click="handleGithubLogin"
+            >Github 登陆</a>
+          </li> -->
           <li class="middle">
             <a
               class="button-submit"
@@ -79,63 +90,64 @@
             >提交</a>
           </li>
         </ul>
+        <div class="comment-alert">
+          <!-- Info -->
+          <template v-if="infoAlertVisiable">
+            <div
+              class="alert info"
+              v-for="(info, index) in infoes"
+              :key="index"
+            >
+              <span
+                class="closebtn"
+                @click="clearAlertClose"
+              >&times;</span>
+              <strong>{{ info }}</strong>
+            </div>
+          </template>
+
+          <!-- Success -->
+          <template v-if="successAlertVisiable">
+            <div
+              class="alert success"
+              v-for="(success, index) in successes"
+              :key="index"
+            >
+              <span
+                class="closebtn"
+                @click="clearAlertClose"
+              >&times;</span>
+              <strong>{{ success }}</strong>
+            </div>
+          </template>
+
+          <!-- Warning -->
+          <template v-if="warningAlertVisiable">
+            <div
+              class="alert warning"
+              v-for="(warning, index) in warnings"
+              :key="index"
+            >
+              <span
+                class="closebtn"
+                @click="clearAlertClose"
+              >&times;</span>
+              <strong>{{ warning }}</strong>
+            </div>
+          </template>
+
+        </div>
       </form>
-    </div>
-    <div class="comment-alert">
-      <!-- Info -->
-      <template v-if="infoAlertVisiable">
-        <div
-          class="alert info"
-          v-for="(info, index) in infoes"
-          :key="index"
-        >
-          <span
-            class="closebtn"
-            @click="clearAlertClose"
-          >&times;</span>
-          <strong>{{ info }}</strong>
-        </div>
-      </template>
-
-      <!-- Success -->
-      <template v-if="successAlertVisiable">
-        <div
-          class="alert success"
-          v-for="(success, index) in successes"
-          :key="index"
-        >
-          <span
-            class="closebtn"
-            @click="clearAlertClose"
-          >&times;</span>
-          <strong>{{ success }}</strong>
-        </div>
-      </template>
-
-      <!-- Warning -->
-      <template v-if="warningAlertVisiable">
-        <div
-          class="alert warning"
-          v-for="(warning, index) in warnings"
-          :key="index"
-        >
-          <span
-            class="closebtn"
-            @click="clearAlertClose"
-          >&times;</span>
-          <strong>{{ warning }}</strong>
-        </div>
-      </template>
-
     </div>
   </section>
 </template>
 <script>
 import marked from "marked";
 import md5 from "md5";
-import { isEmpty, isObject } from "../utils/util";
-import { validEmail } from "../utils/util";
+import { isEmpty, isObject, getUrlKey } from "../utils/util";
+import { validEmail, queryStringify } from "../utils/util";
 import commentApi from "../api/comment";
+import axios from "axios";
 import autosize from "autosize";
 
 export default {
@@ -226,6 +238,7 @@ export default {
     this.comment.author = author ? author : "";
     this.comment.authorUrl = authorUrl ? authorUrl : "";
     this.comment.email = email ? email : "";
+    // this.handleGetGithubUser();
   },
   mounted() {
     // autosize(this.$refs.commentTextArea);
@@ -259,16 +272,11 @@ export default {
           localStorage.setItem("comment-email", this.comment.email);
           localStorage.setItem("comment-authorUrl", this.comment.authorUrl);
 
-          // clearn comment
+          // clear comment
           this.comment.content = null;
-
-          // Emit a created event
-          this.$emit("created", response.data.data);
           this.handleCommentCreated(response.data.data);
-          this.$emit("close", false);
         })
         .catch(error => {
-          this.$emit("failed", error.response);
           this.handleFailedToCreateComment(error.response);
         });
     },
@@ -279,19 +287,14 @@ export default {
       this.clearAlertClose();
 
       if (createdComment.status === "PUBLISHED") {
-        this.loadComments();
-        this.successes.push("评论成功！");
+        this.successes.push("评论成功，刷新即可显示最新评论！");
       } else {
         // Show tips
         this.infoes.push("您的评论已经投递至博主，等待博主审核！");
       }
-
-      this.repliedSuccess = null;
     },
     handleFailedToCreateComment(response) {
       this.clearAlertClose();
-      this.repliedSuccess = null;
-
       if (response.status === 400) {
         this.warnings.push(response.data.message);
         if (response.data) {
@@ -302,6 +305,59 @@ export default {
             });
           }
         }
+      }
+    },
+    handleGithubLogin() {
+      const githubOauthUrl = "http://github.com/login/oauth/authorize";
+      const query = {
+        client_id: "a1aacd842bc158abd65b",
+        redirect_uri: window.location.href,
+        scope: "public_repo"
+      };
+      window.location.href = `${githubOauthUrl}?${queryStringify(query)}`;
+    },
+    handleGetGithubUser() {
+      const accessToken = this.handleGetGithubAccessToken();
+      axios
+        .get(
+          "https://cors-anywhere.herokuapp.com/https://api.github.com/user",
+          {
+            params: {
+              access_token: accessToken
+            }
+          }
+        )
+        .then(function(response) {
+          alert(response);
+        })
+        .catch(error => {
+          alert(error);
+        });
+    },
+    handleGetGithubAccessToken() {
+      const code = getUrlKey("code");
+      if (code) {
+        axios
+          .get(
+            "https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token",
+            {
+              params: {
+                client_id: "a1aacd842bc158abd65b",
+                client_secret: "0daedb3923a4cdeb72620df511bdb11685dfe282",
+                code: code
+              }
+            }
+          )
+          .then(function(response) {
+            let args = response.split("&");
+            let arg = args[0].split("=");
+            let access_token = arg[1];
+            alert(access_token);
+            return access_token;
+          })
+          .catch(error => {
+            alert(error);
+          });
       }
     },
     clearAlertClose() {

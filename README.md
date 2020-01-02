@@ -6,7 +6,7 @@
 
 1. 进入后台 -> 系统 -> 博客设置 -> 评论设置
 
-2. 将 `评论模块 JS` 修改为：`https://cdn.jsdelivr.net/npm/halo-comment-normal@1.1.0/dist/halo-comment.min.js`
+2. 将 `评论模块 JS` 修改为：`https://cdn.jsdelivr.net/npm/halo-comment-normal@1.1.1/dist/halo-comment.min.js`
 
 ### 自定义配置
 
@@ -61,7 +61,7 @@ var configs = {
 <#macro comment target,type>
     <#if !post.disallowComment!false>
         <script src="//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-        <script src="${options.comment_internal_plugin_js!'//cdn.jsdelivr.net/npm/halo-comment-normal@1.1.0/dist/halo-comment.min.js'}"></script>
+        <script src="${options.comment_internal_plugin_js!'//cdn.jsdelivr.net/npm/halo-comment-normal@1.1.1/dist/halo-comment.min.js'}"></script>
         <script>
         var configs = {
             autoLoad: true,
@@ -99,7 +99,7 @@ sheet.ftl：
     
     <#if is_post?? && is_sheet??>
         <script src="//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-        <script src="${options.comment_internal_plugin_js!'//cdn.jsdelivr.net/npm/halo-comment-normal@1.1.0/dist/halo-comment.min.js'}"></script>
+        <script src="${options.comment_internal_plugin_js!'//cdn.jsdelivr.net/npm/halo-comment-normal@1.1.1/dist/halo-comment.min.js'}"></script>
         <script>
         var configs = {
             autoLoad: true,

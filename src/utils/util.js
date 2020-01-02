@@ -76,3 +76,20 @@ export function validEmail(email) {
     var re = /^[A-Za-z1-9]+([-_.][A-Za-z1-9]+)*@([A-Za-z1-9]+[-.])+[A-Za-z]{2,8}$/
     return re.test(email);
 }
+
+export const queryStringify = query => {
+    const queryString = Object.keys(query)
+        .map(key => `${key}=${encodeURIComponent(query[key] || '')}`)
+        .join('&')
+    return queryString
+}
+
+export function getUrlKey(name) {
+    return (
+        decodeURIComponent(
+            (new RegExp("[?|&]" + name + "=" + "([^&;]+?)(&|#|;|$)").exec(
+                location.href
+            ) || "")[1].replace(/\+/g, "%20")
+        ) || null
+    );
+}
