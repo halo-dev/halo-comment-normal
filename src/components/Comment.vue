@@ -23,7 +23,10 @@
       >加载评论</a>
     </div>
 
-    <comment-loading v-show="commentLoading" />
+    <comment-loading
+      v-show="commentLoading"
+      :configs="configs"
+    />
 
     <ol
       class="comment-nodes"
@@ -86,7 +89,8 @@ export default {
         // auto load comment,default true
         autoLoad: true,
         showUserAgent: true,
-        gravatarSource: "//cdn.v2ex.com/gravatar"
+        gravatarSource: "//cdn.v2ex.com/gravatar",
+        loadingStyle: "default"
       })
     }
   },
@@ -119,7 +123,8 @@ export default {
         {
           autoLoad: true,
           showUserAgent: true,
-          gravatarSource: "//cdn.v2ex.com/gravatar"
+          gravatarSource: "//cdn.v2ex.com/gravatar",
+          loadingStyle: "default"
         },
         this.configs
       );
@@ -163,5 +168,5 @@ export default {
 <style lang="scss">
 $color: #898c7b;
 @import "../styles/global";
-@import '../styles/github-markdown'
+@import "../styles/github-markdown";
 </style>

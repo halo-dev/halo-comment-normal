@@ -21,7 +21,8 @@ export default {
       configs: {
         autoLoad: true,
         showUserAgent: true,
-        gravatarSource: '//cdn.v2ex.com/gravatar'
+        gravatarSource: '//cdn.v2ex.com/gravatar',
+        loadingStyle: 'default'
       }
     };
   }

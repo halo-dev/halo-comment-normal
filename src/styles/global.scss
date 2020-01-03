@@ -215,6 +215,7 @@
     .comment-buttons {
         font-size: 14px;
         text-align: right;
+        margin-top: 10px;
 
         .button-submit,
         .button-preview-edit {
@@ -250,7 +251,7 @@
         justify-content: center;
         margin: 30px 0;
 
-        .comment-loader {
+        .comment-loader-default {
             display: flex;
             flex-flow: row nowrap;
             align-items: center;
@@ -260,7 +261,7 @@
             span {
                 width: 4px;
                 height: 15px;
-                background-color: #3b83ee;
+                background-color: #898c7b;
 
                 &:nth-of-type(1) {
                     animation: grow 1s -0.45s ease-in-out infinite;
@@ -288,6 +289,56 @@
 
                 50% {
                     transform: scaleY(2);
+                }
+            }
+        }
+
+        .comment-loader-circle {
+            border: 3px solid #898c7b;
+            border-top-color: #fff;
+            border-radius: 50%;
+            width: 2.5em;
+            height: 2.5em;
+            animation: spin 0.7s linear infinite;
+
+            @keyframes spin {
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+        }
+
+        .comment-loader-balls {
+            width: 3.5em;
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: space-between;
+
+            div {
+                width: 0.7em;
+                height: 0.7em;
+                border-radius: 50%;
+                background-color: #898c7b;
+                transform: translateY(-100%);
+                animation: wave 0.7s ease-in-out alternate infinite;
+
+                &:nth-of-type(1) {
+                    animation-delay: -0.4s;
+                }
+
+                &:nth-of-type(2) {
+                    animation-delay: -0.2s;
+                }
+            }
+
+            @keyframes wave {
+                from {
+                    transform: translateY(-100%);
+                }
+
+                to {
+                    transform: translateY(100%);
                 }
             }
         }
@@ -469,11 +520,6 @@
         }
     }
 
-    .comment-content,
-    .comment-preview {
-        // TODO
-    }
-
     .comment-reply {
         display: none;
         float: right;
@@ -494,8 +540,9 @@
         }
     }
 
-    .comment-alert{
-        margin-top: 10px;;
+    .comment-alert {
+        margin-top: 10px;
+        ;
     }
 
     .alert {
