@@ -2,6 +2,9 @@
 
 > 适用于 Halo 的评论组件。
 
+![npm](https://img.shields.io/npm/v/halo-comment-normal?style=flat-square)
+[![](https://data.jsdelivr.com/v1/package/npm/halo-comment-normal/badge)](https://www.jsdelivr.com/package/npm/halo-comment-normal)
+
 ### 使用指南
 
 1. 进入后台 -> 系统 -> 博客设置 -> 评论设置
