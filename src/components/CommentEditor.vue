@@ -56,6 +56,14 @@
           v-else
           v-html="renderedContent"
         ></div>
+        <div class="comment-emoji-wrap">
+          <VEmojiPicker
+            :pack="emojiPack"
+            @select="handleSelectEmoji"
+            v-show="emojiDialogVisible"
+            labelSearch="搜索表情"
+          />
+        </div>
         <ul class="comment-buttons">
           <li
             v-if="comment.content"
@@ -80,6 +88,9 @@
               @click="handleGithubLogin"
             >Github 登陆</a>
           </li> -->
+          <li>
+            <button type="button" @click="handleToogleDialogEmoji">表情</button>
+          </li>
           <li class="middle">
             <a
               class="button-submit"
@@ -135,7 +146,6 @@
               <strong>{{ warning }}</strong>
             </div>
           </template>
-
         </div>
       </form>
     </div>
@@ -144,6 +154,8 @@
 <script>
 import marked from "marked";
 import md5 from "md5";
+import VEmojiPicker from "./EmojiPicker/VEmojiPicker";
+import emojiData from "./EmojiPicker/data/emojis.js";
 import { isEmpty, isObject, getUrlKey } from "../utils/util";
 import { validEmail, queryStringify } from "../utils/util";
 import commentApi from "../api/comment";
@@ -152,6 +164,9 @@ import autosize from "autosize";
 
 export default {
   name: "CommentEditor",
+  components: {
+    VEmojiPicker
+  },
   props: {
     targetId: {
       type: Number,
@@ -182,6 +197,8 @@ export default {
   },
   data() {
     return {
+      emojiPack: emojiData,
+      emojiDialogVisible: false,
       comment: {
         author: null,
         authorUrl: null,
@@ -273,7 +290,7 @@ export default {
           localStorage.setItem("comment-authorUrl", this.comment.authorUrl);
 
           // clear comment
-          this.comment.content = null;
+          this.comment.content = "";
           this.handleCommentCreated(response.data.data);
         })
         .catch(error => {
@@ -306,6 +323,13 @@ export default {
           }
         }
       }
+    },
+    handleToogleDialogEmoji() {
+      this.emojiDialogVisible = !this.emojiDialogVisible;
+    },
+    handleSelectEmoji(emoji) {
+      this.comment.content += emoji.emoji;
+      this.handleToogleDialogEmoji();
     },
     handleGithubLogin() {
       const githubOauthUrl = "http://github.com/login/oauth/authorize";
