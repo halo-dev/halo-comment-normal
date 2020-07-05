@@ -2,7 +2,7 @@
   <li
     :id="'li-comment-'+comment.id"
     class="comment"
-    :class="isChild?'':'index-1'"
+    :class="commentClass"
     itemtype="http://schema.org/Comment"
     itemprop="comment"
   >
@@ -190,6 +190,10 @@ export default {
         " " +
         result.os.version
       );
+    },
+    commentClass() {
+      let isChild = this.isChild ? ' ': ' index-1';
+      return " li-comment-"+ this.comment.id + isChild;
     }
   },
   methods: {

@@ -152,6 +152,7 @@
   </section>
 </template>
 <script>
+import Vue from 'vue';
 import marked from "marked";
 import md5 from "md5";
 import VEmojiPicker from "./EmojiPicker/VEmojiPicker";
@@ -304,11 +305,65 @@ export default {
       this.clearAlertClose();
 
       if (createdComment.status === "PUBLISHED") {
-        this.successes.push("评论成功，刷新即可显示最新评论！");
+        try {
+          this.createdNewNode(createdComment)
+          this.successes.push("评论成功");
+        } catch {
+          this.successes.push("评论成功，刷新即可显示最新评论！");
+        }
       } else {
         // Show tips
         this.infoes.push("您的评论已经投递至博主，等待博主审核！");
       }
+    },
+    createdNewNode(newComment) {
+      let pr = { 
+          targetId: this.targetId,
+          target: this.target,
+          options: this.options,
+          configs: this.configs,
+          comment: newComment
+      }
+
+      pr = newComment.parentId == 0 ? pr : {...pr, ...{
+        isChild: true,
+        parent: this.replyComment,
+        depth: this.$parent.selfAddDepth
+      }}
+      
+      const CommentNode = () => import('./CommentNode.vue');
+      // 创建一个组件
+      let comment = new Vue({
+        render: (h) => {
+          return h(
+            CommentNode,
+            {
+              props: pr
+            }
+          )
+        }
+      });
+      let dom;
+      if(newComment.parentId == 0) {
+        dom = this.$root.$el.getElementsByClassName("comment-nodes")[0];
+      } else {
+        let parentDom = this.$parent.$el;
+        let replyDom = parentDom.getElementsByTagName("ol");
+        if(replyDom.length > 0) {
+          dom = replyDom[0];
+        } else {
+          dom = document.createElement("ol");
+          dom.setAttribute('class', 'children');
+          parentDom.appendChild(dom);
+        }
+      }
+      let nodeDom = document.createElement('div');
+      if(dom.children[0]) {
+        dom.insertBefore(nodeDom, dom.children[0]);
+      } else {
+        dom.appendChild(nodeDom);
+      }
+      comment.$mount(nodeDom);
     },
     handleFailedToCreateComment(response) {
       this.clearAlertClose();
