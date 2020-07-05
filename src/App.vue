@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <Comment
-      :id="28"
-      type="sheet"
+      :id="11"
+      type="post"
       :configs="configs"
     />
   </div>

@@ -251,6 +251,40 @@ module.exports.f = function getOwnPropertyNames(it) {
 
 /***/ }),
 
+/***/ "063c":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("99af");
+/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _utils_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("9efd");
+
+
+var baseUrl = '/api/content';
+var commentApi = {};
+
+commentApi.createComment = (target, comment) => {
+  return Object(_utils_service__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])({
+    url: "".concat(baseUrl, "/").concat(target, "/comments"),
+    method: 'post',
+    data: comment
+  });
+};
+
+commentApi.listComments = function (target, targetId) {
+  var view = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'tree_view';
+  var pagination = arguments.length > 3 ? arguments[3] : undefined;
+  return Object(_utils_service__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])({
+    url: "".concat(baseUrl, "/").concat(target, "/").concat(targetId, "/comments/").concat(view),
+    params: pagination,
+    method: 'get'
+  });
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (commentApi);
+
+/***/ }),
+
 /***/ "06cf":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1647,6 +1681,1698 @@ module.exports = class Slugger {
   };
 };
 
+
+/***/ }),
+
+/***/ "2877":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return normalizeComponent; });
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+function normalizeComponent (
+  scriptExports,
+  render,
+  staticRenderFns,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier, /* server only */
+  shadowMode /* vue-cli only */
+) {
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (render) {
+    options.render = render
+    options.staticRenderFns = staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = 'data-v-' + scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = shadowMode
+      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      : injectStyles
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      var originalRender = options.render
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return originalRender(h, context)
+      }
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    }
+  }
+
+  return {
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+
+/***/ "2af9":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.for-each.js
+var web_dom_collections_for_each = __webpack_require__("159b");
+
+// EXTERNAL MODULE: external "Vue"
+var external_Vue_ = __webpack_require__("8bbf");
+var external_Vue_default = /*#__PURE__*/__webpack_require__.n(external_Vue_);
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/CommentEditor.vue?vue&type=template&id=6734d408&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"comment-editor",attrs:{"role":"form"}},[_c('div',{staticClass:"inner"},[_c('div',{staticClass:"commentator"},[_c('img',{staticClass:"avatar",attrs:{"src":_vm.avatar}})]),_c('form',{staticClass:"comment-form"},[_c('div',{staticClass:"author-info"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.author),expression:"comment.author"}],attrs:{"type":"text","id":"author","tabindex":"1","required":"required","aria-required":"true","placeholder":"* 昵称"},domProps:{"value":(_vm.comment.author)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "author", $event.target.value)}}}),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.email),expression:"comment.email"}],attrs:{"type":"text","id":"email","tabindex":"2","required":"required","aria-required":"true","placeholder":"* 电子邮件"},domProps:{"value":(_vm.comment.email)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "email", $event.target.value)}}}),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.authorUrl),expression:"comment.authorUrl"}],attrs:{"type":"text","id":"authorUrl","tabindex":"3","placeholder":"个人站点"},domProps:{"value":(_vm.comment.authorUrl)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "authorUrl", $event.target.value)}}})]),(!_vm.previewMode)?_c('div',{staticClass:"comment-textarea"},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.content),expression:"comment.content"}],ref:"commentTextarea",attrs:{"required":"required","aria-required":"true","tabindex":"4","placeholder":_vm.options.comment_content_placeholder || '撰写评论...'},domProps:{"value":(_vm.comment.content)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "content", $event.target.value)}}})]):_c('div',{staticClass:"comment-preview markdown-body",domProps:{"innerHTML":_vm._s(_vm.renderedContent)}}),_c('div',{staticClass:"comment-emoji-wrap"},[_c('VEmojiPicker',{directives:[{name:"show",rawName:"v-show",value:(_vm.emojiDialogVisible),expression:"emojiDialogVisible"}],attrs:{"pack":_vm.emojiPack,"labelSearch":"搜索表情"},on:{"select":_vm.handleSelectEmoji}})],1),_c('ul',{staticClass:"comment-buttons"},[(_vm.comment.content)?_c('li',{staticClass:"middle",staticStyle:{"margin-right":"5px"}},[_c('a',{staticClass:"button-preview-edit",attrs:{"href":"javascript:void(0)","rel":"nofollow noopener"},on:{"click":_vm.handlePreviewContent}},[_vm._v(_vm._s(_vm.previewMode?'编辑':'预览'))])]):_vm._e(),_c('li',[_c('button',{attrs:{"type":"button"},on:{"click":_vm.handleToogleDialogEmoji}},[_vm._v("表情")])]),_c('li',{staticClass:"middle"},[_c('a',{staticClass:"button-submit",attrs:{"href":"javascript:void(0)","tabindex":"5","rel":"nofollow noopener"},on:{"click":_vm.handleSubmitClick}},[_vm._v("提交")])])]),_c('div',{staticClass:"comment-alert"},[(_vm.infoAlertVisiable)?_vm._l((_vm.infoes),function(info,index){return _c('div',{key:index,staticClass:"alert info"},[_c('span',{staticClass:"closebtn",on:{"click":_vm.clearAlertClose}},[_vm._v("×")]),_c('strong',[_vm._v(_vm._s(info))])])}):_vm._e(),(_vm.successAlertVisiable)?_vm._l((_vm.successes),function(success,index){return _c('div',{key:index,staticClass:"alert success"},[_c('span',{staticClass:"closebtn",on:{"click":_vm.clearAlertClose}},[_vm._v("×")]),_c('strong',[_vm._v(_vm._s(success))])])}):_vm._e(),(_vm.warningAlertVisiable)?_vm._l((_vm.warnings),function(warning,index){return _c('div',{key:index,staticClass:"alert warning"},[_c('span',{staticClass:"closebtn",on:{"click":_vm.clearAlertClose}},[_vm._v("×")]),_c('strong',[_vm._v(_vm._s(warning))])])}):_vm._e()],2)])])])}
+var staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/CommentEditor.vue?vue&type=template&id=6734d408&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
+var es_symbol = __webpack_require__("a4d3");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
+var es_array_filter = __webpack_require__("4de4");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.index-of.js
+var es_array_index_of = __webpack_require__("c975");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.number.constructor.js
+var es_number_constructor = __webpack_require__("a9e3");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.get-own-property-descriptors.js
+var es_object_get_own_property_descriptors = __webpack_require__("dbb4");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.to-string.js
+var es_object_to_string = __webpack_require__("d3b7");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.promise.js
+var es_promise = __webpack_require__("e6cf");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.split.js
+var es_string_split = __webpack_require__("1276");
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+// EXTERNAL MODULE: ./node_modules/marked/src/marked.js
+var marked = __webpack_require__("e0c1");
+var marked_default = /*#__PURE__*/__webpack_require__.n(marked);
+
+// EXTERNAL MODULE: ./node_modules/md5/md5.js
+var md5 = __webpack_require__("6821");
+var md5_default = /*#__PURE__*/__webpack_require__.n(md5);
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/VEmojiPicker.vue?vue&type=template&id=48749e14&
+var VEmojiPickervue_type_template_id_48749e14_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"EmojiPicker"}},[(_vm.showCategory)?_c('Categories',{on:{"select":function($event){return _vm.onChangeCategory($event)}}}):_vm._e(),(_vm.showSearch)?_c('InputSearch',{attrs:{"placeholder":_vm.labelSearch},model:{value:(_vm.filterEmoji),callback:function ($$v) {_vm.filterEmoji=$$v},expression:"filterEmoji"}}):_vm._e(),_c('EmojiList',{attrs:{"data":_vm.emojis,"category":_vm.category,"filter":_vm.filterEmoji,"emojisByRow":_vm.emojisByRow,"continuousList":_vm.continuousList},on:{"select":function($event){return _vm.onSelectEmoji($event)}}})],1)}
+var VEmojiPickervue_type_template_id_48749e14_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/EmojiPicker/VEmojiPicker.vue?vue&type=template&id=48749e14&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.iterator.js
+var es_array_iterator = __webpack_require__("e260");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
+var es_function_name = __webpack_require__("b0c0");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.set.js
+var es_set = __webpack_require__("6062");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.iterator.js
+var web_dom_collections_iterator = __webpack_require__("ddb0");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/Categories.vue?vue&type=template&id=b81a141a&
+var Categoriesvue_type_template_id_b81a141a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"Categories"}},_vm._l((_vm.categories),function(categorie,index){return _c('div',{key:index,class:['category', { active: index === _vm.active }],on:{"click":function($event){return _vm.onSelect(index)}}},[_c('VSvg',{attrs:{"name":categorie.icon}})],1)}),0)}
+var Categoriesvue_type_template_id_b81a141a_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/EmojiPicker/Categories.vue?vue&type=template&id=b81a141a&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/VSvg.vue?vue&type=template&id=2a757e4e&
+var VSvgvue_type_template_id_2a757e4e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{style:(_vm.styleSVG),attrs:{"id":"VSvg"},domProps:{"innerHTML":_vm._s(_vm.icon)}})}
+var VSvgvue_type_template_id_2a757e4e_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/EmojiPicker/VSvg.vue?vue&type=template&id=2a757e4e&
+
+// CONCATENATED MODULE: ./src/components/EmojiPicker/_icons.js
+/* based on https://github.com/joaoeudes7/V-Emoji-Picker */
+var categories = {
+  activity: "\n  <svg style=\"max-height:18px\" width=\"24\" height=\"24\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 303.6 303.6\" fill=\"gray\">\n  <path d=\"M291.503 11.6c-10.4-10.4-37.2-11.6-48.4-11.6-50.4 0-122.4 18.4-173.6 69.6-77.2 76.8-78.4 201.6-58.4 222 10.8 10.4 35.6 12 49.2 12 49.6 0 121.2-18.4 173.2-70 76.4-76.4 80.4-199.6 58-222zm-231.2 277.2c-24.4 0-36-4.8-38.8-7.6-5.2-5.2-8.4-24.4-6.8-49.6l57.2 56.8c-4 .4-8 .4-11.6.4zm162.8-66c-38.8 38.8-90.4 57.2-132.4 63.6l-74-73.6c6-42 24-94 63.2-133.2 38-38 88-56.4 130.8-62.8l75.6 75.6c-6 40.8-24.4 91.6-63.2 130.4zm65.2-148.8l-58.8-59.2c4.8-.4 9.2-.4 13.6-.4 24.4 0 35.6 4.8 38 7.2 5.6 5.6 9.2 25.6 7.2 52.4z\"/>\n  <path d=\"M215.103 139.6l-20.8-20.8 13.2-13.2c2.8-2.8 2.8-7.6 0-10.4s-7.6-2.8-10.4 0l-13.2 13.6-20.8-20.8c-2.8-2.8-7.6-2.8-10.4 0-2.8 2.8-2.8 7.6 0 10.4l20.8 20.8-22 22-20.8-20.8c-2.8-2.8-7.6-2.8-10.4 0s-2.8 7.6 0 10.4l20.8 20.8-22 22-20.8-20.8c-2.8-2.8-7.6-2.8-10.4 0s-2.8 7.6 0 10.4l20.8 20.8-13.2 13.2c-2.8 2.8-2.8 7.6 0 10.4 1.6 1.6 3.2 2 5.2 2s3.6-.8 5.2-2l13.2-13.2 20.8 20.8c1.6 1.6 3.2 2 5.2 2s3.6-.8 5.2-2c2.8-2.8 2.8-7.6 0-10.4l-20.8-21.2 22-22 20.8 20.8c1.6 1.6 3.2 2 5.2 2s3.6-.8 5.2-2c2.8-2.8 2.8-7.6 0-10.4l-20.8-20.8 22-22 20.8 20.8c1.6 1.6 3.2 2 5.2 2s3.6-.8 5.2-2c2.8-2.8 2.8-7.6 0-10.4zM169.103 47.6c-1.2-4-5.2-6-9.2-4.8-3.2 1.2-80.8 25.6-110.4 98-1.6 4 0 8.4 4 9.6.8.4 2 .4 2.8.4 2.8 0 5.6-1.6 6.8-4.4 27.2-66 100.4-89.6 101.2-89.6 4-1.2 6-5.2 4.8-9.2z\"/>\n  </svg>\n  ",
+  flags: "\n  <svg style=\"max-height:18px\" width=\"24\" height=\"24\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" fill=\"gray\">\n  <path d=\"M472.928 34.72c-4.384-2.944-9.984-3.52-14.912-1.568-1.088.448-106.528 42.176-195.168.384C186.752-2.4 102.944 14.4 64 25.76V16c0-8.832-7.168-16-16-16S32 7.168 32 16v480c0 8.832 7.168 16 16 16s16-7.168 16-16V315.296c28.352-9.248 112.384-31.232 185.184 3.168 34.592 16.352 70.784 21.792 103.648 21.792 63.2 0 114.016-20.128 117.184-21.408 6.016-2.464 9.984-8.32 9.984-14.848V48c0-5.312-2.656-10.272-7.072-13.28zM448 292.672c-28.512 9.248-112.512 31.136-185.184-3.168C186.752 253.6 102.944 270.4 64 281.76V59.328c28.352-9.248 112.384-31.232 185.184 3.168 76 35.872 159.872 19.104 198.816 7.712v222.464z\"/>\n  </svg>\n  ",
+  foods: "\n  <svg style=\"max-height:18px\" width=\"24\" height=\"24\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 511.999 511.999\" fill=\"gray\">\n  <path d=\"M413.949 155.583a10.153 10.153 0 0 0-3.24-2.16c-.61-.25-1.24-.44-1.87-.57-3.25-.66-6.701.41-9.03 2.73a10.093 10.093 0 0 0-2.93 7.07 10.098 10.098 0 0 0 1.69 5.56c.36.54.779 1.05 1.24 1.52 1.86 1.86 4.44 2.93 7.07 2.93.65 0 1.31-.07 1.96-.2.63-.13 1.26-.32 1.87-.57a10.146 10.146 0 0 0 3.24-2.16c.47-.47.88-.98 1.25-1.52a10.098 10.098 0 0 0 1.49-3.6 10.038 10.038 0 0 0-2.74-9.03zM115.289 385.873c-.12-.64-.32-1.27-.57-1.87-.25-.6-.55-1.18-.91-1.73-.37-.54-.79-1.06-1.25-1.52a9.57 9.57 0 0 0-1.52-1.24c-.54-.36-1.12-.67-1.72-.92-.61-.25-1.24-.44-1.88-.57a9.847 9.847 0 0 0-3.9 0c-.64.13-1.27.32-1.87.57-.61.25-1.19.56-1.73.92-.55.36-1.06.78-1.52 1.24-.46.46-.88.98-1.24 1.52-.36.55-.67 1.13-.92 1.73-.25.6-.45 1.23-.57 1.87-.13.651-.2 1.3-.2 1.96 0 .65.07 1.3.2 1.95.12.64.32 1.27.57 1.87.25.6.56 1.18.92 1.73.36.54.78 1.06 1.24 1.52.46.46.97.88 1.52 1.24.54.36 1.12.67 1.73.92.6.25 1.23.44 1.87.57s1.3.2 1.95.2c.65 0 1.31-.07 1.95-.2.64-.13 1.27-.32 1.88-.57.6-.25 1.18-.56 1.72-.92.55-.36 1.059-.78 1.52-1.24.46-.46.88-.98 1.25-1.52.36-.55.66-1.13.91-1.73.25-.6.45-1.23.57-1.87.13-.65.2-1.3.2-1.95 0-.66-.07-1.31-.2-1.96z\"/>\n  <path d=\"M511.999 222.726c0-14.215-9.228-26.315-22.007-30.624-1.628-74.155-62.456-133.978-136.994-133.978H159.002c-74.538 0-135.366 59.823-136.994 133.978C9.228 196.411 0 208.51 0 222.726a32.076 32.076 0 0 0 3.847 15.203 44.931 44.931 0 0 0-.795 8.427v.708c0 14.06 6.519 26.625 16.693 34.833-10.178 8.275-16.693 20.891-16.693 35.001 0 15.114 7.475 28.515 18.921 36.702v26.668c0 40.588 33.021 73.608 73.608 73.608h320.836c40.588 0 73.608-33.021 73.608-73.608V353.6c11.446-8.186 18.921-21.587 18.921-36.702 0-13.852-6.354-26.385-16.361-34.702 9.983-8.212 16.361-20.656 16.361-34.562v-.708c0-2.985-.294-5.944-.877-8.845a32.082 32.082 0 0 0 3.93-15.355zM44.033 173.229h322.441c5.523 0 10-4.477 10-10s-4.477-10-10-10H49.737c16.896-43.883 59.503-75.106 109.265-75.106h193.996c62.942 0 114.438 49.953 116.934 112.295H42.068c.234-5.848.9-11.588 1.965-17.189zM23.052 316.896c0-13.837 11.257-25.094 25.094-25.094h117.298l55.346 50.188H48.146c-13.837 0-25.094-11.256-25.094-25.094zm.976-62.945c.422.111.847.215 1.275.309 7.421 1.634 14.68 8.002 22.365 14.744a576.29 576.29 0 0 0 3.206 2.799h-3.081c-11.253-.001-20.774-7.551-23.765-17.852zm308.727 89.752l57.233-51.899 49.904.57-81.871 74.24-25.266-22.911zm7.861 34.126H295.12l17.467-15.839h10.563l17.466 15.839zm19.599-86.027l-82.499 74.811-82.499-74.811h164.998zm-59.529-20c.849-.842 1.677-1.675 2.49-2.493 9.531-9.587 17.059-17.16 32.89-17.16 15.832 0 23.359 7.573 32.89 17.162.812.817 1.64 1.65 2.489 2.491h-70.759zm-160.13 0a485.82 485.82 0 0 0 2.489-2.492c9.531-9.588 17.059-17.161 32.89-17.161 15.83 0 23.358 7.573 32.888 17.16.813.818 1.641 1.651 2.49 2.493h-70.757zm275.862 162.073H95.582c-29.56 0-53.608-24.049-53.608-53.608v-18.275h200.872l17.467 15.839H145.897c-5.523 0-10 4.477-10 10s4.477 10 10 10H467.07c-7.288 20.958-27.242 36.044-50.652 36.044zm53.608-56.046h-94.6l17.467-15.839h77.133v15.839zm-6.174-35.837h-48.906l54.624-49.533c11.135 2.604 19.376 12.665 19.376 24.439 0 13.836-11.257 25.094-25.094 25.094zm-2.728-70.19l.262-.227.101-.087.342-.298c.848-.738 1.682-1.469 2.501-2.187 4.105-3.601 8.089-7.095 12.04-9.819 3.446-2.375 6.868-4.164 10.326-4.925l.359-.081.04-.01.317-.076.065-.016a22.897 22.897 0 0 0 .42-.107l.196-.052a.374.374 0 0 0 .048-.012c-2.433 9.276-10.129 16.443-19.691 18.102a9.984 9.984 0 0 0-2.016-.205h-5.31zm21.271-37.073a40.746 40.746 0 0 0-4.536 1.281c-10.109 3.489-18.327 10.602-26.283 17.58l-.434.381c-9.178 8.052-17.923 15.723-29.033 17.834h-13.146c-11.249-1.93-17.833-8.552-25.823-16.591-10.213-10.275-22.923-23.062-47.074-23.062-24.15 0-36.86 12.786-47.074 23.06-7.992 8.04-14.576 14.663-25.829 16.593h-14.327c-11.253-1.93-17.837-8.553-25.829-16.593-10.213-10.274-22.923-23.06-47.072-23.06-24.151 0-36.861 12.787-47.074 23.062-7.991 8.039-14.574 14.661-25.824 16.591h-7.065c-14.134 0-24.325-8.939-35.113-18.404-9.248-8.112-18.81-16.501-31.252-19.241a12.237 12.237 0 0 1-7.025-4.453 10.027 10.027 0 0 0-1.153-1.252 12.234 12.234 0 0 1-1.428-5.727c-.001-6.788 5.52-12.309 12.307-12.309h447.384c6.787 0 12.308 5.521 12.308 12.308 0 5.729-4.039 10.776-9.605 12.002z\"/>\n  </svg>\n  ",
+  frequenty: "\n  <svg style=\"max-height:18px\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 219.15 219.15\" width=\"24\" height=\"24\" fill=\"gray\">\n  <path d=\"M109.575 0C49.156 0 .001 49.155.001 109.574c0 60.42 49.154 109.576 109.573 109.576 60.42 0 109.574-49.156 109.574-109.576C219.149 49.155 169.995 0 109.575 0zm0 204.15c-52.148 0-94.573-42.427-94.573-94.576C15.001 57.426 57.427 15 109.575 15c52.148 0 94.574 42.426 94.574 94.574 0 52.15-42.426 94.576-94.574 94.576z\"/>\n  <path d=\"M166.112 108.111h-52.051V51.249a7.5 7.5 0 0 0-15 0v64.362a7.5 7.5 0 0 0 7.5 7.5h59.551a7.5 7.5 0 0 0 0-15z\"/>\n  </svg>\n  ",
+  nature: "\n  <svg style=\"max-height:18px\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" width=\"24\" height=\"24\" fill=\"gray\">\n  <path d=\"M490.815 3.784C480.082 5.7 227.049 51.632 148.477 130.203c-39.153 39.153-64.259 87.884-70.694 137.218-5.881 45.081 4.347 85.929 28.878 116.708L.001 490.789 21.212 512l106.657-106.657c33.094 26.378 75.092 34.302 116.711 28.874 49.334-6.435 98.065-31.541 137.218-70.695C460.368 284.951 506.3 31.918 508.216 21.185L511.999 0l-21.184 3.784zm-43.303 39.493L309.407 181.383l-7.544-98.076c46.386-15.873 97.819-29.415 145.649-40.03zm-174.919 50.64l8.877 115.402-78.119 78.119-11.816-153.606c19.947-13.468 47.183-26.875 81.058-39.915zm-109.281 64.119l12.103 157.338-47.36 47.36c-39.246-52.892-24.821-139.885 35.257-204.698zm57.113 247.849c-26.548-.001-51.267-7.176-71.161-21.938l47.363-47.363 157.32 12.102c-40.432 37.475-89.488 57.201-133.522 57.199zm157.743-85.421l-153.605-11.816 78.118-78.118 115.403 8.877c-13.04 33.876-26.448 61.111-39.916 81.057zm50.526-110.326l-98.076-7.544L468.725 64.485c-10.589 47.717-24.147 99.232-40.031 145.653z\"/>\n  </svg>\n  ",
+  objects: "\n  <svg style=\"max-height:18px\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 792 792\" fill=\"gray\">\n  <path d=\"M425.512 741.214H365.58c-14.183 0-25.164 11.439-25.164 25.622S351.397 792 365.58 792h59.932c15.101 0 26.54-10.981 26.54-25.164s-11.44-25.622-26.54-25.622zM472.638 671.209H319.821c-14.183 0-26.081 10.98-26.081 25.163s11.898 25.164 26.081 25.164h152.817c14.183 0 25.164-10.981 25.164-25.164s-10.982-25.163-25.164-25.163zM639.188 138.634c-25.164-42.548-59.181-76.135-102.49-101.113C493.526 12.621 446.566 0 395.771 0 320.28 0 247.19 31.684 197.205 81.445c-49.761 49.527-81.904 121.24-81.904 196.282 0 33.861 7.779 68.629 22.879 103.866 15.1 35.228 38.565 78.614 70.005 130.396 7.448 12.269 15.764 31.205 25.623 56.271 12.104 30.757 22.87 51.713 31.566 63.602 5.027 6.872 11.899 10.063 20.596 10.063h228.766c9.605 0 16.359-4.188 21.504-11.898 6.754-10.132 13.987-27.516 22.42-51.693 8.951-25.691 16.838-43.982 23.329-55.364 30.571-53.587 54.446-99.747 70.464-137.717 16.018-37.979 24.246-74.124 24.246-107.526 0-49.878-12.347-96.545-37.511-139.093zm-35.696 232.437c-15.012 34.348-36.398 76.974-65.427 126.736-9.41 16.125-18.458 37.003-26.989 63.592-3.367 10.474-7.32 20.596-11.439 30.2H300.153c-6.862-11.439-12.26-25.837-18.761-42.089-12.718-31.801-23.338-52.621-30.2-64.061-28.824-48.043-49.868-87.39-64.051-118.957s-20.537-60.859-21.044-88.766c-2.235-121.718 106.13-228.991 229.674-226.941 41.631.693 80.527 10.063 115.765 30.659 35.227 20.586 63.134 48.043 83.729 82.812 20.586 34.768 31.108 72.748 31.108 113.47-.001 27.449-7.692 58.596-22.881 93.345z\"/>\n  </svg>\n  ",
+  peoples: "\n  <svg style=\"max-height:18px\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 106.059 106.059\" fill=\"gray\">\n  <path d=\"M90.544 90.542c20.687-20.684 20.685-54.341.002-75.024-20.688-20.689-54.347-20.689-75.031-.006-20.688 20.687-20.686 54.346.002 75.034 20.682 20.684 54.341 20.684 75.027-.004zM21.302 21.3c17.494-17.493 45.959-17.495 63.457.002 17.494 17.494 17.492 45.963-.002 63.455-17.494 17.494-45.96 17.496-63.455.003-17.498-17.498-17.496-45.966 0-63.46zM27 69.865s-2.958-11.438 6.705-8.874c0 0 17.144 9.295 38.651 0 9.662-2.563 6.705 8.874 6.705 8.874C73.539 86.824 53.03 85.444 53.03 85.444S32.521 86.824 27 69.865zm6.24-31.194a6.202 6.202 0 1 1 12.399.001 6.202 6.202 0 0 1-12.399-.001zm28.117 0a6.202 6.202 0 1 1 12.403.001 6.202 6.202 0 0 1-12.403-.001z\"/>\n  </svg>\n  ",
+  places: "\n  <svg style=\"max-height:18px\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 611.999 611.998\" fill=\"gray\">\n  <path d=\"M596.583 15.454C586.226 5.224 573.354.523 558.423.523c-15.597 0-31.901 4.906-49.452 14.599-17.296 9.551-32.851 20.574-46.458 32.524h-.665c-2.655 2.322-10.953 10.287-25.219 24.553-14.272 14.272-26.217 26.223-35.845 36.51L112.401 26.406c-6.896-1.968-12.928.014-17.593 4.645L46.687 78.839c-4.326 4.297-5.805 9.268-4.977 15.597.829 6.287 3.979 10.627 9.629 13.607L280.32 228.839 161.514 347.978l-95.91 3.32c-4.645.164-8.637 1.643-12.276 5.311L5.872 404.397c-4.312 4.34-6.641 9.289-5.643 16.262 1.657 6.967 5.31 11.611 11.618 13.602l117.142 48.787 48.787 117.148c2.421 5.812 6.634 9.621 13.607 11.279h3.313c4.977 0 9.296-1.658 12.942-5.311l47.456-47.457c3.653-3.645 5.494-7.965 5.643-12.275l3.32-95.91 118.807-118.807 121.128 228.99c2.988 5.643 7.32 8.793 13.607 9.621 6.329.836 11.271-1.316 15.597-5.643l47.456-47.457c4.978-4.977 6.945-10.697 4.978-17.586l-82.296-288.389 59.732-59.739c10.287-10.287 21.699-24.149 33.183-45.134 5.777-10.542 10.032-20.886 12.942-31.194 5.722-20.218 3.258-44.07-12.608-59.73zm-59.4 110.176l-67.039 67.372c-5.628 5.657-6.811 11.122-4.977 17.586l81.637 288.388-22.563 22.238L403.438 292.89c-2.98-5.643-7.299-8.963-12.941-9.621-6.301-1.331-11.611.325-16.263 4.977l-141.37 141.37c-2.987 2.986-4.644 6.973-5.643 11.949l-3.32 95.904-22.896 23.236-41.48-98.566c-1.331-4.645-4.553-8.184-9.629-10.287L51.338 411.03l23.229-22.895 95.578-3.654c5.643-.99 9.622-2.654 12.276-5.309l141.37-141.371c4.651-4.645 6.308-9.954 4.984-16.262-.666-5.643-3.986-9.954-9.629-12.942L90.829 87.47l22.231-22.238 288.389 81.637c6.464 1.833 11.951.666 17.587-4.977l28.545-28.539 26.217-25.884 11.278-11.285 1.331-.666c27.873-23.895 55.088-38.16 72.016-38.16 5.969 0 9.954 1.324 11.611 3.979 18.917 18.585-21.099 72.484-32.851 84.293z\"/>\n  </svg>\n  ",
+  symbols: "\n  <svg style=\"max-height:18px\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 511.626 511.626\" fill=\"gray\">\n  <path d=\"M475.366 71.949c-24.175-23.606-57.575-35.404-100.215-35.404-11.8 0-23.843 2.046-36.117 6.136-12.279 4.093-23.702 9.615-34.256 16.562-10.568 6.945-19.65 13.467-27.269 19.556a263.828 263.828 0 0 0-21.696 19.414 264.184 264.184 0 0 0-21.698-19.414c-7.616-6.089-16.702-12.607-27.268-19.556-10.564-6.95-21.985-12.468-34.261-16.562-12.275-4.089-24.316-6.136-36.116-6.136-42.637 0-76.039 11.801-100.211 35.404C12.087 95.55 0 128.286 0 170.16c0 12.753 2.24 25.891 6.711 39.398 4.471 13.514 9.566 25.031 15.275 34.546 5.708 9.514 12.181 18.792 19.414 27.834 7.233 9.041 12.519 15.272 15.846 18.698 3.33 3.426 5.948 5.903 7.851 7.427L243.25 469.938c3.427 3.426 7.614 5.144 12.562 5.144s9.138-1.718 12.563-5.144l177.87-171.31c43.588-43.58 65.38-86.406 65.38-128.472.001-41.877-12.085-74.61-36.259-98.207zm-53.961 199.846L255.813 431.391 89.938 271.507C54.344 235.922 36.55 202.133 36.55 170.156c0-15.415 2.046-29.026 6.136-40.824 4.093-11.8 9.327-21.177 15.703-28.124 6.377-6.949 14.132-12.607 23.268-16.988 9.141-4.377 18.086-7.328 26.84-8.85 8.754-1.52 18.079-2.281 27.978-2.281 9.896 0 20.557 2.424 31.977 7.279 11.418 4.853 21.934 10.944 31.545 18.271 9.613 7.332 17.845 14.183 24.7 20.557 6.851 6.38 12.559 12.229 17.128 17.559 3.424 4.189 8.091 6.283 13.989 6.283 5.9 0 10.562-2.094 13.99-6.283 4.568-5.33 10.28-11.182 17.131-17.559 6.852-6.374 15.085-13.222 24.694-20.557 9.613-7.327 20.129-13.418 31.553-18.271 11.416-4.854 22.08-7.279 31.977-7.279s19.219.761 27.977 2.281c8.757 1.521 17.702 4.473 26.84 8.85 9.137 4.38 16.892 10.042 23.267 16.988 6.376 6.947 11.612 16.324 15.705 28.124 4.086 11.798 6.132 25.409 6.132 40.824-.002 31.977-17.89 65.86-53.675 101.639z\"/>\n  </svg>\n  "
+};
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/VSvg.vue?vue&type=script&lang=js&
+
+
+
+
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ var VSvgvue_type_script_lang_js_ = ({
+  name: 'VSvg',
+  props: {
+    name: {
+      type: String,
+      required: true
+    },
+    styles: {
+      type: Object
+    }
+  },
+  computed: {
+    icon() {
+      return categories[this.name];
+    },
+
+    styleSVG() {
+      return _objectSpread({}, this.styles);
+    }
+
+  }
+});
+// CONCATENATED MODULE: ./src/components/EmojiPicker/VSvg.vue?vue&type=script&lang=js&
+ /* harmony default export */ var EmojiPicker_VSvgvue_type_script_lang_js_ = (VSvgvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__("2877");
+
+// CONCATENATED MODULE: ./src/components/EmojiPicker/VSvg.vue
+
+
+
+function injectStyles (context) {
+  
+  
+}
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  EmojiPicker_VSvgvue_type_script_lang_js_,
+  VSvgvue_type_template_id_2a757e4e_render,
+  VSvgvue_type_template_id_2a757e4e_staticRenderFns,
+  false,
+  injectStyles,
+  null,
+  null
+  ,true
+)
+
+/* harmony default export */ var VSvg = (component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/Categories.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ var Categoriesvue_type_script_lang_js_ = ({
+  name: 'Categories',
+  components: {
+    VSvg: VSvg
+  },
+  data: () => ({
+    categories: [{
+      name: 'Frequenty',
+      icon: 'frequenty'
+    }, {
+      name: 'Peoples',
+      icon: 'peoples'
+    }, {
+      name: 'Nature',
+      icon: 'nature'
+    }, {
+      name: 'Foods',
+      icon: 'foods'
+    }, {
+      name: 'Activity',
+      icon: 'activity'
+    }, {
+      name: 'Objects',
+      icon: 'objects'
+    }, {
+      name: 'Places',
+      icon: 'places'
+    }, {
+      name: 'Symbols',
+      icon: 'symbols'
+    }, {
+      name: 'Flags',
+      icon: 'flags'
+    }],
+    active: 1
+  }),
+  methods: {
+    onSelect(index) {
+      this.active = index;
+      var _category = this.categories[index];
+      this.$emit('select', _category);
+    }
+
+  }
+});
+// CONCATENATED MODULE: ./src/components/EmojiPicker/Categories.vue?vue&type=script&lang=js&
+ /* harmony default export */ var EmojiPicker_Categoriesvue_type_script_lang_js_ = (Categoriesvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/EmojiPicker/Categories.vue
+
+
+
+function Categories_injectStyles (context) {
+  
+  
+}
+
+/* normalize component */
+
+var Categories_component = Object(componentNormalizer["a" /* default */])(
+  EmojiPicker_Categoriesvue_type_script_lang_js_,
+  Categoriesvue_type_template_id_b81a141a_render,
+  Categoriesvue_type_template_id_b81a141a_staticRenderFns,
+  false,
+  Categories_injectStyles,
+  null,
+  null
+  ,true
+)
+
+/* harmony default export */ var Categories = (Categories_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/EmojiList.vue?vue&type=template&id=49d27a6f&
+var EmojiListvue_type_template_id_49d27a6f_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"Emojis"}},[_c('div',{ref:"container-emoji",staticClass:"container-emoji"},[(_vm.continuousList)?_vm._l((_vm.dataFilteredByCategory),function(category,category_name){return _c('div',{key:category_name,staticClass:"category-line"},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(category.length),expression:"category.length"}],ref:category_name,refInFor:true,staticClass:"category-title"},[_vm._v(" "+_vm._s(category_name)+" ")]),(category.length)?_c('div',{staticClass:"grid-emojis",style:(_vm.gridDynamic)},_vm._l((category),function(emoji,index_e){return _c('Emoji',{key:(category_name + "-" + index_e),attrs:{"data":emoji['emoji']},nativeOn:{"click":function($event){return _vm.onSelect(emoji)}}})}),1):_vm._e()])}):_c('div',{staticClass:"grid-emojis",style:(_vm.gridDynamic)},_vm._l((_vm.dataFiltered),function(emoji,index){return _c('Emoji',{key:index,attrs:{"data":emoji['emoji']},nativeOn:{"click":function($event){return _vm.onSelect(emoji)}}})}),1)],2)])}
+var EmojiListvue_type_template_id_49d27a6f_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/EmojiPicker/EmojiList.vue?vue&type=template&id=49d27a6f&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
+var es_array_concat = __webpack_require__("99af");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.includes.js
+var es_array_includes = __webpack_require__("caad");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.assign.js
+var es_object_assign = __webpack_require__("cca6");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.includes.js
+var es_string_includes = __webpack_require__("2532");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.trim.js
+var es_string_trim = __webpack_require__("498a");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/Emoji.vue?vue&type=template&id=0ebc421f&
+var Emojivue_type_template_id_0ebc421f_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"emoji",domProps:{"innerHTML":_vm._s(_vm.data)}})}
+var Emojivue_type_template_id_0ebc421f_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/EmojiPicker/Emoji.vue?vue&type=template&id=0ebc421f&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/Emoji.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ var Emojivue_type_script_lang_js_ = ({
+  name: 'Emoji',
+  props: {
+    data: {
+      type: String
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/components/EmojiPicker/Emoji.vue?vue&type=script&lang=js&
+ /* harmony default export */ var EmojiPicker_Emojivue_type_script_lang_js_ = (Emojivue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/EmojiPicker/Emoji.vue
+
+
+
+function Emoji_injectStyles (context) {
+  
+  
+}
+
+/* normalize component */
+
+var Emoji_component = Object(componentNormalizer["a" /* default */])(
+  EmojiPicker_Emojivue_type_script_lang_js_,
+  Emojivue_type_template_id_0ebc421f_render,
+  Emojivue_type_template_id_0ebc421f_staticRenderFns,
+  false,
+  Emoji_injectStyles,
+  null,
+  null
+  ,true
+)
+
+/* harmony default export */ var Emoji = (Emoji_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/EmojiList.vue?vue&type=script&lang=js&
+
+
+
+
+
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ var EmojiListvue_type_script_lang_js_ = ({
+  name: 'EmojiList',
+  components: {
+    Emoji: Emoji
+  },
+  props: {
+    data: {
+      type: Object,
+      required: true
+    },
+    emojisByRow: {
+      type: Number,
+      required: true
+    },
+    filter: {
+      type: String
+    },
+    continuousList: {
+      type: Boolean
+    },
+    category: {
+      type: String
+    }
+  },
+  methods: {
+    onSelect(emoji) {
+      this.$emit('select', emoji);
+    }
+
+  },
+  computed: {
+    gridDynamic() {
+      var percent = 100 / this.emojisByRow;
+      return {
+        gridTemplateColumns: "repeat(".concat(this.emojisByRow, ", ").concat(percent, "%)")
+      };
+    },
+
+    dataFiltered() {
+      var data = this.data[this.category];
+      var searchValue = this.filter.trim();
+
+      if (searchValue) {
+        data = data.filter(item => item.aliases.some(alias => alias.includes(searchValue.toLowerCase())));
+      }
+
+      return data;
+    },
+
+    dataFilteredByCategory() {
+      var _data = Object.assign({}, this.data);
+
+      var searchValue = this.filter.trim();
+
+      if (searchValue) {
+        this.categories.forEach(category => {
+          _data[category] = this.data[category].filter(item => item.aliases.some(alias => alias.includes(searchValue.toLowerCase())));
+        });
+      }
+
+      return _data;
+    },
+
+    categories() {
+      return Object.keys(this.data);
+    }
+
+  },
+  watch: {
+    data() {
+      this.$refs['container-emoji'].scrollTop = 0;
+    },
+
+    category(new_category) {
+      if (this.continuousList) {
+        var firstItemCategory = this.$refs[new_category][0];
+        var scrollTop = firstItemCategory.offsetTop - 80;
+        this.$refs['container-emoji'].scrollTop = scrollTop;
+      }
+    }
+
+  }
+});
+// CONCATENATED MODULE: ./src/components/EmojiPicker/EmojiList.vue?vue&type=script&lang=js&
+ /* harmony default export */ var EmojiPicker_EmojiListvue_type_script_lang_js_ = (EmojiListvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/EmojiPicker/EmojiList.vue
+
+
+
+function EmojiList_injectStyles (context) {
+  
+  
+}
+
+/* normalize component */
+
+var EmojiList_component = Object(componentNormalizer["a" /* default */])(
+  EmojiPicker_EmojiListvue_type_script_lang_js_,
+  EmojiListvue_type_template_id_49d27a6f_render,
+  EmojiListvue_type_template_id_49d27a6f_staticRenderFns,
+  false,
+  EmojiList_injectStyles,
+  null,
+  null
+  ,true
+)
+
+/* harmony default export */ var EmojiList = (EmojiList_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/InputSearch.vue?vue&type=template&id=16fbf99f&
+var InputSearchvue_type_template_id_16fbf99f_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"InputSearch"}},[_c('div',{staticClass:"container-search"},[_c('input',{attrs:{"type":"text","placeholder":_vm.placeholder},domProps:{"value":_vm.value},on:{"keyup":function($event){return _vm.onKeyUp($event)}}})])])}
+var InputSearchvue_type_template_id_16fbf99f_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/EmojiPicker/InputSearch.vue?vue&type=template&id=16fbf99f&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/InputSearch.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ var InputSearchvue_type_script_lang_js_ = ({
+  name: 'InputSearch',
+  props: {
+    value: {
+      type: String,
+      required: true
+    },
+    placeholder: {
+      type: String,
+      required: true
+    }
+  },
+  methods: {
+    // Emit value of v-model
+    onKeyUp(event) {
+      this.$emit('input', event.target.value);
+    }
+
+  }
+});
+// CONCATENATED MODULE: ./src/components/EmojiPicker/InputSearch.vue?vue&type=script&lang=js&
+ /* harmony default export */ var EmojiPicker_InputSearchvue_type_script_lang_js_ = (InputSearchvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/EmojiPicker/InputSearch.vue
+
+
+
+function InputSearch_injectStyles (context) {
+  
+  
+}
+
+/* normalize component */
+
+var InputSearch_component = Object(componentNormalizer["a" /* default */])(
+  EmojiPicker_InputSearchvue_type_script_lang_js_,
+  InputSearchvue_type_template_id_16fbf99f_render,
+  InputSearchvue_type_template_id_16fbf99f_staticRenderFns,
+  false,
+  InputSearch_injectStyles,
+  null,
+  null
+  ,true
+)
+
+/* harmony default export */ var InputSearch = (InputSearch_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/VEmojiPicker.vue?vue&type=script&lang=js&
+
+
+
+
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ var VEmojiPickervue_type_script_lang_js_ = ({
+  name: 'VEmojiPicker',
+  props: {
+    pack: {
+      type: Array,
+      required: true
+    },
+    labelSearch: {
+      type: String,
+      default: 'Pesquisar...'
+    },
+    showCategory: {
+      type: Boolean,
+      default: true
+    },
+    emojisByRow: {
+      type: Number,
+      default: 5
+    },
+    showSearch: {
+      type: Boolean,
+      default: () => true
+    },
+    continuousList: {
+      type: Boolean,
+      default: () => false
+    }
+  },
+  components: {
+    Categories: Categories,
+    EmojiList: EmojiList,
+    InputSearch: InputSearch
+  },
+  data: () => ({
+    mapEmojis: {},
+    category: 'Peoples',
+    filterEmoji: ''
+  }),
+
+  created() {
+    this.mapperData(this.pack);
+  },
+
+  methods: {
+    onChangeCategory(category) {
+      this.category = category.name;
+      this.$emit('changeCategory', this.category);
+    },
+
+    onSelectEmoji(emoji) {
+      this.updateFrequenty(emoji);
+      this.$emit('select', emoji);
+    },
+
+    updateFrequenty(emoji) {
+      this.mapEmojis['Frequenty'] = [...new Set([...this.mapEmojis['Frequenty'], emoji])];
+    },
+
+    mapperData(dataEmojis) {
+      this.$set(this.mapEmojis, 'Frequenty', []);
+      dataEmojis.forEach(emoji => {
+        var _category = emoji['category'];
+
+        if (!this.mapEmojis[_category]) {
+          this.$set(this.mapEmojis, _category, [emoji]);
+        } else {
+          this.mapEmojis[_category].push(emoji);
+        }
+      });
+    }
+
+  },
+
+  beforeDestroy() {
+    delete this.mapEmojis;
+  },
+
+  computed: {
+    emojis() {
+      return this.mapEmojis;
+    }
+
+  }
+});
+// CONCATENATED MODULE: ./src/components/EmojiPicker/VEmojiPicker.vue?vue&type=script&lang=js&
+ /* harmony default export */ var EmojiPicker_VEmojiPickervue_type_script_lang_js_ = (VEmojiPickervue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/EmojiPicker/VEmojiPicker.vue
+
+
+
+function VEmojiPicker_injectStyles (context) {
+  
+  
+}
+
+/* normalize component */
+
+var VEmojiPicker_component = Object(componentNormalizer["a" /* default */])(
+  EmojiPicker_VEmojiPickervue_type_script_lang_js_,
+  VEmojiPickervue_type_template_id_48749e14_render,
+  VEmojiPickervue_type_template_id_48749e14_staticRenderFns,
+  false,
+  VEmojiPicker_injectStyles,
+  null,
+  null
+  ,true
+)
+
+/* harmony default export */ var VEmojiPicker = (VEmojiPicker_component.exports);
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.description.js
+var es_symbol_description = __webpack_require__("e01a");
+
+// CONCATENATED MODULE: ./src/components/EmojiPicker/data/emojis.js
+
+
+
+/* eslint-disable prettier/prettier */
+
+/* based on https://github.com/joaoeudes7/V-Emoji-Picker */
+class emojis_Emoji {
+  constructor(emoji, description, category, aliases, tags) {
+    this.emoji = emoji;
+    this.description = description;
+    this.category = category;
+    this.aliases = aliases;
+    this.tags = tags;
+  }
+
+}
+
+/* harmony default export */ var emojis = ([new emojis_Emoji("😀", "grinning face", "Peoples", ["grinning"], ["smile", "happy"]), new emojis_Emoji("😃", "smiling face with open mouth", "Peoples", ["smiley"], ["happy", "joy", "haha"]), new emojis_Emoji("😄", "smiling face with open mouth & smiling eyes", "Peoples", ["smile"], ["happy", "joy", "laugh", "pleased"]), new emojis_Emoji("😁", "grinning face with smiling eyes", "Peoples", ["grin"], []), new emojis_Emoji("😆", "smiling face with open mouth & closed eyes", "Peoples", ["laughing", "satisfied"], ["happy", "haha"]), new emojis_Emoji("😅", "smiling face with open mouth & cold sweat", "Peoples", ["sweat_smile"], ["hot"]), new emojis_Emoji("😂", "face with tears of joy", "Peoples", ["joy"], ["tears"]), new emojis_Emoji("🤣", "rolling on the floor laughing", "Peoples", ["rofl"], ["lol", "laughing"]), new emojis_Emoji("😌", "smiling face", "Peoples", ["relaxed"], ["blush", "pleased"]), new emojis_Emoji("😊", "smiling face with smiling eyes", "Peoples", ["blush"], ["proud"]), new emojis_Emoji("😇", "smiling face with halo", "Peoples", ["innocent"], ["angel"]), new emojis_Emoji("🙂", "slightly smiling face", "Peoples", ["slightly_smiling_face"], []), new emojis_Emoji("🙃", "upside-down face", "Peoples", ["upside_down_face"], []), new emojis_Emoji("😉", "winking face", "Peoples", ["wink"], ["flirt"]), new emojis_Emoji("😌", "relieved face", "Peoples", ["relieved"], ["whew"]), new emojis_Emoji("😍", "smiling face with heart-eyes", "Peoples", ["heart_eyes"], ["love", "crush"]), new emojis_Emoji("😘", "face blowing a kiss", "Peoples", ["kissing_heart"], ["flirt"]), new emojis_Emoji("😗", "kissing face", "Peoples", ["kissing"], []), new emojis_Emoji("😙", "kissing face with smiling eyes", "Peoples", ["kissing_smiling_eyes"], []), new emojis_Emoji("😚", "kissing face with closed eyes", "Peoples", ["kissing_closed_eyes"], []), new emojis_Emoji("😋", "face savouring delicious food", "Peoples", ["yum"], ["tongue", "lick"]), new emojis_Emoji("😜", "face with stuck-out tongue & winking eye", "Peoples", ["stuck_out_tongue_winking_eye"], ["prank", "silly"]), new emojis_Emoji("😝", "face with stuck-out tongue & closed eyes", "Peoples", ["stuck_out_tongue_closed_eyes"], ["prank"]), new emojis_Emoji("😛", "face with stuck-out tongue", "Peoples", ["stuck_out_tongue"], []), new emojis_Emoji("🤑", "money-mouth face", "Peoples", ["money_mouth_face"], ["rich"]), new emojis_Emoji("🤗", "hugging face", "Peoples", ["hugs"], []), new emojis_Emoji("🤓", "nerd face", "Peoples", ["nerd_face"], ["geek", "glasses"]), new emojis_Emoji("😎", "smiling face with sunglasses", "Peoples", ["sunglasses"], ["cool"]), new emojis_Emoji("🤡", "clown face", "Peoples", ["clown_face"], []), new emojis_Emoji("🤠", "cowboy hat face", "Peoples", ["cowboy_hat_face"], []), new emojis_Emoji("😏", "smirking face", "Peoples", ["smirk"], ["smug"]), new emojis_Emoji("😒", "unamused face", "Peoples", ["unamused"], ["meh"]), new emojis_Emoji("😞", "disappointed face", "Peoples", ["disappointed"], ["sad"]), new emojis_Emoji("😔", "pensive face", "Peoples", ["pensive"], []), new emojis_Emoji("😟", "worried face", "Peoples", ["worried"], ["nervous"]), new emojis_Emoji("😕", "confused face", "Peoples", ["confused"], []), new emojis_Emoji("🙁", "slightly frowning face", "Peoples", ["slightly_frowning_face"], []), new emojis_Emoji("☹️", "frowning face", "Peoples", ["frowning_face"], []), new emojis_Emoji("😣", "persevering face", "Peoples", ["persevere"], ["struggling"]), new emojis_Emoji("😖", "confounded face", "Peoples", ["confounded"], []), new emojis_Emoji("😫", "tired face", "Peoples", ["tired_face"], ["upset", "whine"]), new emojis_Emoji("😩", "weary face", "Peoples", ["weary"], ["tired"]), new emojis_Emoji("😤", "face with steam from nose", "Peoples", ["triumph"], ["smug"]), new emojis_Emoji("😠", "angry face", "Peoples", ["angry"], ["mad", "annoyed"]), new emojis_Emoji("😡", "pouting face", "Peoples", ["rage", "pout"], ["angry"]), new emojis_Emoji("😶", "face without mouth", "Peoples", ["no_mouth"], ["mute", "silence"]), new emojis_Emoji("😐", "neutral face", "Peoples", ["neutral_face"], ["meh"]), new emojis_Emoji("😑", "expressionless face", "Peoples", ["expressionless"], []), new emojis_Emoji("😯", "hushed face", "Peoples", ["hushed"], ["silence", "speechless"]), new emojis_Emoji("😦", "frowning face with open mouth", "Peoples", ["frowning"], []), new emojis_Emoji("😧", "anguished face", "Peoples", ["anguished"], ["stunned"]), new emojis_Emoji("😮", "face with open mouth", "Peoples", ["open_mouth"], ["surprise", "impressed", "wow"]), new emojis_Emoji("😲", "astonished face", "Peoples", ["astonished"], ["amazed", "gasp"]), new emojis_Emoji("😵", "dizzy face", "Peoples", ["dizzy_face"], []), new emojis_Emoji("😳", "flushed face", "Peoples", ["flushed"], []), new emojis_Emoji("😱", "face screaming in fear", "Peoples", ["scream"], ["horror", "shocked"]), new emojis_Emoji("😨", "fearful face", "Peoples", ["fearful"], ["scared", "shocked", "oops"]), new emojis_Emoji("😰", "face with open mouth & cold sweat", "Peoples", ["cold_sweat"], ["nervous"]), new emojis_Emoji("😢", "crying face", "Peoples", ["cry"], ["sad", "tear"]), new emojis_Emoji("😥", "disappointed but relieved face", "Peoples", ["disappointed_relieved"], ["phew", "sweat", "nervous"]), new emojis_Emoji("🤤", "drooling face", "Peoples", ["drooling_face"], []), new emojis_Emoji("😭", "loudly crying face", "Peoples", ["sob"], ["sad", "cry", "bawling"]), new emojis_Emoji("😓", "face with cold sweat", "Peoples", ["sweat"], []), new emojis_Emoji("😪", "sleepy face", "Peoples", ["sleepy"], ["tired"]), new emojis_Emoji("😴", "sleeping face", "Peoples", ["sleeping"], ["zzz"]), new emojis_Emoji("🙄", "face with rolling eyes", "Peoples", ["roll_eyes"], []), new emojis_Emoji("🤔", "thinking face", "Peoples", ["thinking"], []), new emojis_Emoji("🤥", "lying face", "Peoples", ["lying_face"], ["liar"]), new emojis_Emoji("😬", "grimacing face", "Peoples", ["grimacing"], []), new emojis_Emoji("🤐", "zipper-mouth face", "Peoples", ["zipper_mouth_face"], ["silence", "hush"]), new emojis_Emoji("🤢", "nauseated face", "Peoples", ["nauseated_face"], ["sick", "barf", "disgusted"]), new emojis_Emoji("🤧", "sneezing face", "Peoples", ["sneezing_face"], ["achoo", "sick"]), new emojis_Emoji("😷", "face with medical mask", "Peoples", ["mask"], ["sick", "ill"]), new emojis_Emoji("🤒", "face with thermometer", "Peoples", ["face_with_thermometer"], ["sick"]), new emojis_Emoji("🤕", "face with head-bandage", "Peoples", ["face_with_head_bandage"], ["hurt"]), new emojis_Emoji("😈", "smiling face with horns", "Peoples", ["smiling_imp"], ["devil", "evil", "horns"]), new emojis_Emoji("👿", "angry face with horns", "Peoples", ["imp"], ["angry", "devil", "evil", "horns"]), new emojis_Emoji("👹", "ogre", "Peoples", ["japanese_ogre"], ["monster"]), new emojis_Emoji("👺", "goblin", "Peoples", ["japanese_goblin"], []), new emojis_Emoji("💩", "pile of poo", "Peoples", ["hankey", "poop", "shit"], ["crap"]), new emojis_Emoji("👻", "ghost", "Peoples", ["ghost"], ["halloween"]), new emojis_Emoji("💀", "skull", "Peoples", ["skull"], ["dead", "danger", "poison"]), new emojis_Emoji("☠️", "skull and crossbones", "Peoples", ["skull_and_crossbones"], ["danger", "pirate"]), new emojis_Emoji("👽", "alien", "Peoples", ["alien"], ["ufo"]), new emojis_Emoji("👾", "alien monster", "Peoples", ["space_invader"], ["game", "retro"]), new emojis_Emoji("🤖", "robot face", "Peoples", ["robot"], []), new emojis_Emoji("🎃", "jack-o-lantern", "Peoples", ["jack_o_lantern"], ["halloween"]), new emojis_Emoji("😺", "smiling cat face with open mouth", "Peoples", ["smiley_cat"], []), new emojis_Emoji("😸", "grinning cat face with smiling eyes", "Peoples", ["smile_cat"], []), new emojis_Emoji("😹", "cat face with tears of joy", "Peoples", ["joy_cat"], []), new emojis_Emoji("😻", "smiling cat face with heart-eyes", "Peoples", ["heart_eyes_cat"], []), new emojis_Emoji("😼", "cat face with wry smile", "Peoples", ["smirk_cat"], []), new emojis_Emoji("😽", "kissing cat face with closed eyes", "Peoples", ["kissing_cat"], []), new emojis_Emoji("🙀", "weary cat face", "Peoples", ["scream_cat"], ["horror"]), new emojis_Emoji("😿", "crying cat face", "Peoples", ["crying_cat_face"], ["sad", "tear"]), new emojis_Emoji("😾", "pouting cat face", "Peoples", ["pouting_cat"], []), new emojis_Emoji("👐", "open hands", "Peoples", ["open_hands"], []), new emojis_Emoji("🙌", "raising hands", "Peoples", ["raised_hands"], ["hooray"]), new emojis_Emoji("👏", "clapping hands", "Peoples", ["clap"], ["praise", "applause"]), new emojis_Emoji("🙏", "folded hands", "Peoples", ["pray"], ["please", "hope", "wish"]), new emojis_Emoji("🤝", "handshake", "Peoples", ["handshake"], ["deal"]), new emojis_Emoji("👍", "thumbs up", "Peoples", ["+1", "thumbsup"], ["approve", "ok"]), new emojis_Emoji("👎", "thumbs down", "Peoples", ["-1", "thumbsdown"], ["disapprove", "bury"]), new emojis_Emoji("👊", "oncoming fist", "Peoples", ["fist_oncoming", "facepunch", "punch"], ["attack"]), new emojis_Emoji("✊", "raised fist", "Peoples", ["fist_raised", "fist"], ["power"]), new emojis_Emoji("🤛", "left-facing fist", "Peoples", ["fist_left"], []), new emojis_Emoji("🤜", "right-facing fist", "Peoples", ["fist_right"], []), new emojis_Emoji("🤞", "crossed fingers", "Peoples", ["crossed_fingers"], ["luck", "hopeful"]), new emojis_Emoji("✌️", "victory hand", "Peoples", ["v"], ["victory", "peace"]), new emojis_Emoji("🤘", "sign of the horns", "Peoples", ["metal"], []), new emojis_Emoji("👌", "OK hand", "Peoples", ["ok_hand"], []), new emojis_Emoji("👈", "backhand index pointing left", "Peoples", ["point_left"], []), new emojis_Emoji("👉", "backhand index pointing right", "Peoples", ["point_right"], []), new emojis_Emoji("👆", "backhand index pointing up", "Peoples", ["point_up_2"], []), new emojis_Emoji("👇", "backhand index pointing down", "Peoples", ["point_down"], []), new emojis_Emoji("☝️", "index pointing up", "Peoples", ["point_up"], []), new emojis_Emoji("✋", "raised hand", "Peoples", ["hand", "raised_hand"], ["highfive", "stop"]), new emojis_Emoji("🤚", "raised back of hand", "Peoples", ["raised_back_of_hand"], []), new emojis_Emoji("🖐", "raised hand with fingers splayed", "Peoples", ["raised_hand_with_fingers_splayed"], []), new emojis_Emoji("🖖", "vulcan salute", "Peoples", ["vulcan_salute"], ["prosper", "spock"]), new emojis_Emoji("👋", "waving hand", "Peoples", ["wave"], ["goodbye"]), new emojis_Emoji("🤙", "call me hand", "Peoples", ["call_me_hand"], []), new emojis_Emoji("💪", "flexed biceps", "Peoples", ["muscle"], ["flex", "bicep", "strong", "workout"]), new emojis_Emoji("🖕", "middle finger", "Peoples", ["middle_finger", "fu"], []), new emojis_Emoji("✍️", "writing hand", "Peoples", ["writing_hand"], []), new emojis_Emoji("🤳", "selfie", "Peoples", ["selfie"], []), new emojis_Emoji("💅", "nail polish", "Peoples", ["nail_care"], ["beauty", "manicure"]), new emojis_Emoji("💍", "ring", "Peoples", ["ring"], ["wedding", "marriage", "engaged"]), new emojis_Emoji("💄", "lipstick", "Peoples", ["lipstick"], ["makeup"]), new emojis_Emoji("💋", "kiss mark", "Peoples", ["kiss"], ["lipstick"]), new emojis_Emoji("👄", "mouth", "Peoples", ["lips"], ["kiss"]), new emojis_Emoji("👅", "tongue", "Peoples", ["tongue"], ["taste"]), new emojis_Emoji("👂", "ear", "Peoples", ["ear"], ["hear", "sound", "listen"]), new emojis_Emoji("👃", "nose", "Peoples", ["nose"], ["smell"]), new emojis_Emoji("👣", "footprints", "Peoples", ["footprints"], ["feet", "tracks"]), new emojis_Emoji("👁", "eye", "Peoples", ["eye"], []), new emojis_Emoji("👀", "eyes", "Peoples", ["eyes"], ["look", "see", "watch"]), new emojis_Emoji("🗣", "speaking head", "Peoples", ["speaking_head"], []), new emojis_Emoji("👤", "bust in silhouette", "Peoples", ["bust_in_silhouette"], ["user"]), new emojis_Emoji("👥", "busts in silhouette", "Peoples", ["busts_in_silhouette"], ["users", "group", "team"]), new emojis_Emoji("👶", "baby", "Peoples", ["baby"], ["child", "newborn"]), new emojis_Emoji("👦", "boy", "Peoples", ["boy"], ["child"]), new emojis_Emoji("👧", "girl", "Peoples", ["girl"], ["child"]), new emojis_Emoji("👨", "man", "Peoples", ["man"], ["mustache", "father", "dad"]), new emojis_Emoji("👩", "woman", "Peoples", ["woman"], ["girls"]), new emojis_Emoji("👱‍♀", "blond-haired woman", "Peoples", ["blonde_woman"], []), new emojis_Emoji("👱", "blond-haired person", "Peoples", ["blonde_man", "person_with_blond_hair"], ["boy"]), new emojis_Emoji("👴", "old man", "Peoples", ["older_man"], []), new emojis_Emoji("👵", "old woman", "Peoples", ["older_woman"], []), new emojis_Emoji("👲", "man with Chinese cap", "Peoples", ["man_with_gua_pi_mao"], []), new emojis_Emoji("👳‍♀", "woman wearing turban", "Peoples", ["woman_with_turban"], []), new emojis_Emoji("👳", "person wearing turban", "Peoples", ["man_with_turban"], []), new emojis_Emoji("👮‍♀", "woman police officer", "Peoples", ["policewoman"], []), new emojis_Emoji("👮", "police officer", "Peoples", ["policeman", "cop"], ["police", "law"]), new emojis_Emoji("👷‍♀", "woman construction worker", "Peoples", ["construction_worker_woman"], []), new emojis_Emoji("👷", "construction worker", "Peoples", ["construction_worker_man", "construction_worker"], ["helmet"]), new emojis_Emoji("💂‍♀", "woman guard", "Peoples", ["guardswoman"], []), new emojis_Emoji("💂", "guard", "Peoples", ["guardsman"], []), new emojis_Emoji("👩‍⚕", "woman health worker", "Peoples", ["woman_health_worker"], ["doctor", "nurse"]), new emojis_Emoji("👨‍⚕", "man health worker", "Peoples", ["man_health_worker"], ["doctor", "nurse"]), new emojis_Emoji("👩‍🌾", "woman farmer", "Peoples", ["woman_farmer"], []), new emojis_Emoji("👨‍🌾", "man farmer", "Peoples", ["man_farmer"], []), new emojis_Emoji("👩‍🍳", "woman cook", "Peoples", ["woman_cook"], ["chef"]), new emojis_Emoji("👨‍🍳", "man cook", "Peoples", ["man_cook"], ["chef"]), new emojis_Emoji("👩‍🎓", "woman student", "Peoples", ["woman_student"], ["graduation"]), new emojis_Emoji("👨‍🎓", "man student", "Peoples", ["man_student"], ["graduation"]), new emojis_Emoji("👩‍🎤", "woman singer", "Peoples", ["woman_singer"], ["rockstar"]), new emojis_Emoji("👨‍🎤", "man singer", "Peoples", ["man_singer"], ["rockstar"]), new emojis_Emoji("👩‍🏫", "woman teacher", "Peoples", ["woman_teacher"], ["school", "professor"]), new emojis_Emoji("👨‍🏫", "man teacher", "Peoples", ["man_teacher"], ["school", "professor"]), new emojis_Emoji("👩‍🏭", "woman factory worker", "Peoples", ["woman_factory_worker"], []), new emojis_Emoji("👨‍🏭", "man factory worker", "Peoples", ["man_factory_worker"], []), new emojis_Emoji("👩‍💻", "woman technologist", "Peoples", ["woman_technologist"], ["coder"]), new emojis_Emoji("👨‍💻", "man technologist", "Peoples", ["man_technologist"], ["coder"]), new emojis_Emoji("👩‍💼", "woman office worker", "Peoples", ["woman_office_worker"], ["business"]), new emojis_Emoji("👨‍💼", "man office worker", "Peoples", ["man_office_worker"], ["business"]), new emojis_Emoji("👩‍🔧", "woman mechanic", "Peoples", ["woman_mechanic"], []), new emojis_Emoji("👨‍🔧", "man mechanic", "Peoples", ["man_mechanic"], []), new emojis_Emoji("👩‍🔬", "woman scientist", "Peoples", ["woman_scientist"], ["research"]), new emojis_Emoji("👨‍🔬", "man scientist", "Peoples", ["man_scientist"], ["research"]), new emojis_Emoji("👩‍🎨", "woman artist", "Peoples", ["woman_artist"], ["painter"]), new emojis_Emoji("👨‍🎨", "man artist", "Peoples", ["man_artist"], ["painter"]), new emojis_Emoji("👩‍🚒", "woman firefighter", "Peoples", ["woman_firefighter"], []), new emojis_Emoji("👨‍🚒", "man firefighter", "Peoples", ["man_firefighter"], []), new emojis_Emoji("👩‍🚀", "woman astronaut", "Peoples", ["woman_astronaut"], ["space"]), new emojis_Emoji("👨‍🚀", "man astronaut", "Peoples", ["man_astronaut"], ["space"]), new emojis_Emoji("🤶", "Mrs. Claus", "Peoples", ["mrs_claus"], ["santa"]), new emojis_Emoji("🎅", "Santa Claus", "Peoples", ["santa"], ["christmas"]), new emojis_Emoji("👸", "princess", "Peoples", ["princess"], ["blonde", "crown", "royal"]), new emojis_Emoji("🤴", "prince", "Peoples", ["prince"], ["crown", "royal"]), new emojis_Emoji("👰", "bride with veil", "Peoples", ["bride_with_veil"], ["marriage", "wedding"]), new emojis_Emoji("🤵", "man in tuxedo", "Peoples", ["man_in_tuxedo"], ["groom", "marriage", "wedding"]), new emojis_Emoji("👼", "baby angel", "Peoples", ["angel"], []), new emojis_Emoji("🤰", "pregnant woman", "Peoples", ["pregnant_woman"], []), new emojis_Emoji("🙇‍♀", "woman bowing", "Peoples", ["bowing_woman"], ["respect", "thanks"]), new emojis_Emoji("🙇", "person bowing", "Peoples", ["bowing_man", "bow"], ["respect", "thanks"]), new emojis_Emoji("💁", "person tipping hand", "Peoples", ["tipping_hand_woman", "information_desk_person", "sassy_woman"], []), new emojis_Emoji("💁‍♂", "man tipping hand", "Peoples", ["tipping_hand_man", "sassy_man"], ["information"]), new emojis_Emoji("🙅", "person gesturing NO", "Peoples", ["no_good_woman", "no_good", "ng_woman"], ["stop", "halt"]), new emojis_Emoji("🙅‍♂", "man gesturing NO", "Peoples", ["no_good_man", "ng_man"], ["stop", "halt"]), new emojis_Emoji("🙆", "person gesturing OK", "Peoples", ["ok_woman"], []), new emojis_Emoji("🙆‍♂", "man gesturing OK", "Peoples", ["ok_man"], []), new emojis_Emoji("🙋", "person raising hand", "Peoples", ["raising_hand_woman", "raising_hand"], []), new emojis_Emoji("🙋‍♂", "man raising hand", "Peoples", ["raising_hand_man"], []), new emojis_Emoji("🤦‍♀", "woman facepalming", "Peoples", ["woman_facepalming"], []), new emojis_Emoji("🤦‍♂", "man facepalming", "Peoples", ["man_facepalming"], []), new emojis_Emoji("🤷‍♀", "woman shrugging", "Peoples", ["woman_shrugging"], []), new emojis_Emoji("🤷‍♂", "man shrugging", "Peoples", ["man_shrugging"], []), new emojis_Emoji("🙎", "person pouting", "Peoples", ["pouting_woman", "person_with_pouting_face"], []), new emojis_Emoji("🙎‍♂", "man pouting", "Peoples", ["pouting_man"], []), new emojis_Emoji("🙍", "person frowning", "Peoples", ["frowning_woman", "person_frowning"], ["sad"]), new emojis_Emoji("🙍‍♂", "man frowning", "Peoples", ["frowning_man"], []), new emojis_Emoji("💇", "person getting haircut", "Peoples", ["haircut_woman", "haircut"], ["beauty"]), new emojis_Emoji("💇‍♂", "man getting haircut", "Peoples", ["haircut_man"], []), new emojis_Emoji("💆", "person getting massage", "Peoples", ["massage_woman", "massage"], ["spa"]), new emojis_Emoji("💆‍♂", "man getting massage", "Peoples", ["massage_man"], ["spa"]), new emojis_Emoji("🕴", "man in business suit levitating", "Peoples", ["business_suit_levitating"], []), new emojis_Emoji("💃", "woman dancing", "Peoples", ["dancer"], ["dress"]), new emojis_Emoji("🕺", "man dancing", "Peoples", ["man_dancing"], ["dancer"]), new emojis_Emoji("👯", "people with bunny ears partying", "Peoples", ["dancing_women", "dancers"], ["bunny"]), new emojis_Emoji("👯‍♂", "men with bunny ears partying", "Peoples", ["dancing_men"], ["bunny"]), new emojis_Emoji("🚶‍♀", "woman walking", "Peoples", ["walking_woman"], []), new emojis_Emoji("🚶", "person walking", "Peoples", ["walking_man", "walking"], []), new emojis_Emoji("🏃‍♀", "woman running", "Peoples", ["running_woman"], ["exercise", "workout", "marathon"]), new emojis_Emoji("🏃", "person running", "Peoples", ["running_man", "runner", "running"], ["exercise", "workout", "marathon"]), new emojis_Emoji("👫", "man and woman holding hands", "Peoples", ["couple"], ["date"]), new emojis_Emoji("👭", "two women holding hands", "Peoples", ["two_women_holding_hands"], ["couple", "date"]), new emojis_Emoji("👬", "two men holding hands", "Peoples", ["two_men_holding_hands"], ["couple", "date"]), new emojis_Emoji("💑", "couple with heart", "Peoples", ["couple_with_heart_woman_man", "couple_with_heart"], []), new emojis_Emoji("👩‍❤️‍👩", "couple with heart: woman, woman", "Peoples", ["couple_with_heart_woman_woman"], []), new emojis_Emoji("👨‍❤️‍👨", "couple with heart: man, man", "Peoples", ["couple_with_heart_man_man"], []), new emojis_Emoji("💏", "kiss", "Peoples", ["couplekiss_man_woman"], []), new emojis_Emoji("👩‍❤️‍💋‍👩", "kiss: woman, woman", "Peoples", ["couplekiss_woman_woman"], []), new emojis_Emoji("👨‍❤️‍💋‍👨", "kiss: man, man", "Peoples", ["couplekiss_man_man"], []), new emojis_Emoji("👪", "family", "Peoples", ["family_man_woman_boy", "family"], ["home", "parents", "child"]), new emojis_Emoji("👨‍👩‍👧", "family: man, woman, girl", "Peoples", ["family_man_woman_girl"], []), new emojis_Emoji("👨‍👩‍👧‍👦", "family: man, woman, girl, boy", "Peoples", ["family_man_woman_girl_boy"], []), new emojis_Emoji("👨‍👩‍👦‍👦", "family: man, woman, boy, boy", "Peoples", ["family_man_woman_boy_boy"], []), new emojis_Emoji("👨‍👩‍👧‍👧", "family: man, woman, girl, girl", "Peoples", ["family_man_woman_girl_girl"], []), new emojis_Emoji("👩‍👩‍👦", "family: woman, woman, boy", "Peoples", ["family_woman_woman_boy"], []), new emojis_Emoji("👩‍👩‍👧", "family: woman, woman, girl", "Peoples", ["family_woman_woman_girl"], []), new emojis_Emoji("👩‍👩‍👧‍👦", "family: woman, woman, girl, boy", "Peoples", ["family_woman_woman_girl_boy"], []), new emojis_Emoji("👩‍👩‍👦‍👦", "family: woman, woman, boy, boy", "Peoples", ["family_woman_woman_boy_boy"], []), new emojis_Emoji("👩‍👩‍👧‍👧", "family: woman, woman, girl, girl", "Peoples", ["family_woman_woman_girl_girl"], []), new emojis_Emoji("👨‍👨‍👦", "family: man, man, boy", "Peoples", ["family_man_man_boy"], []), new emojis_Emoji("👨‍👨‍👧", "family: man, man, girl", "Peoples", ["family_man_man_girl"], []), new emojis_Emoji("👨‍👨‍👧‍👦", "family: man, man, girl, boy", "Peoples", ["family_man_man_girl_boy"], []), new emojis_Emoji("👨‍👨‍👦‍👦", "family: man, man, boy, boy", "Peoples", ["family_man_man_boy_boy"], []), new emojis_Emoji("👨‍👨‍👧‍👧", "family: man, man, girl, girl", "Peoples", ["family_man_man_girl_girl"], []), new emojis_Emoji("👩‍👦", "family: woman, boy", "Peoples", ["family_woman_boy"], []), new emojis_Emoji("👩‍👧", "family: woman, girl", "Peoples", ["family_woman_girl"], []), new emojis_Emoji("👩‍👧‍👦", "family: woman, girl, boy", "Peoples", ["family_woman_girl_boy"], []), new emojis_Emoji("👩‍👦‍👦", "family: woman, boy, boy", "Peoples", ["family_woman_boy_boy"], []), new emojis_Emoji("👩‍👧‍👧", "family: woman, girl, girl", "Peoples", ["family_woman_girl_girl"], []), new emojis_Emoji("👨‍👦", "family: man, boy", "Peoples", ["family_man_boy"], []), new emojis_Emoji("👨‍👧", "family: man, girl", "Peoples", ["family_man_girl"], []), new emojis_Emoji("👨‍👧‍👦", "family: man, girl, boy", "Peoples", ["family_man_girl_boy"], []), new emojis_Emoji("👨‍👦‍👦", "family: man, boy, boy", "Peoples", ["family_man_boy_boy"], []), new emojis_Emoji("👨‍👧‍👧", "family: man, girl, girl", "Peoples", ["family_man_girl_girl"], []), new emojis_Emoji("👚", "woman’s clothes", "Peoples", ["womans_clothes"], []), new emojis_Emoji("👕", "t-shirt", "Peoples", ["shirt", "tshirt"], []), new emojis_Emoji("👖", "jeans", "Peoples", ["jeans"], ["pants"]), new emojis_Emoji("👔", "necktie", "Peoples", ["necktie"], ["shirt", "formal"]), new emojis_Emoji("👗", "dress", "Peoples", ["dress"], []), new emojis_Emoji("👙", "bikini", "Peoples", ["bikini"], ["beach"]), new emojis_Emoji("👘", "kimono", "Peoples", ["kimono"], []), new emojis_Emoji("👠", "high-heeled shoe", "Peoples", ["high_heel"], ["shoe"]), new emojis_Emoji("👡", "woman’s sandal", "Peoples", ["sandal"], ["shoe"]), new emojis_Emoji("👢", "woman’s boot", "Peoples", ["boot"], []), new emojis_Emoji("👞", "man’s shoe", "Peoples", ["mans_shoe", "shoe"], []), new emojis_Emoji("👟", "running shoe", "Peoples", ["athletic_shoe"], ["sneaker", "sport", "running"]), new emojis_Emoji("👒", "woman’s hat", "Peoples", ["womans_hat"], []), new emojis_Emoji("🎩", "top hat", "Peoples", ["tophat"], ["hat", "classy"]), new emojis_Emoji("🎓", "graduation cap", "Peoples", ["mortar_board"], ["education", "college", "university", "graduation"]), new emojis_Emoji("👑", "crown", "Peoples", ["crown"], ["king", "queen", "royal"]), new emojis_Emoji("⛑", "rescue worker’s helmet", "Peoples", ["rescue_worker_helmet"], []), new emojis_Emoji("🎒", "school backpack", "Peoples", ["school_satchel"], []), new emojis_Emoji("👝", "clutch bag", "Peoples", ["pouch"], ["bag"]), new emojis_Emoji("👛", "purse", "Peoples", ["purse"], []), new emojis_Emoji("👜", "handbag", "Peoples", ["handbag"], ["bag"]), new emojis_Emoji("💼", "briefcase", "Peoples", ["briefcase"], ["business"]), new emojis_Emoji("👓", "glasses", "Peoples", ["eyeglasses"], ["glasses"]), new emojis_Emoji("🕶", "sunglasses", "Peoples", ["dark_sunglasses"], []), new emojis_Emoji("🌂", "closed umbrella", "Peoples", ["closed_umbrella"], ["weather", "rain"]), new emojis_Emoji("☂️", "umbrella", "Peoples", ["open_umbrella"], []), new emojis_Emoji("🐶", "dog face", "Nature", ["dog"], ["pet"]), new emojis_Emoji("🐱", "cat face", "Nature", ["cat"], ["pet"]), new emojis_Emoji("🐭", "mouse face", "Nature", ["mouse"], []), new emojis_Emoji("🐹", "hamster face", "Nature", ["hamster"], ["pet"]), new emojis_Emoji("🐰", "rabbit face", "Nature", ["rabbit"], ["bunny"]), new emojis_Emoji("🦊", "fox face", "Nature", ["fox_face"], []), new emojis_Emoji("🐻", "bear face", "Nature", ["bear"], []), new emojis_Emoji("🐼", "panda face", "Nature", ["panda_face"], []), new emojis_Emoji("🐨", "koala", "Nature", ["koala"], []), new emojis_Emoji("🐯", "tiger face", "Nature", ["tiger"], []), new emojis_Emoji("🦁", "lion face", "Nature", ["lion"], []), new emojis_Emoji("🐮", "cow face", "Nature", ["cow"], []), new emojis_Emoji("🐷", "pig face", "Nature", ["pig"], []), new emojis_Emoji("🐽", "pig nose", "Nature", ["pig_nose"], []), new emojis_Emoji("🐸", "frog face", "Nature", ["frog"], []), new emojis_Emoji("🐵", "monkey face", "Nature", ["monkey_face"], []), new emojis_Emoji("🙈", "see-no-evil monkey", "Nature", ["see_no_evil"], ["monkey", "blind", "ignore"]), new emojis_Emoji("🙉", "hear-no-evil monkey", "Nature", ["hear_no_evil"], ["monkey", "deaf"]), new emojis_Emoji("🙊", "speak-no-evil monkey", "Nature", ["speak_no_evil"], ["monkey", "mute", "hush"]), new emojis_Emoji("🐒", "monkey", "Nature", ["monkey"], []), new emojis_Emoji("🐔", "chicken", "Nature", ["chicken"], []), new emojis_Emoji("🐧", "penguin", "Nature", ["penguin"], []), new emojis_Emoji("🐦", "bird", "Nature", ["bird"], []), new emojis_Emoji("🐤", "baby chick", "Nature", ["baby_chick"], []), new emojis_Emoji("🐣", "hatching chick", "Nature", ["hatching_chick"], []), new emojis_Emoji("🐥", "front-facing baby chick", "Nature", ["hatched_chick"], []), new emojis_Emoji("🦆", "duck", "Nature", ["duck"], []), new emojis_Emoji("🦅", "eagle", "Nature", ["eagle"], []), new emojis_Emoji("🦉", "owl", "Nature", ["owl"], []), new emojis_Emoji("🦇", "bat", "Nature", ["bat"], []), new emojis_Emoji("🐺", "wolf face", "Nature", ["wolf"], []), new emojis_Emoji("🐗", "boar", "Nature", ["boar"], []), new emojis_Emoji("🐴", "horse face", "Nature", ["horse"], []), new emojis_Emoji("🦄", "unicorn face", "Nature", ["unicorn"], []), new emojis_Emoji("🐝", "honeybee", "Nature", ["bee", "honeybee"], []), new emojis_Emoji("🐛", "bug", "Nature", ["bug"], []), new emojis_Emoji("🦋", "butterfly", "Nature", ["butterfly"], []), new emojis_Emoji("🐌", "snail", "Nature", ["snail"], ["slow"]), new emojis_Emoji("🐚", "spiral shell", "Nature", ["shell"], ["sea", "beach"]), new emojis_Emoji("🐞", "lady beetle", "Nature", ["beetle"], ["bug"]), new emojis_Emoji("🐜", "ant", "Nature", ["ant"], []), new emojis_Emoji("🕷", "spider", "Nature", ["spider"], []), new emojis_Emoji("🕸", "spider web", "Nature", ["spider_web"], []), new emojis_Emoji("🐢", "turtle", "Nature", ["turtle"], ["slow"]), new emojis_Emoji("🐍", "snake", "Nature", ["snake"], []), new emojis_Emoji("🦎", "lizard", "Nature", ["lizard"], []), new emojis_Emoji("🦂", "scorpion", "Nature", ["scorpion"], []), new emojis_Emoji("🦀", "crab", "Nature", ["crab"], []), new emojis_Emoji("🦑", "squid", "Nature", ["squid"], []), new emojis_Emoji("🐙", "octopus", "Nature", ["octopus"], []), new emojis_Emoji("🦐", "shrimp", "Nature", ["shrimp"], []), new emojis_Emoji("🐠", "tropical fish", "Nature", ["tropical_fish"], []), new emojis_Emoji("🐟", "fish", "Nature", ["fish"], []), new emojis_Emoji("🐡", "blowfish", "Nature", ["blowfish"], []), new emojis_Emoji("🐬", "dolphin", "Nature", ["dolphin", "flipper"], []), new emojis_Emoji("🦈", "shark", "Nature", ["shark"], []), new emojis_Emoji("🐳", "spouting whale", "Nature", ["whale"], ["sea"]), new emojis_Emoji("🐋", "whale", "Nature", ["whale2"], []), new emojis_Emoji("🐊", "crocodile", "Nature", ["crocodile"], []), new emojis_Emoji("🐆", "leopard", "Nature", ["leopard"], []), new emojis_Emoji("🐅", "tiger", "Nature", ["tiger2"], []), new emojis_Emoji("🐃", "water buffalo", "Nature", ["water_buffalo"], []), new emojis_Emoji("🐂", "ox", "Nature", ["ox"], []), new emojis_Emoji("🐄", "cow", "Nature", ["cow2"], []), new emojis_Emoji("🦌", "deer", "Nature", ["deer"], []), new emojis_Emoji("🐪", "camel", "Nature", ["dromedary_camel"], ["desert"]), new emojis_Emoji("🐫", "two-hump camel", "Nature", ["camel"], []), new emojis_Emoji("🐘", "elephant", "Nature", ["elephant"], []), new emojis_Emoji("🦏", "rhinoceros", "Nature", ["rhinoceros"], []), new emojis_Emoji("🦍", "gorilla", "Nature", ["gorilla"], []), new emojis_Emoji("🐎", "horse", "Nature", ["racehorse"], ["speed"]), new emojis_Emoji("🐖", "pig", "Nature", ["pig2"], []), new emojis_Emoji("🐐", "goat", "Nature", ["goat"], []), new emojis_Emoji("🐏", "ram", "Nature", ["ram"], []), new emojis_Emoji("🐑", "sheep", "Nature", ["sheep"], []), new emojis_Emoji("🐕", "dog", "Nature", ["dog2"], []), new emojis_Emoji("🐩", "poodle", "Nature", ["poodle"], ["dog"]), new emojis_Emoji("🐈", "cat", "Nature", ["cat2"], []), new emojis_Emoji("🐓", "rooster", "Nature", ["rooster"], []), new emojis_Emoji("🦃", "turkey", "Nature", ["turkey"], ["thanksgiving"]), new emojis_Emoji("🕊", "dove", "Nature", ["dove"], ["peace"]), new emojis_Emoji("🐇", "rabbit", "Nature", ["rabbit2"], []), new emojis_Emoji("🐁", "mouse", "Nature", ["mouse2"], []), new emojis_Emoji("🐀", "rat", "Nature", ["rat"], []), new emojis_Emoji("🐿", "chipmunk", "Nature", ["chipmunk"], []), new emojis_Emoji("🐾", "paw prints", "Nature", ["feet", "paw_prints"], []), new emojis_Emoji("🐉", "dragon", "Nature", ["dragon"], []), new emojis_Emoji("🐲", "dragon face", "Nature", ["dragon_face"], []), new emojis_Emoji("🌵", "cactus", "Nature", ["cactus"], []), new emojis_Emoji("🎄", "Christmas tree", "Nature", ["christmas_tree"], []), new emojis_Emoji("🌲", "evergreen tree", "Nature", ["evergreen_tree"], ["wood"]), new emojis_Emoji("🌳", "deciduous tree", "Nature", ["deciduous_tree"], ["wood"]), new emojis_Emoji("🌴", "palm tree", "Nature", ["palm_tree"], []), new emojis_Emoji("🌱", "seedling", "Nature", ["seedling"], ["plant"]), new emojis_Emoji("🌿", "herb", "Nature", ["herb"], []), new emojis_Emoji("☘️", "shamrock", "Nature", ["shamrock"], []), new emojis_Emoji("🍀", "four leaf clover", "Nature", ["four_leaf_clover"], ["luck"]), new emojis_Emoji("🎍", "pine decoration", "Nature", ["bamboo"], []), new emojis_Emoji("🎋", "tanabata tree", "Nature", ["tanabata_tree"], []), new emojis_Emoji("🍃", "leaf fluttering in wind", "Nature", ["leaves"], ["leaf"]), new emojis_Emoji("🍂", "fallen leaf", "Nature", ["fallen_leaf"], ["autumn"]), new emojis_Emoji("🍁", "maple leaf", "Nature", ["maple_leaf"], ["canada"]), new emojis_Emoji("🍄", "mushroom", "Nature", ["mushroom"], []), new emojis_Emoji("🌾", "sheaf of rice", "Nature", ["ear_of_rice"], []), new emojis_Emoji("💐", "bouquet", "Nature", ["bouquet"], ["flowers"]), new emojis_Emoji("🌷", "tulip", "Nature", ["tulip"], ["flower"]), new emojis_Emoji("🌹", "rose", "Nature", ["rose"], ["flower"]), new emojis_Emoji("🥀", "wilted flower", "Nature", ["wilted_flower"], []), new emojis_Emoji("🌻", "sunflower", "Nature", ["sunflower"], []), new emojis_Emoji("🌼", "blossom", "Nature", ["blossom"], []), new emojis_Emoji("🌸", "cherry blossom", "Nature", ["cherry_blossom"], ["flower", "spring"]), new emojis_Emoji("🌺", "hibiscus", "Nature", ["hibiscus"], []), new emojis_Emoji("🌎", "globe showing Americas", "Nature", ["earth_americas"], ["globe", "world", "international"]), new emojis_Emoji("🌍", "globe showing Europe-Africa", "Nature", ["earth_africa"], ["globe", "world", "international"]), new emojis_Emoji("🌏", "globe showing Asia-Australia", "Nature", ["earth_asia"], ["globe", "world", "international"]), new emojis_Emoji("🌕", "full moon", "Nature", ["full_moon"], []), new emojis_Emoji("🌖", "waning gibbous moon", "Nature", ["waning_gibbous_moon"], []), new emojis_Emoji("🌗", "last quarter moon", "Nature", ["last_quarter_moon"], []), new emojis_Emoji("🌘", "waning crescent moon", "Nature", ["waning_crescent_moon"], []), new emojis_Emoji("🌑", "new moon", "Nature", ["new_moon"], []), new emojis_Emoji("🌒", "waxing crescent moon", "Nature", ["waxing_crescent_moon"], []), new emojis_Emoji("🌓", "first quarter moon", "Nature", ["first_quarter_moon"], []), new emojis_Emoji("🌔", "waxing gibbous moon", "Nature", ["moon", "waxing_gibbous_moon"], []), new emojis_Emoji("🌚", "new moon face", "Nature", ["new_moon_with_face"], []), new emojis_Emoji("🌝", "full moon with face", "Nature", ["full_moon_with_face"], []), new emojis_Emoji("🌞", "sun with face", "Nature", ["sun_with_face"], ["summer"]), new emojis_Emoji("🌛", "first quarter moon with face", "Nature", ["first_quarter_moon_with_face"], []), new emojis_Emoji("🌜", "last quarter moon with face", "Nature", ["last_quarter_moon_with_face"], []), new emojis_Emoji("🌙", "crescent moon", "Nature", ["crescent_moon"], ["night"]), new emojis_Emoji("💫", "dizzy", "Nature", ["dizzy"], ["star"]), new emojis_Emoji("⭐️", "white medium star", "Nature", ["star"], []), new emojis_Emoji("🌟", "glowing star", "Nature", ["star2"], []), new emojis_Emoji("✨", "sparkles", "Nature", ["sparkles"], ["shiny"]), new emojis_Emoji("⚡️", "high voltage", "Nature", ["zap"], ["lightning", "thunder"]), new emojis_Emoji("🔥", "fire", "Nature", ["fire"], ["burn"]), new emojis_Emoji("💥", "collision", "Nature", ["boom", "collision"], ["explode"]), new emojis_Emoji("☄", "comet", "Nature", ["comet"], []), new emojis_Emoji("☀️", "sun", "Nature", ["sunny"], ["weather"]), new emojis_Emoji("🌤", "sun behind small cloud", "Nature", ["sun_behind_small_cloud"], []), new emojis_Emoji("⛅️", "sun behind cloud", "Nature", ["partly_sunny"], ["weather", "cloud"]), new emojis_Emoji("🌥", "sun behind large cloud", "Nature", ["sun_behind_large_cloud"], []), new emojis_Emoji("🌦", "sun behind rain cloud", "Nature", ["sun_behind_rain_cloud"], []), new emojis_Emoji("🌈", "rainbow", "Nature", ["rainbow"], []), new emojis_Emoji("☁️", "cloud", "Nature", ["cloud"], []), new emojis_Emoji("🌧", "cloud with rain", "Nature", ["cloud_with_rain"], []), new emojis_Emoji("⛈", "cloud with lightning and rain", "Nature", ["cloud_with_lightning_and_rain"], []), new emojis_Emoji("🌩", "cloud with lightning", "Nature", ["cloud_with_lightning"], []), new emojis_Emoji("🌨", "cloud with snow", "Nature", ["cloud_with_snow"], []), new emojis_Emoji("☃️", "snowman", "Nature", ["snowman_with_snow"], ["winter", "christmas"]), new emojis_Emoji("⛄️", "snowman without snow", "Nature", ["snowman"], ["winter"]), new emojis_Emoji("❄️", "snowflake", "Nature", ["snowflake"], ["winter", "cold", "weather"]), new emojis_Emoji("🌬", "wind face", "Nature", ["wind_face"], []), new emojis_Emoji("💨", "dashing away", "Nature", ["dash"], ["wind", "blow", "fast"]), new emojis_Emoji("🌪", "tornado", "Nature", ["tornado"], []), new emojis_Emoji("🌫", "fog", "Nature", ["fog"], []), new emojis_Emoji("🌊", "water wave", "Nature", ["ocean"], ["sea"]), new emojis_Emoji("💧", "droplet", "Nature", ["droplet"], ["water"]), new emojis_Emoji("💦", "sweat droplets", "Nature", ["sweat_drops"], ["water", "workout"]), new emojis_Emoji("☔️", "umbrella with rain drops", "Nature", ["umbrella"], ["rain", "weather"]), new emojis_Emoji("🍏", "green apple", "Foods", ["green_apple"], ["fruit"]), new emojis_Emoji("🍎", "red apple", "Foods", ["apple"], []), new emojis_Emoji("🍐", "pear", "Foods", ["pear"], []), new emojis_Emoji("🍊", "tangerine", "Foods", ["tangerine", "orange", "mandarin"], []), new emojis_Emoji("🍋", "lemon", "Foods", ["lemon"], []), new emojis_Emoji("🍌", "banana", "Foods", ["banana"], ["fruit"]), new emojis_Emoji("🍉", "watermelon", "Foods", ["watermelon"], []), new emojis_Emoji("🍇", "grapes", "Foods", ["grapes"], []), new emojis_Emoji("🍓", "strawberry", "Foods", ["strawberry"], ["fruit"]), new emojis_Emoji("🍈", "melon", "Foods", ["melon"], []), new emojis_Emoji("🍒", "cherries", "Foods", ["cherries"], ["fruit"]), new emojis_Emoji("🍑", "peach", "Foods", ["peach"], []), new emojis_Emoji("🍍", "pineapple", "Foods", ["pineapple"], []), new emojis_Emoji("🥝", "kiwi fruit", "Foods", ["kiwi_fruit"], []), new emojis_Emoji("🥑", "avocado", "Foods", ["avocado"], []), new emojis_Emoji("🍅", "tomato", "Foods", ["tomato"], []), new emojis_Emoji("🍆", "eggplant", "Foods", ["eggplant"], ["aubergine"]), new emojis_Emoji("🥒", "cucumber", "Foods", ["cucumber"], []), new emojis_Emoji("🥕", "carrot", "Foods", ["carrot"], []), new emojis_Emoji("🌽", "ear of corn", "Foods", ["corn"], []), new emojis_Emoji("🌶", "hot pepper", "Foods", ["hot_pepper"], ["spicy"]), new emojis_Emoji("🥔", "potato", "Foods", ["potato"], []), new emojis_Emoji("🍠", "roasted sweet potato", "Foods", ["sweet_potato"], []), new emojis_Emoji("🌰", "chestnut", "Foods", ["chestnut"], []), new emojis_Emoji("🥜", "peanuts", "Foods", ["peanuts"], []), new emojis_Emoji("🍯", "honey pot", "Foods", ["honey_pot"], []), new emojis_Emoji("🥐", "croissant", "Foods", ["croissant"], []), new emojis_Emoji("🍞", "bread", "Foods", ["bread"], ["toast"]), new emojis_Emoji("🥖", "baguette bread", "Foods", ["baguette_bread"], []), new emojis_Emoji("🧀", "cheese wedge", "Foods", ["cheese"], []), new emojis_Emoji("🥚", "egg", "Foods", ["egg"], []), new emojis_Emoji("🍳", "cooking", "Foods", ["fried_egg"], ["breakfast"]), new emojis_Emoji("🥓", "bacon", "Foods", ["bacon"], []), new emojis_Emoji("🥞", "pancakes", "Foods", ["pancakes"], []), new emojis_Emoji("🍤", "fried shrimp", "Foods", ["fried_shrimp"], ["tempura"]), new emojis_Emoji("🍗", "poultry leg", "Foods", ["poultry_leg"], ["meat", "chicken"]), new emojis_Emoji("🍖", "meat on bone", "Foods", ["meat_on_bone"], []), new emojis_Emoji("🍕", "pizza", "Foods", ["pizza"], []), new emojis_Emoji("🌭", "hot dog", "Foods", ["hotdog"], []), new emojis_Emoji("🍔", "hamburger", "Foods", ["hamburger"], ["burger"]), new emojis_Emoji("🍟", "french fries", "Foods", ["fries"], []), new emojis_Emoji("🥙", "stuffed flatbread", "Foods", ["stuffed_flatbread"], []), new emojis_Emoji("🌮", "taco", "Foods", ["taco"], []), new emojis_Emoji("🌯", "burrito", "Foods", ["burrito"], []), new emojis_Emoji("🥗", "green salad", "Foods", ["green_salad"], []), new emojis_Emoji("🥘", "shallow pan of food", "Foods", ["shallow_pan_of_food"], ["paella", "curry"]), new emojis_Emoji("🍝", "spaghetti", "Foods", ["spaghetti"], ["pasta"]), new emojis_Emoji("🍜", "steaming bowl", "Foods", ["ramen"], ["noodle"]), new emojis_Emoji("🍲", "pot of food", "Foods", ["stew"], []), new emojis_Emoji("🍥", "fish cake with swirl", "Foods", ["fish_cake"], []), new emojis_Emoji("🍣", "sushi", "Foods", ["sushi"], []), new emojis_Emoji("🍱", "bento box", "Foods", ["bento"], []), new emojis_Emoji("🍛", "curry rice", "Foods", ["curry"], []), new emojis_Emoji("🍚", "cooked rice", "Foods", ["rice"], []), new emojis_Emoji("🍙", "rice ball", "Foods", ["rice_ball"], []), new emojis_Emoji("🍘", "rice cracker", "Foods", ["rice_cracker"], []), new emojis_Emoji("🍢", "oden", "Foods", ["oden"], []), new emojis_Emoji("🍡", "dango", "Foods", ["dango"], []), new emojis_Emoji("🍧", "shaved ice", "Foods", ["shaved_ice"], []), new emojis_Emoji("🍨", "ice cream", "Foods", ["ice_cream"], []), new emojis_Emoji("🍦", "soft ice cream", "Foods", ["icecream"], []), new emojis_Emoji("🍰", "shortcake", "Foods", ["cake"], ["dessert"]), new emojis_Emoji("🎂", "birthday cake", "Foods", ["birthday"], ["party"]), new emojis_Emoji("🍮", "custard", "Foods", ["custard"], []), new emojis_Emoji("🍭", "lollipop", "Foods", ["lollipop"], []), new emojis_Emoji("🍬", "candy", "Foods", ["candy"], ["sweet"]), new emojis_Emoji("🍫", "chocolate bar", "Foods", ["chocolate_bar"], []), new emojis_Emoji("🍿", "popcorn", "Foods", ["popcorn"], []), new emojis_Emoji("🍩", "doughnut", "Foods", ["doughnut"], []), new emojis_Emoji("🍪", "cookie", "Foods", ["cookie"], []), new emojis_Emoji("🥛", "glass of milk", "Foods", ["milk_glass"], []), new emojis_Emoji("🍼", "baby bottle", "Foods", ["baby_bottle"], ["milk"]), new emojis_Emoji("☕️", "hot beverage", "Foods", ["coffee"], ["cafe", "espresso"]), new emojis_Emoji("🍵", "teacup without handle", "Foods", ["tea"], ["green", "breakfast"]), new emojis_Emoji("🍶", "sake", "Foods", ["sake"], []), new emojis_Emoji("🍺", "beer mug", "Foods", ["beer"], ["drink"]), new emojis_Emoji("🍻", "clinking beer mugs", "Foods", ["beers"], ["drinks"]), new emojis_Emoji("🥂", "clinking glasses", "Foods", ["clinking_glasses"], ["cheers", "toast"]), new emojis_Emoji("🍷", "wine glass", "Foods", ["wine_glass"], []), new emojis_Emoji("🥃", "tumbler glass", "Foods", ["tumbler_glass"], ["whisky"]), new emojis_Emoji("🍸", "cocktail glass", "Foods", ["cocktail"], ["drink"]), new emojis_Emoji("🍹", "tropical drink", "Foods", ["tropical_drink"], ["summer", "vacation"]), new emojis_Emoji("🍾", "bottle with popping cork", "Foods", ["champagne"], ["bottle", "bubbly", "celebration"]), new emojis_Emoji("🥄", "spoon", "Foods", ["spoon"], []), new emojis_Emoji("🍴", "fork and knife", "Foods", ["fork_and_knife"], ["cutlery"]), new emojis_Emoji("🍽", "fork and knife with plate", "Foods", ["plate_with_cutlery"], ["dining", "dinner"]), new emojis_Emoji("⚽️", "soccer ball", "Activity", ["soccer"], ["sports"]), new emojis_Emoji("🏀", "basketball", "Activity", ["basketball"], ["sports"]), new emojis_Emoji("🏈", "american football", "Activity", ["football"], ["sports"]), new emojis_Emoji("⚾️", "baseball", "Activity", ["baseball"], ["sports"]), new emojis_Emoji("🎾", "tennis", "Activity", ["tennis"], ["sports"]), new emojis_Emoji("🏐", "volleyball", "Activity", ["volleyball"], []), new emojis_Emoji("🏉", "rugby football", "Activity", ["rugby_football"], []), new emojis_Emoji("🎱", "pool 8 ball", "Activity", ["8ball"], ["pool", "billiards"]), new emojis_Emoji("🏓", "ping pong", "Activity", ["ping_pong"], []), new emojis_Emoji("🏸", "badminton", "Activity", ["badminton"], []), new emojis_Emoji("🥅", "goal net", "Activity", ["goal_net"], []), new emojis_Emoji("🏒", "ice hockey", "Activity", ["ice_hockey"], []), new emojis_Emoji("🏑", "field hockey", "Activity", ["field_hockey"], []), new emojis_Emoji("🏏", "cricket", "Activity", ["cricket"], []), new emojis_Emoji("⛳️", "flag in hole", "Activity", ["golf"], []), new emojis_Emoji("🏹", "bow and arrow", "Activity", ["bow_and_arrow"], ["archery"]), new emojis_Emoji("🎣", "fishing pole", "Activity", ["fishing_pole_and_fish"], []), new emojis_Emoji("🥊", "boxing glove", "Activity", ["boxing_glove"], []), new emojis_Emoji("🥋", "martial arts uniform", "Activity", ["martial_arts_uniform"], []), new emojis_Emoji("⛸", "ice skate", "Activity", ["ice_skate"], ["skating"]), new emojis_Emoji("🎿", "skis", "Activity", ["ski"], []), new emojis_Emoji("⛷", "skier", "Activity", ["skier"], []), new emojis_Emoji("🏂", "snowboarder", "Activity", ["snowboarder"], []), new emojis_Emoji("🏋️‍♀️", "woman lifting weights", "Activity", ["weight_lifting_woman"], ["gym", "workout"]), new emojis_Emoji("🏋", "person lifting weights", "Activity", ["weight_lifting_man"], ["gym", "workout"]), new emojis_Emoji("🤺", "person fencing", "Activity", ["person_fencing"], []), new emojis_Emoji("🤼‍♀", "women wrestling", "Activity", ["women_wrestling"], []), new emojis_Emoji("🤼‍♂", "men wrestling", "Activity", ["men_wrestling"], []), new emojis_Emoji("🤸‍♀", "woman cartwheeling", "Activity", ["woman_cartwheeling"], []), new emojis_Emoji("🤸‍♂", "man cartwheeling", "Activity", ["man_cartwheeling"], []), new emojis_Emoji("⛹️‍♀️", "woman bouncing ball", "Activity", ["basketball_woman"], []), new emojis_Emoji("⛹", "person bouncing ball", "Activity", ["basketball_man"], []), new emojis_Emoji("🤾‍♀", "woman playing handball", "Activity", ["woman_playing_handball"], []), new emojis_Emoji("🤾‍♂", "man playing handball", "Activity", ["man_playing_handball"], []), new emojis_Emoji("🏌️‍♀️", "woman golfing", "Activity", ["golfing_woman"], []), new emojis_Emoji("🏌", "person golfing", "Activity", ["golfing_man"], []), new emojis_Emoji("🏄‍♀", "woman surfing", "Activity", ["surfing_woman"], []), new emojis_Emoji("🏄", "person surfing", "Activity", ["surfing_man", "surfer"], []), new emojis_Emoji("🏊‍♀", "woman swimming", "Activity", ["swimming_woman"], []), new emojis_Emoji("🏊", "person swimming", "Activity", ["swimming_man", "swimmer"], []), new emojis_Emoji("🤽‍♀", "woman playing water polo", "Activity", ["woman_playing_water_polo"], []), new emojis_Emoji("🤽‍♂", "man playing water polo", "Activity", ["man_playing_water_polo"], []), new emojis_Emoji("🚣‍♀", "woman rowing boat", "Activity", ["rowing_woman"], []), new emojis_Emoji("🚣", "person rowing boat", "Activity", ["rowing_man", "rowboat"], []), new emojis_Emoji("🏇", "horse racing", "Activity", ["horse_racing"], []), new emojis_Emoji("🚴‍♀", "woman biking", "Activity", ["biking_woman"], []), new emojis_Emoji("🚴", "person biking", "Activity", ["biking_man", "bicyclist"], []), new emojis_Emoji("🚵‍♀", "woman mountain biking", "Activity", ["mountain_biking_woman"], []), new emojis_Emoji("🚵", "person mountain biking", "Activity", ["mountain_biking_man", "mountain_bicyclist"], []), new emojis_Emoji("🎽", "running shirt", "Activity", ["running_shirt_with_sash"], ["marathon"]), new emojis_Emoji("🏅", "sports medal", "Activity", ["medal_sports"], ["gold", "winner"]), new emojis_Emoji("🎖", "military medal", "Activity", ["medal_military"], []), new emojis_Emoji("🥇", "1st place medal", "Activity", ["1st_place_medal"], ["gold"]), new emojis_Emoji("🥈", "2nd place medal", "Activity", ["2nd_place_medal"], ["silver"]), new emojis_Emoji("🥉", "3rd place medal", "Activity", ["3rd_place_medal"], ["bronze"]), new emojis_Emoji("🏆", "trophy", "Activity", ["trophy"], ["award", "contest", "winner"]), new emojis_Emoji("🏵", "rosette", "Activity", ["rosette"], []), new emojis_Emoji("🎗", "reminder ribbon", "Activity", ["reminder_ribbon"], []), new emojis_Emoji("🎫", "ticket", "Activity", ["ticket"], []), new emojis_Emoji("🎟", "admission tickets", "Activity", ["tickets"], []), new emojis_Emoji("🎪", "circus tent", "Activity", ["circus_tent"], []), new emojis_Emoji("🤹‍♀", "woman juggling", "Activity", ["woman_juggling"], []), new emojis_Emoji("🤹‍♂", "man juggling", "Activity", ["man_juggling"], []), new emojis_Emoji("🎭", "performing arts", "Activity", ["performing_arts"], ["theater", "drama"]), new emojis_Emoji("🎨", "artist palette", "Activity", ["art"], ["design", "paint"]), new emojis_Emoji("🎬", "clapper board", "Activity", ["clapper"], ["film"]), new emojis_Emoji("🎤", "microphone", "Activity", ["microphone"], ["sing"]), new emojis_Emoji("🎧", "headphone", "Activity", ["headphones"], ["music", "earphones"]), new emojis_Emoji("🎼", "musical score", "Activity", ["musical_score"], []), new emojis_Emoji("🎹", "musical keyboard", "Activity", ["musical_keyboard"], ["piano"]), new emojis_Emoji("🥁", "drum", "Activity", ["drum"], []), new emojis_Emoji("🎷", "saxophone", "Activity", ["saxophone"], []), new emojis_Emoji("🎺", "trumpet", "Activity", ["trumpet"], []), new emojis_Emoji("🎸", "guitar", "Activity", ["guitar"], ["rock"]), new emojis_Emoji("🎻", "violin", "Activity", ["violin"], []), new emojis_Emoji("🎲", "game die", "Activity", ["game_die"], ["dice", "gambling"]), new emojis_Emoji("🎯", "direct hit", "Activity", ["dart"], ["target"]), new emojis_Emoji("🎳", "bowling", "Activity", ["bowling"], []), new emojis_Emoji("🎮", "video game", "Activity", ["video_game"], ["play", "controller", "console"]), new emojis_Emoji("🎰", "slot machine", "Activity", ["slot_machine"], []), new emojis_Emoji("🚗", "automobile", "Places", ["car", "red_car"], []), new emojis_Emoji("🚕", "taxi", "Places", ["taxi"], []), new emojis_Emoji("🚙", "sport utility vehicle", "Places", ["blue_car"], []), new emojis_Emoji("🚌", "bus", "Places", ["bus"], []), new emojis_Emoji("🚎", "trolleybus", "Places", ["trolleybus"], []), new emojis_Emoji("🏎", "racing car", "Places", ["racing_car"], []), new emojis_Emoji("🚓", "police car", "Places", ["police_car"], []), new emojis_Emoji("🚑", "ambulance", "Places", ["ambulance"], []), new emojis_Emoji("🚒", "fire engine", "Places", ["fire_engine"], []), new emojis_Emoji("🚐", "minibus", "Places", ["minibus"], []), new emojis_Emoji("🚚", "delivery truck", "Places", ["truck"], []), new emojis_Emoji("🚛", "articulated lorry", "Places", ["articulated_lorry"], []), new emojis_Emoji("🚜", "tractor", "Places", ["tractor"], []), new emojis_Emoji("🛴", "kick scooter", "Places", ["kick_scooter"], []), new emojis_Emoji("🚲", "bicycle", "Places", ["bike"], ["bicycle"]), new emojis_Emoji("🛵", "motor scooter", "Places", ["motor_scooter"], []), new emojis_Emoji("🏍", "motorcycle", "Places", ["motorcycle"], []), new emojis_Emoji("🚨", "police car light", "Places", ["rotating_light"], ["911", "emergency"]), new emojis_Emoji("🚔", "oncoming police car", "Places", ["oncoming_police_car"], []), new emojis_Emoji("🚍", "oncoming bus", "Places", ["oncoming_bus"], []), new emojis_Emoji("🚘", "oncoming automobile", "Places", ["oncoming_automobile"], []), new emojis_Emoji("🚖", "oncoming taxi", "Places", ["oncoming_taxi"], []), new emojis_Emoji("🚡", "aerial tramway", "Places", ["aerial_tramway"], []), new emojis_Emoji("🚠", "mountain cableway", "Places", ["mountain_cableway"], []), new emojis_Emoji("🚟", "suspension railway", "Places", ["suspension_railway"], []), new emojis_Emoji("🚃", "railway car", "Places", ["railway_car"], []), new emojis_Emoji("🚋", "tram car", "Places", ["train"], []), new emojis_Emoji("🚞", "mountain railway", "Places", ["mountain_railway"], []), new emojis_Emoji("🚝", "monorail", "Places", ["monorail"], []), new emojis_Emoji("🚄", "high-speed train", "Places", ["bullettrain_side"], ["train"]), new emojis_Emoji("🚅", "high-speed train with bullet nose", "Places", ["bullettrain_front"], ["train"]), new emojis_Emoji("🚈", "light rail", "Places", ["light_rail"], []), new emojis_Emoji("🚂", "locomotive", "Places", ["steam_locomotive"], ["train"]), new emojis_Emoji("🚆", "train", "Places", ["train2"], []), new emojis_Emoji("🚇", "metro", "Places", ["metro"], []), new emojis_Emoji("🚊", "tram", "Places", ["tram"], []), new emojis_Emoji("🚉", "station", "Places", ["station"], []), new emojis_Emoji("🚁", "helicopter", "Places", ["helicopter"], []), new emojis_Emoji("🛩", "small airplane", "Places", ["small_airplane"], ["flight"]), new emojis_Emoji("✈️", "airplane", "Places", ["airplane"], ["flight"]), new emojis_Emoji("🛫", "airplane departure", "Places", ["flight_departure"], []), new emojis_Emoji("🛬", "airplane arrival", "Places", ["flight_arrival"], []), new emojis_Emoji("🚀", "rocket", "Places", ["rocket"], ["ship", "launch"]), new emojis_Emoji("🛰", "satellite", "Places", ["artificial_satellite"], ["orbit", "space"]), new emojis_Emoji("💺", "seat", "Places", ["seat"], []), new emojis_Emoji("🛶", "canoe", "Places", ["canoe"], []), new emojis_Emoji("⛵️", "sailboat", "Places", ["boat", "sailboat"], []), new emojis_Emoji("🛥", "motor boat", "Places", ["motor_boat"], []), new emojis_Emoji("🚤", "speedboat", "Places", ["speedboat"], ["ship"]), new emojis_Emoji("🛳", "passenger ship", "Places", ["passenger_ship"], ["cruise"]), new emojis_Emoji("⛴", "ferry", "Places", ["ferry"], []), new emojis_Emoji("🚢", "ship", "Places", ["ship"], []), new emojis_Emoji("⚓️", "anchor", "Places", ["anchor"], ["ship"]), new emojis_Emoji("🚧", "construction", "Places", ["construction"], ["wip"]), new emojis_Emoji("⛽️", "fuel pump", "Places", ["fuelpump"], []), new emojis_Emoji("🚏", "bus stop", "Places", ["busstop"], []), new emojis_Emoji("🚦", "vertical traffic light", "Places", ["vertical_traffic_light"], ["semaphore"]), new emojis_Emoji("🚥", "horizontal traffic light", "Places", ["traffic_light"], []), new emojis_Emoji("🗺", "world map", "Places", ["world_map"], ["travel"]), new emojis_Emoji("🗿", "moai", "Places", ["moyai"], ["stone"]), new emojis_Emoji("🗽", "Statue of Liberty", "Places", ["statue_of_liberty"], []), new emojis_Emoji("⛲️", "fountain", "Places", ["fountain"], []), new emojis_Emoji("🗼", "Tokyo tower", "Places", ["tokyo_tower"], []), new emojis_Emoji("🏰", "castle", "Places", ["european_castle"], []), new emojis_Emoji("🏯", "Japanese castle", "Places", ["japanese_castle"], []), new emojis_Emoji("🏟", "stadium", "Places", ["stadium"], []), new emojis_Emoji("🎡", "ferris wheel", "Places", ["ferris_wheel"], []), new emojis_Emoji("🎢", "roller coaster", "Places", ["roller_coaster"], []), new emojis_Emoji("🎠", "carousel horse", "Places", ["carousel_horse"], []), new emojis_Emoji("⛱", "umbrella on ground", "Places", ["parasol_on_ground"], ["beach_umbrella"]), new emojis_Emoji("🏖", "beach with umbrella", "Places", ["beach_umbrella"], []), new emojis_Emoji("🏝", "desert island", "Places", ["desert_island"], []), new emojis_Emoji("⛰", "mountain", "Places", ["mountain"], []), new emojis_Emoji("🏔", "snow-capped mountain", "Places", ["mountain_snow"], []), new emojis_Emoji("🗻", "mount fuji", "Places", ["mount_fuji"], []), new emojis_Emoji("🌋", "volcano", "Places", ["volcano"], []), new emojis_Emoji("🏜", "desert", "Places", ["desert"], []), new emojis_Emoji("🏕", "camping", "Places", ["camping"], []), new emojis_Emoji("⛺️", "tent", "Places", ["tent"], ["camping"]), new emojis_Emoji("🛤", "railway track", "Places", ["railway_track"], []), new emojis_Emoji("🛣", "motorway", "Places", ["motorway"], []), new emojis_Emoji("🏗", "building construction", "Places", ["building_construction"], []), new emojis_Emoji("🏭", "factory", "Places", ["factory"], []), new emojis_Emoji("🏠", "house", "Places", ["house"], []), new emojis_Emoji("🏡", "house with garden", "Places", ["house_with_garden"], []), new emojis_Emoji("🏘", "house", "Places", ["houses"], []), new emojis_Emoji("🏚", "derelict house", "Places", ["derelict_house"], []), new emojis_Emoji("🏢", "office building", "Places", ["office"], []), new emojis_Emoji("🏬", "department store", "Places", ["department_store"], []), new emojis_Emoji("🏣", "Japanese post office", "Places", ["post_office"], []), new emojis_Emoji("🏤", "post office", "Places", ["european_post_office"], []), new emojis_Emoji("🏥", "hospital", "Places", ["hospital"], []), new emojis_Emoji("🏦", "bank", "Places", ["bank"], []), new emojis_Emoji("🏨", "hotel", "Places", ["hotel"], []), new emojis_Emoji("🏪", "convenience store", "Places", ["convenience_store"], []), new emojis_Emoji("🏫", "school", "Places", ["school"], []), new emojis_Emoji("🏩", "love hotel", "Places", ["love_hotel"], []), new emojis_Emoji("💒", "wedding", "Places", ["wedding"], ["marriage"]), new emojis_Emoji("🏛", "classical building", "Places", ["classical_building"], []), new emojis_Emoji("⛪️", "church", "Places", ["church"], []), new emojis_Emoji("🕌", "mosque", "Places", ["mosque"], []), new emojis_Emoji("🕍", "synagogue", "Places", ["synagogue"], []), new emojis_Emoji("🕋", "kaaba", "Places", ["kaaba"], []), new emojis_Emoji("⛩", "shinto shrine", "Places", ["shinto_shrine"], []), new emojis_Emoji("🗾", "map of Japan", "Places", ["japan"], []), new emojis_Emoji("🎑", "moon viewing ceremony", "Places", ["rice_scene"], []), new emojis_Emoji("🏞", "national park", "Places", ["national_park"], []), new emojis_Emoji("🌅", "sunrise", "Places", ["sunrise"], []), new emojis_Emoji("🌄", "sunrise over mountains", "Places", ["sunrise_over_mountains"], []), new emojis_Emoji("🌠", "shooting star", "Places", ["stars"], []), new emojis_Emoji("🎇", "sparkler", "Places", ["sparkler"], []), new emojis_Emoji("🎆", "fireworks", "Places", ["fireworks"], ["festival", "celebration"]), new emojis_Emoji("🌇", "sunset", "Places", ["city_sunrise"], []), new emojis_Emoji("🌆", "cityscape at dusk", "Places", ["city_sunset"], []), new emojis_Emoji("🏙", "cityscape", "Places", ["cityscape"], ["skyline"]), new emojis_Emoji("🌃", "night with stars", "Places", ["night_with_stars"], []), new emojis_Emoji("🌌", "milky way", "Places", ["milky_way"], []), new emojis_Emoji("🌉", "bridge at night", "Places", ["bridge_at_night"], []), new emojis_Emoji("🌁", "foggy", "Places", ["foggy"], ["karl"]), new emojis_Emoji("⌚️", "watch", "Objects", ["watch"], ["time"]), new emojis_Emoji("📱", "mobile phone", "Objects", ["iphone"], ["smartphone", "mobile"]), new emojis_Emoji("📲", "mobile phone with arrow", "Objects", ["calling"], ["call", "incoming"]), new emojis_Emoji("💻", "laptop computer", "Objects", ["computer"], ["desktop", "screen"]), new emojis_Emoji("⌨️", "keyboard", "Objects", ["keyboard"], []), new emojis_Emoji("🖥", "desktop computer", "Objects", ["desktop_computer"], []), new emojis_Emoji("🖨", "printer", "Objects", ["printer"], []), new emojis_Emoji("🖱", "computer mouse", "Objects", ["computer_mouse"], []), new emojis_Emoji("🖲", "trackball", "Objects", ["trackball"], []), new emojis_Emoji("🕹", "joystick", "Objects", ["joystick"], []), new emojis_Emoji("🗜", "clamp", "Objects", ["clamp"], []), new emojis_Emoji("💽", "computer disk", "Objects", ["minidisc"], []), new emojis_Emoji("💾", "floppy disk", "Objects", ["floppy_disk"], ["save"]), new emojis_Emoji("💿", "optical disk", "Objects", ["cd"], []), new emojis_Emoji("📀", "dvd", "Objects", ["dvd"], []), new emojis_Emoji("📼", "videocassette", "Objects", ["vhs"], []), new emojis_Emoji("📷", "camera", "Objects", ["camera"], ["photo"]), new emojis_Emoji("📸", "camera with flash", "Objects", ["camera_flash"], ["photo"]), new emojis_Emoji("📹", "video camera", "Objects", ["video_camera"], []), new emojis_Emoji("🎥", "movie camera", "Objects", ["movie_camera"], ["film", "video"]), new emojis_Emoji("📽", "film projector", "Objects", ["film_projector"], []), new emojis_Emoji("🎞", "film frames", "Objects", ["film_strip"], []), new emojis_Emoji("📞", "telephone receiver", "Objects", ["telephone_receiver"], ["phone", "call"]), new emojis_Emoji("☎️", "telephone", "Objects", ["phone", "telephone"], []), new emojis_Emoji("📟", "pager", "Objects", ["pager"], []), new emojis_Emoji("📠", "fax machine", "Objects", ["fax"], []), new emojis_Emoji("📺", "television", "Objects", ["tv"], []), new emojis_Emoji("📻", "radio", "Objects", ["radio"], ["podcast"]), new emojis_Emoji("🎙", "studio microphone", "Objects", ["studio_microphone"], ["podcast"]), new emojis_Emoji("🎚", "level slider", "Objects", ["level_slider"], []), new emojis_Emoji("🎛", "control knobs", "Objects", ["control_knobs"], []), new emojis_Emoji("⏱", "stopwatch", "Objects", ["stopwatch"], []), new emojis_Emoji("⏲", "timer clock", "Objects", ["timer_clock"], []), new emojis_Emoji("⏰", "alarm clock", "Objects", ["alarm_clock"], ["morning"]), new emojis_Emoji("🕰", "mantelpiece clock", "Objects", ["mantelpiece_clock"], []), new emojis_Emoji("⌛️", "hourglass", "Objects", ["hourglass"], ["time"]), new emojis_Emoji("⏳", "hourglass with flowing sand", "Objects", ["hourglass_flowing_sand"], ["time"]), new emojis_Emoji("📡", "satellite antenna", "Objects", ["satellite"], ["signal"]), new emojis_Emoji("🔋", "battery", "Objects", ["battery"], ["power"]), new emojis_Emoji("🔌", "electric plug", "Objects", ["electric_plug"], []), new emojis_Emoji("💡", "light bulb", "Objects", ["bulb"], ["idea", "light"]), new emojis_Emoji("🔦", "flashlight", "Objects", ["flashlight"], []), new emojis_Emoji("🕯", "candle", "Objects", ["candle"], []), new emojis_Emoji("🗑", "wastebasket", "Objects", ["wastebasket"], ["trash"]), new emojis_Emoji("🛢", "oil drum", "Objects", ["oil_drum"], []), new emojis_Emoji("💸", "money with wings", "Objects", ["money_with_wings"], ["dollar"]), new emojis_Emoji("💵", "dollar banknote", "Objects", ["dollar"], ["money"]), new emojis_Emoji("💴", "yen banknote", "Objects", ["yen"], []), new emojis_Emoji("💶", "euro banknote", "Objects", ["euro"], []), new emojis_Emoji("💷", "pound banknote", "Objects", ["pound"], []), new emojis_Emoji("💰", "money bag", "Objects", ["moneybag"], ["dollar", "cream"]), new emojis_Emoji("💳", "credit card", "Objects", ["credit_card"], ["subscription"]), new emojis_Emoji("💎", "gem stone", "Objects", ["gem"], ["diamond"]), new emojis_Emoji("⚖️", "balance scale", "Objects", ["balance_scale"], []), new emojis_Emoji("🔧", "wrench", "Objects", ["wrench"], ["tool"]), new emojis_Emoji("🔨", "hammer", "Objects", ["hammer"], ["tool"]), new emojis_Emoji("⚒", "hammer and pick", "Objects", ["hammer_and_pick"], []), new emojis_Emoji("🛠", "hammer and wrench", "Objects", ["hammer_and_wrench"], []), new emojis_Emoji("⛏", "pick", "Objects", ["pick"], []), new emojis_Emoji("🔩", "nut and bolt", "Objects", ["nut_and_bolt"], []), new emojis_Emoji("⚙️", "gear", "Objects", ["gear"], []), new emojis_Emoji("⛓", "chains", "Objects", ["chains"], []), new emojis_Emoji("🔫", "pistol", "Objects", ["gun"], ["shoot", "weapon"]), new emojis_Emoji("💣", "bomb", "Objects", ["bomb"], ["boom"]), new emojis_Emoji("🔪", "kitchen knife", "Objects", ["hocho", "knife"], ["cut", "chop"]), new emojis_Emoji("🗡", "dagger", "Objects", ["dagger"], []), new emojis_Emoji("⚔️", "crossed swords", "Objects", ["crossed_swords"], []), new emojis_Emoji("🛡", "shield", "Objects", ["shield"], []), new emojis_Emoji("🚬", "cigarette", "Objects", ["smoking"], ["cigarette"]), new emojis_Emoji("⚰️", "coffin", "Objects", ["coffin"], ["funeral"]), new emojis_Emoji("⚱️", "funeral urn", "Objects", ["funeral_urn"], []), new emojis_Emoji("🏺", "amphora", "Objects", ["amphora"], []), new emojis_Emoji("🔮", "crystal ball", "Objects", ["crystal_ball"], ["fortune"]), new emojis_Emoji("📿", "prayer beads", "Objects", ["prayer_beads"], []), new emojis_Emoji("💈", "barber pole", "Objects", ["barber"], []), new emojis_Emoji("⚗️", "alembic", "Objects", ["alembic"], []), new emojis_Emoji("🔭", "telescope", "Objects", ["telescope"], []), new emojis_Emoji("🔬", "microscope", "Objects", ["microscope"], ["science", "laboratory", "investigate"]), new emojis_Emoji("🕳", "hole", "Objects", ["hole"], []), new emojis_Emoji("💊", "pill", "Objects", ["pill"], ["health", "medicine"]), new emojis_Emoji("💉", "syringe", "Objects", ["syringe"], ["health", "hospital", "needle"]), new emojis_Emoji("🌡", "thermometer", "Objects", ["thermometer"], []), new emojis_Emoji("🚽", "toilet", "Objects", ["toilet"], ["wc"]), new emojis_Emoji("🚰", "potable water", "Objects", ["potable_water"], []), new emojis_Emoji("🚿", "shower", "Objects", ["shower"], ["bath"]), new emojis_Emoji("🛁", "bathtub", "Objects", ["bathtub"], []), new emojis_Emoji("🛀", "person taking bath", "Objects", ["bath"], ["shower"]), new emojis_Emoji("🛎", "bellhop bell", "Objects", ["bellhop_bell"], []), new emojis_Emoji("🔑", "key", "Objects", ["key"], ["lock", "password"]), new emojis_Emoji("🗝", "old key", "Objects", ["old_key"], []), new emojis_Emoji("🚪", "door", "Objects", ["door"], []), new emojis_Emoji("🛋", "couch and lamp", "Objects", ["couch_and_lamp"], []), new emojis_Emoji("🛏", "bed", "Objects", ["bed"], []), new emojis_Emoji("🛌", "person in bed", "Objects", ["sleeping_bed"], []), new emojis_Emoji("🖼", "framed picture", "Objects", ["framed_picture"], []), new emojis_Emoji("🛍", "shopping bags", "Objects", ["shopping"], ["bags"]), new emojis_Emoji("🛒", "shopping cart", "Objects", ["shopping_cart"], []), new emojis_Emoji("🎁", "wrapped gift", "Objects", ["gift"], ["present", "birthday", "christmas"]), new emojis_Emoji("🎈", "balloon", "Objects", ["balloon"], ["party", "birthday"]), new emojis_Emoji("🎏", "carp streamer", "Objects", ["flags"], []), new emojis_Emoji("🎀", "ribbon", "Objects", ["ribbon"], []), new emojis_Emoji("🎊", "confetti ball", "Objects", ["confetti_ball"], []), new emojis_Emoji("🎉", "party popper", "Objects", ["tada"], ["hooray", "party"]), new emojis_Emoji("🎎", "Japanese dolls", "Objects", ["dolls"], []), new emojis_Emoji("🏮", "red paper lantern", "Objects", ["izakaya_lantern", "lantern"], []), new emojis_Emoji("🎐", "wind chime", "Objects", ["wind_chime"], []), new emojis_Emoji("✉️", "envelope", "Objects", ["email", "envelope"], ["letter"]), new emojis_Emoji("📩", "envelope with arrow", "Objects", ["envelope_with_arrow"], []), new emojis_Emoji("📨", "incoming envelope", "Objects", ["incoming_envelope"], []), new emojis_Emoji("📧", "e-mail", "Objects", ["e-mail"], []), new emojis_Emoji("💌", "love letter", "Objects", ["love_letter"], ["email", "envelope"]), new emojis_Emoji("📥", "inbox tray", "Objects", ["inbox_tray"], []), new emojis_Emoji("📤", "outbox tray", "Objects", ["outbox_tray"], []), new emojis_Emoji("📦", "package", "Objects", ["package"], ["shipping"]), new emojis_Emoji("🏷", "label", "Objects", ["label"], ["tag"]), new emojis_Emoji("📪", "closed mailbox with lowered flag", "Objects", ["mailbox_closed"], []), new emojis_Emoji("📫", "closed mailbox with raised flag", "Objects", ["mailbox"], []), new emojis_Emoji("📬", "open mailbox with raised flag", "Objects", ["mailbox_with_mail"], []), new emojis_Emoji("📭", "open mailbox with lowered flag", "Objects", ["mailbox_with_no_mail"], []), new emojis_Emoji("📮", "postbox", "Objects", ["postbox"], []), new emojis_Emoji("📯", "postal horn", "Objects", ["postal_horn"], []), new emojis_Emoji("📜", "scroll", "Objects", ["scroll"], ["document"]), new emojis_Emoji("📃", "page with curl", "Objects", ["page_with_curl"], []), new emojis_Emoji("📄", "page facing up", "Objects", ["page_facing_up"], ["document"]), new emojis_Emoji("📑", "bookmark tabs", "Objects", ["bookmark_tabs"], []), new emojis_Emoji("📊", "bar chart", "Objects", ["bar_chart"], ["stats", "metrics"]), new emojis_Emoji("📈", "chart increasing", "Objects", ["chart_with_upwards_trend"], ["graph", "metrics"]), new emojis_Emoji("📉", "chart decreasing", "Objects", ["chart_with_downwards_trend"], ["graph", "metrics"]), new emojis_Emoji("🗒", "spiral notepad", "Objects", ["spiral_notepad"], []), new emojis_Emoji("🗓", "spiral calendar", "Objects", ["spiral_calendar"], []), new emojis_Emoji("📆", "tear-off calendar", "Objects", ["calendar"], ["schedule"]), new emojis_Emoji("📅", "calendar", "Objects", ["date"], ["calendar", "schedule"]), new emojis_Emoji("📇", "card index", "Objects", ["card_index"], []), new emojis_Emoji("🗃", "card file box", "Objects", ["card_file_box"], []), new emojis_Emoji("🗳", "ballot box with ballot", "Objects", ["ballot_box"], []), new emojis_Emoji("🗄", "file cabinet", "Objects", ["file_cabinet"], []), new emojis_Emoji("📋", "clipboard", "Objects", ["clipboard"], []), new emojis_Emoji("📁", "file folder", "Objects", ["file_folder"], ["directory"]), new emojis_Emoji("📂", "open file folder", "Objects", ["open_file_folder"], []), new emojis_Emoji("🗂", "card index dividers", "Objects", ["card_index_dividers"], []), new emojis_Emoji("🗞", "rolled-up newspaper", "Objects", ["newspaper_roll"], ["press"]), new emojis_Emoji("📰", "newspaper", "Objects", ["newspaper"], ["press"]), new emojis_Emoji("📓", "notebook", "Objects", ["notebook"], []), new emojis_Emoji("📔", "notebook with decorative cover", "Objects", ["notebook_with_decorative_cover"], []), new emojis_Emoji("📒", "ledger", "Objects", ["ledger"], []), new emojis_Emoji("📕", "closed book", "Objects", ["closed_book"], []), new emojis_Emoji("📗", "green book", "Objects", ["green_book"], []), new emojis_Emoji("📘", "blue book", "Objects", ["blue_book"], []), new emojis_Emoji("📙", "orange book", "Objects", ["orange_book"], []), new emojis_Emoji("📚", "books", "Objects", ["books"], ["library"]), new emojis_Emoji("📖", "open book", "Objects", ["book", "open_book"], []), new emojis_Emoji("🔖", "bookmark", "Objects", ["bookmark"], []), new emojis_Emoji("🔗", "link", "Objects", ["link"], []), new emojis_Emoji("📎", "paperclip", "Objects", ["paperclip"], []), new emojis_Emoji("🖇", "linked paperclips", "Objects", ["paperclips"], []), new emojis_Emoji("📐", "triangular ruler", "Objects", ["triangular_ruler"], []), new emojis_Emoji("📏", "straight ruler", "Objects", ["straight_ruler"], []), new emojis_Emoji("📌", "pushpin", "Objects", ["pushpin"], ["location"]), new emojis_Emoji("📍", "round pushpin", "Objects", ["round_pushpin"], ["location"]), new emojis_Emoji("✂️", "scissors", "Objects", ["scissors"], ["cut"]), new emojis_Emoji("🖊", "pen", "Objects", ["pen"], []), new emojis_Emoji("🖋", "fountain pen", "Objects", ["fountain_pen"], []), new emojis_Emoji("✒️", "black nib", "Objects", ["black_nib"], []), new emojis_Emoji("🖌", "paintbrush", "Objects", ["paintbrush"], []), new emojis_Emoji("🖍", "crayon", "Objects", ["crayon"], []), new emojis_Emoji("📝", "memo", "Objects", ["memo", "pencil"], ["document", "note"]), new emojis_Emoji("✏️", "pencil", "Objects", ["pencil2"], []), new emojis_Emoji("🔍", "left-pointing magnifying glass", "Objects", ["mag"], ["search", "zoom"]), new emojis_Emoji("🔎", "right-pointing magnifying glass", "Objects", ["mag_right"], []), new emojis_Emoji("🔏", "locked with pen", "Objects", ["lock_with_ink_pen"], []), new emojis_Emoji("🔐", "locked with key", "Objects", ["closed_lock_with_key"], ["security"]), new emojis_Emoji("🔒", "locked", "Objects", ["lock"], ["security", "private"]), new emojis_Emoji("🔓", "unlocked", "Objects", ["unlock"], ["security"]), new emojis_Emoji("❤️", "red heart", "Symbols", ["heart"], ["love"]), new emojis_Emoji("💛", "yellow heart", "Symbols", ["yellow_heart"], []), new emojis_Emoji("💚", "green heart", "Symbols", ["green_heart"], []), new emojis_Emoji("💙", "blue heart", "Symbols", ["blue_heart"], []), new emojis_Emoji("💜", "purple heart", "Symbols", ["purple_heart"], []), new emojis_Emoji("🖤", "black heart", "Symbols", ["black_heart"], []), new emojis_Emoji("💔", "broken heart", "Symbols", ["broken_heart"], []), new emojis_Emoji("❣️", "heavy heart exclamation", "Symbols", ["heavy_heart_exclamation"], []), new emojis_Emoji("💕", "two hearts", "Symbols", ["two_hearts"], []), new emojis_Emoji("💞", "revolving hearts", "Symbols", ["revolving_hearts"], []), new emojis_Emoji("💓", "beating heart", "Symbols", ["heartbeat"], []), new emojis_Emoji("💗", "growing heart", "Symbols", ["heartpulse"], []), new emojis_Emoji("💖", "sparkling heart", "Symbols", ["sparkling_heart"], []), new emojis_Emoji("💘", "heart with arrow", "Symbols", ["cupid"], ["love", "heart"]), new emojis_Emoji("💝", "heart with ribbon", "Symbols", ["gift_heart"], ["chocolates"]), new emojis_Emoji("💟", "heart decoration", "Symbols", ["heart_decoration"], []), new emojis_Emoji("☮️", "peace symbol", "Symbols", ["peace_symbol"], []), new emojis_Emoji("✝️", "latin cross", "Symbols", ["latin_cross"], []), new emojis_Emoji("☪️", "star and crescent", "Symbols", ["star_and_crescent"], []), new emojis_Emoji("🕉", "om", "Symbols", ["om"], []), new emojis_Emoji("☸️", "wheel of dharma", "Symbols", ["wheel_of_dharma"], []), new emojis_Emoji("✡️", "star of David", "Symbols", ["star_of_david"], []), new emojis_Emoji("🔯", "dotted six-pointed star", "Symbols", ["six_pointed_star"], []), new emojis_Emoji("🕎", "menorah", "Symbols", ["menorah"], []), new emojis_Emoji("☯️", "yin yang", "Symbols", ["yin_yang"], []), new emojis_Emoji("☦️", "orthodox cross", "Symbols", ["orthodox_cross"], []), new emojis_Emoji("🛐", "place of worship", "Symbols", ["place_of_worship"], []), new emojis_Emoji("⛎", "Ophiuchus", "Symbols", ["ophiuchus"], []), new emojis_Emoji("♈️", "Aries", "Symbols", ["aries"], []), new emojis_Emoji("♉️", "Taurus", "Symbols", ["taurus"], []), new emojis_Emoji("♊️", "Gemini", "Symbols", ["gemini"], []), new emojis_Emoji("♋️", "Cancer", "Symbols", ["cancer"], []), new emojis_Emoji("♌️", "Leo", "Symbols", ["leo"], []), new emojis_Emoji("♍️", "Virgo", "Symbols", ["virgo"], []), new emojis_Emoji("♎️", "Libra", "Symbols", ["libra"], []), new emojis_Emoji("♏️", "Scorpius", "Symbols", ["scorpius"], []), new emojis_Emoji("♐️", "Sagittarius", "Symbols", ["sagittarius"], []), new emojis_Emoji("♑️", "Capricorn", "Symbols", ["capricorn"], []), new emojis_Emoji("♒️", "Aquarius", "Symbols", ["aquarius"], []), new emojis_Emoji("♓️", "Pisces", "Symbols", ["pisces"], []), new emojis_Emoji("🆔", "ID button", "Symbols", ["id"], []), new emojis_Emoji("⚛️", "atom symbol", "Symbols", ["atom_symbol"], []), new emojis_Emoji("🉑", "Japanese “acceptable” button", "Symbols", ["accept"], []), new emojis_Emoji("☢️", "radioactive", "Symbols", ["radioactive"], []), new emojis_Emoji("☣️", "biohazard", "Symbols", ["biohazard"], []), new emojis_Emoji("📴", "mobile phone off", "Symbols", ["mobile_phone_off"], ["mute", "off"]), new emojis_Emoji("📳", "vibration mode", "Symbols", ["vibration_mode"], []), new emojis_Emoji("🈶", "Japanese “not free of charge” button", "Symbols", ["u6709"], []), new emojis_Emoji("🈚️", "Japanese “free of charge” button", "Symbols", ["u7121"], []), new emojis_Emoji("🈸", "Japanese “application” button", "Symbols", ["u7533"], []), new emojis_Emoji("🈺", "Japanese “open for business” button", "Symbols", ["u55b6"], []), new emojis_Emoji("🈷️", "Japanese “monthly amount” button", "Symbols", ["u6708"], []), new emojis_Emoji("✴️", "eight-pointed star", "Symbols", ["eight_pointed_black_star"], []), new emojis_Emoji("🆚", "VS button", "Symbols", ["vs"], []), new emojis_Emoji("💮", "white flower", "Symbols", ["white_flower"], []), new emojis_Emoji("🉐", "Japanese “bargain” button", "Symbols", ["ideograph_advantage"], []), new emojis_Emoji("㊙️", "Japanese “secret” button", "Symbols", ["secret"], []), new emojis_Emoji("㊗️", "Japanese “congratulations” button", "Symbols", ["congratulations"], []), new emojis_Emoji("🈴", "Japanese “passing grade” button", "Symbols", ["u5408"], []), new emojis_Emoji("🈵", "Japanese “no vacancy” button", "Symbols", ["u6e80"], []), new emojis_Emoji("🈹", "Japanese “discount” button", "Symbols", ["u5272"], []), new emojis_Emoji("🈲", "Japanese “prohibited” button", "Symbols", ["u7981"], []), new emojis_Emoji("🅰️", "A button (blood type)", "Symbols", ["a"], []), new emojis_Emoji("🅱️", "B button (blood type)", "Symbols", ["b"], []), new emojis_Emoji("🆎", "AB button (blood type)", "Symbols", ["ab"], []), new emojis_Emoji("🆑", "CL button", "Symbols", ["cl"], []), new emojis_Emoji("🅾️", "O button (blood type)", "Symbols", ["o2"], []), new emojis_Emoji("🆘", "SOS button", "Symbols", ["sos"], ["help", "emergency"]), new emojis_Emoji("❌", "cross mark", "Symbols", ["x"], []), new emojis_Emoji("⭕️", "heavy large circle", "Symbols", ["o"], []), new emojis_Emoji("🛑", "stop sign", "Symbols", ["stop_sign"], []), new emojis_Emoji("⛔️", "no entry", "Symbols", ["no_entry"], ["limit"]), new emojis_Emoji("📛", "name badge", "Symbols", ["name_badge"], []), new emojis_Emoji("🚫", "prohibited", "Symbols", ["no_entry_sign"], ["block", "forbidden"]), new emojis_Emoji("💯", "hundred points", "Symbols", ["100"], ["score", "perfect"]), new emojis_Emoji("💢", "anger symbol", "Symbols", ["anger"], ["angry"]), new emojis_Emoji("♨️", "hot springs", "Symbols", ["hotsprings"], []), new emojis_Emoji("🚷", "no pedestrians", "Symbols", ["no_pedestrians"], []), new emojis_Emoji("🚯", "no littering", "Symbols", ["do_not_litter"], []), new emojis_Emoji("🚳", "no bicycles", "Symbols", ["no_bicycles"], []), new emojis_Emoji("🚱", "non-potable water", "Symbols", ["non-potable_water"], []), new emojis_Emoji("🔞", "no one under eighteen", "Symbols", ["underage"], []), new emojis_Emoji("📵", "no mobile phones", "Symbols", ["no_mobile_phones"], []), new emojis_Emoji("🚭", "no smoking", "Symbols", ["no_smoking"], []), new emojis_Emoji("❗️", "exclamation mark", "Symbols", ["exclamation", "heavy_exclamation_mark"], ["bang"]), new emojis_Emoji("❕", "white exclamation mark", "Symbols", ["grey_exclamation"], []), new emojis_Emoji("❓", "question mark", "Symbols", ["question"], ["confused"]), new emojis_Emoji("❔", "white question mark", "Symbols", ["grey_question"], []), new emojis_Emoji("‼️", "double exclamation mark", "Symbols", ["bangbang"], []), new emojis_Emoji("⁉️", "exclamation question mark", "Symbols", ["interrobang"], []), new emojis_Emoji("🔅", "dim button", "Symbols", ["low_brightness"], []), new emojis_Emoji("🔆", "bright button", "Symbols", ["high_brightness"], []), new emojis_Emoji("〽️", "part alternation mark", "Symbols", ["part_alternation_mark"], []), new emojis_Emoji("⚠️", "warning", "Symbols", ["warning"], ["wip"]), new emojis_Emoji("🚸", "children crossing", "Symbols", ["children_crossing"], []), new emojis_Emoji("🔱", "trident emblem", "Symbols", ["trident"], []), new emojis_Emoji("⚜️", "fleur-de-lis", "Symbols", ["fleur_de_lis"], []), new emojis_Emoji("🔰", "Japanese symbol for beginner", "Symbols", ["beginner"], []), new emojis_Emoji("♻️", "recycling symbol", "Symbols", ["recycle"], ["environment", "green"]), new emojis_Emoji("✅", "white heavy check mark", "Symbols", ["white_check_mark"], []), new emojis_Emoji("🈯️", "Japanese “reserved” button", "Symbols", ["u6307"], []), new emojis_Emoji("💹", "chart increasing with yen", "Symbols", ["chart"], []), new emojis_Emoji("❇️", "sparkle", "Symbols", ["sparkle"], []), new emojis_Emoji("✳️", "eight-spoked asterisk", "Symbols", ["eight_spoked_asterisk"], []), new emojis_Emoji("❎", "cross mark button", "Symbols", ["negative_squared_cross_mark"], []), new emojis_Emoji("🌐", "globe with meridians", "Symbols", ["globe_with_meridians"], ["world", "global", "international"]), new emojis_Emoji("💠", "diamond with a dot", "Symbols", ["diamond_shape_with_a_dot_inside"], []), new emojis_Emoji("Ⓜ️", "circled M", "Symbols", ["m"], []), new emojis_Emoji("🌀", "cyclone", "Symbols", ["cyclone"], ["swirl"]), new emojis_Emoji("💤", "zzz", "Symbols", ["zzz"], ["sleeping"]), new emojis_Emoji("🏧", "ATM sign", "Symbols", ["atm"], []), new emojis_Emoji("🚾", "water closet", "Symbols", ["wc"], ["toilet", "restroom"]), new emojis_Emoji("♿️", "wheelchair symbol", "Symbols", ["wheelchair"], ["accessibility"]), new emojis_Emoji("🅿️", "P button", "Symbols", ["parking"], []), new emojis_Emoji("🈳", "Japanese “vacancy” button", "Symbols", ["u7a7a"], []), new emojis_Emoji("🈂️", "Japanese “service charge” button", "Symbols", ["sa"], []), new emojis_Emoji("🛂", "passport control", "Symbols", ["passport_control"], []), new emojis_Emoji("🛃", "customs", "Symbols", ["customs"], []), new emojis_Emoji("🛄", "baggage claim", "Symbols", ["baggage_claim"], ["airport"]), new emojis_Emoji("🛅", "left luggage", "Symbols", ["left_luggage"], []), new emojis_Emoji("🚹", "men’s room", "Symbols", ["mens"], []), new emojis_Emoji("🚺", "women’s room", "Symbols", ["womens"], []), new emojis_Emoji("🚼", "baby symbol", "Symbols", ["baby_symbol"], []), new emojis_Emoji("🚻", "restroom", "Symbols", ["restroom"], ["toilet"]), new emojis_Emoji("🚮", "litter in bin sign", "Symbols", ["put_litter_in_its_place"], []), new emojis_Emoji("🎦", "cinema", "Symbols", ["cinema"], ["film", "movie"]), new emojis_Emoji("📶", "antenna bars", "Symbols", ["signal_strength"], ["wifi"]), new emojis_Emoji("🈁", "Japanese “here” button", "Symbols", ["koko"], []), new emojis_Emoji("🔣", "input symbols", "Symbols", ["symbols"], []), new emojis_Emoji("ℹ️", "information", "Symbols", ["information_source"], []), new emojis_Emoji("🔤", "input latin letters", "Symbols", ["abc"], ["alphabet"]), new emojis_Emoji("🔡", "input latin lowercase", "Symbols", ["abcd"], []), new emojis_Emoji("🔠", "input latin uppercase", "Symbols", ["capital_abcd"], ["letters"]), new emojis_Emoji("🆖", "NG button", "Symbols", ["ng"], []), new emojis_Emoji("🆗", "OK button", "Symbols", ["ok"], ["yes"]), new emojis_Emoji("🆙", "UP! button", "Symbols", ["up"], []), new emojis_Emoji("🆒", "COOL button", "Symbols", ["cool"], []), new emojis_Emoji("🆕", "NEW button", "Symbols", ["new"], ["fresh"]), new emojis_Emoji("🆓", "FREE button", "Symbols", ["free"], []), new emojis_Emoji("0️⃣", "keycap: 0", "Symbols", ["zero"], []), new emojis_Emoji("1️⃣", "keycap: 1", "Symbols", ["one"], []), new emojis_Emoji("2️⃣", "keycap: 2", "Symbols", ["two"], []), new emojis_Emoji("3️⃣", "keycap: 3", "Symbols", ["three"], []), new emojis_Emoji("4️⃣", "keycap: 4", "Symbols", ["four"], []), new emojis_Emoji("5️⃣", "keycap: 5", "Symbols", ["five"], []), new emojis_Emoji("6️⃣", "keycap: 6", "Symbols", ["six"], []), new emojis_Emoji("7️⃣", "keycap: 7", "Symbols", ["seven"], []), new emojis_Emoji("8️⃣", "keycap: 8", "Symbols", ["eight"], []), new emojis_Emoji("9️⃣", "keycap: 9", "Symbols", ["nine"], []), new emojis_Emoji("🔟", "keycap 10", "Symbols", ["keycap_ten"], []), new emojis_Emoji("🔢", "input numbers", "Symbols", ["1234"], ["numbers"]), new emojis_Emoji("#️⃣", "keycap: #", "Symbols", ["hash"], ["number"]), new emojis_Emoji("*️⃣", "keycap: *", "Symbols", ["asterisk"], []), new emojis_Emoji("▶️", "play button", "Symbols", ["arrow_forward"], []), new emojis_Emoji("⏸", "pause button", "Symbols", ["pause_button"], []), new emojis_Emoji("⏯", "play or pause button", "Symbols", ["play_or_pause_button"], []), new emojis_Emoji("⏹", "stop button", "Symbols", ["stop_button"], []), new emojis_Emoji("⏺", "record button", "Symbols", ["record_button"], []), new emojis_Emoji("⏭", "next track button", "Symbols", ["next_track_button"], []), new emojis_Emoji("⏮", "last track button", "Symbols", ["previous_track_button"], []), new emojis_Emoji("⏩", "fast-forward button", "Symbols", ["fast_forward"], []), new emojis_Emoji("⏪", "fast reverse button", "Symbols", ["rewind"], []), new emojis_Emoji("⏫", "fast up button", "Symbols", ["arrow_double_up"], []), new emojis_Emoji("⏬", "fast down button", "Symbols", ["arrow_double_down"], []), new emojis_Emoji("◀️", "reverse button", "Symbols", ["arrow_backward"], []), new emojis_Emoji("🔼", "up button", "Symbols", ["arrow_up_small"], []), new emojis_Emoji("🔽", "down button", "Symbols", ["arrow_down_small"], []), new emojis_Emoji("➡️", "right arrow", "Symbols", ["arrow_right"], []), new emojis_Emoji("⬅️", "left arrow", "Symbols", ["arrow_left"], []), new emojis_Emoji("⬆️", "up arrow", "Symbols", ["arrow_up"], []), new emojis_Emoji("⬇️", "down arrow", "Symbols", ["arrow_down"], []), new emojis_Emoji("↗️", "up-right arrow", "Symbols", ["arrow_upper_right"], []), new emojis_Emoji("↘️", "down-right arrow", "Symbols", ["arrow_lower_right"], []), new emojis_Emoji("↙️", "down-left arrow", "Symbols", ["arrow_lower_left"], []), new emojis_Emoji("↖️", "up-left arrow", "Symbols", ["arrow_upper_left"], []), new emojis_Emoji("↕️", "up-down arrow", "Symbols", ["arrow_up_down"], []), new emojis_Emoji("↔️", "left-right arrow", "Symbols", ["left_right_arrow"], []), new emojis_Emoji("↪️", "left arrow curving right", "Symbols", ["arrow_right_hook"], []), new emojis_Emoji("↩️", "right arrow curving left", "Symbols", ["leftwards_arrow_with_hook"], ["return"]), new emojis_Emoji("⤴️", "right arrow curving up", "Symbols", ["arrow_heading_up"], []), new emojis_Emoji("⤵️", "right arrow curving down", "Symbols", ["arrow_heading_down"], []), new emojis_Emoji("🔀", "shuffle tracks button", "Symbols", ["twisted_rightwards_arrows"], ["shuffle"]), new emojis_Emoji("🔁", "repeat button", "Symbols", ["repeat"], ["loop"]), new emojis_Emoji("🔂", "repeat single button", "Symbols", ["repeat_one"], []), new emojis_Emoji("🔄", "anticlockwise arrows button", "Symbols", ["arrows_counterclockwise"], ["sync"]), new emojis_Emoji("🔃", "clockwise vertical arrows", "Symbols", ["arrows_clockwise"], []), new emojis_Emoji("🎵", "musical note", "Symbols", ["musical_note"], []), new emojis_Emoji("🎶", "musical notes", "Symbols", ["notes"], ["music"]), new emojis_Emoji("➕", "heavy plus sign", "Symbols", ["heavy_plus_sign"], []), new emojis_Emoji("➖", "heavy minus sign", "Symbols", ["heavy_minus_sign"], []), new emojis_Emoji("➗", "heavy division sign", "Symbols", ["heavy_division_sign"], []), new emojis_Emoji("✖️", "heavy multiplication x", "Symbols", ["heavy_multiplication_x"], []), new emojis_Emoji("💲", "heavy dollar sign", "Symbols", ["heavy_dollar_sign"], []), new emojis_Emoji("💱", "currency exchange", "Symbols", ["currency_exchange"], []), new emojis_Emoji("™️", "trade mark", "Symbols", ["tm"], ["trademark"]), new emojis_Emoji("©️", "copyright", "Symbols", ["copyright"], []), new emojis_Emoji("®️", "registered", "Symbols", ["registered"], []), new emojis_Emoji("〰️", "wavy dash", "Symbols", ["wavy_dash"], []), new emojis_Emoji("➰", "curly loop", "Symbols", ["curly_loop"], []), new emojis_Emoji("➿", "double curly loop", "Symbols", ["loop"], []), new emojis_Emoji("🔚", "END arrow", "Symbols", ["end"], []), new emojis_Emoji("🔙", "BACK arrow", "Symbols", ["back"], []), new emojis_Emoji("🔛", "ON! arrow", "Symbols", ["on"], []), new emojis_Emoji("🔝", "TOP arrow", "Symbols", ["top"], []), new emojis_Emoji("🔜", "SOON arrow", "Symbols", ["soon"], []), new emojis_Emoji("✔️", "heavy check mark", "Symbols", ["heavy_check_mark"], []), new emojis_Emoji("☑️", "ballot box with check", "Symbols", ["ballot_box_with_check"], []), new emojis_Emoji("🔘", "radio button", "Symbols", ["radio_button"], []), new emojis_Emoji("⚪️", "white circle", "Symbols", ["white_circle"], []), new emojis_Emoji("⚫️", "black circle", "Symbols", ["black_circle"], []), new emojis_Emoji("🔴", "red circle", "Symbols", ["red_circle"], []), new emojis_Emoji("🔵", "blue circle", "Symbols", ["large_blue_circle"], []), new emojis_Emoji("🔺", "red triangle pointed up", "Symbols", ["small_red_triangle"], []), new emojis_Emoji("🔻", "red triangle pointed down", "Symbols", ["small_red_triangle_down"], []), new emojis_Emoji("🔸", "small orange diamond", "Symbols", ["small_orange_diamond"], []), new emojis_Emoji("🔹", "small blue diamond", "Symbols", ["small_blue_diamond"], []), new emojis_Emoji("🔶", "large orange diamond", "Symbols", ["large_orange_diamond"], []), new emojis_Emoji("🔷", "large blue diamond", "Symbols", ["large_blue_diamond"], []), new emojis_Emoji("🔳", "white square button", "Symbols", ["white_square_button"], []), new emojis_Emoji("🔲", "black square button", "Symbols", ["black_square_button"], []), new emojis_Emoji("▪️", "black small square", "Symbols", ["black_small_square"], []), new emojis_Emoji("▫️", "white small square", "Symbols", ["white_small_square"], []), new emojis_Emoji("◾️", "black medium-small square", "Symbols", ["black_medium_small_square"], []), new emojis_Emoji("◽️", "white medium-small square", "Symbols", ["white_medium_small_square"], []), new emojis_Emoji("◼️", "black medium square", "Symbols", ["black_medium_square"], []), new emojis_Emoji("◻️", "white medium square", "Symbols", ["white_medium_square"], []), new emojis_Emoji("⬛️", "black large square", "Symbols", ["black_large_square"], []), new emojis_Emoji("⬜️", "white large square", "Symbols", ["white_large_square"], []), new emojis_Emoji("🔈", "speaker low volume", "Symbols", ["speaker"], []), new emojis_Emoji("🔇", "muted speaker", "Symbols", ["mute"], ["sound", "volume"]), new emojis_Emoji("🔉", "speaker medium volume", "Symbols", ["sound"], ["volume"]), new emojis_Emoji("🔊", "speaker high volume", "Symbols", ["loud_sound"], ["volume"]), new emojis_Emoji("🔔", "bell", "Symbols", ["bell"], ["sound", "notification"]), new emojis_Emoji("🔕", "bell with slash", "Symbols", ["no_bell"], ["volume", "off"]), new emojis_Emoji("📣", "megaphone", "Symbols", ["mega"], []), new emojis_Emoji("📢", "loudspeaker", "Symbols", ["loudspeaker"], ["announcement"]), new emojis_Emoji("👁‍🗨", "eye in speech bubble", "Symbols", ["eye_speech_bubble"], []), new emojis_Emoji("💬", "speech balloon", "Symbols", ["speech_balloon"], ["comment"]), new emojis_Emoji("💭", "thought balloon", "Symbols", ["thought_balloon"], ["thinking"]), new emojis_Emoji("🗯", "right anger bubble", "Symbols", ["right_anger_bubble"], []), new emojis_Emoji("♠️", "spade suit", "Symbols", ["spades"], []), new emojis_Emoji("♣️", "club suit", "Symbols", ["clubs"], []), new emojis_Emoji("♥️", "heart suit", "Symbols", ["hearts"], []), new emojis_Emoji("♦️", "diamond suit", "Symbols", ["diamonds"], []), new emojis_Emoji("🃏", "joker", "Symbols", ["black_joker"], []), new emojis_Emoji("🎴", "flower playing cards", "Symbols", ["flower_playing_cards"], []), new emojis_Emoji("🀄️", "mahjong red dragon", "Symbols", ["mahjong"], []), new emojis_Emoji("🕐", "one o’clock", "Symbols", ["clock1"], []), new emojis_Emoji("🕑", "two o’clock", "Symbols", ["clock2"], []), new emojis_Emoji("🕒", "three o’clock", "Symbols", ["clock3"], []), new emojis_Emoji("🕓", "four o’clock", "Symbols", ["clock4"], []), new emojis_Emoji("🕔", "five o’clock", "Symbols", ["clock5"], []), new emojis_Emoji("🕕", "six o’clock", "Symbols", ["clock6"], []), new emojis_Emoji("🕖", "seven o’clock", "Symbols", ["clock7"], []), new emojis_Emoji("🕗", "eight o’clock", "Symbols", ["clock8"], []), new emojis_Emoji("🕘", "nine o’clock", "Symbols", ["clock9"], []), new emojis_Emoji("🕙", "ten o’clock", "Symbols", ["clock10"], []), new emojis_Emoji("🕚", "eleven o’clock", "Symbols", ["clock11"], []), new emojis_Emoji("🕛", "twelve o’clock", "Symbols", ["clock12"], []), new emojis_Emoji("🕜", "one-thirty", "Symbols", ["clock130"], []), new emojis_Emoji("🕝", "two-thirty", "Symbols", ["clock230"], []), new emojis_Emoji("🕞", "three-thirty", "Symbols", ["clock330"], []), new emojis_Emoji("🕟", "four-thirty", "Symbols", ["clock430"], []), new emojis_Emoji("🕠", "five-thirty", "Symbols", ["clock530"], []), new emojis_Emoji("🕡", "six-thirty", "Symbols", ["clock630"], []), new emojis_Emoji("🕢", "seven-thirty", "Symbols", ["clock730"], []), new emojis_Emoji("🕣", "eight-thirty", "Symbols", ["clock830"], []), new emojis_Emoji("🕤", "nine-thirty", "Symbols", ["clock930"], []), new emojis_Emoji("🕥", "ten-thirty", "Symbols", ["clock1030"], []), new emojis_Emoji("🕦", "eleven-thirty", "Symbols", ["clock1130"], []), new emojis_Emoji("🕧", "twelve-thirty", "Symbols", ["clock1230"], []), new emojis_Emoji("🏳️", "white flag", "Flags", ["white_flag"], []), new emojis_Emoji("🏴", "black flag", "Flags", ["black_flag"], []), new emojis_Emoji("🏁", "chequered flag", "Flags", ["checkered_flag"], ["milestone", "finish"]), new emojis_Emoji("🚩", "triangular flag", "Flags", ["triangular_flag_on_post"], []), new emojis_Emoji("🏳️‍🌈", "rainbow flag", "Flags", ["rainbow_flag"], ["pride"]), new emojis_Emoji("🇦🇫", "Afghanistan", "Flags", ["afghanistan"], []), new emojis_Emoji("🇦🇽", "Åland Islands", "Flags", ["aland_islands"], []), new emojis_Emoji("🇦🇱", "Albania", "Flags", ["albania"], []), new emojis_Emoji("🇩🇿", "Algeria", "Flags", ["algeria"], []), new emojis_Emoji("🇦🇸", "American Samoa", "Flags", ["american_samoa"], []), new emojis_Emoji("🇦🇩", "Andorra", "Flags", ["andorra"], []), new emojis_Emoji("🇦🇴", "Angola", "Flags", ["angola"], []), new emojis_Emoji("🇦🇮", "Anguilla", "Flags", ["anguilla"], []), new emojis_Emoji("🇦🇶", "Antarctica", "Flags", ["antarctica"], []), new emojis_Emoji("🇦🇬", "Antigua & Barbuda", "Flags", ["antigua_barbuda"], []), new emojis_Emoji("🇦🇷", "Argentina", "Flags", ["argentina"], []), new emojis_Emoji("🇦🇲", "Armenia", "Flags", ["armenia"], []), new emojis_Emoji("🇦🇼", "Aruba", "Flags", ["aruba"], []), new emojis_Emoji("🇦🇺", "Australia", "Flags", ["australia"], []), new emojis_Emoji("🇦🇹", "Austria", "Flags", ["austria"], []), new emojis_Emoji("🇦🇿", "Azerbaijan", "Flags", ["azerbaijan"], []), new emojis_Emoji("🇧🇸", "Bahamas", "Flags", ["bahamas"], []), new emojis_Emoji("🇧🇭", "Bahrain", "Flags", ["bahrain"], []), new emojis_Emoji("🇧🇩", "Bangladesh", "Flags", ["bangladesh"], []), new emojis_Emoji("🇧🇧", "Barbados", "Flags", ["barbados"], []), new emojis_Emoji("🇧🇾", "Belarus", "Flags", ["belarus"], []), new emojis_Emoji("🇧🇪", "Belgium", "Flags", ["belgium"], []), new emojis_Emoji("🇧🇿", "Belize", "Flags", ["belize"], []), new emojis_Emoji("🇧🇯", "Benin", "Flags", ["benin"], []), new emojis_Emoji("🇧🇲", "Bermuda", "Flags", ["bermuda"], []), new emojis_Emoji("🇧🇹", "Bhutan", "Flags", ["bhutan"], []), new emojis_Emoji("🇧🇴", "Bolivia", "Flags", ["bolivia"], []), new emojis_Emoji("🇧🇶", "Caribbean Netherlands", "Flags", ["caribbean_netherlands"], []), new emojis_Emoji("🇧🇦", "Bosnia & Herzegovina", "Flags", ["bosnia_herzegovina"], []), new emojis_Emoji("🇧🇼", "Botswana", "Flags", ["botswana"], []), new emojis_Emoji("🇧🇷", "Brazil", "Flags", ["brazil"], []), new emojis_Emoji("🇮🇴", "British Indian Ocean Territory", "Flags", ["british_indian_ocean_territory"], []), new emojis_Emoji("🇻🇬", "British Virgin Islands", "Flags", ["british_virgin_islands"], []), new emojis_Emoji("🇧🇳", "Brunei", "Flags", ["brunei"], []), new emojis_Emoji("🇧🇬", "Bulgaria", "Flags", ["bulgaria"], []), new emojis_Emoji("🇧🇫", "Burkina Faso", "Flags", ["burkina_faso"], []), new emojis_Emoji("🇧🇮", "Burundi", "Flags", ["burundi"], []), new emojis_Emoji("🇨🇻", "Cape Verde", "Flags", ["cape_verde"], []), new emojis_Emoji("🇰🇭", "Cambodia", "Flags", ["cambodia"], []), new emojis_Emoji("🇨🇲", "Cameroon", "Flags", ["cameroon"], []), new emojis_Emoji("🇨🇦", "Canada", "Flags", ["canada"], []), new emojis_Emoji("🇮🇨", "Canary Islands", "Flags", ["canary_islands"], []), new emojis_Emoji("🇰🇾", "Cayman Islands", "Flags", ["cayman_islands"], []), new emojis_Emoji("🇨🇫", "Central African Republic", "Flags", ["central_african_republic"], []), new emojis_Emoji("🇹🇩", "Chad", "Flags", ["chad"], []), new emojis_Emoji("🇨🇱", "Chile", "Flags", ["chile"], []), new emojis_Emoji("🇨🇳", "China", "Flags", ["cn"], ["china"]), new emojis_Emoji("🇨🇽", "Christmas Island", "Flags", ["christmas_island"], []), new emojis_Emoji("🇨🇨", "Cocos (Keeling) Islands", "Flags", ["cocos_islands"], ["keeling"]), new emojis_Emoji("🇨🇴", "Colombia", "Flags", ["colombia"], []), new emojis_Emoji("🇰🇲", "Comoros", "Flags", ["comoros"], []), new emojis_Emoji("🇨🇬", "Congo - Brazzaville", "Flags", ["congo_brazzaville"], []), new emojis_Emoji("🇨🇩", "Congo - Kinshasa", "Flags", ["congo_kinshasa"], []), new emojis_Emoji("🇨🇰", "Cook Islands", "Flags", ["cook_islands"], []), new emojis_Emoji("🇨🇷", "Costa Rica", "Flags", ["costa_rica"], []), new emojis_Emoji("🇨🇮", "Côte d’Ivoire", "Flags", ["cote_divoire"], ["ivory"]), new emojis_Emoji("🇭🇷", "Croatia", "Flags", ["croatia"], []), new emojis_Emoji("🇨🇺", "Cuba", "Flags", ["cuba"], []), new emojis_Emoji("🇨🇼", "Curaçao", "Flags", ["curacao"], []), new emojis_Emoji("🇨🇾", "Cyprus", "Flags", ["cyprus"], []), new emojis_Emoji("🇨🇿", "Czech Republic", "Flags", ["czech_republic"], []), new emojis_Emoji("🇩🇰", "Denmark", "Flags", ["denmark"], []), new emojis_Emoji("🇩🇯", "Djibouti", "Flags", ["djibouti"], []), new emojis_Emoji("🇩🇲", "Dominica", "Flags", ["dominica"], []), new emojis_Emoji("🇩🇴", "Dominican Republic", "Flags", ["dominican_republic"], []), new emojis_Emoji("🇪🇨", "Ecuador", "Flags", ["ecuador"], []), new emojis_Emoji("🇪🇬", "Egypt", "Flags", ["egypt"], []), new emojis_Emoji("🇸🇻", "El Salvador", "Flags", ["el_salvador"], []), new emojis_Emoji("🇬🇶", "Equatorial Guinea", "Flags", ["equatorial_guinea"], []), new emojis_Emoji("🇪🇷", "Eritrea", "Flags", ["eritrea"], []), new emojis_Emoji("🇪🇪", "Estonia", "Flags", ["estonia"], []), new emojis_Emoji("🇪🇹", "Ethiopia", "Flags", ["ethiopia"], []), new emojis_Emoji("🇪🇺", "European Union", "Flags", ["eu", "european_union"], []), new emojis_Emoji("🇫🇰", "Falkland Islands", "Flags", ["falkland_islands"], []), new emojis_Emoji("🇫🇴", "Faroe Islands", "Flags", ["faroe_islands"], []), new emojis_Emoji("🇫🇯", "Fiji", "Flags", ["fiji"], []), new emojis_Emoji("🇫🇮", "Finland", "Flags", ["finland"], []), new emojis_Emoji("🇫🇷", "France", "Flags", ["fr"], ["france", "french"]), new emojis_Emoji("🇬🇫", "French Guiana", "Flags", ["french_guiana"], []), new emojis_Emoji("🇵🇫", "French Polynesia", "Flags", ["french_polynesia"], []), new emojis_Emoji("🇹🇫", "French Southern Territories", "Flags", ["french_southern_territories"], []), new emojis_Emoji("🇬🇦", "Gabon", "Flags", ["gabon"], []), new emojis_Emoji("🇬🇲", "Gambia", "Flags", ["gambia"], []), new emojis_Emoji("🇬🇪", "Georgia", "Flags", ["georgia"], []), new emojis_Emoji("🇩🇪", "Germany", "Flags", ["de"], ["flag", "germany"]), new emojis_Emoji("🇬🇭", "Ghana", "Flags", ["ghana"], []), new emojis_Emoji("🇬🇮", "Gibraltar", "Flags", ["gibraltar"], []), new emojis_Emoji("🇬🇷", "Greece", "Flags", ["greece"], []), new emojis_Emoji("🇬🇱", "Greenland", "Flags", ["greenland"], []), new emojis_Emoji("🇬🇩", "Grenada", "Flags", ["grenada"], []), new emojis_Emoji("🇬🇵", "Guadeloupe", "Flags", ["guadeloupe"], []), new emojis_Emoji("🇬🇺", "Guam", "Flags", ["guam"], []), new emojis_Emoji("🇬🇹", "Guatemala", "Flags", ["guatemala"], []), new emojis_Emoji("🇬🇬", "Guernsey", "Flags", ["guernsey"], []), new emojis_Emoji("🇬🇳", "Guinea", "Flags", ["guinea"], []), new emojis_Emoji("🇬🇼", "Guinea-Bissau", "Flags", ["guinea_bissau"], []), new emojis_Emoji("🇬🇾", "Guyana", "Flags", ["guyana"], []), new emojis_Emoji("🇭🇹", "Haiti", "Flags", ["haiti"], []), new emojis_Emoji("🇭🇳", "Honduras", "Flags", ["honduras"], []), new emojis_Emoji("🇭🇰", "Hong Kong SAR China", "Flags", ["hong_kong"], []), new emojis_Emoji("🇭🇺", "Hungary", "Flags", ["hungary"], []), new emojis_Emoji("🇮🇸", "Iceland", "Flags", ["iceland"], []), new emojis_Emoji("🇮🇳", "India", "Flags", ["india"], []), new emojis_Emoji("🇮🇩", "Indonesia", "Flags", ["indonesia"], []), new emojis_Emoji("🇮🇷", "Iran", "Flags", ["iran"], []), new emojis_Emoji("🇮🇶", "Iraq", "Flags", ["iraq"], []), new emojis_Emoji("🇮🇪", "Ireland", "Flags", ["ireland"], []), new emojis_Emoji("🇮🇲", "Isle of Man", "Flags", ["isle_of_man"], []), new emojis_Emoji("🇮🇱", "Israel", "Flags", ["israel"], []), new emojis_Emoji("🇮🇹", "Italy", "Flags", ["it"], ["italy"]), new emojis_Emoji("🇯🇲", "Jamaica", "Flags", ["jamaica"], []), new emojis_Emoji("🇯🇵", "Japan", "Flags", ["jp"], ["japan"]), new emojis_Emoji("🎌", "crossed flags", "Flags", ["crossed_flags"], []), new emojis_Emoji("🇯🇪", "Jersey", "Flags", ["jersey"], []), new emojis_Emoji("🇯🇴", "Jordan", "Flags", ["jordan"], []), new emojis_Emoji("🇰🇿", "Kazakhstan", "Flags", ["kazakhstan"], []), new emojis_Emoji("🇰🇪", "Kenya", "Flags", ["kenya"], []), new emojis_Emoji("🇰🇮", "Kiribati", "Flags", ["kiribati"], []), new emojis_Emoji("🇽🇰", "Kosovo", "Flags", ["kosovo"], []), new emojis_Emoji("🇰🇼", "Kuwait", "Flags", ["kuwait"], []), new emojis_Emoji("🇰🇬", "Kyrgyzstan", "Flags", ["kyrgyzstan"], []), new emojis_Emoji("🇱🇦", "Laos", "Flags", ["laos"], []), new emojis_Emoji("🇱🇻", "Latvia", "Flags", ["latvia"], []), new emojis_Emoji("🇱🇧", "Lebanon", "Flags", ["lebanon"], []), new emojis_Emoji("🇱🇸", "Lesotho", "Flags", ["lesotho"], []), new emojis_Emoji("🇱🇷", "Liberia", "Flags", ["liberia"], []), new emojis_Emoji("🇱🇾", "Libya", "Flags", ["libya"], []), new emojis_Emoji("🇱🇮", "Liechtenstein", "Flags", ["liechtenstein"], []), new emojis_Emoji("🇱🇹", "Lithuania", "Flags", ["lithuania"], []), new emojis_Emoji("🇱🇺", "Luxembourg", "Flags", ["luxembourg"], []), new emojis_Emoji("🇲🇴", "Macau SAR China", "Flags", ["macau"], []), new emojis_Emoji("🇲🇰", "Macedonia", "Flags", ["macedonia"], []), new emojis_Emoji("🇲🇬", "Madagascar", "Flags", ["madagascar"], []), new emojis_Emoji("🇲🇼", "Malawi", "Flags", ["malawi"], []), new emojis_Emoji("🇲🇾", "Malaysia", "Flags", ["malaysia"], []), new emojis_Emoji("🇲🇻", "Maldives", "Flags", ["maldives"], []), new emojis_Emoji("🇲🇱", "Mali", "Flags", ["mali"], []), new emojis_Emoji("🇲🇹", "Malta", "Flags", ["malta"], []), new emojis_Emoji("🇲🇭", "Marshall Islands", "Flags", ["marshall_islands"], []), new emojis_Emoji("🇲🇶", "Martinique", "Flags", ["martinique"], []), new emojis_Emoji("🇲🇷", "Mauritania", "Flags", ["mauritania"], []), new emojis_Emoji("🇲🇺", "Mauritius", "Flags", ["mauritius"], []), new emojis_Emoji("🇾🇹", "Mayotte", "Flags", ["mayotte"], []), new emojis_Emoji("🇲🇽", "Mexico", "Flags", ["mexico"], []), new emojis_Emoji("🇫🇲", "Micronesia", "Flags", ["micronesia"], []), new emojis_Emoji("🇲🇩", "Moldova", "Flags", ["moldova"], []), new emojis_Emoji("🇲🇨", "Monaco", "Flags", ["monaco"], []), new emojis_Emoji("🇲🇳", "Mongolia", "Flags", ["mongolia"], []), new emojis_Emoji("🇲🇪", "Montenegro", "Flags", ["montenegro"], []), new emojis_Emoji("🇲🇸", "Montserrat", "Flags", ["montserrat"], []), new emojis_Emoji("🇲🇦", "Morocco", "Flags", ["morocco"], []), new emojis_Emoji("🇲🇿", "Mozambique", "Flags", ["mozambique"], []), new emojis_Emoji("🇲🇲", "Myanmar (Burma)", "Flags", ["myanmar"], ["burma"]), new emojis_Emoji("🇳🇦", "Namibia", "Flags", ["namibia"], []), new emojis_Emoji("🇳🇷", "Nauru", "Flags", ["nauru"], []), new emojis_Emoji("🇳🇵", "Nepal", "Flags", ["nepal"], []), new emojis_Emoji("🇳🇱", "Netherlands", "Flags", ["netherlands"], []), new emojis_Emoji("🇳🇨", "New Caledonia", "Flags", ["new_caledonia"], []), new emojis_Emoji("🇳🇿", "New Zealand", "Flags", ["new_zealand"], []), new emojis_Emoji("🇳🇮", "Nicaragua", "Flags", ["nicaragua"], []), new emojis_Emoji("🇳🇪", "Niger", "Flags", ["niger"], []), new emojis_Emoji("🇳🇬", "Nigeria", "Flags", ["nigeria"], []), new emojis_Emoji("🇳🇺", "Niue", "Flags", ["niue"], []), new emojis_Emoji("🇳🇫", "Norfolk Island", "Flags", ["norfolk_island"], []), new emojis_Emoji("🇲🇵", "Northern Mariana Islands", "Flags", ["northern_mariana_islands"], []), new emojis_Emoji("🇰🇵", "North Korea", "Flags", ["north_korea"], []), new emojis_Emoji("🇳🇴", "Norway", "Flags", ["norway"], []), new emojis_Emoji("🇴🇲", "Oman", "Flags", ["oman"], []), new emojis_Emoji("🇵🇰", "Pakistan", "Flags", ["pakistan"], []), new emojis_Emoji("🇵🇼", "Palau", "Flags", ["palau"], []), new emojis_Emoji("🇵🇸", "Palestinian Territories", "Flags", ["palestinian_territories"], []), new emojis_Emoji("🇵🇦", "Panama", "Flags", ["panama"], []), new emojis_Emoji("🇵🇬", "Papua New Guinea", "Flags", ["papua_new_guinea"], []), new emojis_Emoji("🇵🇾", "Paraguay", "Flags", ["paraguay"], []), new emojis_Emoji("🇵🇪", "Peru", "Flags", ["peru"], []), new emojis_Emoji("🇵🇭", "Philippines", "Flags", ["philippines"], []), new emojis_Emoji("🇵🇳", "Pitcairn Islands", "Flags", ["pitcairn_islands"], []), new emojis_Emoji("🇵🇱", "Poland", "Flags", ["poland"], []), new emojis_Emoji("🇵🇹", "Portugal", "Flags", ["portugal"], []), new emojis_Emoji("🇵🇷", "Puerto Rico", "Flags", ["puerto_rico"], []), new emojis_Emoji("🇶🇦", "Qatar", "Flags", ["qatar"], []), new emojis_Emoji("🇷🇪", "Réunion", "Flags", ["reunion"], []), new emojis_Emoji("🇷🇴", "Romania", "Flags", ["romania"], []), new emojis_Emoji("🇷🇺", "Russia", "Flags", ["ru"], ["russia"]), new emojis_Emoji("🇷🇼", "Rwanda", "Flags", ["rwanda"], []), new emojis_Emoji("🇧🇱", "St. Barthélemy", "Flags", ["st_barthelemy"], []), new emojis_Emoji("🇸🇭", "St. Helena", "Flags", ["st_helena"], []), new emojis_Emoji("🇰🇳", "St. Kitts & Nevis", "Flags", ["st_kitts_nevis"], []), new emojis_Emoji("🇱🇨", "St. Lucia", "Flags", ["st_lucia"], []), new emojis_Emoji("🇵🇲", "St. Pierre & Miquelon", "Flags", ["st_pierre_miquelon"], []), new emojis_Emoji("🇻🇨", "St. Vincent & Grenadines", "Flags", ["st_vincent_grenadines"], []), new emojis_Emoji("🇼🇸", "Samoa", "Flags", ["samoa"], []), new emojis_Emoji("🇸🇲", "San Marino", "Flags", ["san_marino"], []), new emojis_Emoji("🇸🇹", "São Tomé & Príncipe", "Flags", ["sao_tome_principe"], []), new emojis_Emoji("🇸🇦", "Saudi Arabia", "Flags", ["saudi_arabia"], []), new emojis_Emoji("🇸🇳", "Senegal", "Flags", ["senegal"], []), new emojis_Emoji("🇷🇸", "Serbia", "Flags", ["serbia"], []), new emojis_Emoji("🇸🇨", "Seychelles", "Flags", ["seychelles"], []), new emojis_Emoji("🇸🇱", "Sierra Leone", "Flags", ["sierra_leone"], []), new emojis_Emoji("🇸🇬", "Singapore", "Flags", ["singapore"], []), new emojis_Emoji("🇸🇽", "Sint Maarten", "Flags", ["sint_maarten"], []), new emojis_Emoji("🇸🇰", "Slovakia", "Flags", ["slovakia"], []), new emojis_Emoji("🇸🇮", "Slovenia", "Flags", ["slovenia"], []), new emojis_Emoji("🇸🇧", "Solomon Islands", "Flags", ["solomon_islands"], []), new emojis_Emoji("🇸🇴", "Somalia", "Flags", ["somalia"], []), new emojis_Emoji("🇿🇦", "South Africa", "Flags", ["south_africa"], []), new emojis_Emoji("🇬🇸", "South Georgia & South Sandwich Islands", "Flags", ["south_georgia_south_sandwich_islands"], []), new emojis_Emoji("🇰🇷", "South Korea", "Flags", ["kr"], ["korea"]), new emojis_Emoji("🇸🇸", "South Sudan", "Flags", ["south_sudan"], []), new emojis_Emoji("🇪🇸", "Spain", "Flags", ["es"], ["spain"]), new emojis_Emoji("🇱🇰", "Sri Lanka", "Flags", ["sri_lanka"], []), new emojis_Emoji("🇸🇩", "Sudan", "Flags", ["sudan"], []), new emojis_Emoji("🇸🇷", "Suriname", "Flags", ["suriname"], []), new emojis_Emoji("🇸🇿", "Swaziland", "Flags", ["swaziland"], []), new emojis_Emoji("🇸🇪", "Sweden", "Flags", ["sweden"], []), new emojis_Emoji("🇨🇭", "Switzerland", "Flags", ["switzerland"], []), new emojis_Emoji("🇸🇾", "Syria", "Flags", ["syria"], []), new emojis_Emoji("🇹🇼", "Taiwan", "Flags", ["taiwan"], []), new emojis_Emoji("🇹🇯", "Tajikistan", "Flags", ["tajikistan"], []), new emojis_Emoji("🇹🇿", "Tanzania", "Flags", ["tanzania"], []), new emojis_Emoji("🇹🇭", "Thailand", "Flags", ["thailand"], []), new emojis_Emoji("🇹🇱", "Timor-Leste", "Flags", ["timor_leste"], []), new emojis_Emoji("🇹🇬", "Togo", "Flags", ["togo"], []), new emojis_Emoji("🇹🇰", "Tokelau", "Flags", ["tokelau"], []), new emojis_Emoji("🇹🇴", "Tonga", "Flags", ["tonga"], []), new emojis_Emoji("🇹🇹", "Trinidad & Tobago", "Flags", ["trinidad_tobago"], []), new emojis_Emoji("🇹🇳", "Tunisia", "Flags", ["tunisia"], []), new emojis_Emoji("🇹🇷", "Turkey", "Flags", ["tr"], ["turkey"]), new emojis_Emoji("🇹🇲", "Turkmenistan", "Flags", ["turkmenistan"], []), new emojis_Emoji("🇹🇨", "Turks & Caicos Islands", "Flags", ["turks_caicos_islands"], []), new emojis_Emoji("🇹🇻", "Tuvalu", "Flags", ["tuvalu"], []), new emojis_Emoji("🇺🇬", "Uganda", "Flags", ["uganda"], []), new emojis_Emoji("🇺🇦", "Ukraine", "Flags", ["ukraine"], []), new emojis_Emoji("🇦🇪", "United Arab Emirates", "Flags", ["united_arab_emirates"], []), new emojis_Emoji("🇬🇧", "United Kingdom", "Flags", ["gb", "uk"], ["flag", "british"]), new emojis_Emoji("🇺🇸", "United States", "Flags", ["us"], ["flag", "united", "america"]), new emojis_Emoji("🇻🇮", "U.S. Virgin Islands", "Flags", ["us_virgin_islands"], []), new emojis_Emoji("🇺🇾", "Uruguay", "Flags", ["uruguay"], []), new emojis_Emoji("🇺🇿", "Uzbekistan", "Flags", ["uzbekistan"], []), new emojis_Emoji("🇻🇺", "Vanuatu", "Flags", ["vanuatu"], []), new emojis_Emoji("🇻🇦", "Vatican City", "Flags", ["vatican_city"], []), new emojis_Emoji("🇻🇪", "Venezuela", "Flags", ["venezuela"], []), new emojis_Emoji("🇻🇳", "Vietnam", "Flags", ["vietnam"], []), new emojis_Emoji("🇼🇫", "Wallis & Futuna", "Flags", ["wallis_futuna"], []), new emojis_Emoji("🇪🇭", "Western Sahara", "Flags", ["western_sahara"], []), new emojis_Emoji("🇾🇪", "Yemen", "Flags", ["yemen"], []), new emojis_Emoji("🇿🇲", "Zambia", "Flags", ["zambia"], []), new emojis_Emoji("🇿🇼", "Zimbabwe", "Flags", ["zimbabwe"], [])]);
+// EXTERNAL MODULE: ./src/utils/util.js
+var util = __webpack_require__("ca00");
+
+// EXTERNAL MODULE: ./src/api/comment.js
+var api_comment = __webpack_require__("063c");
+
+// EXTERNAL MODULE: ./node_modules/axios/index.js
+var axios = __webpack_require__("bc3a");
+var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
+
+// EXTERNAL MODULE: ./node_modules/autosize/dist/autosize.js
+var autosize = __webpack_require__("19e9");
+var autosize_default = /*#__PURE__*/__webpack_require__.n(autosize);
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/CommentEditor.vue?vue&type=script&lang=js&
+
+
+
+
+
+
+
+
+
+
+
+function CommentEditorvue_type_script_lang_js_ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function CommentEditorvue_type_script_lang_js_objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { CommentEditorvue_type_script_lang_js_ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { CommentEditorvue_type_script_lang_js_ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+
+
+
+/* harmony default export */ var CommentEditorvue_type_script_lang_js_ = ({
+  name: "CommentEditor",
+  components: {
+    VEmojiPicker: VEmojiPicker
+  },
+  props: {
+    targetId: {
+      type: Number,
+      required: false,
+      default: 0
+    },
+    target: {
+      type: String,
+      required: false,
+      default: "posts",
+      validator: function validator(value) {
+        return ["posts", "sheets", "journals"].indexOf(value) !== -1;
+      }
+    },
+    replyComment: {
+      type: Object,
+      required: false,
+      default: () => {}
+    },
+    options: {
+      required: false,
+      default: []
+    },
+    configs: {
+      type: Object,
+      required: true
+    }
+  },
+
+  data() {
+    return {
+      emojiPack: emojis,
+      emojiDialogVisible: false,
+      comment: {
+        author: null,
+        authorUrl: null,
+        email: null,
+        content: ""
+      },
+      previewMode: false,
+      infoes: [],
+      warnings: [],
+      successes: []
+    };
+  },
+
+  computed: {
+    renderedContent() {
+      return this.comment.content ? marked_default()(this.comment.content) : "";
+    },
+
+    avatar() {
+      if (!this.comment.email || !Object(util["f" /* validEmail */])(this.comment.email)) {
+        return this.configs.gravatarSource + "?d=" + this.options.comment_gravatar_default;
+      }
+
+      var gravatarMd5 = md5_default()(this.comment.email);
+      return this.configs.gravatarSource + "/".concat(gravatarMd5, "?s=256&d=") + this.options.comment_gravatar_default;
+    },
+
+    commentValid() {
+      return !Object(util["b" /* isEmpty */])(this.comment.author) && !Object(util["b" /* isEmpty */])(this.comment.email) && !Object(util["b" /* isEmpty */])(this.comment.content);
+    },
+
+    infoAlertVisiable() {
+      return this.infoes !== null && this.infoes.length > 0;
+    },
+
+    warningAlertVisiable() {
+      return this.warnings !== null && this.warnings.length > 0;
+    },
+
+    successAlertVisiable() {
+      return this.successes !== null && this.successes.length > 0;
+    }
+
+  },
+
+  created() {
+    // Get info from local storage
+    var author = localStorage.getItem("comment-author");
+    var authorUrl = localStorage.getItem("comment-authorUrl");
+    var email = localStorage.getItem("comment-email");
+    this.comment.author = author ? author : "";
+    this.comment.authorUrl = authorUrl ? authorUrl : "";
+    this.comment.email = email ? email : ""; // this.handleGetGithubUser();
+  },
+
+  mounted() {
+    // autosize(this.$refs.commentTextArea);
+    autosize_default()(document.querySelector("textarea"));
+  },
+
+  methods: {
+    handleSubmitClick() {
+      if (Object(util["b" /* isEmpty */])(this.comment.author)) {
+        this.warnings.push("评论者昵称不能为空");
+        return;
+      }
+
+      if (Object(util["b" /* isEmpty */])(this.comment.email)) {
+        this.warnings.push("邮箱不能为空");
+        return;
+      }
+
+      if (Object(util["b" /* isEmpty */])(this.comment.content)) {
+        this.warnings.push("评论内容不能为空");
+        return;
+      } // Submit the comment
+
+
+      this.comment.postId = this.targetId;
+
+      if (this.replyComment) {
+        // Set parent id if available
+        this.comment.parentId = this.replyComment.id;
+      }
+
+      api_comment["a" /* default */].createComment(this.target, this.comment).then(response => {
+        // Store comment author, email, authorUrl
+        localStorage.setItem("comment-author", this.comment.author);
+        localStorage.setItem("comment-email", this.comment.email);
+        localStorage.setItem("comment-authorUrl", this.comment.authorUrl); // clear comment
+
+        this.comment.content = "";
+        this.handleCommentCreated(response.data.data);
+      }).catch(error => {
+        this.handleFailedToCreateComment(error.response);
+      });
+    },
+
+    handlePreviewContent() {
+      this.previewMode = !this.previewMode;
+    },
+
+    handleCommentCreated(createdComment) {
+      this.clearAlertClose();
+
+      if (createdComment.status === "PUBLISHED") {
+        try {
+          this.createdNewNode(createdComment);
+          this.successes.push("评论成功");
+        } catch (_unused) {
+          this.successes.push("评论成功，刷新即可显示最新评论！");
+        }
+      } else {
+        // Show tips
+        this.infoes.push("您的评论已经投递至博主，等待博主审核！");
+      }
+    },
+
+    createdNewNode(newComment) {
+      var pr = {
+        targetId: this.targetId,
+        target: this.target,
+        options: this.options,
+        configs: this.configs,
+        comment: newComment
+      };
+      pr = newComment.parentId == 0 ? pr : CommentEditorvue_type_script_lang_js_objectSpread({}, pr, {}, {
+        isChild: true,
+        parent: this.replyComment,
+        depth: this.$parent.selfAddDepth
+      });
+
+      var CommentNode = () => Promise.resolve(/* import() */).then(__webpack_require__.bind(null, "f9af")); // 创建一个组件
+
+
+      var comment = new external_Vue_default.a({
+        render: h => {
+          return h(CommentNode, {
+            props: pr
+          });
+        }
+      });
+      var dom;
+
+      if (newComment.parentId == 0) {
+        dom = this.$root.$el.getElementsByClassName("comment-nodes")[0];
+      } else {
+        var parentDom = this.$parent.$el;
+        var replyDom = parentDom.getElementsByTagName("ol");
+
+        if (replyDom.length > 0) {
+          dom = replyDom[0];
+        } else {
+          dom = document.createElement("ol");
+          dom.setAttribute('class', 'children');
+          parentDom.appendChild(dom);
+        }
+      }
+
+      var nodeDom = document.createElement('div');
+
+      if (dom.children[0]) {
+        dom.insertBefore(nodeDom, dom.children[0]);
+      } else {
+        dom.appendChild(nodeDom);
+      }
+
+      comment.$mount(nodeDom);
+    },
+
+    handleFailedToCreateComment(response) {
+      this.clearAlertClose();
+
+      if (response.status === 400) {
+        this.warnings.push(response.data.message);
+
+        if (response.data) {
+          var errorDetail = response.data.data;
+
+          if (Object(util["c" /* isObject */])(errorDetail)) {
+            Object.keys(errorDetail).forEach(key => {
+              this.warnings.push(errorDetail[key]);
+            });
+          }
+        }
+      }
+    },
+
+    handleToogleDialogEmoji() {
+      this.emojiDialogVisible = !this.emojiDialogVisible;
+    },
+
+    handleSelectEmoji(emoji) {
+      this.comment.content += emoji.emoji;
+      this.handleToogleDialogEmoji();
+    },
+
+    handleGithubLogin() {
+      var githubOauthUrl = "http://github.com/login/oauth/authorize";
+      var query = {
+        client_id: "a1aacd842bc158abd65b",
+        redirect_uri: window.location.href,
+        scope: "public_repo"
+      };
+      window.location.href = "".concat(githubOauthUrl, "?").concat(Object(util["d" /* queryStringify */])(query));
+    },
+
+    handleGetGithubUser() {
+      var accessToken = this.handleGetGithubAccessToken();
+      axios_default.a.get("https://cors-anywhere.herokuapp.com/https://api.github.com/user", {
+        params: {
+          access_token: accessToken
+        }
+      }).then(function (response) {
+        alert(response);
+      }).catch(error => {
+        alert(error);
+      });
+    },
+
+    handleGetGithubAccessToken() {
+      var code = Object(util["a" /* getUrlKey */])("code");
+
+      if (code) {
+        axios_default.a.get("https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token", {
+          params: {
+            client_id: "a1aacd842bc158abd65b",
+            client_secret: "0daedb3923a4cdeb72620df511bdb11685dfe282",
+            code: code
+          }
+        }).then(function (response) {
+          var args = response.split("&");
+          var arg = args[0].split("=");
+          var access_token = arg[1];
+          alert(access_token);
+          return access_token;
+        }).catch(error => {
+          alert(error);
+        });
+      }
+    },
+
+    clearAlertClose() {
+      this.infoes = [];
+      this.warnings = [];
+      this.successes = [];
+    }
+
+  }
+});
+// CONCATENATED MODULE: ./src/components/CommentEditor.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_CommentEditorvue_type_script_lang_js_ = (CommentEditorvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/CommentEditor.vue
+
+
+
+
+
+/* normalize component */
+
+var CommentEditor_component = Object(componentNormalizer["a" /* default */])(
+  components_CommentEditorvue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  ,true
+)
+
+/* harmony default export */ var CommentEditor = (CommentEditor_component.exports);
+// EXTERNAL MODULE: ./src/components/CommentNode.vue + 4 modules
+var components_CommentNode = __webpack_require__("f9af");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/CommentLoading.vue?vue&type=template&id=1f98d647&
+var CommentLoadingvue_type_template_id_1f98d647_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"comment-loader-container"},[(_vm.configs.loadingStyle==='default')?_c('div',{staticClass:"comment-loader-default"},[_c('span'),_c('span'),_c('span'),_c('span')]):(_vm.configs.loadingStyle==='circle')?_c('div',{staticClass:"comment-loader-circle"}):(_vm.configs.loadingStyle==='balls')?_c('div',{staticClass:"comment-loader-balls"},[_c('div'),_c('div'),_c('div')]):_vm._e()])}
+var CommentLoadingvue_type_template_id_1f98d647_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/CommentLoading.vue?vue&type=template&id=1f98d647&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/CommentLoading.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ var CommentLoadingvue_type_script_lang_js_ = ({
+  name: "CommentLoading",
+  props: {
+    configs: {
+      type: Object,
+      required: true
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/components/CommentLoading.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_CommentLoadingvue_type_script_lang_js_ = (CommentLoadingvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/CommentLoading.vue
+
+
+
+
+
+/* normalize component */
+
+var CommentLoading_component = Object(componentNormalizer["a" /* default */])(
+  components_CommentLoadingvue_type_script_lang_js_,
+  CommentLoadingvue_type_template_id_1f98d647_render,
+  CommentLoadingvue_type_template_id_1f98d647_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  ,true
+)
+
+/* harmony default export */ var CommentLoading = (CommentLoading_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Pagination.vue?vue&type=template&id=22a6f9f8&
+var Paginationvue_type_template_id_22a6f9f8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ul',{staticClass:"page"},[_c('li',{staticClass:"page-item",class:{ disabled: !_vm.hasPrev }},[_c('button',{staticClass:"prev-button",attrs:{"tabindex":"-1"},on:{"click":_vm.handlePrevClick}},[_vm._v("上一页")])]),(_vm.firstPage != null)?_c('li',{staticClass:"page-item",class:{ active: _vm.page === _vm.firstPage}},[_c('button',{class:{ active: _vm.page === _vm.firstPage},on:{"click":function($event){return _vm.handlePageItemClick(_vm.firstPage)}}},[_vm._v(_vm._s(_vm.firstPage + 1))])]):_vm._e(),_c('li',{directives:[{name:"show",rawName:"v-show",value:(_vm.hasMorePrev),expression:"hasMorePrev"}],staticClass:"page-item"},[_c('span',[_vm._v("...")])]),_vm._l((_vm.middlePages),function(middlePage){return _c('li',{key:middlePage,staticClass:"page-item",class:{ active: middlePage === _vm.page }},[_c('button',{class:{ active: middlePage === _vm.page },on:{"click":function($event){return _vm.handlePageItemClick(middlePage)}}},[_vm._v(" "+_vm._s(middlePage + 1)+" ")])])}),_c('li',{directives:[{name:"show",rawName:"v-show",value:(_vm.hasMoreNext),expression:"hasMoreNext"}],staticClass:"page-item"},[_c('span',[_vm._v("...")])]),(_vm.lastPage)?_c('li',{staticClass:"page-item",class:{ active: _vm.page === _vm.lastPage}},[_c('button',{class:{ active: _vm.page === _vm.lastPage},on:{"click":function($event){return _vm.handlePageItemClick(_vm.lastPage)}}},[_vm._v(" "+_vm._s(_vm.lastPage + 1)+" ")])]):_vm._e(),_c('li',{staticClass:"page-item",class:{ disabled: !_vm.hasNext }},[_c('button',{staticClass:"next-button",on:{"click":_vm.handleNextClick}},[_vm._v("下一页")])])],2)}
+var Paginationvue_type_template_id_22a6f9f8_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/Pagination.vue?vue&type=template&id=22a6f9f8&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Pagination.vue?vue&type=script&lang=js&
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ var Paginationvue_type_script_lang_js_ = ({
+  name: "Pagination",
+  model: {
+    prop: "page",
+    event: "change"
+  },
+  props: {
+    page: {
+      type: Number,
+      required: false,
+      default: 0
+    },
+    size: {
+      type: Number,
+      required: false,
+      default: 10
+    },
+    total: {
+      type: Number,
+      required: false,
+      default: 0
+    }
+  },
+
+  data() {
+    return {
+      middleSize: 3
+    };
+  },
+
+  computed: {
+    pages() {
+      return Math.ceil(this.total / this.size);
+    },
+
+    hasNext() {
+      return this.page < this.pages - 1;
+    },
+
+    hasPrev() {
+      return this.page > 0;
+    },
+
+    firstPage() {
+      if (this.pages === 0) {
+        return null;
+      }
+
+      return 0;
+    },
+
+    hasMorePrev() {
+      if (this.firstPage === null || this.pages <= this.middleSize + 2) {
+        return false;
+      }
+
+      return this.page >= 2 + this.middleSize / 2;
+    },
+
+    hasMoreNext() {
+      if (this.lastPage === null || this.pages <= this.middleSize + 2) {
+        return false;
+      }
+
+      return this.page < this.lastPage - 1 - this.middleSize / 2;
+    },
+
+    middlePages() {
+      if (this.pages <= 2) {
+        return [];
+      }
+
+      if (this.pages <= 2 + this.middleSize) {
+        return this.range(1, this.lastPage);
+      }
+
+      var halfMiddleSize = Math.floor(this.middleSize / 2);
+      var left = this.page - halfMiddleSize;
+      var right = this.page + halfMiddleSize;
+
+      if (this.page <= this.firstPage + halfMiddleSize + 1) {
+        left = this.firstPage + 1;
+        right = left + this.middleSize - 1;
+      } else if (this.page >= this.lastPage - halfMiddleSize - 1) {
+        right = this.lastPage - 1;
+        left = right - this.middleSize + 1;
+      }
+
+      return this.range(left, right + 1);
+    },
+
+    lastPage() {
+      if (this.pages === 0 || this.pages === 1) {
+        return 0;
+      }
+
+      return this.pages - 1;
+    }
+
+  },
+  methods: {
+    handleNextClick() {
+      if (this.hasNext) {
+        this.$emit("change", this.page + 1);
+      }
+    },
+
+    handlePrevClick() {
+      if (this.hasPrev) {
+        this.$emit("change", this.page - 1);
+      }
+    },
+
+    handlePageItemClick(page) {
+      this.$emit("change", page);
+    },
+
+    range(left, right) {
+      if (left >= right) {
+        return [];
+      }
+
+      var result = [];
+
+      for (var i = left; i < right; i++) {
+        result.push(i);
+      }
+
+      return result;
+    }
+
+  }
+});
+// CONCATENATED MODULE: ./src/components/Pagination.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_Paginationvue_type_script_lang_js_ = (Paginationvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/Pagination.vue
+
+
+
+function Pagination_injectStyles (context) {
+  
+  
+}
+
+/* normalize component */
+
+var Pagination_component = Object(componentNormalizer["a" /* default */])(
+  components_Paginationvue_type_script_lang_js_,
+  Paginationvue_type_template_id_22a6f9f8_render,
+  Paginationvue_type_template_id_22a6f9f8_staticRenderFns,
+  false,
+  Pagination_injectStyles,
+  null,
+  null
+  ,true
+)
+
+/* harmony default export */ var Pagination = (Pagination_component.exports);
+// CONCATENATED MODULE: ./src/components/index.js
+
+// Register components
+ // pro components
+
+
+
+
+
+var _components = {
+  CommentEditor: CommentEditor,
+  CommentNode: components_CommentNode["default"],
+  CommentLoading: CommentLoading,
+  Pagination: Pagination
+};
+var components = {};
+Object.keys(_components).forEach(key => {
+  components[key] = external_Vue_default.a.component(key, _components[key]);
+});
+/* harmony default export */ var src_components = (components);
 
 /***/ }),
 
@@ -4586,9 +6312,9 @@ if (typeof window !== 'undefined') {
     __webpack_require__("f6fd")
   }
 
-  var setPublicPath_i
-  if ((setPublicPath_i = window.document.currentScript) && (setPublicPath_i = setPublicPath_i.src.match(/(.+\/)[^/]+\.js(\?.*)?$/))) {
-    __webpack_require__.p = setPublicPath_i[1] // eslint-disable-line
+  var i
+  if ((i = window.document.currentScript) && (i = i.src.match(/(.+\/)[^/]+\.js(\?.*)?$/))) {
+    __webpack_require__.p = i[1] // eslint-disable-line
   }
 }
 
@@ -4874,107 +6600,15 @@ var api = __webpack_require__("24fb");
 // EXTERNAL MODULE: ./node_modules/vue-style-loader/lib/addStylesShadow.js + 1 modules
 var addStylesShadow = __webpack_require__("35d6");
 
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-/* globals __VUE_SSR_CONTEXT__ */
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__("2877");
 
-// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-function normalizeComponent (
-  scriptExports,
-  render,
-  staticRenderFns,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier, /* server only */
-  shadowMode /* vue-cli only */
-) {
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (render) {
-    options.render = render
-    options.staticRenderFns = staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = 'data-v-' + scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
-      : injectStyles
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      var originalRender = options.render
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return originalRender(h, context)
-      }
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    }
-  }
-
-  return {
-    exports: scriptExports,
-    options: options
-  }
-}
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Comment.vue?vue&type=template&id=11a833bf&shadow
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Comment.vue?vue&type=template&id=b167c6be&shadow
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"halo-comment",attrs:{"id":"halo-comment"}},[_c('comment-editor',{attrs:{"targetId":_vm.id,"target":_vm.target,"options":_vm.options,"configs":_vm.mergedConfigs}}),(!_vm.mergedConfigs.autoLoad && !_vm.loaded)?_c('div',{staticClass:"comment-load-button"},[_c('a',{staticClass:"button-load",attrs:{"href":"javascript:void(0)","rel":"nofollow noopener"},on:{"click":_vm.loadComments}},[_vm._v("加载评论")])]):_vm._e(),_c('comment-loading',{directives:[{name:"show",rawName:"v-show",value:(_vm.commentLoading),expression:"commentLoading"}],attrs:{"configs":_vm.configs}}),(_vm.comments.length>=1)?_c('ol',{staticClass:"comment-nodes"},[_vm._l((_vm.comments),function(comment,index){return [_c('CommentNode',{key:index,attrs:{"targetId":_vm.id,"target":_vm.target,"comment":comment,"options":_vm.options,"configs":_vm.mergedConfigs}})]})],2):_vm._e(),(_vm.loaded && !_vm.commentLoading && _vm.comments.length<=0)?_c('div',{staticClass:"comment-empty"},[_vm._v("暂无评论")]):_vm._e(),(_vm.pagination.pages>1)?_c('div',{staticClass:"comment-page"},[_c('pagination',{attrs:{"page":_vm.pagination.page,"size":_vm.pagination.size,"total":_vm.pagination.total},on:{"change":_vm.handlePaginationChange}})],1):_vm._e()],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/Comment.vue?vue&type=template&id=11a833bf&shadow
+// CONCATENATED MODULE: ./src/components/Comment.vue?vue&type=template&id=b167c6be&shadow
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.index-of.js
 var es_array_index_of = __webpack_require__("c975");
@@ -4994,1908 +6628,23 @@ var es_promise = __webpack_require__("e6cf");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.promise.finally.js
 var es_promise_finally = __webpack_require__("a79d");
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.for-each.js
-var web_dom_collections_for_each = __webpack_require__("159b");
+// EXTERNAL MODULE: ./src/components/index.js + 48 modules
+var components = __webpack_require__("2af9");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/CommentEditor.vue?vue&type=template&id=114e092a&
-var CommentEditorvue_type_template_id_114e092a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('section',{staticClass:"comment-editor",attrs:{"role":"form"}},[_c('div',{staticClass:"inner"},[_c('div',{staticClass:"commentator"},[_c('img',{staticClass:"avatar",attrs:{"src":_vm.avatar}})]),_c('form',{staticClass:"comment-form"},[_c('div',{staticClass:"author-info"},[_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.author),expression:"comment.author"}],attrs:{"type":"text","id":"author","tabindex":"1","required":"required","aria-required":"true","placeholder":"* 昵称"},domProps:{"value":(_vm.comment.author)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "author", $event.target.value)}}}),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.email),expression:"comment.email"}],attrs:{"type":"text","id":"email","tabindex":"2","required":"required","aria-required":"true","placeholder":"* 电子邮件"},domProps:{"value":(_vm.comment.email)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "email", $event.target.value)}}}),_c('input',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.authorUrl),expression:"comment.authorUrl"}],attrs:{"type":"text","id":"authorUrl","tabindex":"3","placeholder":"个人站点"},domProps:{"value":(_vm.comment.authorUrl)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "authorUrl", $event.target.value)}}})]),(!_vm.previewMode)?_c('div',{staticClass:"comment-textarea"},[_c('textarea',{directives:[{name:"model",rawName:"v-model",value:(_vm.comment.content),expression:"comment.content"}],ref:"commentTextarea",attrs:{"required":"required","aria-required":"true","tabindex":"4","placeholder":_vm.options.comment_content_placeholder || '撰写评论...'},domProps:{"value":(_vm.comment.content)},on:{"input":function($event){if($event.target.composing){ return; }_vm.$set(_vm.comment, "content", $event.target.value)}}})]):_c('div',{staticClass:"comment-preview markdown-body",domProps:{"innerHTML":_vm._s(_vm.renderedContent)}}),_c('div',{staticClass:"comment-emoji-wrap"},[_c('VEmojiPicker',{directives:[{name:"show",rawName:"v-show",value:(_vm.emojiDialogVisible),expression:"emojiDialogVisible"}],attrs:{"pack":_vm.emojiPack,"labelSearch":"搜索表情"},on:{"select":_vm.handleSelectEmoji}})],1),_c('ul',{staticClass:"comment-buttons"},[(_vm.comment.content)?_c('li',{staticClass:"middle",staticStyle:{"margin-right":"5px"}},[_c('a',{staticClass:"button-preview-edit",attrs:{"href":"javascript:void(0)","rel":"nofollow noopener"},on:{"click":_vm.handlePreviewContent}},[_vm._v(_vm._s(_vm.previewMode?'编辑':'预览'))])]):_vm._e(),_c('li',[_c('button',{attrs:{"type":"button"},on:{"click":_vm.handleToogleDialogEmoji}},[_vm._v("表情")])]),_c('li',{staticClass:"middle"},[_c('a',{staticClass:"button-submit",attrs:{"href":"javascript:void(0)","tabindex":"5","rel":"nofollow noopener"},on:{"click":_vm.handleSubmitClick}},[_vm._v("提交")])])]),_c('div',{staticClass:"comment-alert"},[(_vm.infoAlertVisiable)?_vm._l((_vm.infoes),function(info,index){return _c('div',{key:index,staticClass:"alert info"},[_c('span',{staticClass:"closebtn",on:{"click":_vm.clearAlertClose}},[_vm._v("×")]),_c('strong',[_vm._v(_vm._s(info))])])}):_vm._e(),(_vm.successAlertVisiable)?_vm._l((_vm.successes),function(success,index){return _c('div',{key:index,staticClass:"alert success"},[_c('span',{staticClass:"closebtn",on:{"click":_vm.clearAlertClose}},[_vm._v("×")]),_c('strong',[_vm._v(_vm._s(success))])])}):_vm._e(),(_vm.warningAlertVisiable)?_vm._l((_vm.warnings),function(warning,index){return _c('div',{key:index,staticClass:"alert warning"},[_c('span',{staticClass:"closebtn",on:{"click":_vm.clearAlertClose}},[_vm._v("×")]),_c('strong',[_vm._v(_vm._s(warning))])])}):_vm._e()],2)])])])}
-var CommentEditorvue_type_template_id_114e092a_staticRenderFns = []
+// EXTERNAL MODULE: ./src/api/comment.js
+var comment = __webpack_require__("063c");
 
+// EXTERNAL MODULE: ./src/utils/service.js
+var service = __webpack_require__("9efd");
 
-// CONCATENATED MODULE: ./src/components/CommentEditor.vue?vue&type=template&id=114e092a&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.split.js
-var es_string_split = __webpack_require__("1276");
-
-// EXTERNAL MODULE: ./node_modules/marked/src/marked.js
-var marked = __webpack_require__("e0c1");
-var marked_default = /*#__PURE__*/__webpack_require__.n(marked);
-
-// EXTERNAL MODULE: ./node_modules/md5/md5.js
-var md5 = __webpack_require__("6821");
-var md5_default = /*#__PURE__*/__webpack_require__.n(md5);
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/VEmojiPicker.vue?vue&type=template&id=d23cd26c&
-var VEmojiPickervue_type_template_id_d23cd26c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"EmojiPicker"}},[(_vm.showCategory)?_c('Categories',{on:{"select":function($event){return _vm.onChangeCategory($event)}}}):_vm._e(),(_vm.showSearch)?_c('InputSearch',{attrs:{"placeholder":_vm.labelSearch},model:{value:(_vm.filterEmoji),callback:function ($$v) {_vm.filterEmoji=$$v},expression:"filterEmoji"}}):_vm._e(),_c('EmojiList',{attrs:{"data":_vm.emojis,"category":_vm.category,"filter":_vm.filterEmoji,"emojisByRow":_vm.emojisByRow,"continuousList":_vm.continuousList},on:{"select":function($event){return _vm.onSelectEmoji($event)}}})],1)}
-var VEmojiPickervue_type_template_id_d23cd26c_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/EmojiPicker/VEmojiPicker.vue?vue&type=template&id=d23cd26c&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.iterator.js
-var es_array_iterator = __webpack_require__("e260");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
-var es_function_name = __webpack_require__("b0c0");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.set.js
-var es_set = __webpack_require__("6062");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.iterator.js
-var web_dom_collections_iterator = __webpack_require__("ddb0");
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/Categories.vue?vue&type=template&id=77978050&
-var Categoriesvue_type_template_id_77978050_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"Categories"}},_vm._l((_vm.categories),function(categorie,index){return _c('div',{key:index,class:['category', { active: index === _vm.active }],on:{"click":function($event){return _vm.onSelect(index)}}},[_c('VSvg',{attrs:{"name":categorie.icon}})],1)}),0)}
-var Categoriesvue_type_template_id_77978050_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/EmojiPicker/Categories.vue?vue&type=template&id=77978050&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/VSvg.vue?vue&type=template&id=2d7c38fb&
-var VSvgvue_type_template_id_2d7c38fb_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{style:(_vm.styleSVG),attrs:{"id":"VSvg"},domProps:{"innerHTML":_vm._s(_vm.icon)}})}
-var VSvgvue_type_template_id_2d7c38fb_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/EmojiPicker/VSvg.vue?vue&type=template&id=2d7c38fb&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.js
-var es_symbol = __webpack_require__("a4d3");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
-var es_array_filter = __webpack_require__("4de4");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.get-own-property-descriptors.js
-var es_object_get_own_property_descriptors = __webpack_require__("dbb4");
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-// CONCATENATED MODULE: ./src/components/EmojiPicker/_icons.js
-/* based on https://github.com/joaoeudes7/V-Emoji-Picker */
-var categories = {
-  activity: "\n  <svg style=\"max-height:18px\" width=\"24\" height=\"24\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 303.6 303.6\" fill=\"gray\">\n  <path d=\"M291.503 11.6c-10.4-10.4-37.2-11.6-48.4-11.6-50.4 0-122.4 18.4-173.6 69.6-77.2 76.8-78.4 201.6-58.4 222 10.8 10.4 35.6 12 49.2 12 49.6 0 121.2-18.4 173.2-70 76.4-76.4 80.4-199.6 58-222zm-231.2 277.2c-24.4 0-36-4.8-38.8-7.6-5.2-5.2-8.4-24.4-6.8-49.6l57.2 56.8c-4 .4-8 .4-11.6.4zm162.8-66c-38.8 38.8-90.4 57.2-132.4 63.6l-74-73.6c6-42 24-94 63.2-133.2 38-38 88-56.4 130.8-62.8l75.6 75.6c-6 40.8-24.4 91.6-63.2 130.4zm65.2-148.8l-58.8-59.2c4.8-.4 9.2-.4 13.6-.4 24.4 0 35.6 4.8 38 7.2 5.6 5.6 9.2 25.6 7.2 52.4z\"/>\n  <path d=\"M215.103 139.6l-20.8-20.8 13.2-13.2c2.8-2.8 2.8-7.6 0-10.4s-7.6-2.8-10.4 0l-13.2 13.6-20.8-20.8c-2.8-2.8-7.6-2.8-10.4 0-2.8 2.8-2.8 7.6 0 10.4l20.8 20.8-22 22-20.8-20.8c-2.8-2.8-7.6-2.8-10.4 0s-2.8 7.6 0 10.4l20.8 20.8-22 22-20.8-20.8c-2.8-2.8-7.6-2.8-10.4 0s-2.8 7.6 0 10.4l20.8 20.8-13.2 13.2c-2.8 2.8-2.8 7.6 0 10.4 1.6 1.6 3.2 2 5.2 2s3.6-.8 5.2-2l13.2-13.2 20.8 20.8c1.6 1.6 3.2 2 5.2 2s3.6-.8 5.2-2c2.8-2.8 2.8-7.6 0-10.4l-20.8-21.2 22-22 20.8 20.8c1.6 1.6 3.2 2 5.2 2s3.6-.8 5.2-2c2.8-2.8 2.8-7.6 0-10.4l-20.8-20.8 22-22 20.8 20.8c1.6 1.6 3.2 2 5.2 2s3.6-.8 5.2-2c2.8-2.8 2.8-7.6 0-10.4zM169.103 47.6c-1.2-4-5.2-6-9.2-4.8-3.2 1.2-80.8 25.6-110.4 98-1.6 4 0 8.4 4 9.6.8.4 2 .4 2.8.4 2.8 0 5.6-1.6 6.8-4.4 27.2-66 100.4-89.6 101.2-89.6 4-1.2 6-5.2 4.8-9.2z\"/>\n  </svg>\n  ",
-  flags: "\n  <svg style=\"max-height:18px\" width=\"24\" height=\"24\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" fill=\"gray\">\n  <path d=\"M472.928 34.72c-4.384-2.944-9.984-3.52-14.912-1.568-1.088.448-106.528 42.176-195.168.384C186.752-2.4 102.944 14.4 64 25.76V16c0-8.832-7.168-16-16-16S32 7.168 32 16v480c0 8.832 7.168 16 16 16s16-7.168 16-16V315.296c28.352-9.248 112.384-31.232 185.184 3.168 34.592 16.352 70.784 21.792 103.648 21.792 63.2 0 114.016-20.128 117.184-21.408 6.016-2.464 9.984-8.32 9.984-14.848V48c0-5.312-2.656-10.272-7.072-13.28zM448 292.672c-28.512 9.248-112.512 31.136-185.184-3.168C186.752 253.6 102.944 270.4 64 281.76V59.328c28.352-9.248 112.384-31.232 185.184 3.168 76 35.872 159.872 19.104 198.816 7.712v222.464z\"/>\n  </svg>\n  ",
-  foods: "\n  <svg style=\"max-height:18px\" width=\"24\" height=\"24\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 511.999 511.999\" fill=\"gray\">\n  <path d=\"M413.949 155.583a10.153 10.153 0 0 0-3.24-2.16c-.61-.25-1.24-.44-1.87-.57-3.25-.66-6.701.41-9.03 2.73a10.093 10.093 0 0 0-2.93 7.07 10.098 10.098 0 0 0 1.69 5.56c.36.54.779 1.05 1.24 1.52 1.86 1.86 4.44 2.93 7.07 2.93.65 0 1.31-.07 1.96-.2.63-.13 1.26-.32 1.87-.57a10.146 10.146 0 0 0 3.24-2.16c.47-.47.88-.98 1.25-1.52a10.098 10.098 0 0 0 1.49-3.6 10.038 10.038 0 0 0-2.74-9.03zM115.289 385.873c-.12-.64-.32-1.27-.57-1.87-.25-.6-.55-1.18-.91-1.73-.37-.54-.79-1.06-1.25-1.52a9.57 9.57 0 0 0-1.52-1.24c-.54-.36-1.12-.67-1.72-.92-.61-.25-1.24-.44-1.88-.57a9.847 9.847 0 0 0-3.9 0c-.64.13-1.27.32-1.87.57-.61.25-1.19.56-1.73.92-.55.36-1.06.78-1.52 1.24-.46.46-.88.98-1.24 1.52-.36.55-.67 1.13-.92 1.73-.25.6-.45 1.23-.57 1.87-.13.651-.2 1.3-.2 1.96 0 .65.07 1.3.2 1.95.12.64.32 1.27.57 1.87.25.6.56 1.18.92 1.73.36.54.78 1.06 1.24 1.52.46.46.97.88 1.52 1.24.54.36 1.12.67 1.73.92.6.25 1.23.44 1.87.57s1.3.2 1.95.2c.65 0 1.31-.07 1.95-.2.64-.13 1.27-.32 1.88-.57.6-.25 1.18-.56 1.72-.92.55-.36 1.059-.78 1.52-1.24.46-.46.88-.98 1.25-1.52.36-.55.66-1.13.91-1.73.25-.6.45-1.23.57-1.87.13-.65.2-1.3.2-1.95 0-.66-.07-1.31-.2-1.96z\"/>\n  <path d=\"M511.999 222.726c0-14.215-9.228-26.315-22.007-30.624-1.628-74.155-62.456-133.978-136.994-133.978H159.002c-74.538 0-135.366 59.823-136.994 133.978C9.228 196.411 0 208.51 0 222.726a32.076 32.076 0 0 0 3.847 15.203 44.931 44.931 0 0 0-.795 8.427v.708c0 14.06 6.519 26.625 16.693 34.833-10.178 8.275-16.693 20.891-16.693 35.001 0 15.114 7.475 28.515 18.921 36.702v26.668c0 40.588 33.021 73.608 73.608 73.608h320.836c40.588 0 73.608-33.021 73.608-73.608V353.6c11.446-8.186 18.921-21.587 18.921-36.702 0-13.852-6.354-26.385-16.361-34.702 9.983-8.212 16.361-20.656 16.361-34.562v-.708c0-2.985-.294-5.944-.877-8.845a32.082 32.082 0 0 0 3.93-15.355zM44.033 173.229h322.441c5.523 0 10-4.477 10-10s-4.477-10-10-10H49.737c16.896-43.883 59.503-75.106 109.265-75.106h193.996c62.942 0 114.438 49.953 116.934 112.295H42.068c.234-5.848.9-11.588 1.965-17.189zM23.052 316.896c0-13.837 11.257-25.094 25.094-25.094h117.298l55.346 50.188H48.146c-13.837 0-25.094-11.256-25.094-25.094zm.976-62.945c.422.111.847.215 1.275.309 7.421 1.634 14.68 8.002 22.365 14.744a576.29 576.29 0 0 0 3.206 2.799h-3.081c-11.253-.001-20.774-7.551-23.765-17.852zm308.727 89.752l57.233-51.899 49.904.57-81.871 74.24-25.266-22.911zm7.861 34.126H295.12l17.467-15.839h10.563l17.466 15.839zm19.599-86.027l-82.499 74.811-82.499-74.811h164.998zm-59.529-20c.849-.842 1.677-1.675 2.49-2.493 9.531-9.587 17.059-17.16 32.89-17.16 15.832 0 23.359 7.573 32.89 17.162.812.817 1.64 1.65 2.489 2.491h-70.759zm-160.13 0a485.82 485.82 0 0 0 2.489-2.492c9.531-9.588 17.059-17.161 32.89-17.161 15.83 0 23.358 7.573 32.888 17.16.813.818 1.641 1.651 2.49 2.493h-70.757zm275.862 162.073H95.582c-29.56 0-53.608-24.049-53.608-53.608v-18.275h200.872l17.467 15.839H145.897c-5.523 0-10 4.477-10 10s4.477 10 10 10H467.07c-7.288 20.958-27.242 36.044-50.652 36.044zm53.608-56.046h-94.6l17.467-15.839h77.133v15.839zm-6.174-35.837h-48.906l54.624-49.533c11.135 2.604 19.376 12.665 19.376 24.439 0 13.836-11.257 25.094-25.094 25.094zm-2.728-70.19l.262-.227.101-.087.342-.298c.848-.738 1.682-1.469 2.501-2.187 4.105-3.601 8.089-7.095 12.04-9.819 3.446-2.375 6.868-4.164 10.326-4.925l.359-.081.04-.01.317-.076.065-.016a22.897 22.897 0 0 0 .42-.107l.196-.052a.374.374 0 0 0 .048-.012c-2.433 9.276-10.129 16.443-19.691 18.102a9.984 9.984 0 0 0-2.016-.205h-5.31zm21.271-37.073a40.746 40.746 0 0 0-4.536 1.281c-10.109 3.489-18.327 10.602-26.283 17.58l-.434.381c-9.178 8.052-17.923 15.723-29.033 17.834h-13.146c-11.249-1.93-17.833-8.552-25.823-16.591-10.213-10.275-22.923-23.062-47.074-23.062-24.15 0-36.86 12.786-47.074 23.06-7.992 8.04-14.576 14.663-25.829 16.593h-14.327c-11.253-1.93-17.837-8.553-25.829-16.593-10.213-10.274-22.923-23.06-47.072-23.06-24.151 0-36.861 12.787-47.074 23.062-7.991 8.039-14.574 14.661-25.824 16.591h-7.065c-14.134 0-24.325-8.939-35.113-18.404-9.248-8.112-18.81-16.501-31.252-19.241a12.237 12.237 0 0 1-7.025-4.453 10.027 10.027 0 0 0-1.153-1.252 12.234 12.234 0 0 1-1.428-5.727c-.001-6.788 5.52-12.309 12.307-12.309h447.384c6.787 0 12.308 5.521 12.308 12.308 0 5.729-4.039 10.776-9.605 12.002z\"/>\n  </svg>\n  ",
-  frequenty: "\n  <svg style=\"max-height:18px\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 219.15 219.15\" width=\"24\" height=\"24\" fill=\"gray\">\n  <path d=\"M109.575 0C49.156 0 .001 49.155.001 109.574c0 60.42 49.154 109.576 109.573 109.576 60.42 0 109.574-49.156 109.574-109.576C219.149 49.155 169.995 0 109.575 0zm0 204.15c-52.148 0-94.573-42.427-94.573-94.576C15.001 57.426 57.427 15 109.575 15c52.148 0 94.574 42.426 94.574 94.574 0 52.15-42.426 94.576-94.574 94.576z\"/>\n  <path d=\"M166.112 108.111h-52.051V51.249a7.5 7.5 0 0 0-15 0v64.362a7.5 7.5 0 0 0 7.5 7.5h59.551a7.5 7.5 0 0 0 0-15z\"/>\n  </svg>\n  ",
-  nature: "\n  <svg style=\"max-height:18px\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" width=\"24\" height=\"24\" fill=\"gray\">\n  <path d=\"M490.815 3.784C480.082 5.7 227.049 51.632 148.477 130.203c-39.153 39.153-64.259 87.884-70.694 137.218-5.881 45.081 4.347 85.929 28.878 116.708L.001 490.789 21.212 512l106.657-106.657c33.094 26.378 75.092 34.302 116.711 28.874 49.334-6.435 98.065-31.541 137.218-70.695C460.368 284.951 506.3 31.918 508.216 21.185L511.999 0l-21.184 3.784zm-43.303 39.493L309.407 181.383l-7.544-98.076c46.386-15.873 97.819-29.415 145.649-40.03zm-174.919 50.64l8.877 115.402-78.119 78.119-11.816-153.606c19.947-13.468 47.183-26.875 81.058-39.915zm-109.281 64.119l12.103 157.338-47.36 47.36c-39.246-52.892-24.821-139.885 35.257-204.698zm57.113 247.849c-26.548-.001-51.267-7.176-71.161-21.938l47.363-47.363 157.32 12.102c-40.432 37.475-89.488 57.201-133.522 57.199zm157.743-85.421l-153.605-11.816 78.118-78.118 115.403 8.877c-13.04 33.876-26.448 61.111-39.916 81.057zm50.526-110.326l-98.076-7.544L468.725 64.485c-10.589 47.717-24.147 99.232-40.031 145.653z\"/>\n  </svg>\n  ",
-  objects: "\n  <svg style=\"max-height:18px\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 792 792\" fill=\"gray\">\n  <path d=\"M425.512 741.214H365.58c-14.183 0-25.164 11.439-25.164 25.622S351.397 792 365.58 792h59.932c15.101 0 26.54-10.981 26.54-25.164s-11.44-25.622-26.54-25.622zM472.638 671.209H319.821c-14.183 0-26.081 10.98-26.081 25.163s11.898 25.164 26.081 25.164h152.817c14.183 0 25.164-10.981 25.164-25.164s-10.982-25.163-25.164-25.163zM639.188 138.634c-25.164-42.548-59.181-76.135-102.49-101.113C493.526 12.621 446.566 0 395.771 0 320.28 0 247.19 31.684 197.205 81.445c-49.761 49.527-81.904 121.24-81.904 196.282 0 33.861 7.779 68.629 22.879 103.866 15.1 35.228 38.565 78.614 70.005 130.396 7.448 12.269 15.764 31.205 25.623 56.271 12.104 30.757 22.87 51.713 31.566 63.602 5.027 6.872 11.899 10.063 20.596 10.063h228.766c9.605 0 16.359-4.188 21.504-11.898 6.754-10.132 13.987-27.516 22.42-51.693 8.951-25.691 16.838-43.982 23.329-55.364 30.571-53.587 54.446-99.747 70.464-137.717 16.018-37.979 24.246-74.124 24.246-107.526 0-49.878-12.347-96.545-37.511-139.093zm-35.696 232.437c-15.012 34.348-36.398 76.974-65.427 126.736-9.41 16.125-18.458 37.003-26.989 63.592-3.367 10.474-7.32 20.596-11.439 30.2H300.153c-6.862-11.439-12.26-25.837-18.761-42.089-12.718-31.801-23.338-52.621-30.2-64.061-28.824-48.043-49.868-87.39-64.051-118.957s-20.537-60.859-21.044-88.766c-2.235-121.718 106.13-228.991 229.674-226.941 41.631.693 80.527 10.063 115.765 30.659 35.227 20.586 63.134 48.043 83.729 82.812 20.586 34.768 31.108 72.748 31.108 113.47-.001 27.449-7.692 58.596-22.881 93.345z\"/>\n  </svg>\n  ",
-  peoples: "\n  <svg style=\"max-height:18px\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 106.059 106.059\" fill=\"gray\">\n  <path d=\"M90.544 90.542c20.687-20.684 20.685-54.341.002-75.024-20.688-20.689-54.347-20.689-75.031-.006-20.688 20.687-20.686 54.346.002 75.034 20.682 20.684 54.341 20.684 75.027-.004zM21.302 21.3c17.494-17.493 45.959-17.495 63.457.002 17.494 17.494 17.492 45.963-.002 63.455-17.494 17.494-45.96 17.496-63.455.003-17.498-17.498-17.496-45.966 0-63.46zM27 69.865s-2.958-11.438 6.705-8.874c0 0 17.144 9.295 38.651 0 9.662-2.563 6.705 8.874 6.705 8.874C73.539 86.824 53.03 85.444 53.03 85.444S32.521 86.824 27 69.865zm6.24-31.194a6.202 6.202 0 1 1 12.399.001 6.202 6.202 0 0 1-12.399-.001zm28.117 0a6.202 6.202 0 1 1 12.403.001 6.202 6.202 0 0 1-12.403-.001z\"/>\n  </svg>\n  ",
-  places: "\n  <svg style=\"max-height:18px\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 611.999 611.998\" fill=\"gray\">\n  <path d=\"M596.583 15.454C586.226 5.224 573.354.523 558.423.523c-15.597 0-31.901 4.906-49.452 14.599-17.296 9.551-32.851 20.574-46.458 32.524h-.665c-2.655 2.322-10.953 10.287-25.219 24.553-14.272 14.272-26.217 26.223-35.845 36.51L112.401 26.406c-6.896-1.968-12.928.014-17.593 4.645L46.687 78.839c-4.326 4.297-5.805 9.268-4.977 15.597.829 6.287 3.979 10.627 9.629 13.607L280.32 228.839 161.514 347.978l-95.91 3.32c-4.645.164-8.637 1.643-12.276 5.311L5.872 404.397c-4.312 4.34-6.641 9.289-5.643 16.262 1.657 6.967 5.31 11.611 11.618 13.602l117.142 48.787 48.787 117.148c2.421 5.812 6.634 9.621 13.607 11.279h3.313c4.977 0 9.296-1.658 12.942-5.311l47.456-47.457c3.653-3.645 5.494-7.965 5.643-12.275l3.32-95.91 118.807-118.807 121.128 228.99c2.988 5.643 7.32 8.793 13.607 9.621 6.329.836 11.271-1.316 15.597-5.643l47.456-47.457c4.978-4.977 6.945-10.697 4.978-17.586l-82.296-288.389 59.732-59.739c10.287-10.287 21.699-24.149 33.183-45.134 5.777-10.542 10.032-20.886 12.942-31.194 5.722-20.218 3.258-44.07-12.608-59.73zm-59.4 110.176l-67.039 67.372c-5.628 5.657-6.811 11.122-4.977 17.586l81.637 288.388-22.563 22.238L403.438 292.89c-2.98-5.643-7.299-8.963-12.941-9.621-6.301-1.331-11.611.325-16.263 4.977l-141.37 141.37c-2.987 2.986-4.644 6.973-5.643 11.949l-3.32 95.904-22.896 23.236-41.48-98.566c-1.331-4.645-4.553-8.184-9.629-10.287L51.338 411.03l23.229-22.895 95.578-3.654c5.643-.99 9.622-2.654 12.276-5.309l141.37-141.371c4.651-4.645 6.308-9.954 4.984-16.262-.666-5.643-3.986-9.954-9.629-12.942L90.829 87.47l22.231-22.238 288.389 81.637c6.464 1.833 11.951.666 17.587-4.977l28.545-28.539 26.217-25.884 11.278-11.285 1.331-.666c27.873-23.895 55.088-38.16 72.016-38.16 5.969 0 9.954 1.324 11.611 3.979 18.917 18.585-21.099 72.484-32.851 84.293z\"/>\n  </svg>\n  ",
-  symbols: "\n  <svg style=\"max-height:18px\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 511.626 511.626\" fill=\"gray\">\n  <path d=\"M475.366 71.949c-24.175-23.606-57.575-35.404-100.215-35.404-11.8 0-23.843 2.046-36.117 6.136-12.279 4.093-23.702 9.615-34.256 16.562-10.568 6.945-19.65 13.467-27.269 19.556a263.828 263.828 0 0 0-21.696 19.414 264.184 264.184 0 0 0-21.698-19.414c-7.616-6.089-16.702-12.607-27.268-19.556-10.564-6.95-21.985-12.468-34.261-16.562-12.275-4.089-24.316-6.136-36.116-6.136-42.637 0-76.039 11.801-100.211 35.404C12.087 95.55 0 128.286 0 170.16c0 12.753 2.24 25.891 6.711 39.398 4.471 13.514 9.566 25.031 15.275 34.546 5.708 9.514 12.181 18.792 19.414 27.834 7.233 9.041 12.519 15.272 15.846 18.698 3.33 3.426 5.948 5.903 7.851 7.427L243.25 469.938c3.427 3.426 7.614 5.144 12.562 5.144s9.138-1.718 12.563-5.144l177.87-171.31c43.588-43.58 65.38-86.406 65.38-128.472.001-41.877-12.085-74.61-36.259-98.207zm-53.961 199.846L255.813 431.391 89.938 271.507C54.344 235.922 36.55 202.133 36.55 170.156c0-15.415 2.046-29.026 6.136-40.824 4.093-11.8 9.327-21.177 15.703-28.124 6.377-6.949 14.132-12.607 23.268-16.988 9.141-4.377 18.086-7.328 26.84-8.85 8.754-1.52 18.079-2.281 27.978-2.281 9.896 0 20.557 2.424 31.977 7.279 11.418 4.853 21.934 10.944 31.545 18.271 9.613 7.332 17.845 14.183 24.7 20.557 6.851 6.38 12.559 12.229 17.128 17.559 3.424 4.189 8.091 6.283 13.989 6.283 5.9 0 10.562-2.094 13.99-6.283 4.568-5.33 10.28-11.182 17.131-17.559 6.852-6.374 15.085-13.222 24.694-20.557 9.613-7.327 20.129-13.418 31.553-18.271 11.416-4.854 22.08-7.279 31.977-7.279s19.219.761 27.977 2.281c8.757 1.521 17.702 4.473 26.84 8.85 9.137 4.38 16.892 10.042 23.267 16.988 6.376 6.947 11.612 16.324 15.705 28.124 4.086 11.798 6.132 25.409 6.132 40.824-.002 31.977-17.89 65.86-53.675 101.639z\"/>\n  </svg>\n  "
-};
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/VSvg.vue?vue&type=script&lang=js&
-
-
-
-
-
-
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ var VSvgvue_type_script_lang_js_ = ({
-  name: 'VSvg',
-  props: {
-    name: {
-      type: String,
-      required: true
-    },
-    styles: {
-      type: Object
-    }
-  },
-  computed: {
-    icon() {
-      return categories[this.name];
-    },
-
-    styleSVG() {
-      return _objectSpread({}, this.styles);
-    }
-
-  }
-});
-// CONCATENATED MODULE: ./src/components/EmojiPicker/VSvg.vue?vue&type=script&lang=js&
- /* harmony default export */ var EmojiPicker_VSvgvue_type_script_lang_js_ = (VSvgvue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/EmojiPicker/VSvg.vue
-
-
-
-function injectStyles (context) {
-  
-  
-}
-
-/* normalize component */
-
-var component = normalizeComponent(
-  EmojiPicker_VSvgvue_type_script_lang_js_,
-  VSvgvue_type_template_id_2d7c38fb_render,
-  VSvgvue_type_template_id_2d7c38fb_staticRenderFns,
-  false,
-  injectStyles,
-  null,
-  null
-  ,true
-)
-
-/* harmony default export */ var VSvg = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/Categories.vue?vue&type=script&lang=js&
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ var Categoriesvue_type_script_lang_js_ = ({
-  name: 'Categories',
-  components: {
-    VSvg: VSvg
-  },
-  data: () => ({
-    categories: [{
-      name: 'Frequenty',
-      icon: 'frequenty'
-    }, {
-      name: 'Peoples',
-      icon: 'peoples'
-    }, {
-      name: 'Nature',
-      icon: 'nature'
-    }, {
-      name: 'Foods',
-      icon: 'foods'
-    }, {
-      name: 'Activity',
-      icon: 'activity'
-    }, {
-      name: 'Objects',
-      icon: 'objects'
-    }, {
-      name: 'Places',
-      icon: 'places'
-    }, {
-      name: 'Symbols',
-      icon: 'symbols'
-    }, {
-      name: 'Flags',
-      icon: 'flags'
-    }],
-    active: 1
-  }),
-  methods: {
-    onSelect(index) {
-      this.active = index;
-      var _category = this.categories[index];
-      this.$emit('select', _category);
-    }
-
-  }
-});
-// CONCATENATED MODULE: ./src/components/EmojiPicker/Categories.vue?vue&type=script&lang=js&
- /* harmony default export */ var EmojiPicker_Categoriesvue_type_script_lang_js_ = (Categoriesvue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/EmojiPicker/Categories.vue
-
-
-
-function Categories_injectStyles (context) {
-  
-  
-}
-
-/* normalize component */
-
-var Categories_component = normalizeComponent(
-  EmojiPicker_Categoriesvue_type_script_lang_js_,
-  Categoriesvue_type_template_id_77978050_render,
-  Categoriesvue_type_template_id_77978050_staticRenderFns,
-  false,
-  Categories_injectStyles,
-  null,
-  null
-  ,true
-)
-
-/* harmony default export */ var Categories = (Categories_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/EmojiList.vue?vue&type=template&id=52365ea0&
-var EmojiListvue_type_template_id_52365ea0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"Emojis"}},[_c('div',{ref:"container-emoji",staticClass:"container-emoji"},[(_vm.continuousList)?_vm._l((_vm.dataFilteredByCategory),function(category,category_name){return _c('div',{key:category_name,staticClass:"category-line"},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(category.length),expression:"category.length"}],ref:category_name,refInFor:true,staticClass:"category-title"},[_vm._v(" "+_vm._s(category_name)+" ")]),(category.length)?_c('div',{staticClass:"grid-emojis",style:(_vm.gridDynamic)},_vm._l((category),function(emoji,index_e){return _c('Emoji',{key:(category_name + "-" + index_e),attrs:{"data":emoji['emoji']},nativeOn:{"click":function($event){return _vm.onSelect(emoji)}}})}),1):_vm._e()])}):_c('div',{staticClass:"grid-emojis",style:(_vm.gridDynamic)},_vm._l((_vm.dataFiltered),function(emoji,index){return _c('Emoji',{key:index,attrs:{"data":emoji['emoji']},nativeOn:{"click":function($event){return _vm.onSelect(emoji)}}})}),1)],2)])}
-var EmojiListvue_type_template_id_52365ea0_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/EmojiPicker/EmojiList.vue?vue&type=template&id=52365ea0&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
-var es_array_concat = __webpack_require__("99af");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.includes.js
-var es_array_includes = __webpack_require__("caad");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.includes.js
-var es_string_includes = __webpack_require__("2532");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.trim.js
-var es_string_trim = __webpack_require__("498a");
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/Emoji.vue?vue&type=template&id=a7aa5fde&
-var Emojivue_type_template_id_a7aa5fde_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('span',{staticClass:"emoji",domProps:{"innerHTML":_vm._s(_vm.data)}})}
-var Emojivue_type_template_id_a7aa5fde_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/EmojiPicker/Emoji.vue?vue&type=template&id=a7aa5fde&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/Emoji.vue?vue&type=script&lang=js&
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ var Emojivue_type_script_lang_js_ = ({
-  name: 'Emoji',
-  props: {
-    data: {
-      type: String
-    }
-  }
-});
-// CONCATENATED MODULE: ./src/components/EmojiPicker/Emoji.vue?vue&type=script&lang=js&
- /* harmony default export */ var EmojiPicker_Emojivue_type_script_lang_js_ = (Emojivue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/EmojiPicker/Emoji.vue
-
-
-
-function Emoji_injectStyles (context) {
-  
-  
-}
-
-/* normalize component */
-
-var Emoji_component = normalizeComponent(
-  EmojiPicker_Emojivue_type_script_lang_js_,
-  Emojivue_type_template_id_a7aa5fde_render,
-  Emojivue_type_template_id_a7aa5fde_staticRenderFns,
-  false,
-  Emoji_injectStyles,
-  null,
-  null
-  ,true
-)
-
-/* harmony default export */ var Emoji = (Emoji_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/EmojiList.vue?vue&type=script&lang=js&
-
-
-
-
-
-
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ var EmojiListvue_type_script_lang_js_ = ({
-  name: 'EmojiList',
-  components: {
-    Emoji: Emoji
-  },
-  props: {
-    data: {
-      type: Object,
-      required: true
-    },
-    emojisByRow: {
-      type: Number,
-      required: true
-    },
-    filter: {
-      type: String
-    },
-    continuousList: {
-      type: Boolean
-    },
-    category: {
-      type: String
-    }
-  },
-  methods: {
-    onSelect(emoji) {
-      this.$emit('select', emoji);
-    }
-
-  },
-  computed: {
-    gridDynamic() {
-      var percent = 100 / this.emojisByRow;
-      return {
-        gridTemplateColumns: "repeat(".concat(this.emojisByRow, ", ").concat(percent, "%)")
-      };
-    },
-
-    dataFiltered() {
-      var data = this.data[this.category];
-      var searchValue = this.filter.trim();
-
-      if (searchValue) {
-        data = data.filter(item => item.aliases.some(alias => alias.includes(searchValue.toLowerCase())));
-      }
-
-      return data;
-    },
-
-    dataFilteredByCategory() {
-      var _data = Object.assign({}, this.data);
-
-      var searchValue = this.filter.trim();
-
-      if (searchValue) {
-        this.categories.forEach(category => {
-          _data[category] = this.data[category].filter(item => item.aliases.some(alias => alias.includes(searchValue.toLowerCase())));
-        });
-      }
-
-      return _data;
-    },
-
-    categories() {
-      return Object.keys(this.data);
-    }
-
-  },
-  watch: {
-    data() {
-      this.$refs['container-emoji'].scrollTop = 0;
-    },
-
-    category(new_category) {
-      if (this.continuousList) {
-        var firstItemCategory = this.$refs[new_category][0];
-        var scrollTop = firstItemCategory.offsetTop - 80;
-        this.$refs['container-emoji'].scrollTop = scrollTop;
-      }
-    }
-
-  }
-});
-// CONCATENATED MODULE: ./src/components/EmojiPicker/EmojiList.vue?vue&type=script&lang=js&
- /* harmony default export */ var EmojiPicker_EmojiListvue_type_script_lang_js_ = (EmojiListvue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/EmojiPicker/EmojiList.vue
-
-
-
-function EmojiList_injectStyles (context) {
-  
-  
-}
-
-/* normalize component */
-
-var EmojiList_component = normalizeComponent(
-  EmojiPicker_EmojiListvue_type_script_lang_js_,
-  EmojiListvue_type_template_id_52365ea0_render,
-  EmojiListvue_type_template_id_52365ea0_staticRenderFns,
-  false,
-  EmojiList_injectStyles,
-  null,
-  null
-  ,true
-)
-
-/* harmony default export */ var EmojiList = (EmojiList_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/InputSearch.vue?vue&type=template&id=1cd4bfb9&
-var InputSearchvue_type_template_id_1cd4bfb9_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"InputSearch"}},[_c('div',{staticClass:"container-search"},[_c('input',{attrs:{"type":"text","placeholder":_vm.placeholder},domProps:{"value":_vm.value},on:{"keyup":function($event){return _vm.onKeyUp($event)}}})])])}
-var InputSearchvue_type_template_id_1cd4bfb9_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/EmojiPicker/InputSearch.vue?vue&type=template&id=1cd4bfb9&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/InputSearch.vue?vue&type=script&lang=js&
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ var InputSearchvue_type_script_lang_js_ = ({
-  name: 'InputSearch',
-  props: {
-    value: {
-      type: String,
-      required: true
-    },
-    placeholder: {
-      type: String,
-      required: true
-    }
-  },
-  methods: {
-    // Emit value of v-model
-    onKeyUp(event) {
-      this.$emit('input', event.target.value);
-    }
-
-  }
-});
-// CONCATENATED MODULE: ./src/components/EmojiPicker/InputSearch.vue?vue&type=script&lang=js&
- /* harmony default export */ var EmojiPicker_InputSearchvue_type_script_lang_js_ = (InputSearchvue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/EmojiPicker/InputSearch.vue
-
-
-
-function InputSearch_injectStyles (context) {
-  
-  
-}
-
-/* normalize component */
-
-var InputSearch_component = normalizeComponent(
-  EmojiPicker_InputSearchvue_type_script_lang_js_,
-  InputSearchvue_type_template_id_1cd4bfb9_render,
-  InputSearchvue_type_template_id_1cd4bfb9_staticRenderFns,
-  false,
-  InputSearch_injectStyles,
-  null,
-  null
-  ,true
-)
-
-/* harmony default export */ var InputSearch = (InputSearch_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/EmojiPicker/VEmojiPicker.vue?vue&type=script&lang=js&
-
-
-
-
-
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ var VEmojiPickervue_type_script_lang_js_ = ({
-  name: 'VEmojiPicker',
-  props: {
-    pack: {
-      type: Array,
-      required: true
-    },
-    labelSearch: {
-      type: String,
-      default: 'Pesquisar...'
-    },
-    showCategory: {
-      type: Boolean,
-      default: true
-    },
-    emojisByRow: {
-      type: Number,
-      default: 5
-    },
-    showSearch: {
-      type: Boolean,
-      default: () => true
-    },
-    continuousList: {
-      type: Boolean,
-      default: () => false
-    }
-  },
-  components: {
-    Categories: Categories,
-    EmojiList: EmojiList,
-    InputSearch: InputSearch
-  },
-  data: () => ({
-    mapEmojis: {},
-    category: 'Peoples',
-    filterEmoji: ''
-  }),
-
-  created() {
-    this.mapperData(this.pack);
-  },
-
-  methods: {
-    onChangeCategory(category) {
-      this.category = category.name;
-      this.$emit('changeCategory', this.category);
-    },
-
-    onSelectEmoji(emoji) {
-      this.updateFrequenty(emoji);
-      this.$emit('select', emoji);
-    },
-
-    updateFrequenty(emoji) {
-      this.mapEmojis['Frequenty'] = [...new Set([...this.mapEmojis['Frequenty'], emoji])];
-    },
-
-    mapperData(dataEmojis) {
-      this.$set(this.mapEmojis, 'Frequenty', []);
-      dataEmojis.forEach(emoji => {
-        var _category = emoji['category'];
-
-        if (!this.mapEmojis[_category]) {
-          this.$set(this.mapEmojis, _category, [emoji]);
-        } else {
-          this.mapEmojis[_category].push(emoji);
-        }
-      });
-    }
-
-  },
-
-  beforeDestroy() {
-    delete this.mapEmojis;
-  },
-
-  computed: {
-    emojis() {
-      return this.mapEmojis;
-    }
-
-  }
-});
-// CONCATENATED MODULE: ./src/components/EmojiPicker/VEmojiPicker.vue?vue&type=script&lang=js&
- /* harmony default export */ var EmojiPicker_VEmojiPickervue_type_script_lang_js_ = (VEmojiPickervue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/EmojiPicker/VEmojiPicker.vue
-
-
-
-function VEmojiPicker_injectStyles (context) {
-  
-  
-}
-
-/* normalize component */
-
-var VEmojiPicker_component = normalizeComponent(
-  EmojiPicker_VEmojiPickervue_type_script_lang_js_,
-  VEmojiPickervue_type_template_id_d23cd26c_render,
-  VEmojiPickervue_type_template_id_d23cd26c_staticRenderFns,
-  false,
-  VEmojiPicker_injectStyles,
-  null,
-  null
-  ,true
-)
-
-/* harmony default export */ var VEmojiPicker = (VEmojiPicker_component.exports);
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.description.js
-var es_symbol_description = __webpack_require__("e01a");
-
-// CONCATENATED MODULE: ./src/components/EmojiPicker/data/emojis.js
-
-
-
-/* eslint-disable prettier/prettier */
-
-/* based on https://github.com/joaoeudes7/V-Emoji-Picker */
-class emojis_Emoji {
-  constructor(emoji, description, category, aliases, tags) {
-    this.emoji = emoji;
-    this.description = description;
-    this.category = category;
-    this.aliases = aliases;
-    this.tags = tags;
-  }
-
-}
-
-/* harmony default export */ var emojis = ([new emojis_Emoji("😀", "grinning face", "Peoples", ["grinning"], ["smile", "happy"]), new emojis_Emoji("😃", "smiling face with open mouth", "Peoples", ["smiley"], ["happy", "joy", "haha"]), new emojis_Emoji("😄", "smiling face with open mouth & smiling eyes", "Peoples", ["smile"], ["happy", "joy", "laugh", "pleased"]), new emojis_Emoji("😁", "grinning face with smiling eyes", "Peoples", ["grin"], []), new emojis_Emoji("😆", "smiling face with open mouth & closed eyes", "Peoples", ["laughing", "satisfied"], ["happy", "haha"]), new emojis_Emoji("😅", "smiling face with open mouth & cold sweat", "Peoples", ["sweat_smile"], ["hot"]), new emojis_Emoji("😂", "face with tears of joy", "Peoples", ["joy"], ["tears"]), new emojis_Emoji("🤣", "rolling on the floor laughing", "Peoples", ["rofl"], ["lol", "laughing"]), new emojis_Emoji("😌", "smiling face", "Peoples", ["relaxed"], ["blush", "pleased"]), new emojis_Emoji("😊", "smiling face with smiling eyes", "Peoples", ["blush"], ["proud"]), new emojis_Emoji("😇", "smiling face with halo", "Peoples", ["innocent"], ["angel"]), new emojis_Emoji("🙂", "slightly smiling face", "Peoples", ["slightly_smiling_face"], []), new emojis_Emoji("🙃", "upside-down face", "Peoples", ["upside_down_face"], []), new emojis_Emoji("😉", "winking face", "Peoples", ["wink"], ["flirt"]), new emojis_Emoji("😌", "relieved face", "Peoples", ["relieved"], ["whew"]), new emojis_Emoji("😍", "smiling face with heart-eyes", "Peoples", ["heart_eyes"], ["love", "crush"]), new emojis_Emoji("😘", "face blowing a kiss", "Peoples", ["kissing_heart"], ["flirt"]), new emojis_Emoji("😗", "kissing face", "Peoples", ["kissing"], []), new emojis_Emoji("😙", "kissing face with smiling eyes", "Peoples", ["kissing_smiling_eyes"], []), new emojis_Emoji("😚", "kissing face with closed eyes", "Peoples", ["kissing_closed_eyes"], []), new emojis_Emoji("😋", "face savouring delicious food", "Peoples", ["yum"], ["tongue", "lick"]), new emojis_Emoji("😜", "face with stuck-out tongue & winking eye", "Peoples", ["stuck_out_tongue_winking_eye"], ["prank", "silly"]), new emojis_Emoji("😝", "face with stuck-out tongue & closed eyes", "Peoples", ["stuck_out_tongue_closed_eyes"], ["prank"]), new emojis_Emoji("😛", "face with stuck-out tongue", "Peoples", ["stuck_out_tongue"], []), new emojis_Emoji("🤑", "money-mouth face", "Peoples", ["money_mouth_face"], ["rich"]), new emojis_Emoji("🤗", "hugging face", "Peoples", ["hugs"], []), new emojis_Emoji("🤓", "nerd face", "Peoples", ["nerd_face"], ["geek", "glasses"]), new emojis_Emoji("😎", "smiling face with sunglasses", "Peoples", ["sunglasses"], ["cool"]), new emojis_Emoji("🤡", "clown face", "Peoples", ["clown_face"], []), new emojis_Emoji("🤠", "cowboy hat face", "Peoples", ["cowboy_hat_face"], []), new emojis_Emoji("😏", "smirking face", "Peoples", ["smirk"], ["smug"]), new emojis_Emoji("😒", "unamused face", "Peoples", ["unamused"], ["meh"]), new emojis_Emoji("😞", "disappointed face", "Peoples", ["disappointed"], ["sad"]), new emojis_Emoji("😔", "pensive face", "Peoples", ["pensive"], []), new emojis_Emoji("😟", "worried face", "Peoples", ["worried"], ["nervous"]), new emojis_Emoji("😕", "confused face", "Peoples", ["confused"], []), new emojis_Emoji("🙁", "slightly frowning face", "Peoples", ["slightly_frowning_face"], []), new emojis_Emoji("☹️", "frowning face", "Peoples", ["frowning_face"], []), new emojis_Emoji("😣", "persevering face", "Peoples", ["persevere"], ["struggling"]), new emojis_Emoji("😖", "confounded face", "Peoples", ["confounded"], []), new emojis_Emoji("😫", "tired face", "Peoples", ["tired_face"], ["upset", "whine"]), new emojis_Emoji("😩", "weary face", "Peoples", ["weary"], ["tired"]), new emojis_Emoji("😤", "face with steam from nose", "Peoples", ["triumph"], ["smug"]), new emojis_Emoji("😠", "angry face", "Peoples", ["angry"], ["mad", "annoyed"]), new emojis_Emoji("😡", "pouting face", "Peoples", ["rage", "pout"], ["angry"]), new emojis_Emoji("😶", "face without mouth", "Peoples", ["no_mouth"], ["mute", "silence"]), new emojis_Emoji("😐", "neutral face", "Peoples", ["neutral_face"], ["meh"]), new emojis_Emoji("😑", "expressionless face", "Peoples", ["expressionless"], []), new emojis_Emoji("😯", "hushed face", "Peoples", ["hushed"], ["silence", "speechless"]), new emojis_Emoji("😦", "frowning face with open mouth", "Peoples", ["frowning"], []), new emojis_Emoji("😧", "anguished face", "Peoples", ["anguished"], ["stunned"]), new emojis_Emoji("😮", "face with open mouth", "Peoples", ["open_mouth"], ["surprise", "impressed", "wow"]), new emojis_Emoji("😲", "astonished face", "Peoples", ["astonished"], ["amazed", "gasp"]), new emojis_Emoji("😵", "dizzy face", "Peoples", ["dizzy_face"], []), new emojis_Emoji("😳", "flushed face", "Peoples", ["flushed"], []), new emojis_Emoji("😱", "face screaming in fear", "Peoples", ["scream"], ["horror", "shocked"]), new emojis_Emoji("😨", "fearful face", "Peoples", ["fearful"], ["scared", "shocked", "oops"]), new emojis_Emoji("😰", "face with open mouth & cold sweat", "Peoples", ["cold_sweat"], ["nervous"]), new emojis_Emoji("😢", "crying face", "Peoples", ["cry"], ["sad", "tear"]), new emojis_Emoji("😥", "disappointed but relieved face", "Peoples", ["disappointed_relieved"], ["phew", "sweat", "nervous"]), new emojis_Emoji("🤤", "drooling face", "Peoples", ["drooling_face"], []), new emojis_Emoji("😭", "loudly crying face", "Peoples", ["sob"], ["sad", "cry", "bawling"]), new emojis_Emoji("😓", "face with cold sweat", "Peoples", ["sweat"], []), new emojis_Emoji("😪", "sleepy face", "Peoples", ["sleepy"], ["tired"]), new emojis_Emoji("😴", "sleeping face", "Peoples", ["sleeping"], ["zzz"]), new emojis_Emoji("🙄", "face with rolling eyes", "Peoples", ["roll_eyes"], []), new emojis_Emoji("🤔", "thinking face", "Peoples", ["thinking"], []), new emojis_Emoji("🤥", "lying face", "Peoples", ["lying_face"], ["liar"]), new emojis_Emoji("😬", "grimacing face", "Peoples", ["grimacing"], []), new emojis_Emoji("🤐", "zipper-mouth face", "Peoples", ["zipper_mouth_face"], ["silence", "hush"]), new emojis_Emoji("🤢", "nauseated face", "Peoples", ["nauseated_face"], ["sick", "barf", "disgusted"]), new emojis_Emoji("🤧", "sneezing face", "Peoples", ["sneezing_face"], ["achoo", "sick"]), new emojis_Emoji("😷", "face with medical mask", "Peoples", ["mask"], ["sick", "ill"]), new emojis_Emoji("🤒", "face with thermometer", "Peoples", ["face_with_thermometer"], ["sick"]), new emojis_Emoji("🤕", "face with head-bandage", "Peoples", ["face_with_head_bandage"], ["hurt"]), new emojis_Emoji("😈", "smiling face with horns", "Peoples", ["smiling_imp"], ["devil", "evil", "horns"]), new emojis_Emoji("👿", "angry face with horns", "Peoples", ["imp"], ["angry", "devil", "evil", "horns"]), new emojis_Emoji("👹", "ogre", "Peoples", ["japanese_ogre"], ["monster"]), new emojis_Emoji("👺", "goblin", "Peoples", ["japanese_goblin"], []), new emojis_Emoji("💩", "pile of poo", "Peoples", ["hankey", "poop", "shit"], ["crap"]), new emojis_Emoji("👻", "ghost", "Peoples", ["ghost"], ["halloween"]), new emojis_Emoji("💀", "skull", "Peoples", ["skull"], ["dead", "danger", "poison"]), new emojis_Emoji("☠️", "skull and crossbones", "Peoples", ["skull_and_crossbones"], ["danger", "pirate"]), new emojis_Emoji("👽", "alien", "Peoples", ["alien"], ["ufo"]), new emojis_Emoji("👾", "alien monster", "Peoples", ["space_invader"], ["game", "retro"]), new emojis_Emoji("🤖", "robot face", "Peoples", ["robot"], []), new emojis_Emoji("🎃", "jack-o-lantern", "Peoples", ["jack_o_lantern"], ["halloween"]), new emojis_Emoji("😺", "smiling cat face with open mouth", "Peoples", ["smiley_cat"], []), new emojis_Emoji("😸", "grinning cat face with smiling eyes", "Peoples", ["smile_cat"], []), new emojis_Emoji("😹", "cat face with tears of joy", "Peoples", ["joy_cat"], []), new emojis_Emoji("😻", "smiling cat face with heart-eyes", "Peoples", ["heart_eyes_cat"], []), new emojis_Emoji("😼", "cat face with wry smile", "Peoples", ["smirk_cat"], []), new emojis_Emoji("😽", "kissing cat face with closed eyes", "Peoples", ["kissing_cat"], []), new emojis_Emoji("🙀", "weary cat face", "Peoples", ["scream_cat"], ["horror"]), new emojis_Emoji("😿", "crying cat face", "Peoples", ["crying_cat_face"], ["sad", "tear"]), new emojis_Emoji("😾", "pouting cat face", "Peoples", ["pouting_cat"], []), new emojis_Emoji("👐", "open hands", "Peoples", ["open_hands"], []), new emojis_Emoji("🙌", "raising hands", "Peoples", ["raised_hands"], ["hooray"]), new emojis_Emoji("👏", "clapping hands", "Peoples", ["clap"], ["praise", "applause"]), new emojis_Emoji("🙏", "folded hands", "Peoples", ["pray"], ["please", "hope", "wish"]), new emojis_Emoji("🤝", "handshake", "Peoples", ["handshake"], ["deal"]), new emojis_Emoji("👍", "thumbs up", "Peoples", ["+1", "thumbsup"], ["approve", "ok"]), new emojis_Emoji("👎", "thumbs down", "Peoples", ["-1", "thumbsdown"], ["disapprove", "bury"]), new emojis_Emoji("👊", "oncoming fist", "Peoples", ["fist_oncoming", "facepunch", "punch"], ["attack"]), new emojis_Emoji("✊", "raised fist", "Peoples", ["fist_raised", "fist"], ["power"]), new emojis_Emoji("🤛", "left-facing fist", "Peoples", ["fist_left"], []), new emojis_Emoji("🤜", "right-facing fist", "Peoples", ["fist_right"], []), new emojis_Emoji("🤞", "crossed fingers", "Peoples", ["crossed_fingers"], ["luck", "hopeful"]), new emojis_Emoji("✌️", "victory hand", "Peoples", ["v"], ["victory", "peace"]), new emojis_Emoji("🤘", "sign of the horns", "Peoples", ["metal"], []), new emojis_Emoji("👌", "OK hand", "Peoples", ["ok_hand"], []), new emojis_Emoji("👈", "backhand index pointing left", "Peoples", ["point_left"], []), new emojis_Emoji("👉", "backhand index pointing right", "Peoples", ["point_right"], []), new emojis_Emoji("👆", "backhand index pointing up", "Peoples", ["point_up_2"], []), new emojis_Emoji("👇", "backhand index pointing down", "Peoples", ["point_down"], []), new emojis_Emoji("☝️", "index pointing up", "Peoples", ["point_up"], []), new emojis_Emoji("✋", "raised hand", "Peoples", ["hand", "raised_hand"], ["highfive", "stop"]), new emojis_Emoji("🤚", "raised back of hand", "Peoples", ["raised_back_of_hand"], []), new emojis_Emoji("🖐", "raised hand with fingers splayed", "Peoples", ["raised_hand_with_fingers_splayed"], []), new emojis_Emoji("🖖", "vulcan salute", "Peoples", ["vulcan_salute"], ["prosper", "spock"]), new emojis_Emoji("👋", "waving hand", "Peoples", ["wave"], ["goodbye"]), new emojis_Emoji("🤙", "call me hand", "Peoples", ["call_me_hand"], []), new emojis_Emoji("💪", "flexed biceps", "Peoples", ["muscle"], ["flex", "bicep", "strong", "workout"]), new emojis_Emoji("🖕", "middle finger", "Peoples", ["middle_finger", "fu"], []), new emojis_Emoji("✍️", "writing hand", "Peoples", ["writing_hand"], []), new emojis_Emoji("🤳", "selfie", "Peoples", ["selfie"], []), new emojis_Emoji("💅", "nail polish", "Peoples", ["nail_care"], ["beauty", "manicure"]), new emojis_Emoji("💍", "ring", "Peoples", ["ring"], ["wedding", "marriage", "engaged"]), new emojis_Emoji("💄", "lipstick", "Peoples", ["lipstick"], ["makeup"]), new emojis_Emoji("💋", "kiss mark", "Peoples", ["kiss"], ["lipstick"]), new emojis_Emoji("👄", "mouth", "Peoples", ["lips"], ["kiss"]), new emojis_Emoji("👅", "tongue", "Peoples", ["tongue"], ["taste"]), new emojis_Emoji("👂", "ear", "Peoples", ["ear"], ["hear", "sound", "listen"]), new emojis_Emoji("👃", "nose", "Peoples", ["nose"], ["smell"]), new emojis_Emoji("👣", "footprints", "Peoples", ["footprints"], ["feet", "tracks"]), new emojis_Emoji("👁", "eye", "Peoples", ["eye"], []), new emojis_Emoji("👀", "eyes", "Peoples", ["eyes"], ["look", "see", "watch"]), new emojis_Emoji("🗣", "speaking head", "Peoples", ["speaking_head"], []), new emojis_Emoji("👤", "bust in silhouette", "Peoples", ["bust_in_silhouette"], ["user"]), new emojis_Emoji("👥", "busts in silhouette", "Peoples", ["busts_in_silhouette"], ["users", "group", "team"]), new emojis_Emoji("👶", "baby", "Peoples", ["baby"], ["child", "newborn"]), new emojis_Emoji("👦", "boy", "Peoples", ["boy"], ["child"]), new emojis_Emoji("👧", "girl", "Peoples", ["girl"], ["child"]), new emojis_Emoji("👨", "man", "Peoples", ["man"], ["mustache", "father", "dad"]), new emojis_Emoji("👩", "woman", "Peoples", ["woman"], ["girls"]), new emojis_Emoji("👱‍♀", "blond-haired woman", "Peoples", ["blonde_woman"], []), new emojis_Emoji("👱", "blond-haired person", "Peoples", ["blonde_man", "person_with_blond_hair"], ["boy"]), new emojis_Emoji("👴", "old man", "Peoples", ["older_man"], []), new emojis_Emoji("👵", "old woman", "Peoples", ["older_woman"], []), new emojis_Emoji("👲", "man with Chinese cap", "Peoples", ["man_with_gua_pi_mao"], []), new emojis_Emoji("👳‍♀", "woman wearing turban", "Peoples", ["woman_with_turban"], []), new emojis_Emoji("👳", "person wearing turban", "Peoples", ["man_with_turban"], []), new emojis_Emoji("👮‍♀", "woman police officer", "Peoples", ["policewoman"], []), new emojis_Emoji("👮", "police officer", "Peoples", ["policeman", "cop"], ["police", "law"]), new emojis_Emoji("👷‍♀", "woman construction worker", "Peoples", ["construction_worker_woman"], []), new emojis_Emoji("👷", "construction worker", "Peoples", ["construction_worker_man", "construction_worker"], ["helmet"]), new emojis_Emoji("💂‍♀", "woman guard", "Peoples", ["guardswoman"], []), new emojis_Emoji("💂", "guard", "Peoples", ["guardsman"], []), new emojis_Emoji("👩‍⚕", "woman health worker", "Peoples", ["woman_health_worker"], ["doctor", "nurse"]), new emojis_Emoji("👨‍⚕", "man health worker", "Peoples", ["man_health_worker"], ["doctor", "nurse"]), new emojis_Emoji("👩‍🌾", "woman farmer", "Peoples", ["woman_farmer"], []), new emojis_Emoji("👨‍🌾", "man farmer", "Peoples", ["man_farmer"], []), new emojis_Emoji("👩‍🍳", "woman cook", "Peoples", ["woman_cook"], ["chef"]), new emojis_Emoji("👨‍🍳", "man cook", "Peoples", ["man_cook"], ["chef"]), new emojis_Emoji("👩‍🎓", "woman student", "Peoples", ["woman_student"], ["graduation"]), new emojis_Emoji("👨‍🎓", "man student", "Peoples", ["man_student"], ["graduation"]), new emojis_Emoji("👩‍🎤", "woman singer", "Peoples", ["woman_singer"], ["rockstar"]), new emojis_Emoji("👨‍🎤", "man singer", "Peoples", ["man_singer"], ["rockstar"]), new emojis_Emoji("👩‍🏫", "woman teacher", "Peoples", ["woman_teacher"], ["school", "professor"]), new emojis_Emoji("👨‍🏫", "man teacher", "Peoples", ["man_teacher"], ["school", "professor"]), new emojis_Emoji("👩‍🏭", "woman factory worker", "Peoples", ["woman_factory_worker"], []), new emojis_Emoji("👨‍🏭", "man factory worker", "Peoples", ["man_factory_worker"], []), new emojis_Emoji("👩‍💻", "woman technologist", "Peoples", ["woman_technologist"], ["coder"]), new emojis_Emoji("👨‍💻", "man technologist", "Peoples", ["man_technologist"], ["coder"]), new emojis_Emoji("👩‍💼", "woman office worker", "Peoples", ["woman_office_worker"], ["business"]), new emojis_Emoji("👨‍💼", "man office worker", "Peoples", ["man_office_worker"], ["business"]), new emojis_Emoji("👩‍🔧", "woman mechanic", "Peoples", ["woman_mechanic"], []), new emojis_Emoji("👨‍🔧", "man mechanic", "Peoples", ["man_mechanic"], []), new emojis_Emoji("👩‍🔬", "woman scientist", "Peoples", ["woman_scientist"], ["research"]), new emojis_Emoji("👨‍🔬", "man scientist", "Peoples", ["man_scientist"], ["research"]), new emojis_Emoji("👩‍🎨", "woman artist", "Peoples", ["woman_artist"], ["painter"]), new emojis_Emoji("👨‍🎨", "man artist", "Peoples", ["man_artist"], ["painter"]), new emojis_Emoji("👩‍🚒", "woman firefighter", "Peoples", ["woman_firefighter"], []), new emojis_Emoji("👨‍🚒", "man firefighter", "Peoples", ["man_firefighter"], []), new emojis_Emoji("👩‍🚀", "woman astronaut", "Peoples", ["woman_astronaut"], ["space"]), new emojis_Emoji("👨‍🚀", "man astronaut", "Peoples", ["man_astronaut"], ["space"]), new emojis_Emoji("🤶", "Mrs. Claus", "Peoples", ["mrs_claus"], ["santa"]), new emojis_Emoji("🎅", "Santa Claus", "Peoples", ["santa"], ["christmas"]), new emojis_Emoji("👸", "princess", "Peoples", ["princess"], ["blonde", "crown", "royal"]), new emojis_Emoji("🤴", "prince", "Peoples", ["prince"], ["crown", "royal"]), new emojis_Emoji("👰", "bride with veil", "Peoples", ["bride_with_veil"], ["marriage", "wedding"]), new emojis_Emoji("🤵", "man in tuxedo", "Peoples", ["man_in_tuxedo"], ["groom", "marriage", "wedding"]), new emojis_Emoji("👼", "baby angel", "Peoples", ["angel"], []), new emojis_Emoji("🤰", "pregnant woman", "Peoples", ["pregnant_woman"], []), new emojis_Emoji("🙇‍♀", "woman bowing", "Peoples", ["bowing_woman"], ["respect", "thanks"]), new emojis_Emoji("🙇", "person bowing", "Peoples", ["bowing_man", "bow"], ["respect", "thanks"]), new emojis_Emoji("💁", "person tipping hand", "Peoples", ["tipping_hand_woman", "information_desk_person", "sassy_woman"], []), new emojis_Emoji("💁‍♂", "man tipping hand", "Peoples", ["tipping_hand_man", "sassy_man"], ["information"]), new emojis_Emoji("🙅", "person gesturing NO", "Peoples", ["no_good_woman", "no_good", "ng_woman"], ["stop", "halt"]), new emojis_Emoji("🙅‍♂", "man gesturing NO", "Peoples", ["no_good_man", "ng_man"], ["stop", "halt"]), new emojis_Emoji("🙆", "person gesturing OK", "Peoples", ["ok_woman"], []), new emojis_Emoji("🙆‍♂", "man gesturing OK", "Peoples", ["ok_man"], []), new emojis_Emoji("🙋", "person raising hand", "Peoples", ["raising_hand_woman", "raising_hand"], []), new emojis_Emoji("🙋‍♂", "man raising hand", "Peoples", ["raising_hand_man"], []), new emojis_Emoji("🤦‍♀", "woman facepalming", "Peoples", ["woman_facepalming"], []), new emojis_Emoji("🤦‍♂", "man facepalming", "Peoples", ["man_facepalming"], []), new emojis_Emoji("🤷‍♀", "woman shrugging", "Peoples", ["woman_shrugging"], []), new emojis_Emoji("🤷‍♂", "man shrugging", "Peoples", ["man_shrugging"], []), new emojis_Emoji("🙎", "person pouting", "Peoples", ["pouting_woman", "person_with_pouting_face"], []), new emojis_Emoji("🙎‍♂", "man pouting", "Peoples", ["pouting_man"], []), new emojis_Emoji("🙍", "person frowning", "Peoples", ["frowning_woman", "person_frowning"], ["sad"]), new emojis_Emoji("🙍‍♂", "man frowning", "Peoples", ["frowning_man"], []), new emojis_Emoji("💇", "person getting haircut", "Peoples", ["haircut_woman", "haircut"], ["beauty"]), new emojis_Emoji("💇‍♂", "man getting haircut", "Peoples", ["haircut_man"], []), new emojis_Emoji("💆", "person getting massage", "Peoples", ["massage_woman", "massage"], ["spa"]), new emojis_Emoji("💆‍♂", "man getting massage", "Peoples", ["massage_man"], ["spa"]), new emojis_Emoji("🕴", "man in business suit levitating", "Peoples", ["business_suit_levitating"], []), new emojis_Emoji("💃", "woman dancing", "Peoples", ["dancer"], ["dress"]), new emojis_Emoji("🕺", "man dancing", "Peoples", ["man_dancing"], ["dancer"]), new emojis_Emoji("👯", "people with bunny ears partying", "Peoples", ["dancing_women", "dancers"], ["bunny"]), new emojis_Emoji("👯‍♂", "men with bunny ears partying", "Peoples", ["dancing_men"], ["bunny"]), new emojis_Emoji("🚶‍♀", "woman walking", "Peoples", ["walking_woman"], []), new emojis_Emoji("🚶", "person walking", "Peoples", ["walking_man", "walking"], []), new emojis_Emoji("🏃‍♀", "woman running", "Peoples", ["running_woman"], ["exercise", "workout", "marathon"]), new emojis_Emoji("🏃", "person running", "Peoples", ["running_man", "runner", "running"], ["exercise", "workout", "marathon"]), new emojis_Emoji("👫", "man and woman holding hands", "Peoples", ["couple"], ["date"]), new emojis_Emoji("👭", "two women holding hands", "Peoples", ["two_women_holding_hands"], ["couple", "date"]), new emojis_Emoji("👬", "two men holding hands", "Peoples", ["two_men_holding_hands"], ["couple", "date"]), new emojis_Emoji("💑", "couple with heart", "Peoples", ["couple_with_heart_woman_man", "couple_with_heart"], []), new emojis_Emoji("👩‍❤️‍👩", "couple with heart: woman, woman", "Peoples", ["couple_with_heart_woman_woman"], []), new emojis_Emoji("👨‍❤️‍👨", "couple with heart: man, man", "Peoples", ["couple_with_heart_man_man"], []), new emojis_Emoji("💏", "kiss", "Peoples", ["couplekiss_man_woman"], []), new emojis_Emoji("👩‍❤️‍💋‍👩", "kiss: woman, woman", "Peoples", ["couplekiss_woman_woman"], []), new emojis_Emoji("👨‍❤️‍💋‍👨", "kiss: man, man", "Peoples", ["couplekiss_man_man"], []), new emojis_Emoji("👪", "family", "Peoples", ["family_man_woman_boy", "family"], ["home", "parents", "child"]), new emojis_Emoji("👨‍👩‍👧", "family: man, woman, girl", "Peoples", ["family_man_woman_girl"], []), new emojis_Emoji("👨‍👩‍👧‍👦", "family: man, woman, girl, boy", "Peoples", ["family_man_woman_girl_boy"], []), new emojis_Emoji("👨‍👩‍👦‍👦", "family: man, woman, boy, boy", "Peoples", ["family_man_woman_boy_boy"], []), new emojis_Emoji("👨‍👩‍👧‍👧", "family: man, woman, girl, girl", "Peoples", ["family_man_woman_girl_girl"], []), new emojis_Emoji("👩‍👩‍👦", "family: woman, woman, boy", "Peoples", ["family_woman_woman_boy"], []), new emojis_Emoji("👩‍👩‍👧", "family: woman, woman, girl", "Peoples", ["family_woman_woman_girl"], []), new emojis_Emoji("👩‍👩‍👧‍👦", "family: woman, woman, girl, boy", "Peoples", ["family_woman_woman_girl_boy"], []), new emojis_Emoji("👩‍👩‍👦‍👦", "family: woman, woman, boy, boy", "Peoples", ["family_woman_woman_boy_boy"], []), new emojis_Emoji("👩‍👩‍👧‍👧", "family: woman, woman, girl, girl", "Peoples", ["family_woman_woman_girl_girl"], []), new emojis_Emoji("👨‍👨‍👦", "family: man, man, boy", "Peoples", ["family_man_man_boy"], []), new emojis_Emoji("👨‍👨‍👧", "family: man, man, girl", "Peoples", ["family_man_man_girl"], []), new emojis_Emoji("👨‍👨‍👧‍👦", "family: man, man, girl, boy", "Peoples", ["family_man_man_girl_boy"], []), new emojis_Emoji("👨‍👨‍👦‍👦", "family: man, man, boy, boy", "Peoples", ["family_man_man_boy_boy"], []), new emojis_Emoji("👨‍👨‍👧‍👧", "family: man, man, girl, girl", "Peoples", ["family_man_man_girl_girl"], []), new emojis_Emoji("👩‍👦", "family: woman, boy", "Peoples", ["family_woman_boy"], []), new emojis_Emoji("👩‍👧", "family: woman, girl", "Peoples", ["family_woman_girl"], []), new emojis_Emoji("👩‍👧‍👦", "family: woman, girl, boy", "Peoples", ["family_woman_girl_boy"], []), new emojis_Emoji("👩‍👦‍👦", "family: woman, boy, boy", "Peoples", ["family_woman_boy_boy"], []), new emojis_Emoji("👩‍👧‍👧", "family: woman, girl, girl", "Peoples", ["family_woman_girl_girl"], []), new emojis_Emoji("👨‍👦", "family: man, boy", "Peoples", ["family_man_boy"], []), new emojis_Emoji("👨‍👧", "family: man, girl", "Peoples", ["family_man_girl"], []), new emojis_Emoji("👨‍👧‍👦", "family: man, girl, boy", "Peoples", ["family_man_girl_boy"], []), new emojis_Emoji("👨‍👦‍👦", "family: man, boy, boy", "Peoples", ["family_man_boy_boy"], []), new emojis_Emoji("👨‍👧‍👧", "family: man, girl, girl", "Peoples", ["family_man_girl_girl"], []), new emojis_Emoji("👚", "woman’s clothes", "Peoples", ["womans_clothes"], []), new emojis_Emoji("👕", "t-shirt", "Peoples", ["shirt", "tshirt"], []), new emojis_Emoji("👖", "jeans", "Peoples", ["jeans"], ["pants"]), new emojis_Emoji("👔", "necktie", "Peoples", ["necktie"], ["shirt", "formal"]), new emojis_Emoji("👗", "dress", "Peoples", ["dress"], []), new emojis_Emoji("👙", "bikini", "Peoples", ["bikini"], ["beach"]), new emojis_Emoji("👘", "kimono", "Peoples", ["kimono"], []), new emojis_Emoji("👠", "high-heeled shoe", "Peoples", ["high_heel"], ["shoe"]), new emojis_Emoji("👡", "woman’s sandal", "Peoples", ["sandal"], ["shoe"]), new emojis_Emoji("👢", "woman’s boot", "Peoples", ["boot"], []), new emojis_Emoji("👞", "man’s shoe", "Peoples", ["mans_shoe", "shoe"], []), new emojis_Emoji("👟", "running shoe", "Peoples", ["athletic_shoe"], ["sneaker", "sport", "running"]), new emojis_Emoji("👒", "woman’s hat", "Peoples", ["womans_hat"], []), new emojis_Emoji("🎩", "top hat", "Peoples", ["tophat"], ["hat", "classy"]), new emojis_Emoji("🎓", "graduation cap", "Peoples", ["mortar_board"], ["education", "college", "university", "graduation"]), new emojis_Emoji("👑", "crown", "Peoples", ["crown"], ["king", "queen", "royal"]), new emojis_Emoji("⛑", "rescue worker’s helmet", "Peoples", ["rescue_worker_helmet"], []), new emojis_Emoji("🎒", "school backpack", "Peoples", ["school_satchel"], []), new emojis_Emoji("👝", "clutch bag", "Peoples", ["pouch"], ["bag"]), new emojis_Emoji("👛", "purse", "Peoples", ["purse"], []), new emojis_Emoji("👜", "handbag", "Peoples", ["handbag"], ["bag"]), new emojis_Emoji("💼", "briefcase", "Peoples", ["briefcase"], ["business"]), new emojis_Emoji("👓", "glasses", "Peoples", ["eyeglasses"], ["glasses"]), new emojis_Emoji("🕶", "sunglasses", "Peoples", ["dark_sunglasses"], []), new emojis_Emoji("🌂", "closed umbrella", "Peoples", ["closed_umbrella"], ["weather", "rain"]), new emojis_Emoji("☂️", "umbrella", "Peoples", ["open_umbrella"], []), new emojis_Emoji("🐶", "dog face", "Nature", ["dog"], ["pet"]), new emojis_Emoji("🐱", "cat face", "Nature", ["cat"], ["pet"]), new emojis_Emoji("🐭", "mouse face", "Nature", ["mouse"], []), new emojis_Emoji("🐹", "hamster face", "Nature", ["hamster"], ["pet"]), new emojis_Emoji("🐰", "rabbit face", "Nature", ["rabbit"], ["bunny"]), new emojis_Emoji("🦊", "fox face", "Nature", ["fox_face"], []), new emojis_Emoji("🐻", "bear face", "Nature", ["bear"], []), new emojis_Emoji("🐼", "panda face", "Nature", ["panda_face"], []), new emojis_Emoji("🐨", "koala", "Nature", ["koala"], []), new emojis_Emoji("🐯", "tiger face", "Nature", ["tiger"], []), new emojis_Emoji("🦁", "lion face", "Nature", ["lion"], []), new emojis_Emoji("🐮", "cow face", "Nature", ["cow"], []), new emojis_Emoji("🐷", "pig face", "Nature", ["pig"], []), new emojis_Emoji("🐽", "pig nose", "Nature", ["pig_nose"], []), new emojis_Emoji("🐸", "frog face", "Nature", ["frog"], []), new emojis_Emoji("🐵", "monkey face", "Nature", ["monkey_face"], []), new emojis_Emoji("🙈", "see-no-evil monkey", "Nature", ["see_no_evil"], ["monkey", "blind", "ignore"]), new emojis_Emoji("🙉", "hear-no-evil monkey", "Nature", ["hear_no_evil"], ["monkey", "deaf"]), new emojis_Emoji("🙊", "speak-no-evil monkey", "Nature", ["speak_no_evil"], ["monkey", "mute", "hush"]), new emojis_Emoji("🐒", "monkey", "Nature", ["monkey"], []), new emojis_Emoji("🐔", "chicken", "Nature", ["chicken"], []), new emojis_Emoji("🐧", "penguin", "Nature", ["penguin"], []), new emojis_Emoji("🐦", "bird", "Nature", ["bird"], []), new emojis_Emoji("🐤", "baby chick", "Nature", ["baby_chick"], []), new emojis_Emoji("🐣", "hatching chick", "Nature", ["hatching_chick"], []), new emojis_Emoji("🐥", "front-facing baby chick", "Nature", ["hatched_chick"], []), new emojis_Emoji("🦆", "duck", "Nature", ["duck"], []), new emojis_Emoji("🦅", "eagle", "Nature", ["eagle"], []), new emojis_Emoji("🦉", "owl", "Nature", ["owl"], []), new emojis_Emoji("🦇", "bat", "Nature", ["bat"], []), new emojis_Emoji("🐺", "wolf face", "Nature", ["wolf"], []), new emojis_Emoji("🐗", "boar", "Nature", ["boar"], []), new emojis_Emoji("🐴", "horse face", "Nature", ["horse"], []), new emojis_Emoji("🦄", "unicorn face", "Nature", ["unicorn"], []), new emojis_Emoji("🐝", "honeybee", "Nature", ["bee", "honeybee"], []), new emojis_Emoji("🐛", "bug", "Nature", ["bug"], []), new emojis_Emoji("🦋", "butterfly", "Nature", ["butterfly"], []), new emojis_Emoji("🐌", "snail", "Nature", ["snail"], ["slow"]), new emojis_Emoji("🐚", "spiral shell", "Nature", ["shell"], ["sea", "beach"]), new emojis_Emoji("🐞", "lady beetle", "Nature", ["beetle"], ["bug"]), new emojis_Emoji("🐜", "ant", "Nature", ["ant"], []), new emojis_Emoji("🕷", "spider", "Nature", ["spider"], []), new emojis_Emoji("🕸", "spider web", "Nature", ["spider_web"], []), new emojis_Emoji("🐢", "turtle", "Nature", ["turtle"], ["slow"]), new emojis_Emoji("🐍", "snake", "Nature", ["snake"], []), new emojis_Emoji("🦎", "lizard", "Nature", ["lizard"], []), new emojis_Emoji("🦂", "scorpion", "Nature", ["scorpion"], []), new emojis_Emoji("🦀", "crab", "Nature", ["crab"], []), new emojis_Emoji("🦑", "squid", "Nature", ["squid"], []), new emojis_Emoji("🐙", "octopus", "Nature", ["octopus"], []), new emojis_Emoji("🦐", "shrimp", "Nature", ["shrimp"], []), new emojis_Emoji("🐠", "tropical fish", "Nature", ["tropical_fish"], []), new emojis_Emoji("🐟", "fish", "Nature", ["fish"], []), new emojis_Emoji("🐡", "blowfish", "Nature", ["blowfish"], []), new emojis_Emoji("🐬", "dolphin", "Nature", ["dolphin", "flipper"], []), new emojis_Emoji("🦈", "shark", "Nature", ["shark"], []), new emojis_Emoji("🐳", "spouting whale", "Nature", ["whale"], ["sea"]), new emojis_Emoji("🐋", "whale", "Nature", ["whale2"], []), new emojis_Emoji("🐊", "crocodile", "Nature", ["crocodile"], []), new emojis_Emoji("🐆", "leopard", "Nature", ["leopard"], []), new emojis_Emoji("🐅", "tiger", "Nature", ["tiger2"], []), new emojis_Emoji("🐃", "water buffalo", "Nature", ["water_buffalo"], []), new emojis_Emoji("🐂", "ox", "Nature", ["ox"], []), new emojis_Emoji("🐄", "cow", "Nature", ["cow2"], []), new emojis_Emoji("🦌", "deer", "Nature", ["deer"], []), new emojis_Emoji("🐪", "camel", "Nature", ["dromedary_camel"], ["desert"]), new emojis_Emoji("🐫", "two-hump camel", "Nature", ["camel"], []), new emojis_Emoji("🐘", "elephant", "Nature", ["elephant"], []), new emojis_Emoji("🦏", "rhinoceros", "Nature", ["rhinoceros"], []), new emojis_Emoji("🦍", "gorilla", "Nature", ["gorilla"], []), new emojis_Emoji("🐎", "horse", "Nature", ["racehorse"], ["speed"]), new emojis_Emoji("🐖", "pig", "Nature", ["pig2"], []), new emojis_Emoji("🐐", "goat", "Nature", ["goat"], []), new emojis_Emoji("🐏", "ram", "Nature", ["ram"], []), new emojis_Emoji("🐑", "sheep", "Nature", ["sheep"], []), new emojis_Emoji("🐕", "dog", "Nature", ["dog2"], []), new emojis_Emoji("🐩", "poodle", "Nature", ["poodle"], ["dog"]), new emojis_Emoji("🐈", "cat", "Nature", ["cat2"], []), new emojis_Emoji("🐓", "rooster", "Nature", ["rooster"], []), new emojis_Emoji("🦃", "turkey", "Nature", ["turkey"], ["thanksgiving"]), new emojis_Emoji("🕊", "dove", "Nature", ["dove"], ["peace"]), new emojis_Emoji("🐇", "rabbit", "Nature", ["rabbit2"], []), new emojis_Emoji("🐁", "mouse", "Nature", ["mouse2"], []), new emojis_Emoji("🐀", "rat", "Nature", ["rat"], []), new emojis_Emoji("🐿", "chipmunk", "Nature", ["chipmunk"], []), new emojis_Emoji("🐾", "paw prints", "Nature", ["feet", "paw_prints"], []), new emojis_Emoji("🐉", "dragon", "Nature", ["dragon"], []), new emojis_Emoji("🐲", "dragon face", "Nature", ["dragon_face"], []), new emojis_Emoji("🌵", "cactus", "Nature", ["cactus"], []), new emojis_Emoji("🎄", "Christmas tree", "Nature", ["christmas_tree"], []), new emojis_Emoji("🌲", "evergreen tree", "Nature", ["evergreen_tree"], ["wood"]), new emojis_Emoji("🌳", "deciduous tree", "Nature", ["deciduous_tree"], ["wood"]), new emojis_Emoji("🌴", "palm tree", "Nature", ["palm_tree"], []), new emojis_Emoji("🌱", "seedling", "Nature", ["seedling"], ["plant"]), new emojis_Emoji("🌿", "herb", "Nature", ["herb"], []), new emojis_Emoji("☘️", "shamrock", "Nature", ["shamrock"], []), new emojis_Emoji("🍀", "four leaf clover", "Nature", ["four_leaf_clover"], ["luck"]), new emojis_Emoji("🎍", "pine decoration", "Nature", ["bamboo"], []), new emojis_Emoji("🎋", "tanabata tree", "Nature", ["tanabata_tree"], []), new emojis_Emoji("🍃", "leaf fluttering in wind", "Nature", ["leaves"], ["leaf"]), new emojis_Emoji("🍂", "fallen leaf", "Nature", ["fallen_leaf"], ["autumn"]), new emojis_Emoji("🍁", "maple leaf", "Nature", ["maple_leaf"], ["canada"]), new emojis_Emoji("🍄", "mushroom", "Nature", ["mushroom"], []), new emojis_Emoji("🌾", "sheaf of rice", "Nature", ["ear_of_rice"], []), new emojis_Emoji("💐", "bouquet", "Nature", ["bouquet"], ["flowers"]), new emojis_Emoji("🌷", "tulip", "Nature", ["tulip"], ["flower"]), new emojis_Emoji("🌹", "rose", "Nature", ["rose"], ["flower"]), new emojis_Emoji("🥀", "wilted flower", "Nature", ["wilted_flower"], []), new emojis_Emoji("🌻", "sunflower", "Nature", ["sunflower"], []), new emojis_Emoji("🌼", "blossom", "Nature", ["blossom"], []), new emojis_Emoji("🌸", "cherry blossom", "Nature", ["cherry_blossom"], ["flower", "spring"]), new emojis_Emoji("🌺", "hibiscus", "Nature", ["hibiscus"], []), new emojis_Emoji("🌎", "globe showing Americas", "Nature", ["earth_americas"], ["globe", "world", "international"]), new emojis_Emoji("🌍", "globe showing Europe-Africa", "Nature", ["earth_africa"], ["globe", "world", "international"]), new emojis_Emoji("🌏", "globe showing Asia-Australia", "Nature", ["earth_asia"], ["globe", "world", "international"]), new emojis_Emoji("🌕", "full moon", "Nature", ["full_moon"], []), new emojis_Emoji("🌖", "waning gibbous moon", "Nature", ["waning_gibbous_moon"], []), new emojis_Emoji("🌗", "last quarter moon", "Nature", ["last_quarter_moon"], []), new emojis_Emoji("🌘", "waning crescent moon", "Nature", ["waning_crescent_moon"], []), new emojis_Emoji("🌑", "new moon", "Nature", ["new_moon"], []), new emojis_Emoji("🌒", "waxing crescent moon", "Nature", ["waxing_crescent_moon"], []), new emojis_Emoji("🌓", "first quarter moon", "Nature", ["first_quarter_moon"], []), new emojis_Emoji("🌔", "waxing gibbous moon", "Nature", ["moon", "waxing_gibbous_moon"], []), new emojis_Emoji("🌚", "new moon face", "Nature", ["new_moon_with_face"], []), new emojis_Emoji("🌝", "full moon with face", "Nature", ["full_moon_with_face"], []), new emojis_Emoji("🌞", "sun with face", "Nature", ["sun_with_face"], ["summer"]), new emojis_Emoji("🌛", "first quarter moon with face", "Nature", ["first_quarter_moon_with_face"], []), new emojis_Emoji("🌜", "last quarter moon with face", "Nature", ["last_quarter_moon_with_face"], []), new emojis_Emoji("🌙", "crescent moon", "Nature", ["crescent_moon"], ["night"]), new emojis_Emoji("💫", "dizzy", "Nature", ["dizzy"], ["star"]), new emojis_Emoji("⭐️", "white medium star", "Nature", ["star"], []), new emojis_Emoji("🌟", "glowing star", "Nature", ["star2"], []), new emojis_Emoji("✨", "sparkles", "Nature", ["sparkles"], ["shiny"]), new emojis_Emoji("⚡️", "high voltage", "Nature", ["zap"], ["lightning", "thunder"]), new emojis_Emoji("🔥", "fire", "Nature", ["fire"], ["burn"]), new emojis_Emoji("💥", "collision", "Nature", ["boom", "collision"], ["explode"]), new emojis_Emoji("☄", "comet", "Nature", ["comet"], []), new emojis_Emoji("☀️", "sun", "Nature", ["sunny"], ["weather"]), new emojis_Emoji("🌤", "sun behind small cloud", "Nature", ["sun_behind_small_cloud"], []), new emojis_Emoji("⛅️", "sun behind cloud", "Nature", ["partly_sunny"], ["weather", "cloud"]), new emojis_Emoji("🌥", "sun behind large cloud", "Nature", ["sun_behind_large_cloud"], []), new emojis_Emoji("🌦", "sun behind rain cloud", "Nature", ["sun_behind_rain_cloud"], []), new emojis_Emoji("🌈", "rainbow", "Nature", ["rainbow"], []), new emojis_Emoji("☁️", "cloud", "Nature", ["cloud"], []), new emojis_Emoji("🌧", "cloud with rain", "Nature", ["cloud_with_rain"], []), new emojis_Emoji("⛈", "cloud with lightning and rain", "Nature", ["cloud_with_lightning_and_rain"], []), new emojis_Emoji("🌩", "cloud with lightning", "Nature", ["cloud_with_lightning"], []), new emojis_Emoji("🌨", "cloud with snow", "Nature", ["cloud_with_snow"], []), new emojis_Emoji("☃️", "snowman", "Nature", ["snowman_with_snow"], ["winter", "christmas"]), new emojis_Emoji("⛄️", "snowman without snow", "Nature", ["snowman"], ["winter"]), new emojis_Emoji("❄️", "snowflake", "Nature", ["snowflake"], ["winter", "cold", "weather"]), new emojis_Emoji("🌬", "wind face", "Nature", ["wind_face"], []), new emojis_Emoji("💨", "dashing away", "Nature", ["dash"], ["wind", "blow", "fast"]), new emojis_Emoji("🌪", "tornado", "Nature", ["tornado"], []), new emojis_Emoji("🌫", "fog", "Nature", ["fog"], []), new emojis_Emoji("🌊", "water wave", "Nature", ["ocean"], ["sea"]), new emojis_Emoji("💧", "droplet", "Nature", ["droplet"], ["water"]), new emojis_Emoji("💦", "sweat droplets", "Nature", ["sweat_drops"], ["water", "workout"]), new emojis_Emoji("☔️", "umbrella with rain drops", "Nature", ["umbrella"], ["rain", "weather"]), new emojis_Emoji("🍏", "green apple", "Foods", ["green_apple"], ["fruit"]), new emojis_Emoji("🍎", "red apple", "Foods", ["apple"], []), new emojis_Emoji("🍐", "pear", "Foods", ["pear"], []), new emojis_Emoji("🍊", "tangerine", "Foods", ["tangerine", "orange", "mandarin"], []), new emojis_Emoji("🍋", "lemon", "Foods", ["lemon"], []), new emojis_Emoji("🍌", "banana", "Foods", ["banana"], ["fruit"]), new emojis_Emoji("🍉", "watermelon", "Foods", ["watermelon"], []), new emojis_Emoji("🍇", "grapes", "Foods", ["grapes"], []), new emojis_Emoji("🍓", "strawberry", "Foods", ["strawberry"], ["fruit"]), new emojis_Emoji("🍈", "melon", "Foods", ["melon"], []), new emojis_Emoji("🍒", "cherries", "Foods", ["cherries"], ["fruit"]), new emojis_Emoji("🍑", "peach", "Foods", ["peach"], []), new emojis_Emoji("🍍", "pineapple", "Foods", ["pineapple"], []), new emojis_Emoji("🥝", "kiwi fruit", "Foods", ["kiwi_fruit"], []), new emojis_Emoji("🥑", "avocado", "Foods", ["avocado"], []), new emojis_Emoji("🍅", "tomato", "Foods", ["tomato"], []), new emojis_Emoji("🍆", "eggplant", "Foods", ["eggplant"], ["aubergine"]), new emojis_Emoji("🥒", "cucumber", "Foods", ["cucumber"], []), new emojis_Emoji("🥕", "carrot", "Foods", ["carrot"], []), new emojis_Emoji("🌽", "ear of corn", "Foods", ["corn"], []), new emojis_Emoji("🌶", "hot pepper", "Foods", ["hot_pepper"], ["spicy"]), new emojis_Emoji("🥔", "potato", "Foods", ["potato"], []), new emojis_Emoji("🍠", "roasted sweet potato", "Foods", ["sweet_potato"], []), new emojis_Emoji("🌰", "chestnut", "Foods", ["chestnut"], []), new emojis_Emoji("🥜", "peanuts", "Foods", ["peanuts"], []), new emojis_Emoji("🍯", "honey pot", "Foods", ["honey_pot"], []), new emojis_Emoji("🥐", "croissant", "Foods", ["croissant"], []), new emojis_Emoji("🍞", "bread", "Foods", ["bread"], ["toast"]), new emojis_Emoji("🥖", "baguette bread", "Foods", ["baguette_bread"], []), new emojis_Emoji("🧀", "cheese wedge", "Foods", ["cheese"], []), new emojis_Emoji("🥚", "egg", "Foods", ["egg"], []), new emojis_Emoji("🍳", "cooking", "Foods", ["fried_egg"], ["breakfast"]), new emojis_Emoji("🥓", "bacon", "Foods", ["bacon"], []), new emojis_Emoji("🥞", "pancakes", "Foods", ["pancakes"], []), new emojis_Emoji("🍤", "fried shrimp", "Foods", ["fried_shrimp"], ["tempura"]), new emojis_Emoji("🍗", "poultry leg", "Foods", ["poultry_leg"], ["meat", "chicken"]), new emojis_Emoji("🍖", "meat on bone", "Foods", ["meat_on_bone"], []), new emojis_Emoji("🍕", "pizza", "Foods", ["pizza"], []), new emojis_Emoji("🌭", "hot dog", "Foods", ["hotdog"], []), new emojis_Emoji("🍔", "hamburger", "Foods", ["hamburger"], ["burger"]), new emojis_Emoji("🍟", "french fries", "Foods", ["fries"], []), new emojis_Emoji("🥙", "stuffed flatbread", "Foods", ["stuffed_flatbread"], []), new emojis_Emoji("🌮", "taco", "Foods", ["taco"], []), new emojis_Emoji("🌯", "burrito", "Foods", ["burrito"], []), new emojis_Emoji("🥗", "green salad", "Foods", ["green_salad"], []), new emojis_Emoji("🥘", "shallow pan of food", "Foods", ["shallow_pan_of_food"], ["paella", "curry"]), new emojis_Emoji("🍝", "spaghetti", "Foods", ["spaghetti"], ["pasta"]), new emojis_Emoji("🍜", "steaming bowl", "Foods", ["ramen"], ["noodle"]), new emojis_Emoji("🍲", "pot of food", "Foods", ["stew"], []), new emojis_Emoji("🍥", "fish cake with swirl", "Foods", ["fish_cake"], []), new emojis_Emoji("🍣", "sushi", "Foods", ["sushi"], []), new emojis_Emoji("🍱", "bento box", "Foods", ["bento"], []), new emojis_Emoji("🍛", "curry rice", "Foods", ["curry"], []), new emojis_Emoji("🍚", "cooked rice", "Foods", ["rice"], []), new emojis_Emoji("🍙", "rice ball", "Foods", ["rice_ball"], []), new emojis_Emoji("🍘", "rice cracker", "Foods", ["rice_cracker"], []), new emojis_Emoji("🍢", "oden", "Foods", ["oden"], []), new emojis_Emoji("🍡", "dango", "Foods", ["dango"], []), new emojis_Emoji("🍧", "shaved ice", "Foods", ["shaved_ice"], []), new emojis_Emoji("🍨", "ice cream", "Foods", ["ice_cream"], []), new emojis_Emoji("🍦", "soft ice cream", "Foods", ["icecream"], []), new emojis_Emoji("🍰", "shortcake", "Foods", ["cake"], ["dessert"]), new emojis_Emoji("🎂", "birthday cake", "Foods", ["birthday"], ["party"]), new emojis_Emoji("🍮", "custard", "Foods", ["custard"], []), new emojis_Emoji("🍭", "lollipop", "Foods", ["lollipop"], []), new emojis_Emoji("🍬", "candy", "Foods", ["candy"], ["sweet"]), new emojis_Emoji("🍫", "chocolate bar", "Foods", ["chocolate_bar"], []), new emojis_Emoji("🍿", "popcorn", "Foods", ["popcorn"], []), new emojis_Emoji("🍩", "doughnut", "Foods", ["doughnut"], []), new emojis_Emoji("🍪", "cookie", "Foods", ["cookie"], []), new emojis_Emoji("🥛", "glass of milk", "Foods", ["milk_glass"], []), new emojis_Emoji("🍼", "baby bottle", "Foods", ["baby_bottle"], ["milk"]), new emojis_Emoji("☕️", "hot beverage", "Foods", ["coffee"], ["cafe", "espresso"]), new emojis_Emoji("🍵", "teacup without handle", "Foods", ["tea"], ["green", "breakfast"]), new emojis_Emoji("🍶", "sake", "Foods", ["sake"], []), new emojis_Emoji("🍺", "beer mug", "Foods", ["beer"], ["drink"]), new emojis_Emoji("🍻", "clinking beer mugs", "Foods", ["beers"], ["drinks"]), new emojis_Emoji("🥂", "clinking glasses", "Foods", ["clinking_glasses"], ["cheers", "toast"]), new emojis_Emoji("🍷", "wine glass", "Foods", ["wine_glass"], []), new emojis_Emoji("🥃", "tumbler glass", "Foods", ["tumbler_glass"], ["whisky"]), new emojis_Emoji("🍸", "cocktail glass", "Foods", ["cocktail"], ["drink"]), new emojis_Emoji("🍹", "tropical drink", "Foods", ["tropical_drink"], ["summer", "vacation"]), new emojis_Emoji("🍾", "bottle with popping cork", "Foods", ["champagne"], ["bottle", "bubbly", "celebration"]), new emojis_Emoji("🥄", "spoon", "Foods", ["spoon"], []), new emojis_Emoji("🍴", "fork and knife", "Foods", ["fork_and_knife"], ["cutlery"]), new emojis_Emoji("🍽", "fork and knife with plate", "Foods", ["plate_with_cutlery"], ["dining", "dinner"]), new emojis_Emoji("⚽️", "soccer ball", "Activity", ["soccer"], ["sports"]), new emojis_Emoji("🏀", "basketball", "Activity", ["basketball"], ["sports"]), new emojis_Emoji("🏈", "american football", "Activity", ["football"], ["sports"]), new emojis_Emoji("⚾️", "baseball", "Activity", ["baseball"], ["sports"]), new emojis_Emoji("🎾", "tennis", "Activity", ["tennis"], ["sports"]), new emojis_Emoji("🏐", "volleyball", "Activity", ["volleyball"], []), new emojis_Emoji("🏉", "rugby football", "Activity", ["rugby_football"], []), new emojis_Emoji("🎱", "pool 8 ball", "Activity", ["8ball"], ["pool", "billiards"]), new emojis_Emoji("🏓", "ping pong", "Activity", ["ping_pong"], []), new emojis_Emoji("🏸", "badminton", "Activity", ["badminton"], []), new emojis_Emoji("🥅", "goal net", "Activity", ["goal_net"], []), new emojis_Emoji("🏒", "ice hockey", "Activity", ["ice_hockey"], []), new emojis_Emoji("🏑", "field hockey", "Activity", ["field_hockey"], []), new emojis_Emoji("🏏", "cricket", "Activity", ["cricket"], []), new emojis_Emoji("⛳️", "flag in hole", "Activity", ["golf"], []), new emojis_Emoji("🏹", "bow and arrow", "Activity", ["bow_and_arrow"], ["archery"]), new emojis_Emoji("🎣", "fishing pole", "Activity", ["fishing_pole_and_fish"], []), new emojis_Emoji("🥊", "boxing glove", "Activity", ["boxing_glove"], []), new emojis_Emoji("🥋", "martial arts uniform", "Activity", ["martial_arts_uniform"], []), new emojis_Emoji("⛸", "ice skate", "Activity", ["ice_skate"], ["skating"]), new emojis_Emoji("🎿", "skis", "Activity", ["ski"], []), new emojis_Emoji("⛷", "skier", "Activity", ["skier"], []), new emojis_Emoji("🏂", "snowboarder", "Activity", ["snowboarder"], []), new emojis_Emoji("🏋️‍♀️", "woman lifting weights", "Activity", ["weight_lifting_woman"], ["gym", "workout"]), new emojis_Emoji("🏋", "person lifting weights", "Activity", ["weight_lifting_man"], ["gym", "workout"]), new emojis_Emoji("🤺", "person fencing", "Activity", ["person_fencing"], []), new emojis_Emoji("🤼‍♀", "women wrestling", "Activity", ["women_wrestling"], []), new emojis_Emoji("🤼‍♂", "men wrestling", "Activity", ["men_wrestling"], []), new emojis_Emoji("🤸‍♀", "woman cartwheeling", "Activity", ["woman_cartwheeling"], []), new emojis_Emoji("🤸‍♂", "man cartwheeling", "Activity", ["man_cartwheeling"], []), new emojis_Emoji("⛹️‍♀️", "woman bouncing ball", "Activity", ["basketball_woman"], []), new emojis_Emoji("⛹", "person bouncing ball", "Activity", ["basketball_man"], []), new emojis_Emoji("🤾‍♀", "woman playing handball", "Activity", ["woman_playing_handball"], []), new emojis_Emoji("🤾‍♂", "man playing handball", "Activity", ["man_playing_handball"], []), new emojis_Emoji("🏌️‍♀️", "woman golfing", "Activity", ["golfing_woman"], []), new emojis_Emoji("🏌", "person golfing", "Activity", ["golfing_man"], []), new emojis_Emoji("🏄‍♀", "woman surfing", "Activity", ["surfing_woman"], []), new emojis_Emoji("🏄", "person surfing", "Activity", ["surfing_man", "surfer"], []), new emojis_Emoji("🏊‍♀", "woman swimming", "Activity", ["swimming_woman"], []), new emojis_Emoji("🏊", "person swimming", "Activity", ["swimming_man", "swimmer"], []), new emojis_Emoji("🤽‍♀", "woman playing water polo", "Activity", ["woman_playing_water_polo"], []), new emojis_Emoji("🤽‍♂", "man playing water polo", "Activity", ["man_playing_water_polo"], []), new emojis_Emoji("🚣‍♀", "woman rowing boat", "Activity", ["rowing_woman"], []), new emojis_Emoji("🚣", "person rowing boat", "Activity", ["rowing_man", "rowboat"], []), new emojis_Emoji("🏇", "horse racing", "Activity", ["horse_racing"], []), new emojis_Emoji("🚴‍♀", "woman biking", "Activity", ["biking_woman"], []), new emojis_Emoji("🚴", "person biking", "Activity", ["biking_man", "bicyclist"], []), new emojis_Emoji("🚵‍♀", "woman mountain biking", "Activity", ["mountain_biking_woman"], []), new emojis_Emoji("🚵", "person mountain biking", "Activity", ["mountain_biking_man", "mountain_bicyclist"], []), new emojis_Emoji("🎽", "running shirt", "Activity", ["running_shirt_with_sash"], ["marathon"]), new emojis_Emoji("🏅", "sports medal", "Activity", ["medal_sports"], ["gold", "winner"]), new emojis_Emoji("🎖", "military medal", "Activity", ["medal_military"], []), new emojis_Emoji("🥇", "1st place medal", "Activity", ["1st_place_medal"], ["gold"]), new emojis_Emoji("🥈", "2nd place medal", "Activity", ["2nd_place_medal"], ["silver"]), new emojis_Emoji("🥉", "3rd place medal", "Activity", ["3rd_place_medal"], ["bronze"]), new emojis_Emoji("🏆", "trophy", "Activity", ["trophy"], ["award", "contest", "winner"]), new emojis_Emoji("🏵", "rosette", "Activity", ["rosette"], []), new emojis_Emoji("🎗", "reminder ribbon", "Activity", ["reminder_ribbon"], []), new emojis_Emoji("🎫", "ticket", "Activity", ["ticket"], []), new emojis_Emoji("🎟", "admission tickets", "Activity", ["tickets"], []), new emojis_Emoji("🎪", "circus tent", "Activity", ["circus_tent"], []), new emojis_Emoji("🤹‍♀", "woman juggling", "Activity", ["woman_juggling"], []), new emojis_Emoji("🤹‍♂", "man juggling", "Activity", ["man_juggling"], []), new emojis_Emoji("🎭", "performing arts", "Activity", ["performing_arts"], ["theater", "drama"]), new emojis_Emoji("🎨", "artist palette", "Activity", ["art"], ["design", "paint"]), new emojis_Emoji("🎬", "clapper board", "Activity", ["clapper"], ["film"]), new emojis_Emoji("🎤", "microphone", "Activity", ["microphone"], ["sing"]), new emojis_Emoji("🎧", "headphone", "Activity", ["headphones"], ["music", "earphones"]), new emojis_Emoji("🎼", "musical score", "Activity", ["musical_score"], []), new emojis_Emoji("🎹", "musical keyboard", "Activity", ["musical_keyboard"], ["piano"]), new emojis_Emoji("🥁", "drum", "Activity", ["drum"], []), new emojis_Emoji("🎷", "saxophone", "Activity", ["saxophone"], []), new emojis_Emoji("🎺", "trumpet", "Activity", ["trumpet"], []), new emojis_Emoji("🎸", "guitar", "Activity", ["guitar"], ["rock"]), new emojis_Emoji("🎻", "violin", "Activity", ["violin"], []), new emojis_Emoji("🎲", "game die", "Activity", ["game_die"], ["dice", "gambling"]), new emojis_Emoji("🎯", "direct hit", "Activity", ["dart"], ["target"]), new emojis_Emoji("🎳", "bowling", "Activity", ["bowling"], []), new emojis_Emoji("🎮", "video game", "Activity", ["video_game"], ["play", "controller", "console"]), new emojis_Emoji("🎰", "slot machine", "Activity", ["slot_machine"], []), new emojis_Emoji("🚗", "automobile", "Places", ["car", "red_car"], []), new emojis_Emoji("🚕", "taxi", "Places", ["taxi"], []), new emojis_Emoji("🚙", "sport utility vehicle", "Places", ["blue_car"], []), new emojis_Emoji("🚌", "bus", "Places", ["bus"], []), new emojis_Emoji("🚎", "trolleybus", "Places", ["trolleybus"], []), new emojis_Emoji("🏎", "racing car", "Places", ["racing_car"], []), new emojis_Emoji("🚓", "police car", "Places", ["police_car"], []), new emojis_Emoji("🚑", "ambulance", "Places", ["ambulance"], []), new emojis_Emoji("🚒", "fire engine", "Places", ["fire_engine"], []), new emojis_Emoji("🚐", "minibus", "Places", ["minibus"], []), new emojis_Emoji("🚚", "delivery truck", "Places", ["truck"], []), new emojis_Emoji("🚛", "articulated lorry", "Places", ["articulated_lorry"], []), new emojis_Emoji("🚜", "tractor", "Places", ["tractor"], []), new emojis_Emoji("🛴", "kick scooter", "Places", ["kick_scooter"], []), new emojis_Emoji("🚲", "bicycle", "Places", ["bike"], ["bicycle"]), new emojis_Emoji("🛵", "motor scooter", "Places", ["motor_scooter"], []), new emojis_Emoji("🏍", "motorcycle", "Places", ["motorcycle"], []), new emojis_Emoji("🚨", "police car light", "Places", ["rotating_light"], ["911", "emergency"]), new emojis_Emoji("🚔", "oncoming police car", "Places", ["oncoming_police_car"], []), new emojis_Emoji("🚍", "oncoming bus", "Places", ["oncoming_bus"], []), new emojis_Emoji("🚘", "oncoming automobile", "Places", ["oncoming_automobile"], []), new emojis_Emoji("🚖", "oncoming taxi", "Places", ["oncoming_taxi"], []), new emojis_Emoji("🚡", "aerial tramway", "Places", ["aerial_tramway"], []), new emojis_Emoji("🚠", "mountain cableway", "Places", ["mountain_cableway"], []), new emojis_Emoji("🚟", "suspension railway", "Places", ["suspension_railway"], []), new emojis_Emoji("🚃", "railway car", "Places", ["railway_car"], []), new emojis_Emoji("🚋", "tram car", "Places", ["train"], []), new emojis_Emoji("🚞", "mountain railway", "Places", ["mountain_railway"], []), new emojis_Emoji("🚝", "monorail", "Places", ["monorail"], []), new emojis_Emoji("🚄", "high-speed train", "Places", ["bullettrain_side"], ["train"]), new emojis_Emoji("🚅", "high-speed train with bullet nose", "Places", ["bullettrain_front"], ["train"]), new emojis_Emoji("🚈", "light rail", "Places", ["light_rail"], []), new emojis_Emoji("🚂", "locomotive", "Places", ["steam_locomotive"], ["train"]), new emojis_Emoji("🚆", "train", "Places", ["train2"], []), new emojis_Emoji("🚇", "metro", "Places", ["metro"], []), new emojis_Emoji("🚊", "tram", "Places", ["tram"], []), new emojis_Emoji("🚉", "station", "Places", ["station"], []), new emojis_Emoji("🚁", "helicopter", "Places", ["helicopter"], []), new emojis_Emoji("🛩", "small airplane", "Places", ["small_airplane"], ["flight"]), new emojis_Emoji("✈️", "airplane", "Places", ["airplane"], ["flight"]), new emojis_Emoji("🛫", "airplane departure", "Places", ["flight_departure"], []), new emojis_Emoji("🛬", "airplane arrival", "Places", ["flight_arrival"], []), new emojis_Emoji("🚀", "rocket", "Places", ["rocket"], ["ship", "launch"]), new emojis_Emoji("🛰", "satellite", "Places", ["artificial_satellite"], ["orbit", "space"]), new emojis_Emoji("💺", "seat", "Places", ["seat"], []), new emojis_Emoji("🛶", "canoe", "Places", ["canoe"], []), new emojis_Emoji("⛵️", "sailboat", "Places", ["boat", "sailboat"], []), new emojis_Emoji("🛥", "motor boat", "Places", ["motor_boat"], []), new emojis_Emoji("🚤", "speedboat", "Places", ["speedboat"], ["ship"]), new emojis_Emoji("🛳", "passenger ship", "Places", ["passenger_ship"], ["cruise"]), new emojis_Emoji("⛴", "ferry", "Places", ["ferry"], []), new emojis_Emoji("🚢", "ship", "Places", ["ship"], []), new emojis_Emoji("⚓️", "anchor", "Places", ["anchor"], ["ship"]), new emojis_Emoji("🚧", "construction", "Places", ["construction"], ["wip"]), new emojis_Emoji("⛽️", "fuel pump", "Places", ["fuelpump"], []), new emojis_Emoji("🚏", "bus stop", "Places", ["busstop"], []), new emojis_Emoji("🚦", "vertical traffic light", "Places", ["vertical_traffic_light"], ["semaphore"]), new emojis_Emoji("🚥", "horizontal traffic light", "Places", ["traffic_light"], []), new emojis_Emoji("🗺", "world map", "Places", ["world_map"], ["travel"]), new emojis_Emoji("🗿", "moai", "Places", ["moyai"], ["stone"]), new emojis_Emoji("🗽", "Statue of Liberty", "Places", ["statue_of_liberty"], []), new emojis_Emoji("⛲️", "fountain", "Places", ["fountain"], []), new emojis_Emoji("🗼", "Tokyo tower", "Places", ["tokyo_tower"], []), new emojis_Emoji("🏰", "castle", "Places", ["european_castle"], []), new emojis_Emoji("🏯", "Japanese castle", "Places", ["japanese_castle"], []), new emojis_Emoji("🏟", "stadium", "Places", ["stadium"], []), new emojis_Emoji("🎡", "ferris wheel", "Places", ["ferris_wheel"], []), new emojis_Emoji("🎢", "roller coaster", "Places", ["roller_coaster"], []), new emojis_Emoji("🎠", "carousel horse", "Places", ["carousel_horse"], []), new emojis_Emoji("⛱", "umbrella on ground", "Places", ["parasol_on_ground"], ["beach_umbrella"]), new emojis_Emoji("🏖", "beach with umbrella", "Places", ["beach_umbrella"], []), new emojis_Emoji("🏝", "desert island", "Places", ["desert_island"], []), new emojis_Emoji("⛰", "mountain", "Places", ["mountain"], []), new emojis_Emoji("🏔", "snow-capped mountain", "Places", ["mountain_snow"], []), new emojis_Emoji("🗻", "mount fuji", "Places", ["mount_fuji"], []), new emojis_Emoji("🌋", "volcano", "Places", ["volcano"], []), new emojis_Emoji("🏜", "desert", "Places", ["desert"], []), new emojis_Emoji("🏕", "camping", "Places", ["camping"], []), new emojis_Emoji("⛺️", "tent", "Places", ["tent"], ["camping"]), new emojis_Emoji("🛤", "railway track", "Places", ["railway_track"], []), new emojis_Emoji("🛣", "motorway", "Places", ["motorway"], []), new emojis_Emoji("🏗", "building construction", "Places", ["building_construction"], []), new emojis_Emoji("🏭", "factory", "Places", ["factory"], []), new emojis_Emoji("🏠", "house", "Places", ["house"], []), new emojis_Emoji("🏡", "house with garden", "Places", ["house_with_garden"], []), new emojis_Emoji("🏘", "house", "Places", ["houses"], []), new emojis_Emoji("🏚", "derelict house", "Places", ["derelict_house"], []), new emojis_Emoji("🏢", "office building", "Places", ["office"], []), new emojis_Emoji("🏬", "department store", "Places", ["department_store"], []), new emojis_Emoji("🏣", "Japanese post office", "Places", ["post_office"], []), new emojis_Emoji("🏤", "post office", "Places", ["european_post_office"], []), new emojis_Emoji("🏥", "hospital", "Places", ["hospital"], []), new emojis_Emoji("🏦", "bank", "Places", ["bank"], []), new emojis_Emoji("🏨", "hotel", "Places", ["hotel"], []), new emojis_Emoji("🏪", "convenience store", "Places", ["convenience_store"], []), new emojis_Emoji("🏫", "school", "Places", ["school"], []), new emojis_Emoji("🏩", "love hotel", "Places", ["love_hotel"], []), new emojis_Emoji("💒", "wedding", "Places", ["wedding"], ["marriage"]), new emojis_Emoji("🏛", "classical building", "Places", ["classical_building"], []), new emojis_Emoji("⛪️", "church", "Places", ["church"], []), new emojis_Emoji("🕌", "mosque", "Places", ["mosque"], []), new emojis_Emoji("🕍", "synagogue", "Places", ["synagogue"], []), new emojis_Emoji("🕋", "kaaba", "Places", ["kaaba"], []), new emojis_Emoji("⛩", "shinto shrine", "Places", ["shinto_shrine"], []), new emojis_Emoji("🗾", "map of Japan", "Places", ["japan"], []), new emojis_Emoji("🎑", "moon viewing ceremony", "Places", ["rice_scene"], []), new emojis_Emoji("🏞", "national park", "Places", ["national_park"], []), new emojis_Emoji("🌅", "sunrise", "Places", ["sunrise"], []), new emojis_Emoji("🌄", "sunrise over mountains", "Places", ["sunrise_over_mountains"], []), new emojis_Emoji("🌠", "shooting star", "Places", ["stars"], []), new emojis_Emoji("🎇", "sparkler", "Places", ["sparkler"], []), new emojis_Emoji("🎆", "fireworks", "Places", ["fireworks"], ["festival", "celebration"]), new emojis_Emoji("🌇", "sunset", "Places", ["city_sunrise"], []), new emojis_Emoji("🌆", "cityscape at dusk", "Places", ["city_sunset"], []), new emojis_Emoji("🏙", "cityscape", "Places", ["cityscape"], ["skyline"]), new emojis_Emoji("🌃", "night with stars", "Places", ["night_with_stars"], []), new emojis_Emoji("🌌", "milky way", "Places", ["milky_way"], []), new emojis_Emoji("🌉", "bridge at night", "Places", ["bridge_at_night"], []), new emojis_Emoji("🌁", "foggy", "Places", ["foggy"], ["karl"]), new emojis_Emoji("⌚️", "watch", "Objects", ["watch"], ["time"]), new emojis_Emoji("📱", "mobile phone", "Objects", ["iphone"], ["smartphone", "mobile"]), new emojis_Emoji("📲", "mobile phone with arrow", "Objects", ["calling"], ["call", "incoming"]), new emojis_Emoji("💻", "laptop computer", "Objects", ["computer"], ["desktop", "screen"]), new emojis_Emoji("⌨️", "keyboard", "Objects", ["keyboard"], []), new emojis_Emoji("🖥", "desktop computer", "Objects", ["desktop_computer"], []), new emojis_Emoji("🖨", "printer", "Objects", ["printer"], []), new emojis_Emoji("🖱", "computer mouse", "Objects", ["computer_mouse"], []), new emojis_Emoji("🖲", "trackball", "Objects", ["trackball"], []), new emojis_Emoji("🕹", "joystick", "Objects", ["joystick"], []), new emojis_Emoji("🗜", "clamp", "Objects", ["clamp"], []), new emojis_Emoji("💽", "computer disk", "Objects", ["minidisc"], []), new emojis_Emoji("💾", "floppy disk", "Objects", ["floppy_disk"], ["save"]), new emojis_Emoji("💿", "optical disk", "Objects", ["cd"], []), new emojis_Emoji("📀", "dvd", "Objects", ["dvd"], []), new emojis_Emoji("📼", "videocassette", "Objects", ["vhs"], []), new emojis_Emoji("📷", "camera", "Objects", ["camera"], ["photo"]), new emojis_Emoji("📸", "camera with flash", "Objects", ["camera_flash"], ["photo"]), new emojis_Emoji("📹", "video camera", "Objects", ["video_camera"], []), new emojis_Emoji("🎥", "movie camera", "Objects", ["movie_camera"], ["film", "video"]), new emojis_Emoji("📽", "film projector", "Objects", ["film_projector"], []), new emojis_Emoji("🎞", "film frames", "Objects", ["film_strip"], []), new emojis_Emoji("📞", "telephone receiver", "Objects", ["telephone_receiver"], ["phone", "call"]), new emojis_Emoji("☎️", "telephone", "Objects", ["phone", "telephone"], []), new emojis_Emoji("📟", "pager", "Objects", ["pager"], []), new emojis_Emoji("📠", "fax machine", "Objects", ["fax"], []), new emojis_Emoji("📺", "television", "Objects", ["tv"], []), new emojis_Emoji("📻", "radio", "Objects", ["radio"], ["podcast"]), new emojis_Emoji("🎙", "studio microphone", "Objects", ["studio_microphone"], ["podcast"]), new emojis_Emoji("🎚", "level slider", "Objects", ["level_slider"], []), new emojis_Emoji("🎛", "control knobs", "Objects", ["control_knobs"], []), new emojis_Emoji("⏱", "stopwatch", "Objects", ["stopwatch"], []), new emojis_Emoji("⏲", "timer clock", "Objects", ["timer_clock"], []), new emojis_Emoji("⏰", "alarm clock", "Objects", ["alarm_clock"], ["morning"]), new emojis_Emoji("🕰", "mantelpiece clock", "Objects", ["mantelpiece_clock"], []), new emojis_Emoji("⌛️", "hourglass", "Objects", ["hourglass"], ["time"]), new emojis_Emoji("⏳", "hourglass with flowing sand", "Objects", ["hourglass_flowing_sand"], ["time"]), new emojis_Emoji("📡", "satellite antenna", "Objects", ["satellite"], ["signal"]), new emojis_Emoji("🔋", "battery", "Objects", ["battery"], ["power"]), new emojis_Emoji("🔌", "electric plug", "Objects", ["electric_plug"], []), new emojis_Emoji("💡", "light bulb", "Objects", ["bulb"], ["idea", "light"]), new emojis_Emoji("🔦", "flashlight", "Objects", ["flashlight"], []), new emojis_Emoji("🕯", "candle", "Objects", ["candle"], []), new emojis_Emoji("🗑", "wastebasket", "Objects", ["wastebasket"], ["trash"]), new emojis_Emoji("🛢", "oil drum", "Objects", ["oil_drum"], []), new emojis_Emoji("💸", "money with wings", "Objects", ["money_with_wings"], ["dollar"]), new emojis_Emoji("💵", "dollar banknote", "Objects", ["dollar"], ["money"]), new emojis_Emoji("💴", "yen banknote", "Objects", ["yen"], []), new emojis_Emoji("💶", "euro banknote", "Objects", ["euro"], []), new emojis_Emoji("💷", "pound banknote", "Objects", ["pound"], []), new emojis_Emoji("💰", "money bag", "Objects", ["moneybag"], ["dollar", "cream"]), new emojis_Emoji("💳", "credit card", "Objects", ["credit_card"], ["subscription"]), new emojis_Emoji("💎", "gem stone", "Objects", ["gem"], ["diamond"]), new emojis_Emoji("⚖️", "balance scale", "Objects", ["balance_scale"], []), new emojis_Emoji("🔧", "wrench", "Objects", ["wrench"], ["tool"]), new emojis_Emoji("🔨", "hammer", "Objects", ["hammer"], ["tool"]), new emojis_Emoji("⚒", "hammer and pick", "Objects", ["hammer_and_pick"], []), new emojis_Emoji("🛠", "hammer and wrench", "Objects", ["hammer_and_wrench"], []), new emojis_Emoji("⛏", "pick", "Objects", ["pick"], []), new emojis_Emoji("🔩", "nut and bolt", "Objects", ["nut_and_bolt"], []), new emojis_Emoji("⚙️", "gear", "Objects", ["gear"], []), new emojis_Emoji("⛓", "chains", "Objects", ["chains"], []), new emojis_Emoji("🔫", "pistol", "Objects", ["gun"], ["shoot", "weapon"]), new emojis_Emoji("💣", "bomb", "Objects", ["bomb"], ["boom"]), new emojis_Emoji("🔪", "kitchen knife", "Objects", ["hocho", "knife"], ["cut", "chop"]), new emojis_Emoji("🗡", "dagger", "Objects", ["dagger"], []), new emojis_Emoji("⚔️", "crossed swords", "Objects", ["crossed_swords"], []), new emojis_Emoji("🛡", "shield", "Objects", ["shield"], []), new emojis_Emoji("🚬", "cigarette", "Objects", ["smoking"], ["cigarette"]), new emojis_Emoji("⚰️", "coffin", "Objects", ["coffin"], ["funeral"]), new emojis_Emoji("⚱️", "funeral urn", "Objects", ["funeral_urn"], []), new emojis_Emoji("🏺", "amphora", "Objects", ["amphora"], []), new emojis_Emoji("🔮", "crystal ball", "Objects", ["crystal_ball"], ["fortune"]), new emojis_Emoji("📿", "prayer beads", "Objects", ["prayer_beads"], []), new emojis_Emoji("💈", "barber pole", "Objects", ["barber"], []), new emojis_Emoji("⚗️", "alembic", "Objects", ["alembic"], []), new emojis_Emoji("🔭", "telescope", "Objects", ["telescope"], []), new emojis_Emoji("🔬", "microscope", "Objects", ["microscope"], ["science", "laboratory", "investigate"]), new emojis_Emoji("🕳", "hole", "Objects", ["hole"], []), new emojis_Emoji("💊", "pill", "Objects", ["pill"], ["health", "medicine"]), new emojis_Emoji("💉", "syringe", "Objects", ["syringe"], ["health", "hospital", "needle"]), new emojis_Emoji("🌡", "thermometer", "Objects", ["thermometer"], []), new emojis_Emoji("🚽", "toilet", "Objects", ["toilet"], ["wc"]), new emojis_Emoji("🚰", "potable water", "Objects", ["potable_water"], []), new emojis_Emoji("🚿", "shower", "Objects", ["shower"], ["bath"]), new emojis_Emoji("🛁", "bathtub", "Objects", ["bathtub"], []), new emojis_Emoji("🛀", "person taking bath", "Objects", ["bath"], ["shower"]), new emojis_Emoji("🛎", "bellhop bell", "Objects", ["bellhop_bell"], []), new emojis_Emoji("🔑", "key", "Objects", ["key"], ["lock", "password"]), new emojis_Emoji("🗝", "old key", "Objects", ["old_key"], []), new emojis_Emoji("🚪", "door", "Objects", ["door"], []), new emojis_Emoji("🛋", "couch and lamp", "Objects", ["couch_and_lamp"], []), new emojis_Emoji("🛏", "bed", "Objects", ["bed"], []), new emojis_Emoji("🛌", "person in bed", "Objects", ["sleeping_bed"], []), new emojis_Emoji("🖼", "framed picture", "Objects", ["framed_picture"], []), new emojis_Emoji("🛍", "shopping bags", "Objects", ["shopping"], ["bags"]), new emojis_Emoji("🛒", "shopping cart", "Objects", ["shopping_cart"], []), new emojis_Emoji("🎁", "wrapped gift", "Objects", ["gift"], ["present", "birthday", "christmas"]), new emojis_Emoji("🎈", "balloon", "Objects", ["balloon"], ["party", "birthday"]), new emojis_Emoji("🎏", "carp streamer", "Objects", ["flags"], []), new emojis_Emoji("🎀", "ribbon", "Objects", ["ribbon"], []), new emojis_Emoji("🎊", "confetti ball", "Objects", ["confetti_ball"], []), new emojis_Emoji("🎉", "party popper", "Objects", ["tada"], ["hooray", "party"]), new emojis_Emoji("🎎", "Japanese dolls", "Objects", ["dolls"], []), new emojis_Emoji("🏮", "red paper lantern", "Objects", ["izakaya_lantern", "lantern"], []), new emojis_Emoji("🎐", "wind chime", "Objects", ["wind_chime"], []), new emojis_Emoji("✉️", "envelope", "Objects", ["email", "envelope"], ["letter"]), new emojis_Emoji("📩", "envelope with arrow", "Objects", ["envelope_with_arrow"], []), new emojis_Emoji("📨", "incoming envelope", "Objects", ["incoming_envelope"], []), new emojis_Emoji("📧", "e-mail", "Objects", ["e-mail"], []), new emojis_Emoji("💌", "love letter", "Objects", ["love_letter"], ["email", "envelope"]), new emojis_Emoji("📥", "inbox tray", "Objects", ["inbox_tray"], []), new emojis_Emoji("📤", "outbox tray", "Objects", ["outbox_tray"], []), new emojis_Emoji("📦", "package", "Objects", ["package"], ["shipping"]), new emojis_Emoji("🏷", "label", "Objects", ["label"], ["tag"]), new emojis_Emoji("📪", "closed mailbox with lowered flag", "Objects", ["mailbox_closed"], []), new emojis_Emoji("📫", "closed mailbox with raised flag", "Objects", ["mailbox"], []), new emojis_Emoji("📬", "open mailbox with raised flag", "Objects", ["mailbox_with_mail"], []), new emojis_Emoji("📭", "open mailbox with lowered flag", "Objects", ["mailbox_with_no_mail"], []), new emojis_Emoji("📮", "postbox", "Objects", ["postbox"], []), new emojis_Emoji("📯", "postal horn", "Objects", ["postal_horn"], []), new emojis_Emoji("📜", "scroll", "Objects", ["scroll"], ["document"]), new emojis_Emoji("📃", "page with curl", "Objects", ["page_with_curl"], []), new emojis_Emoji("📄", "page facing up", "Objects", ["page_facing_up"], ["document"]), new emojis_Emoji("📑", "bookmark tabs", "Objects", ["bookmark_tabs"], []), new emojis_Emoji("📊", "bar chart", "Objects", ["bar_chart"], ["stats", "metrics"]), new emojis_Emoji("📈", "chart increasing", "Objects", ["chart_with_upwards_trend"], ["graph", "metrics"]), new emojis_Emoji("📉", "chart decreasing", "Objects", ["chart_with_downwards_trend"], ["graph", "metrics"]), new emojis_Emoji("🗒", "spiral notepad", "Objects", ["spiral_notepad"], []), new emojis_Emoji("🗓", "spiral calendar", "Objects", ["spiral_calendar"], []), new emojis_Emoji("📆", "tear-off calendar", "Objects", ["calendar"], ["schedule"]), new emojis_Emoji("📅", "calendar", "Objects", ["date"], ["calendar", "schedule"]), new emojis_Emoji("📇", "card index", "Objects", ["card_index"], []), new emojis_Emoji("🗃", "card file box", "Objects", ["card_file_box"], []), new emojis_Emoji("🗳", "ballot box with ballot", "Objects", ["ballot_box"], []), new emojis_Emoji("🗄", "file cabinet", "Objects", ["file_cabinet"], []), new emojis_Emoji("📋", "clipboard", "Objects", ["clipboard"], []), new emojis_Emoji("📁", "file folder", "Objects", ["file_folder"], ["directory"]), new emojis_Emoji("📂", "open file folder", "Objects", ["open_file_folder"], []), new emojis_Emoji("🗂", "card index dividers", "Objects", ["card_index_dividers"], []), new emojis_Emoji("🗞", "rolled-up newspaper", "Objects", ["newspaper_roll"], ["press"]), new emojis_Emoji("📰", "newspaper", "Objects", ["newspaper"], ["press"]), new emojis_Emoji("📓", "notebook", "Objects", ["notebook"], []), new emojis_Emoji("📔", "notebook with decorative cover", "Objects", ["notebook_with_decorative_cover"], []), new emojis_Emoji("📒", "ledger", "Objects", ["ledger"], []), new emojis_Emoji("📕", "closed book", "Objects", ["closed_book"], []), new emojis_Emoji("📗", "green book", "Objects", ["green_book"], []), new emojis_Emoji("📘", "blue book", "Objects", ["blue_book"], []), new emojis_Emoji("📙", "orange book", "Objects", ["orange_book"], []), new emojis_Emoji("📚", "books", "Objects", ["books"], ["library"]), new emojis_Emoji("📖", "open book", "Objects", ["book", "open_book"], []), new emojis_Emoji("🔖", "bookmark", "Objects", ["bookmark"], []), new emojis_Emoji("🔗", "link", "Objects", ["link"], []), new emojis_Emoji("📎", "paperclip", "Objects", ["paperclip"], []), new emojis_Emoji("🖇", "linked paperclips", "Objects", ["paperclips"], []), new emojis_Emoji("📐", "triangular ruler", "Objects", ["triangular_ruler"], []), new emojis_Emoji("📏", "straight ruler", "Objects", ["straight_ruler"], []), new emojis_Emoji("📌", "pushpin", "Objects", ["pushpin"], ["location"]), new emojis_Emoji("📍", "round pushpin", "Objects", ["round_pushpin"], ["location"]), new emojis_Emoji("✂️", "scissors", "Objects", ["scissors"], ["cut"]), new emojis_Emoji("🖊", "pen", "Objects", ["pen"], []), new emojis_Emoji("🖋", "fountain pen", "Objects", ["fountain_pen"], []), new emojis_Emoji("✒️", "black nib", "Objects", ["black_nib"], []), new emojis_Emoji("🖌", "paintbrush", "Objects", ["paintbrush"], []), new emojis_Emoji("🖍", "crayon", "Objects", ["crayon"], []), new emojis_Emoji("📝", "memo", "Objects", ["memo", "pencil"], ["document", "note"]), new emojis_Emoji("✏️", "pencil", "Objects", ["pencil2"], []), new emojis_Emoji("🔍", "left-pointing magnifying glass", "Objects", ["mag"], ["search", "zoom"]), new emojis_Emoji("🔎", "right-pointing magnifying glass", "Objects", ["mag_right"], []), new emojis_Emoji("🔏", "locked with pen", "Objects", ["lock_with_ink_pen"], []), new emojis_Emoji("🔐", "locked with key", "Objects", ["closed_lock_with_key"], ["security"]), new emojis_Emoji("🔒", "locked", "Objects", ["lock"], ["security", "private"]), new emojis_Emoji("🔓", "unlocked", "Objects", ["unlock"], ["security"]), new emojis_Emoji("❤️", "red heart", "Symbols", ["heart"], ["love"]), new emojis_Emoji("💛", "yellow heart", "Symbols", ["yellow_heart"], []), new emojis_Emoji("💚", "green heart", "Symbols", ["green_heart"], []), new emojis_Emoji("💙", "blue heart", "Symbols", ["blue_heart"], []), new emojis_Emoji("💜", "purple heart", "Symbols", ["purple_heart"], []), new emojis_Emoji("🖤", "black heart", "Symbols", ["black_heart"], []), new emojis_Emoji("💔", "broken heart", "Symbols", ["broken_heart"], []), new emojis_Emoji("❣️", "heavy heart exclamation", "Symbols", ["heavy_heart_exclamation"], []), new emojis_Emoji("💕", "two hearts", "Symbols", ["two_hearts"], []), new emojis_Emoji("💞", "revolving hearts", "Symbols", ["revolving_hearts"], []), new emojis_Emoji("💓", "beating heart", "Symbols", ["heartbeat"], []), new emojis_Emoji("💗", "growing heart", "Symbols", ["heartpulse"], []), new emojis_Emoji("💖", "sparkling heart", "Symbols", ["sparkling_heart"], []), new emojis_Emoji("💘", "heart with arrow", "Symbols", ["cupid"], ["love", "heart"]), new emojis_Emoji("💝", "heart with ribbon", "Symbols", ["gift_heart"], ["chocolates"]), new emojis_Emoji("💟", "heart decoration", "Symbols", ["heart_decoration"], []), new emojis_Emoji("☮️", "peace symbol", "Symbols", ["peace_symbol"], []), new emojis_Emoji("✝️", "latin cross", "Symbols", ["latin_cross"], []), new emojis_Emoji("☪️", "star and crescent", "Symbols", ["star_and_crescent"], []), new emojis_Emoji("🕉", "om", "Symbols", ["om"], []), new emojis_Emoji("☸️", "wheel of dharma", "Symbols", ["wheel_of_dharma"], []), new emojis_Emoji("✡️", "star of David", "Symbols", ["star_of_david"], []), new emojis_Emoji("🔯", "dotted six-pointed star", "Symbols", ["six_pointed_star"], []), new emojis_Emoji("🕎", "menorah", "Symbols", ["menorah"], []), new emojis_Emoji("☯️", "yin yang", "Symbols", ["yin_yang"], []), new emojis_Emoji("☦️", "orthodox cross", "Symbols", ["orthodox_cross"], []), new emojis_Emoji("🛐", "place of worship", "Symbols", ["place_of_worship"], []), new emojis_Emoji("⛎", "Ophiuchus", "Symbols", ["ophiuchus"], []), new emojis_Emoji("♈️", "Aries", "Symbols", ["aries"], []), new emojis_Emoji("♉️", "Taurus", "Symbols", ["taurus"], []), new emojis_Emoji("♊️", "Gemini", "Symbols", ["gemini"], []), new emojis_Emoji("♋️", "Cancer", "Symbols", ["cancer"], []), new emojis_Emoji("♌️", "Leo", "Symbols", ["leo"], []), new emojis_Emoji("♍️", "Virgo", "Symbols", ["virgo"], []), new emojis_Emoji("♎️", "Libra", "Symbols", ["libra"], []), new emojis_Emoji("♏️", "Scorpius", "Symbols", ["scorpius"], []), new emojis_Emoji("♐️", "Sagittarius", "Symbols", ["sagittarius"], []), new emojis_Emoji("♑️", "Capricorn", "Symbols", ["capricorn"], []), new emojis_Emoji("♒️", "Aquarius", "Symbols", ["aquarius"], []), new emojis_Emoji("♓️", "Pisces", "Symbols", ["pisces"], []), new emojis_Emoji("🆔", "ID button", "Symbols", ["id"], []), new emojis_Emoji("⚛️", "atom symbol", "Symbols", ["atom_symbol"], []), new emojis_Emoji("🉑", "Japanese “acceptable” button", "Symbols", ["accept"], []), new emojis_Emoji("☢️", "radioactive", "Symbols", ["radioactive"], []), new emojis_Emoji("☣️", "biohazard", "Symbols", ["biohazard"], []), new emojis_Emoji("📴", "mobile phone off", "Symbols", ["mobile_phone_off"], ["mute", "off"]), new emojis_Emoji("📳", "vibration mode", "Symbols", ["vibration_mode"], []), new emojis_Emoji("🈶", "Japanese “not free of charge” button", "Symbols", ["u6709"], []), new emojis_Emoji("🈚️", "Japanese “free of charge” button", "Symbols", ["u7121"], []), new emojis_Emoji("🈸", "Japanese “application” button", "Symbols", ["u7533"], []), new emojis_Emoji("🈺", "Japanese “open for business” button", "Symbols", ["u55b6"], []), new emojis_Emoji("🈷️", "Japanese “monthly amount” button", "Symbols", ["u6708"], []), new emojis_Emoji("✴️", "eight-pointed star", "Symbols", ["eight_pointed_black_star"], []), new emojis_Emoji("🆚", "VS button", "Symbols", ["vs"], []), new emojis_Emoji("💮", "white flower", "Symbols", ["white_flower"], []), new emojis_Emoji("🉐", "Japanese “bargain” button", "Symbols", ["ideograph_advantage"], []), new emojis_Emoji("㊙️", "Japanese “secret” button", "Symbols", ["secret"], []), new emojis_Emoji("㊗️", "Japanese “congratulations” button", "Symbols", ["congratulations"], []), new emojis_Emoji("🈴", "Japanese “passing grade” button", "Symbols", ["u5408"], []), new emojis_Emoji("🈵", "Japanese “no vacancy” button", "Symbols", ["u6e80"], []), new emojis_Emoji("🈹", "Japanese “discount” button", "Symbols", ["u5272"], []), new emojis_Emoji("🈲", "Japanese “prohibited” button", "Symbols", ["u7981"], []), new emojis_Emoji("🅰️", "A button (blood type)", "Symbols", ["a"], []), new emojis_Emoji("🅱️", "B button (blood type)", "Symbols", ["b"], []), new emojis_Emoji("🆎", "AB button (blood type)", "Symbols", ["ab"], []), new emojis_Emoji("🆑", "CL button", "Symbols", ["cl"], []), new emojis_Emoji("🅾️", "O button (blood type)", "Symbols", ["o2"], []), new emojis_Emoji("🆘", "SOS button", "Symbols", ["sos"], ["help", "emergency"]), new emojis_Emoji("❌", "cross mark", "Symbols", ["x"], []), new emojis_Emoji("⭕️", "heavy large circle", "Symbols", ["o"], []), new emojis_Emoji("🛑", "stop sign", "Symbols", ["stop_sign"], []), new emojis_Emoji("⛔️", "no entry", "Symbols", ["no_entry"], ["limit"]), new emojis_Emoji("📛", "name badge", "Symbols", ["name_badge"], []), new emojis_Emoji("🚫", "prohibited", "Symbols", ["no_entry_sign"], ["block", "forbidden"]), new emojis_Emoji("💯", "hundred points", "Symbols", ["100"], ["score", "perfect"]), new emojis_Emoji("💢", "anger symbol", "Symbols", ["anger"], ["angry"]), new emojis_Emoji("♨️", "hot springs", "Symbols", ["hotsprings"], []), new emojis_Emoji("🚷", "no pedestrians", "Symbols", ["no_pedestrians"], []), new emojis_Emoji("🚯", "no littering", "Symbols", ["do_not_litter"], []), new emojis_Emoji("🚳", "no bicycles", "Symbols", ["no_bicycles"], []), new emojis_Emoji("🚱", "non-potable water", "Symbols", ["non-potable_water"], []), new emojis_Emoji("🔞", "no one under eighteen", "Symbols", ["underage"], []), new emojis_Emoji("📵", "no mobile phones", "Symbols", ["no_mobile_phones"], []), new emojis_Emoji("🚭", "no smoking", "Symbols", ["no_smoking"], []), new emojis_Emoji("❗️", "exclamation mark", "Symbols", ["exclamation", "heavy_exclamation_mark"], ["bang"]), new emojis_Emoji("❕", "white exclamation mark", "Symbols", ["grey_exclamation"], []), new emojis_Emoji("❓", "question mark", "Symbols", ["question"], ["confused"]), new emojis_Emoji("❔", "white question mark", "Symbols", ["grey_question"], []), new emojis_Emoji("‼️", "double exclamation mark", "Symbols", ["bangbang"], []), new emojis_Emoji("⁉️", "exclamation question mark", "Symbols", ["interrobang"], []), new emojis_Emoji("🔅", "dim button", "Symbols", ["low_brightness"], []), new emojis_Emoji("🔆", "bright button", "Symbols", ["high_brightness"], []), new emojis_Emoji("〽️", "part alternation mark", "Symbols", ["part_alternation_mark"], []), new emojis_Emoji("⚠️", "warning", "Symbols", ["warning"], ["wip"]), new emojis_Emoji("🚸", "children crossing", "Symbols", ["children_crossing"], []), new emojis_Emoji("🔱", "trident emblem", "Symbols", ["trident"], []), new emojis_Emoji("⚜️", "fleur-de-lis", "Symbols", ["fleur_de_lis"], []), new emojis_Emoji("🔰", "Japanese symbol for beginner", "Symbols", ["beginner"], []), new emojis_Emoji("♻️", "recycling symbol", "Symbols", ["recycle"], ["environment", "green"]), new emojis_Emoji("✅", "white heavy check mark", "Symbols", ["white_check_mark"], []), new emojis_Emoji("🈯️", "Japanese “reserved” button", "Symbols", ["u6307"], []), new emojis_Emoji("💹", "chart increasing with yen", "Symbols", ["chart"], []), new emojis_Emoji("❇️", "sparkle", "Symbols", ["sparkle"], []), new emojis_Emoji("✳️", "eight-spoked asterisk", "Symbols", ["eight_spoked_asterisk"], []), new emojis_Emoji("❎", "cross mark button", "Symbols", ["negative_squared_cross_mark"], []), new emojis_Emoji("🌐", "globe with meridians", "Symbols", ["globe_with_meridians"], ["world", "global", "international"]), new emojis_Emoji("💠", "diamond with a dot", "Symbols", ["diamond_shape_with_a_dot_inside"], []), new emojis_Emoji("Ⓜ️", "circled M", "Symbols", ["m"], []), new emojis_Emoji("🌀", "cyclone", "Symbols", ["cyclone"], ["swirl"]), new emojis_Emoji("💤", "zzz", "Symbols", ["zzz"], ["sleeping"]), new emojis_Emoji("🏧", "ATM sign", "Symbols", ["atm"], []), new emojis_Emoji("🚾", "water closet", "Symbols", ["wc"], ["toilet", "restroom"]), new emojis_Emoji("♿️", "wheelchair symbol", "Symbols", ["wheelchair"], ["accessibility"]), new emojis_Emoji("🅿️", "P button", "Symbols", ["parking"], []), new emojis_Emoji("🈳", "Japanese “vacancy” button", "Symbols", ["u7a7a"], []), new emojis_Emoji("🈂️", "Japanese “service charge” button", "Symbols", ["sa"], []), new emojis_Emoji("🛂", "passport control", "Symbols", ["passport_control"], []), new emojis_Emoji("🛃", "customs", "Symbols", ["customs"], []), new emojis_Emoji("🛄", "baggage claim", "Symbols", ["baggage_claim"], ["airport"]), new emojis_Emoji("🛅", "left luggage", "Symbols", ["left_luggage"], []), new emojis_Emoji("🚹", "men’s room", "Symbols", ["mens"], []), new emojis_Emoji("🚺", "women’s room", "Symbols", ["womens"], []), new emojis_Emoji("🚼", "baby symbol", "Symbols", ["baby_symbol"], []), new emojis_Emoji("🚻", "restroom", "Symbols", ["restroom"], ["toilet"]), new emojis_Emoji("🚮", "litter in bin sign", "Symbols", ["put_litter_in_its_place"], []), new emojis_Emoji("🎦", "cinema", "Symbols", ["cinema"], ["film", "movie"]), new emojis_Emoji("📶", "antenna bars", "Symbols", ["signal_strength"], ["wifi"]), new emojis_Emoji("🈁", "Japanese “here” button", "Symbols", ["koko"], []), new emojis_Emoji("🔣", "input symbols", "Symbols", ["symbols"], []), new emojis_Emoji("ℹ️", "information", "Symbols", ["information_source"], []), new emojis_Emoji("🔤", "input latin letters", "Symbols", ["abc"], ["alphabet"]), new emojis_Emoji("🔡", "input latin lowercase", "Symbols", ["abcd"], []), new emojis_Emoji("🔠", "input latin uppercase", "Symbols", ["capital_abcd"], ["letters"]), new emojis_Emoji("🆖", "NG button", "Symbols", ["ng"], []), new emojis_Emoji("🆗", "OK button", "Symbols", ["ok"], ["yes"]), new emojis_Emoji("🆙", "UP! button", "Symbols", ["up"], []), new emojis_Emoji("🆒", "COOL button", "Symbols", ["cool"], []), new emojis_Emoji("🆕", "NEW button", "Symbols", ["new"], ["fresh"]), new emojis_Emoji("🆓", "FREE button", "Symbols", ["free"], []), new emojis_Emoji("0️⃣", "keycap: 0", "Symbols", ["zero"], []), new emojis_Emoji("1️⃣", "keycap: 1", "Symbols", ["one"], []), new emojis_Emoji("2️⃣", "keycap: 2", "Symbols", ["two"], []), new emojis_Emoji("3️⃣", "keycap: 3", "Symbols", ["three"], []), new emojis_Emoji("4️⃣", "keycap: 4", "Symbols", ["four"], []), new emojis_Emoji("5️⃣", "keycap: 5", "Symbols", ["five"], []), new emojis_Emoji("6️⃣", "keycap: 6", "Symbols", ["six"], []), new emojis_Emoji("7️⃣", "keycap: 7", "Symbols", ["seven"], []), new emojis_Emoji("8️⃣", "keycap: 8", "Symbols", ["eight"], []), new emojis_Emoji("9️⃣", "keycap: 9", "Symbols", ["nine"], []), new emojis_Emoji("🔟", "keycap 10", "Symbols", ["keycap_ten"], []), new emojis_Emoji("🔢", "input numbers", "Symbols", ["1234"], ["numbers"]), new emojis_Emoji("#️⃣", "keycap: #", "Symbols", ["hash"], ["number"]), new emojis_Emoji("*️⃣", "keycap: *", "Symbols", ["asterisk"], []), new emojis_Emoji("▶️", "play button", "Symbols", ["arrow_forward"], []), new emojis_Emoji("⏸", "pause button", "Symbols", ["pause_button"], []), new emojis_Emoji("⏯", "play or pause button", "Symbols", ["play_or_pause_button"], []), new emojis_Emoji("⏹", "stop button", "Symbols", ["stop_button"], []), new emojis_Emoji("⏺", "record button", "Symbols", ["record_button"], []), new emojis_Emoji("⏭", "next track button", "Symbols", ["next_track_button"], []), new emojis_Emoji("⏮", "last track button", "Symbols", ["previous_track_button"], []), new emojis_Emoji("⏩", "fast-forward button", "Symbols", ["fast_forward"], []), new emojis_Emoji("⏪", "fast reverse button", "Symbols", ["rewind"], []), new emojis_Emoji("⏫", "fast up button", "Symbols", ["arrow_double_up"], []), new emojis_Emoji("⏬", "fast down button", "Symbols", ["arrow_double_down"], []), new emojis_Emoji("◀️", "reverse button", "Symbols", ["arrow_backward"], []), new emojis_Emoji("🔼", "up button", "Symbols", ["arrow_up_small"], []), new emojis_Emoji("🔽", "down button", "Symbols", ["arrow_down_small"], []), new emojis_Emoji("➡️", "right arrow", "Symbols", ["arrow_right"], []), new emojis_Emoji("⬅️", "left arrow", "Symbols", ["arrow_left"], []), new emojis_Emoji("⬆️", "up arrow", "Symbols", ["arrow_up"], []), new emojis_Emoji("⬇️", "down arrow", "Symbols", ["arrow_down"], []), new emojis_Emoji("↗️", "up-right arrow", "Symbols", ["arrow_upper_right"], []), new emojis_Emoji("↘️", "down-right arrow", "Symbols", ["arrow_lower_right"], []), new emojis_Emoji("↙️", "down-left arrow", "Symbols", ["arrow_lower_left"], []), new emojis_Emoji("↖️", "up-left arrow", "Symbols", ["arrow_upper_left"], []), new emojis_Emoji("↕️", "up-down arrow", "Symbols", ["arrow_up_down"], []), new emojis_Emoji("↔️", "left-right arrow", "Symbols", ["left_right_arrow"], []), new emojis_Emoji("↪️", "left arrow curving right", "Symbols", ["arrow_right_hook"], []), new emojis_Emoji("↩️", "right arrow curving left", "Symbols", ["leftwards_arrow_with_hook"], ["return"]), new emojis_Emoji("⤴️", "right arrow curving up", "Symbols", ["arrow_heading_up"], []), new emojis_Emoji("⤵️", "right arrow curving down", "Symbols", ["arrow_heading_down"], []), new emojis_Emoji("🔀", "shuffle tracks button", "Symbols", ["twisted_rightwards_arrows"], ["shuffle"]), new emojis_Emoji("🔁", "repeat button", "Symbols", ["repeat"], ["loop"]), new emojis_Emoji("🔂", "repeat single button", "Symbols", ["repeat_one"], []), new emojis_Emoji("🔄", "anticlockwise arrows button", "Symbols", ["arrows_counterclockwise"], ["sync"]), new emojis_Emoji("🔃", "clockwise vertical arrows", "Symbols", ["arrows_clockwise"], []), new emojis_Emoji("🎵", "musical note", "Symbols", ["musical_note"], []), new emojis_Emoji("🎶", "musical notes", "Symbols", ["notes"], ["music"]), new emojis_Emoji("➕", "heavy plus sign", "Symbols", ["heavy_plus_sign"], []), new emojis_Emoji("➖", "heavy minus sign", "Symbols", ["heavy_minus_sign"], []), new emojis_Emoji("➗", "heavy division sign", "Symbols", ["heavy_division_sign"], []), new emojis_Emoji("✖️", "heavy multiplication x", "Symbols", ["heavy_multiplication_x"], []), new emojis_Emoji("💲", "heavy dollar sign", "Symbols", ["heavy_dollar_sign"], []), new emojis_Emoji("💱", "currency exchange", "Symbols", ["currency_exchange"], []), new emojis_Emoji("™️", "trade mark", "Symbols", ["tm"], ["trademark"]), new emojis_Emoji("©️", "copyright", "Symbols", ["copyright"], []), new emojis_Emoji("®️", "registered", "Symbols", ["registered"], []), new emojis_Emoji("〰️", "wavy dash", "Symbols", ["wavy_dash"], []), new emojis_Emoji("➰", "curly loop", "Symbols", ["curly_loop"], []), new emojis_Emoji("➿", "double curly loop", "Symbols", ["loop"], []), new emojis_Emoji("🔚", "END arrow", "Symbols", ["end"], []), new emojis_Emoji("🔙", "BACK arrow", "Symbols", ["back"], []), new emojis_Emoji("🔛", "ON! arrow", "Symbols", ["on"], []), new emojis_Emoji("🔝", "TOP arrow", "Symbols", ["top"], []), new emojis_Emoji("🔜", "SOON arrow", "Symbols", ["soon"], []), new emojis_Emoji("✔️", "heavy check mark", "Symbols", ["heavy_check_mark"], []), new emojis_Emoji("☑️", "ballot box with check", "Symbols", ["ballot_box_with_check"], []), new emojis_Emoji("🔘", "radio button", "Symbols", ["radio_button"], []), new emojis_Emoji("⚪️", "white circle", "Symbols", ["white_circle"], []), new emojis_Emoji("⚫️", "black circle", "Symbols", ["black_circle"], []), new emojis_Emoji("🔴", "red circle", "Symbols", ["red_circle"], []), new emojis_Emoji("🔵", "blue circle", "Symbols", ["large_blue_circle"], []), new emojis_Emoji("🔺", "red triangle pointed up", "Symbols", ["small_red_triangle"], []), new emojis_Emoji("🔻", "red triangle pointed down", "Symbols", ["small_red_triangle_down"], []), new emojis_Emoji("🔸", "small orange diamond", "Symbols", ["small_orange_diamond"], []), new emojis_Emoji("🔹", "small blue diamond", "Symbols", ["small_blue_diamond"], []), new emojis_Emoji("🔶", "large orange diamond", "Symbols", ["large_orange_diamond"], []), new emojis_Emoji("🔷", "large blue diamond", "Symbols", ["large_blue_diamond"], []), new emojis_Emoji("🔳", "white square button", "Symbols", ["white_square_button"], []), new emojis_Emoji("🔲", "black square button", "Symbols", ["black_square_button"], []), new emojis_Emoji("▪️", "black small square", "Symbols", ["black_small_square"], []), new emojis_Emoji("▫️", "white small square", "Symbols", ["white_small_square"], []), new emojis_Emoji("◾️", "black medium-small square", "Symbols", ["black_medium_small_square"], []), new emojis_Emoji("◽️", "white medium-small square", "Symbols", ["white_medium_small_square"], []), new emojis_Emoji("◼️", "black medium square", "Symbols", ["black_medium_square"], []), new emojis_Emoji("◻️", "white medium square", "Symbols", ["white_medium_square"], []), new emojis_Emoji("⬛️", "black large square", "Symbols", ["black_large_square"], []), new emojis_Emoji("⬜️", "white large square", "Symbols", ["white_large_square"], []), new emojis_Emoji("🔈", "speaker low volume", "Symbols", ["speaker"], []), new emojis_Emoji("🔇", "muted speaker", "Symbols", ["mute"], ["sound", "volume"]), new emojis_Emoji("🔉", "speaker medium volume", "Symbols", ["sound"], ["volume"]), new emojis_Emoji("🔊", "speaker high volume", "Symbols", ["loud_sound"], ["volume"]), new emojis_Emoji("🔔", "bell", "Symbols", ["bell"], ["sound", "notification"]), new emojis_Emoji("🔕", "bell with slash", "Symbols", ["no_bell"], ["volume", "off"]), new emojis_Emoji("📣", "megaphone", "Symbols", ["mega"], []), new emojis_Emoji("📢", "loudspeaker", "Symbols", ["loudspeaker"], ["announcement"]), new emojis_Emoji("👁‍🗨", "eye in speech bubble", "Symbols", ["eye_speech_bubble"], []), new emojis_Emoji("💬", "speech balloon", "Symbols", ["speech_balloon"], ["comment"]), new emojis_Emoji("💭", "thought balloon", "Symbols", ["thought_balloon"], ["thinking"]), new emojis_Emoji("🗯", "right anger bubble", "Symbols", ["right_anger_bubble"], []), new emojis_Emoji("♠️", "spade suit", "Symbols", ["spades"], []), new emojis_Emoji("♣️", "club suit", "Symbols", ["clubs"], []), new emojis_Emoji("♥️", "heart suit", "Symbols", ["hearts"], []), new emojis_Emoji("♦️", "diamond suit", "Symbols", ["diamonds"], []), new emojis_Emoji("🃏", "joker", "Symbols", ["black_joker"], []), new emojis_Emoji("🎴", "flower playing cards", "Symbols", ["flower_playing_cards"], []), new emojis_Emoji("🀄️", "mahjong red dragon", "Symbols", ["mahjong"], []), new emojis_Emoji("🕐", "one o’clock", "Symbols", ["clock1"], []), new emojis_Emoji("🕑", "two o’clock", "Symbols", ["clock2"], []), new emojis_Emoji("🕒", "three o’clock", "Symbols", ["clock3"], []), new emojis_Emoji("🕓", "four o’clock", "Symbols", ["clock4"], []), new emojis_Emoji("🕔", "five o’clock", "Symbols", ["clock5"], []), new emojis_Emoji("🕕", "six o’clock", "Symbols", ["clock6"], []), new emojis_Emoji("🕖", "seven o’clock", "Symbols", ["clock7"], []), new emojis_Emoji("🕗", "eight o’clock", "Symbols", ["clock8"], []), new emojis_Emoji("🕘", "nine o’clock", "Symbols", ["clock9"], []), new emojis_Emoji("🕙", "ten o’clock", "Symbols", ["clock10"], []), new emojis_Emoji("🕚", "eleven o’clock", "Symbols", ["clock11"], []), new emojis_Emoji("🕛", "twelve o’clock", "Symbols", ["clock12"], []), new emojis_Emoji("🕜", "one-thirty", "Symbols", ["clock130"], []), new emojis_Emoji("🕝", "two-thirty", "Symbols", ["clock230"], []), new emojis_Emoji("🕞", "three-thirty", "Symbols", ["clock330"], []), new emojis_Emoji("🕟", "four-thirty", "Symbols", ["clock430"], []), new emojis_Emoji("🕠", "five-thirty", "Symbols", ["clock530"], []), new emojis_Emoji("🕡", "six-thirty", "Symbols", ["clock630"], []), new emojis_Emoji("🕢", "seven-thirty", "Symbols", ["clock730"], []), new emojis_Emoji("🕣", "eight-thirty", "Symbols", ["clock830"], []), new emojis_Emoji("🕤", "nine-thirty", "Symbols", ["clock930"], []), new emojis_Emoji("🕥", "ten-thirty", "Symbols", ["clock1030"], []), new emojis_Emoji("🕦", "eleven-thirty", "Symbols", ["clock1130"], []), new emojis_Emoji("🕧", "twelve-thirty", "Symbols", ["clock1230"], []), new emojis_Emoji("🏳️", "white flag", "Flags", ["white_flag"], []), new emojis_Emoji("🏴", "black flag", "Flags", ["black_flag"], []), new emojis_Emoji("🏁", "chequered flag", "Flags", ["checkered_flag"], ["milestone", "finish"]), new emojis_Emoji("🚩", "triangular flag", "Flags", ["triangular_flag_on_post"], []), new emojis_Emoji("🏳️‍🌈", "rainbow flag", "Flags", ["rainbow_flag"], ["pride"]), new emojis_Emoji("🇦🇫", "Afghanistan", "Flags", ["afghanistan"], []), new emojis_Emoji("🇦🇽", "Åland Islands", "Flags", ["aland_islands"], []), new emojis_Emoji("🇦🇱", "Albania", "Flags", ["albania"], []), new emojis_Emoji("🇩🇿", "Algeria", "Flags", ["algeria"], []), new emojis_Emoji("🇦🇸", "American Samoa", "Flags", ["american_samoa"], []), new emojis_Emoji("🇦🇩", "Andorra", "Flags", ["andorra"], []), new emojis_Emoji("🇦🇴", "Angola", "Flags", ["angola"], []), new emojis_Emoji("🇦🇮", "Anguilla", "Flags", ["anguilla"], []), new emojis_Emoji("🇦🇶", "Antarctica", "Flags", ["antarctica"], []), new emojis_Emoji("🇦🇬", "Antigua & Barbuda", "Flags", ["antigua_barbuda"], []), new emojis_Emoji("🇦🇷", "Argentina", "Flags", ["argentina"], []), new emojis_Emoji("🇦🇲", "Armenia", "Flags", ["armenia"], []), new emojis_Emoji("🇦🇼", "Aruba", "Flags", ["aruba"], []), new emojis_Emoji("🇦🇺", "Australia", "Flags", ["australia"], []), new emojis_Emoji("🇦🇹", "Austria", "Flags", ["austria"], []), new emojis_Emoji("🇦🇿", "Azerbaijan", "Flags", ["azerbaijan"], []), new emojis_Emoji("🇧🇸", "Bahamas", "Flags", ["bahamas"], []), new emojis_Emoji("🇧🇭", "Bahrain", "Flags", ["bahrain"], []), new emojis_Emoji("🇧🇩", "Bangladesh", "Flags", ["bangladesh"], []), new emojis_Emoji("🇧🇧", "Barbados", "Flags", ["barbados"], []), new emojis_Emoji("🇧🇾", "Belarus", "Flags", ["belarus"], []), new emojis_Emoji("🇧🇪", "Belgium", "Flags", ["belgium"], []), new emojis_Emoji("🇧🇿", "Belize", "Flags", ["belize"], []), new emojis_Emoji("🇧🇯", "Benin", "Flags", ["benin"], []), new emojis_Emoji("🇧🇲", "Bermuda", "Flags", ["bermuda"], []), new emojis_Emoji("🇧🇹", "Bhutan", "Flags", ["bhutan"], []), new emojis_Emoji("🇧🇴", "Bolivia", "Flags", ["bolivia"], []), new emojis_Emoji("🇧🇶", "Caribbean Netherlands", "Flags", ["caribbean_netherlands"], []), new emojis_Emoji("🇧🇦", "Bosnia & Herzegovina", "Flags", ["bosnia_herzegovina"], []), new emojis_Emoji("🇧🇼", "Botswana", "Flags", ["botswana"], []), new emojis_Emoji("🇧🇷", "Brazil", "Flags", ["brazil"], []), new emojis_Emoji("🇮🇴", "British Indian Ocean Territory", "Flags", ["british_indian_ocean_territory"], []), new emojis_Emoji("🇻🇬", "British Virgin Islands", "Flags", ["british_virgin_islands"], []), new emojis_Emoji("🇧🇳", "Brunei", "Flags", ["brunei"], []), new emojis_Emoji("🇧🇬", "Bulgaria", "Flags", ["bulgaria"], []), new emojis_Emoji("🇧🇫", "Burkina Faso", "Flags", ["burkina_faso"], []), new emojis_Emoji("🇧🇮", "Burundi", "Flags", ["burundi"], []), new emojis_Emoji("🇨🇻", "Cape Verde", "Flags", ["cape_verde"], []), new emojis_Emoji("🇰🇭", "Cambodia", "Flags", ["cambodia"], []), new emojis_Emoji("🇨🇲", "Cameroon", "Flags", ["cameroon"], []), new emojis_Emoji("🇨🇦", "Canada", "Flags", ["canada"], []), new emojis_Emoji("🇮🇨", "Canary Islands", "Flags", ["canary_islands"], []), new emojis_Emoji("🇰🇾", "Cayman Islands", "Flags", ["cayman_islands"], []), new emojis_Emoji("🇨🇫", "Central African Republic", "Flags", ["central_african_republic"], []), new emojis_Emoji("🇹🇩", "Chad", "Flags", ["chad"], []), new emojis_Emoji("🇨🇱", "Chile", "Flags", ["chile"], []), new emojis_Emoji("🇨🇳", "China", "Flags", ["cn"], ["china"]), new emojis_Emoji("🇨🇽", "Christmas Island", "Flags", ["christmas_island"], []), new emojis_Emoji("🇨🇨", "Cocos (Keeling) Islands", "Flags", ["cocos_islands"], ["keeling"]), new emojis_Emoji("🇨🇴", "Colombia", "Flags", ["colombia"], []), new emojis_Emoji("🇰🇲", "Comoros", "Flags", ["comoros"], []), new emojis_Emoji("🇨🇬", "Congo - Brazzaville", "Flags", ["congo_brazzaville"], []), new emojis_Emoji("🇨🇩", "Congo - Kinshasa", "Flags", ["congo_kinshasa"], []), new emojis_Emoji("🇨🇰", "Cook Islands", "Flags", ["cook_islands"], []), new emojis_Emoji("🇨🇷", "Costa Rica", "Flags", ["costa_rica"], []), new emojis_Emoji("🇨🇮", "Côte d’Ivoire", "Flags", ["cote_divoire"], ["ivory"]), new emojis_Emoji("🇭🇷", "Croatia", "Flags", ["croatia"], []), new emojis_Emoji("🇨🇺", "Cuba", "Flags", ["cuba"], []), new emojis_Emoji("🇨🇼", "Curaçao", "Flags", ["curacao"], []), new emojis_Emoji("🇨🇾", "Cyprus", "Flags", ["cyprus"], []), new emojis_Emoji("🇨🇿", "Czech Republic", "Flags", ["czech_republic"], []), new emojis_Emoji("🇩🇰", "Denmark", "Flags", ["denmark"], []), new emojis_Emoji("🇩🇯", "Djibouti", "Flags", ["djibouti"], []), new emojis_Emoji("🇩🇲", "Dominica", "Flags", ["dominica"], []), new emojis_Emoji("🇩🇴", "Dominican Republic", "Flags", ["dominican_republic"], []), new emojis_Emoji("🇪🇨", "Ecuador", "Flags", ["ecuador"], []), new emojis_Emoji("🇪🇬", "Egypt", "Flags", ["egypt"], []), new emojis_Emoji("🇸🇻", "El Salvador", "Flags", ["el_salvador"], []), new emojis_Emoji("🇬🇶", "Equatorial Guinea", "Flags", ["equatorial_guinea"], []), new emojis_Emoji("🇪🇷", "Eritrea", "Flags", ["eritrea"], []), new emojis_Emoji("🇪🇪", "Estonia", "Flags", ["estonia"], []), new emojis_Emoji("🇪🇹", "Ethiopia", "Flags", ["ethiopia"], []), new emojis_Emoji("🇪🇺", "European Union", "Flags", ["eu", "european_union"], []), new emojis_Emoji("🇫🇰", "Falkland Islands", "Flags", ["falkland_islands"], []), new emojis_Emoji("🇫🇴", "Faroe Islands", "Flags", ["faroe_islands"], []), new emojis_Emoji("🇫🇯", "Fiji", "Flags", ["fiji"], []), new emojis_Emoji("🇫🇮", "Finland", "Flags", ["finland"], []), new emojis_Emoji("🇫🇷", "France", "Flags", ["fr"], ["france", "french"]), new emojis_Emoji("🇬🇫", "French Guiana", "Flags", ["french_guiana"], []), new emojis_Emoji("🇵🇫", "French Polynesia", "Flags", ["french_polynesia"], []), new emojis_Emoji("🇹🇫", "French Southern Territories", "Flags", ["french_southern_territories"], []), new emojis_Emoji("🇬🇦", "Gabon", "Flags", ["gabon"], []), new emojis_Emoji("🇬🇲", "Gambia", "Flags", ["gambia"], []), new emojis_Emoji("🇬🇪", "Georgia", "Flags", ["georgia"], []), new emojis_Emoji("🇩🇪", "Germany", "Flags", ["de"], ["flag", "germany"]), new emojis_Emoji("🇬🇭", "Ghana", "Flags", ["ghana"], []), new emojis_Emoji("🇬🇮", "Gibraltar", "Flags", ["gibraltar"], []), new emojis_Emoji("🇬🇷", "Greece", "Flags", ["greece"], []), new emojis_Emoji("🇬🇱", "Greenland", "Flags", ["greenland"], []), new emojis_Emoji("🇬🇩", "Grenada", "Flags", ["grenada"], []), new emojis_Emoji("🇬🇵", "Guadeloupe", "Flags", ["guadeloupe"], []), new emojis_Emoji("🇬🇺", "Guam", "Flags", ["guam"], []), new emojis_Emoji("🇬🇹", "Guatemala", "Flags", ["guatemala"], []), new emojis_Emoji("🇬🇬", "Guernsey", "Flags", ["guernsey"], []), new emojis_Emoji("🇬🇳", "Guinea", "Flags", ["guinea"], []), new emojis_Emoji("🇬🇼", "Guinea-Bissau", "Flags", ["guinea_bissau"], []), new emojis_Emoji("🇬🇾", "Guyana", "Flags", ["guyana"], []), new emojis_Emoji("🇭🇹", "Haiti", "Flags", ["haiti"], []), new emojis_Emoji("🇭🇳", "Honduras", "Flags", ["honduras"], []), new emojis_Emoji("🇭🇰", "Hong Kong SAR China", "Flags", ["hong_kong"], []), new emojis_Emoji("🇭🇺", "Hungary", "Flags", ["hungary"], []), new emojis_Emoji("🇮🇸", "Iceland", "Flags", ["iceland"], []), new emojis_Emoji("🇮🇳", "India", "Flags", ["india"], []), new emojis_Emoji("🇮🇩", "Indonesia", "Flags", ["indonesia"], []), new emojis_Emoji("🇮🇷", "Iran", "Flags", ["iran"], []), new emojis_Emoji("🇮🇶", "Iraq", "Flags", ["iraq"], []), new emojis_Emoji("🇮🇪", "Ireland", "Flags", ["ireland"], []), new emojis_Emoji("🇮🇲", "Isle of Man", "Flags", ["isle_of_man"], []), new emojis_Emoji("🇮🇱", "Israel", "Flags", ["israel"], []), new emojis_Emoji("🇮🇹", "Italy", "Flags", ["it"], ["italy"]), new emojis_Emoji("🇯🇲", "Jamaica", "Flags", ["jamaica"], []), new emojis_Emoji("🇯🇵", "Japan", "Flags", ["jp"], ["japan"]), new emojis_Emoji("🎌", "crossed flags", "Flags", ["crossed_flags"], []), new emojis_Emoji("🇯🇪", "Jersey", "Flags", ["jersey"], []), new emojis_Emoji("🇯🇴", "Jordan", "Flags", ["jordan"], []), new emojis_Emoji("🇰🇿", "Kazakhstan", "Flags", ["kazakhstan"], []), new emojis_Emoji("🇰🇪", "Kenya", "Flags", ["kenya"], []), new emojis_Emoji("🇰🇮", "Kiribati", "Flags", ["kiribati"], []), new emojis_Emoji("🇽🇰", "Kosovo", "Flags", ["kosovo"], []), new emojis_Emoji("🇰🇼", "Kuwait", "Flags", ["kuwait"], []), new emojis_Emoji("🇰🇬", "Kyrgyzstan", "Flags", ["kyrgyzstan"], []), new emojis_Emoji("🇱🇦", "Laos", "Flags", ["laos"], []), new emojis_Emoji("🇱🇻", "Latvia", "Flags", ["latvia"], []), new emojis_Emoji("🇱🇧", "Lebanon", "Flags", ["lebanon"], []), new emojis_Emoji("🇱🇸", "Lesotho", "Flags", ["lesotho"], []), new emojis_Emoji("🇱🇷", "Liberia", "Flags", ["liberia"], []), new emojis_Emoji("🇱🇾", "Libya", "Flags", ["libya"], []), new emojis_Emoji("🇱🇮", "Liechtenstein", "Flags", ["liechtenstein"], []), new emojis_Emoji("🇱🇹", "Lithuania", "Flags", ["lithuania"], []), new emojis_Emoji("🇱🇺", "Luxembourg", "Flags", ["luxembourg"], []), new emojis_Emoji("🇲🇴", "Macau SAR China", "Flags", ["macau"], []), new emojis_Emoji("🇲🇰", "Macedonia", "Flags", ["macedonia"], []), new emojis_Emoji("🇲🇬", "Madagascar", "Flags", ["madagascar"], []), new emojis_Emoji("🇲🇼", "Malawi", "Flags", ["malawi"], []), new emojis_Emoji("🇲🇾", "Malaysia", "Flags", ["malaysia"], []), new emojis_Emoji("🇲🇻", "Maldives", "Flags", ["maldives"], []), new emojis_Emoji("🇲🇱", "Mali", "Flags", ["mali"], []), new emojis_Emoji("🇲🇹", "Malta", "Flags", ["malta"], []), new emojis_Emoji("🇲🇭", "Marshall Islands", "Flags", ["marshall_islands"], []), new emojis_Emoji("🇲🇶", "Martinique", "Flags", ["martinique"], []), new emojis_Emoji("🇲🇷", "Mauritania", "Flags", ["mauritania"], []), new emojis_Emoji("🇲🇺", "Mauritius", "Flags", ["mauritius"], []), new emojis_Emoji("🇾🇹", "Mayotte", "Flags", ["mayotte"], []), new emojis_Emoji("🇲🇽", "Mexico", "Flags", ["mexico"], []), new emojis_Emoji("🇫🇲", "Micronesia", "Flags", ["micronesia"], []), new emojis_Emoji("🇲🇩", "Moldova", "Flags", ["moldova"], []), new emojis_Emoji("🇲🇨", "Monaco", "Flags", ["monaco"], []), new emojis_Emoji("🇲🇳", "Mongolia", "Flags", ["mongolia"], []), new emojis_Emoji("🇲🇪", "Montenegro", "Flags", ["montenegro"], []), new emojis_Emoji("🇲🇸", "Montserrat", "Flags", ["montserrat"], []), new emojis_Emoji("🇲🇦", "Morocco", "Flags", ["morocco"], []), new emojis_Emoji("🇲🇿", "Mozambique", "Flags", ["mozambique"], []), new emojis_Emoji("🇲🇲", "Myanmar (Burma)", "Flags", ["myanmar"], ["burma"]), new emojis_Emoji("🇳🇦", "Namibia", "Flags", ["namibia"], []), new emojis_Emoji("🇳🇷", "Nauru", "Flags", ["nauru"], []), new emojis_Emoji("🇳🇵", "Nepal", "Flags", ["nepal"], []), new emojis_Emoji("🇳🇱", "Netherlands", "Flags", ["netherlands"], []), new emojis_Emoji("🇳🇨", "New Caledonia", "Flags", ["new_caledonia"], []), new emojis_Emoji("🇳🇿", "New Zealand", "Flags", ["new_zealand"], []), new emojis_Emoji("🇳🇮", "Nicaragua", "Flags", ["nicaragua"], []), new emojis_Emoji("🇳🇪", "Niger", "Flags", ["niger"], []), new emojis_Emoji("🇳🇬", "Nigeria", "Flags", ["nigeria"], []), new emojis_Emoji("🇳🇺", "Niue", "Flags", ["niue"], []), new emojis_Emoji("🇳🇫", "Norfolk Island", "Flags", ["norfolk_island"], []), new emojis_Emoji("🇲🇵", "Northern Mariana Islands", "Flags", ["northern_mariana_islands"], []), new emojis_Emoji("🇰🇵", "North Korea", "Flags", ["north_korea"], []), new emojis_Emoji("🇳🇴", "Norway", "Flags", ["norway"], []), new emojis_Emoji("🇴🇲", "Oman", "Flags", ["oman"], []), new emojis_Emoji("🇵🇰", "Pakistan", "Flags", ["pakistan"], []), new emojis_Emoji("🇵🇼", "Palau", "Flags", ["palau"], []), new emojis_Emoji("🇵🇸", "Palestinian Territories", "Flags", ["palestinian_territories"], []), new emojis_Emoji("🇵🇦", "Panama", "Flags", ["panama"], []), new emojis_Emoji("🇵🇬", "Papua New Guinea", "Flags", ["papua_new_guinea"], []), new emojis_Emoji("🇵🇾", "Paraguay", "Flags", ["paraguay"], []), new emojis_Emoji("🇵🇪", "Peru", "Flags", ["peru"], []), new emojis_Emoji("🇵🇭", "Philippines", "Flags", ["philippines"], []), new emojis_Emoji("🇵🇳", "Pitcairn Islands", "Flags", ["pitcairn_islands"], []), new emojis_Emoji("🇵🇱", "Poland", "Flags", ["poland"], []), new emojis_Emoji("🇵🇹", "Portugal", "Flags", ["portugal"], []), new emojis_Emoji("🇵🇷", "Puerto Rico", "Flags", ["puerto_rico"], []), new emojis_Emoji("🇶🇦", "Qatar", "Flags", ["qatar"], []), new emojis_Emoji("🇷🇪", "Réunion", "Flags", ["reunion"], []), new emojis_Emoji("🇷🇴", "Romania", "Flags", ["romania"], []), new emojis_Emoji("🇷🇺", "Russia", "Flags", ["ru"], ["russia"]), new emojis_Emoji("🇷🇼", "Rwanda", "Flags", ["rwanda"], []), new emojis_Emoji("🇧🇱", "St. Barthélemy", "Flags", ["st_barthelemy"], []), new emojis_Emoji("🇸🇭", "St. Helena", "Flags", ["st_helena"], []), new emojis_Emoji("🇰🇳", "St. Kitts & Nevis", "Flags", ["st_kitts_nevis"], []), new emojis_Emoji("🇱🇨", "St. Lucia", "Flags", ["st_lucia"], []), new emojis_Emoji("🇵🇲", "St. Pierre & Miquelon", "Flags", ["st_pierre_miquelon"], []), new emojis_Emoji("🇻🇨", "St. Vincent & Grenadines", "Flags", ["st_vincent_grenadines"], []), new emojis_Emoji("🇼🇸", "Samoa", "Flags", ["samoa"], []), new emojis_Emoji("🇸🇲", "San Marino", "Flags", ["san_marino"], []), new emojis_Emoji("🇸🇹", "São Tomé & Príncipe", "Flags", ["sao_tome_principe"], []), new emojis_Emoji("🇸🇦", "Saudi Arabia", "Flags", ["saudi_arabia"], []), new emojis_Emoji("🇸🇳", "Senegal", "Flags", ["senegal"], []), new emojis_Emoji("🇷🇸", "Serbia", "Flags", ["serbia"], []), new emojis_Emoji("🇸🇨", "Seychelles", "Flags", ["seychelles"], []), new emojis_Emoji("🇸🇱", "Sierra Leone", "Flags", ["sierra_leone"], []), new emojis_Emoji("🇸🇬", "Singapore", "Flags", ["singapore"], []), new emojis_Emoji("🇸🇽", "Sint Maarten", "Flags", ["sint_maarten"], []), new emojis_Emoji("🇸🇰", "Slovakia", "Flags", ["slovakia"], []), new emojis_Emoji("🇸🇮", "Slovenia", "Flags", ["slovenia"], []), new emojis_Emoji("🇸🇧", "Solomon Islands", "Flags", ["solomon_islands"], []), new emojis_Emoji("🇸🇴", "Somalia", "Flags", ["somalia"], []), new emojis_Emoji("🇿🇦", "South Africa", "Flags", ["south_africa"], []), new emojis_Emoji("🇬🇸", "South Georgia & South Sandwich Islands", "Flags", ["south_georgia_south_sandwich_islands"], []), new emojis_Emoji("🇰🇷", "South Korea", "Flags", ["kr"], ["korea"]), new emojis_Emoji("🇸🇸", "South Sudan", "Flags", ["south_sudan"], []), new emojis_Emoji("🇪🇸", "Spain", "Flags", ["es"], ["spain"]), new emojis_Emoji("🇱🇰", "Sri Lanka", "Flags", ["sri_lanka"], []), new emojis_Emoji("🇸🇩", "Sudan", "Flags", ["sudan"], []), new emojis_Emoji("🇸🇷", "Suriname", "Flags", ["suriname"], []), new emojis_Emoji("🇸🇿", "Swaziland", "Flags", ["swaziland"], []), new emojis_Emoji("🇸🇪", "Sweden", "Flags", ["sweden"], []), new emojis_Emoji("🇨🇭", "Switzerland", "Flags", ["switzerland"], []), new emojis_Emoji("🇸🇾", "Syria", "Flags", ["syria"], []), new emojis_Emoji("🇹🇼", "Taiwan", "Flags", ["taiwan"], []), new emojis_Emoji("🇹🇯", "Tajikistan", "Flags", ["tajikistan"], []), new emojis_Emoji("🇹🇿", "Tanzania", "Flags", ["tanzania"], []), new emojis_Emoji("🇹🇭", "Thailand", "Flags", ["thailand"], []), new emojis_Emoji("🇹🇱", "Timor-Leste", "Flags", ["timor_leste"], []), new emojis_Emoji("🇹🇬", "Togo", "Flags", ["togo"], []), new emojis_Emoji("🇹🇰", "Tokelau", "Flags", ["tokelau"], []), new emojis_Emoji("🇹🇴", "Tonga", "Flags", ["tonga"], []), new emojis_Emoji("🇹🇹", "Trinidad & Tobago", "Flags", ["trinidad_tobago"], []), new emojis_Emoji("🇹🇳", "Tunisia", "Flags", ["tunisia"], []), new emojis_Emoji("🇹🇷", "Turkey", "Flags", ["tr"], ["turkey"]), new emojis_Emoji("🇹🇲", "Turkmenistan", "Flags", ["turkmenistan"], []), new emojis_Emoji("🇹🇨", "Turks & Caicos Islands", "Flags", ["turks_caicos_islands"], []), new emojis_Emoji("🇹🇻", "Tuvalu", "Flags", ["tuvalu"], []), new emojis_Emoji("🇺🇬", "Uganda", "Flags", ["uganda"], []), new emojis_Emoji("🇺🇦", "Ukraine", "Flags", ["ukraine"], []), new emojis_Emoji("🇦🇪", "United Arab Emirates", "Flags", ["united_arab_emirates"], []), new emojis_Emoji("🇬🇧", "United Kingdom", "Flags", ["gb", "uk"], ["flag", "british"]), new emojis_Emoji("🇺🇸", "United States", "Flags", ["us"], ["flag", "united", "america"]), new emojis_Emoji("🇻🇮", "U.S. Virgin Islands", "Flags", ["us_virgin_islands"], []), new emojis_Emoji("🇺🇾", "Uruguay", "Flags", ["uruguay"], []), new emojis_Emoji("🇺🇿", "Uzbekistan", "Flags", ["uzbekistan"], []), new emojis_Emoji("🇻🇺", "Vanuatu", "Flags", ["vanuatu"], []), new emojis_Emoji("🇻🇦", "Vatican City", "Flags", ["vatican_city"], []), new emojis_Emoji("🇻🇪", "Venezuela", "Flags", ["venezuela"], []), new emojis_Emoji("🇻🇳", "Vietnam", "Flags", ["vietnam"], []), new emojis_Emoji("🇼🇫", "Wallis & Futuna", "Flags", ["wallis_futuna"], []), new emojis_Emoji("🇪🇭", "Western Sahara", "Flags", ["western_sahara"], []), new emojis_Emoji("🇾🇪", "Yemen", "Flags", ["yemen"], []), new emojis_Emoji("🇿🇲", "Zambia", "Flags", ["zambia"], []), new emojis_Emoji("🇿🇼", "Zimbabwe", "Flags", ["zimbabwe"], [])]);
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
-var es_array_map = __webpack_require__("d81d");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.constructor.js
-var es_regexp_constructor = __webpack_require__("4d63");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.to-string.js
-var es_regexp_to_string = __webpack_require__("25f0");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.replace.js
-var es_string_replace = __webpack_require__("5319");
-
-// CONCATENATED MODULE: ./src/utils/util.js
-
-
-
-
-
-
-/**
- * time ago
- * @param {*} time
- */
-function timeAgo(time) {
-  var currentTime = new Date().getTime();
-  var between = currentTime - time;
-  var days = Math.floor(between / (24 * 3600 * 1000));
-
-  if (days === 0) {
-    var leave1 = between % (24 * 3600 * 1000);
-    var hours = Math.floor(leave1 / (3600 * 1000));
-
-    if (hours === 0) {
-      var leave2 = leave1 % (3600 * 1000);
-      var minutes = Math.floor(leave2 / (60 * 1000));
-
-      if (minutes === 0) {
-        var leave3 = leave2 % (60 * 1000);
-        var seconds = Math.round(leave3 / 1000);
-        return seconds + ' 秒前';
-      }
-
-      return minutes + ' 分钟前';
-    }
-
-    return hours + ' 小时前';
-  }
-
-  if (days < 0) return '刚刚';
-
-  if (days < 1) {
-    return days + ' 天前';
-  } else {
-    return formatDate(time, 'yyyy/MM/dd hh:mm');
-  }
-}
-
-function formatDate(date, fmt) {
-  date = new Date(date);
-
-  if (/(y+)/.test(fmt)) {
-    fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
-  }
-
-  var o = {
-    'M+': date.getMonth() + 1,
-    'd+': date.getDate(),
-    'h+': date.getHours(),
-    'm+': date.getMinutes(),
-    's+': date.getSeconds()
-  };
-
-  for (var k in o) {
-    if (new RegExp("(".concat(k, ")")).test(fmt)) {
-      var str = o[k] + '';
-      fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? str : padLeftZero(str));
-    }
-  }
-
-  return fmt;
-}
-
-function padLeftZero(str) {
-  return ('00' + str).substr(str.length);
-} // From <https://www.w3resource.com/javascript-exercises/javascript-regexp-exercise-9.php>
-
-
-function isUrl(str) {
-  var regexp = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
-
-  if (regexp.test(str)) {
-    return true;
-  } else {
-    return false;
-  }
-}
-function isEmpty(content) {
-  return content === null || content === undefined || content === '';
-}
-function isObject(value) {
-  return value && typeof value === 'object' && value.constructor === Object;
-}
-function validEmail(email) {
-  var re = /^[A-Za-z1-9]+([-_.][A-Za-z1-9]+)*@([A-Za-z1-9]+[-.])+[A-Za-z]{2,8}$/;
-  return re.test(email);
-}
-var queryStringify = query => {
-  var queryString = Object.keys(query).map(key => "".concat(key, "=").concat(encodeURIComponent(query[key] || ''))).join('&');
-  return queryString;
-};
-function getUrlKey(name) {
-  return decodeURIComponent((new RegExp("[?|&]" + name + "=" + "([^&;]+?)(&|#|;|$)").exec(location.href) || "")[1].replace(/\+/g, "%20")) || null;
-}
-// EXTERNAL MODULE: ./node_modules/axios/index.js
-var axios = __webpack_require__("bc3a");
-var axios_default = /*#__PURE__*/__webpack_require__.n(axios);
-
-// CONCATENATED MODULE: ./src/utils/service.js
-
-
-
-
-__webpack_require__("09bd").shim();
-
-var service = axios_default.a.create({
-  baseURL:  true ? '' : undefined,
-  timeout: 5000,
-  withCredentials: true
-});
-service.interceptors.request.use(config => {
-  return config;
-}, error => {
-  return Promise.reject(error);
-});
-service.interceptors.response.use(response => {
-  return response;
-}, error => {
-  if (axios_default.a.isCancel(error)) {
-    // Vue.$log.debug("Cancelled uploading by user.");
-    return Promise.reject(error);
-  } // Vue.$log.error("Response failed", error);
-
-
-  var response = error.response; // const status = response ? response.status : -1;
-  // Vue.$log.error("Server response status", status);
-
-  var data = response ? response.data : null;
-
-  if (data) {
-    // Business response
-    // Vue.$log.error("Business response status", data.status);
-    if (data.status === 400) {// TODO handle 400 status error
-    } else if (data.status === 401) {// TODO Handle 401 status error
-    } else if (data.status === 403) {// TODO handle 403 status error
-    } else if (data.status === 404) {// TODO handle 404 status error
-    } else if (data.status === 500) {// TODO handle 500 status error
-    }
-  } else {// TODO Server unavailable
-    }
-
-  return Promise.reject(error);
-});
-/* harmony default export */ var utils_service = (service);
-// CONCATENATED MODULE: ./src/api/comment.js
-
-
-var baseUrl = '/api/content';
-var commentApi = {};
-
-commentApi.createComment = (target, comment) => {
-  return utils_service({
-    url: "".concat(baseUrl, "/").concat(target, "/comments"),
-    method: 'post',
-    data: comment
-  });
-};
-
-commentApi.listComments = function (target, targetId) {
-  var view = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'tree_view';
-  var pagination = arguments.length > 3 ? arguments[3] : undefined;
-  return utils_service({
-    url: "".concat(baseUrl, "/").concat(target, "/").concat(targetId, "/comments/").concat(view),
-    params: pagination,
-    method: 'get'
-  });
-};
-
-/* harmony default export */ var api_comment = (commentApi);
-// EXTERNAL MODULE: ./node_modules/autosize/dist/autosize.js
-var autosize = __webpack_require__("19e9");
-var autosize_default = /*#__PURE__*/__webpack_require__.n(autosize);
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/CommentEditor.vue?vue&type=script&lang=js&
-
-
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-
-
-
-
-
-/* harmony default export */ var CommentEditorvue_type_script_lang_js_ = ({
-  name: "CommentEditor",
-  components: {
-    VEmojiPicker: VEmojiPicker
-  },
-  props: {
-    targetId: {
-      type: Number,
-      required: false,
-      default: 0
-    },
-    target: {
-      type: String,
-      required: false,
-      default: "posts",
-      validator: function validator(value) {
-        return ["posts", "sheets", "journals"].indexOf(value) !== -1;
-      }
-    },
-    replyComment: {
-      type: Object,
-      required: false,
-      default: () => {}
-    },
-    options: {
-      required: false,
-      default: []
-    },
-    configs: {
-      type: Object,
-      required: true
-    }
-  },
-
-  data() {
-    return {
-      emojiPack: emojis,
-      emojiDialogVisible: false,
-      comment: {
-        author: null,
-        authorUrl: null,
-        email: null,
-        content: ""
-      },
-      previewMode: false,
-      infoes: [],
-      warnings: [],
-      successes: []
-    };
-  },
-
-  computed: {
-    renderedContent() {
-      return this.comment.content ? marked_default()(this.comment.content) : "";
-    },
-
-    avatar() {
-      if (!this.comment.email || !validEmail(this.comment.email)) {
-        return this.configs.gravatarSource + "?d=" + this.options.comment_gravatar_default;
-      }
-
-      var gravatarMd5 = md5_default()(this.comment.email);
-      return this.configs.gravatarSource + "/".concat(gravatarMd5, "?s=256&d=") + this.options.comment_gravatar_default;
-    },
-
-    commentValid() {
-      return !isEmpty(this.comment.author) && !isEmpty(this.comment.email) && !isEmpty(this.comment.content);
-    },
-
-    infoAlertVisiable() {
-      return this.infoes !== null && this.infoes.length > 0;
-    },
-
-    warningAlertVisiable() {
-      return this.warnings !== null && this.warnings.length > 0;
-    },
-
-    successAlertVisiable() {
-      return this.successes !== null && this.successes.length > 0;
-    }
-
-  },
-
-  created() {
-    // Get info from local storage
-    var author = localStorage.getItem("comment-author");
-    var authorUrl = localStorage.getItem("comment-authorUrl");
-    var email = localStorage.getItem("comment-email");
-    this.comment.author = author ? author : "";
-    this.comment.authorUrl = authorUrl ? authorUrl : "";
-    this.comment.email = email ? email : ""; // this.handleGetGithubUser();
-  },
-
-  mounted() {
-    // autosize(this.$refs.commentTextArea);
-    autosize_default()(document.querySelector("textarea"));
-  },
-
-  methods: {
-    handleSubmitClick() {
-      if (isEmpty(this.comment.author)) {
-        this.warnings.push("评论者昵称不能为空");
-        return;
-      }
-
-      if (isEmpty(this.comment.email)) {
-        this.warnings.push("邮箱不能为空");
-        return;
-      }
-
-      if (isEmpty(this.comment.content)) {
-        this.warnings.push("评论内容不能为空");
-        return;
-      } // Submit the comment
-
-
-      this.comment.postId = this.targetId;
-
-      if (this.replyComment) {
-        // Set parent id if available
-        this.comment.parentId = this.replyComment.id;
-      }
-
-      api_comment.createComment(this.target, this.comment).then(response => {
-        // Store comment author, email, authorUrl
-        localStorage.setItem("comment-author", this.comment.author);
-        localStorage.setItem("comment-email", this.comment.email);
-        localStorage.setItem("comment-authorUrl", this.comment.authorUrl); // clear comment
-
-        this.comment.content = "";
-        this.handleCommentCreated(response.data.data);
-      }).catch(error => {
-        this.handleFailedToCreateComment(error.response);
-      });
-    },
-
-    handlePreviewContent() {
-      this.previewMode = !this.previewMode;
-    },
-
-    handleCommentCreated(createdComment) {
-      this.clearAlertClose();
-
-      if (createdComment.status === "PUBLISHED") {
-        this.successes.push("评论成功，刷新即可显示最新评论！");
-      } else {
-        // Show tips
-        this.infoes.push("您的评论已经投递至博主，等待博主审核！");
-      }
-    },
-
-    handleFailedToCreateComment(response) {
-      this.clearAlertClose();
-
-      if (response.status === 400) {
-        this.warnings.push(response.data.message);
-
-        if (response.data) {
-          var errorDetail = response.data.data;
-
-          if (isObject(errorDetail)) {
-            Object.keys(errorDetail).forEach(key => {
-              this.warnings.push(errorDetail[key]);
-            });
-          }
-        }
-      }
-    },
-
-    handleToogleDialogEmoji() {
-      this.emojiDialogVisible = !this.emojiDialogVisible;
-    },
-
-    handleSelectEmoji(emoji) {
-      this.comment.content += emoji.emoji;
-      this.handleToogleDialogEmoji();
-    },
-
-    handleGithubLogin() {
-      var githubOauthUrl = "http://github.com/login/oauth/authorize";
-      var query = {
-        client_id: "a1aacd842bc158abd65b",
-        redirect_uri: window.location.href,
-        scope: "public_repo"
-      };
-      window.location.href = "".concat(githubOauthUrl, "?").concat(queryStringify(query));
-    },
-
-    handleGetGithubUser() {
-      var accessToken = this.handleGetGithubAccessToken();
-      axios_default.a.get("https://cors-anywhere.herokuapp.com/https://api.github.com/user", {
-        params: {
-          access_token: accessToken
-        }
-      }).then(function (response) {
-        alert(response);
-      }).catch(error => {
-        alert(error);
-      });
-    },
-
-    handleGetGithubAccessToken() {
-      var code = getUrlKey("code");
-
-      if (code) {
-        axios_default.a.get("https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token", {
-          params: {
-            client_id: "a1aacd842bc158abd65b",
-            client_secret: "0daedb3923a4cdeb72620df511bdb11685dfe282",
-            code: code
-          }
-        }).then(function (response) {
-          var args = response.split("&");
-          var arg = args[0].split("=");
-          var access_token = arg[1];
-          alert(access_token);
-          return access_token;
-        }).catch(error => {
-          alert(error);
-        });
-      }
-    },
-
-    clearAlertClose() {
-      this.infoes = [];
-      this.warnings = [];
-      this.successes = [];
-    }
-
-  }
-});
-// CONCATENATED MODULE: ./src/components/CommentEditor.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_CommentEditorvue_type_script_lang_js_ = (CommentEditorvue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/CommentEditor.vue
-
-
-
-
-
-/* normalize component */
-
-var CommentEditor_component = normalizeComponent(
-  components_CommentEditorvue_type_script_lang_js_,
-  CommentEditorvue_type_template_id_114e092a_render,
-  CommentEditorvue_type_template_id_114e092a_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  ,true
-)
-
-/* harmony default export */ var CommentEditor = (CommentEditor_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/CommentNode.vue?vue&type=template&id=08df163c&
-var CommentNodevue_type_template_id_08df163c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('li',{staticClass:"comment",class:_vm.isChild?'':'index-1',attrs:{"id":'li-comment-'+_vm.comment.id,"itemtype":"http://schema.org/Comment","itemprop":"comment"}},[_c('div',{staticClass:"comment-body",attrs:{"id":'comment-'+_vm.comment.id}},[_c('div',{staticClass:"comment-avatar"},[_c('a',{attrs:{"href":_vm.comment.authorUrl,"rel":"nofollow","target":"_blank"}},[_c('img',{staticClass:"avatar",attrs:{"alt":_vm.comment.author+"'s avatar","src":_vm.avatar}})])]),_c('div',{staticClass:"contain-main"},[_c('div',{staticClass:"comment-meta"},[_c('div',{staticClass:"comment-author",attrs:{"itemprop":"author"}},[_c('a',{staticClass:"author-name",attrs:{"href":_vm.comment.authorUrl,"rel":"nofollow","target":"_blank"}},[_vm._v(_vm._s(_vm.comment.author))]),_c('span',{staticClass:"comment-reply",staticStyle:{"cursor":"pointer"},style:(_vm.editing?'display:block;':''),on:{"click":_vm.handleReplyClick}},[_vm._v(_vm._s(_vm.editing?'取消回复':'回复'))]),(_vm.comment.isAdmin)?_c('span',{staticClass:"is-admin"},[_c('svg',{staticClass:"icon",attrs:{"viewBox":"0 0 1024 1024","version":"1.1","xmlns":"http://www.w3.org/2000/svg","width":"14","height":"14"}},[_c('path',{attrs:{"d":"M512 0C229.248 0 0 229.248 0 512s229.248 512 512 512 512-229.248 512-512S794.752 0 512 0z m0 896c-212.032 0-384-171.968-384-384S299.968 128 512 128s384 171.968 384 384-171.968 384-384 384z m94.08-513.408L512 192.064l-94.016 190.528-210.304 30.592 152.192 148.288-35.968 209.344L512 672l188.032 98.88-35.904-209.344 152.128-148.288-210.176-30.656z","p-id":"6998","fill":"#1296db"}})])]):_vm._e(),(_vm.configs.showUserAgent)?_c('div',{staticClass:"useragent-info"},[_vm._v(_vm._s(_vm.compileUserAgent))]):_vm._e()]),_c('time',{staticClass:"comment-time",attrs:{"itemprop":"datePublished","datetime":_vm.comment.createTime}},[_vm._v(_vm._s(_vm.createTimeAgo))]),_c('a',{staticClass:"comment-id",attrs:{"href":'#comment-'+_vm.comment.id}},[_vm._v("#"+_vm._s(_vm.comment.id))])]),_c('div',{staticClass:"comment-content markdown-body",attrs:{"itemprop":"description"},domProps:{"innerHTML":_vm._s(_vm.compileContent)}})])]),(_vm.editing)?_c('comment-editor',{attrs:{"targetId":_vm.targetId,"target":_vm.target,"replyComment":_vm.comment,"options":_vm.options,"configs":_vm.configs}}):_vm._e(),(_vm.comment.children)?_c('ol',{staticClass:"children"},[_vm._l((_vm.comment.children),function(children,index){return [_c('CommentNode',{key:index,attrs:{"isChild":true,"targetId":_vm.targetId,"target":_vm.target,"comment":children,"options":_vm.options,"configs":_vm.configs}})]})],2):_vm._e()],1)}
-var CommentNodevue_type_template_id_08df163c_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/CommentNode.vue?vue&type=template&id=08df163c&
-
-// EXTERNAL MODULE: ./node_modules/ua-parser-js/src/ua-parser.js
-var ua_parser = __webpack_require__("2b80");
-var ua_parser_default = /*#__PURE__*/__webpack_require__.n(ua_parser);
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/CommentNode.vue?vue&type=script&lang=js&
-
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-/* harmony default export */ var CommentNodevue_type_script_lang_js_ = ({
-  name: "CommentNode",
-  props: {
-    isChild: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
-    targetId: {
-      type: Number,
-      required: false,
-      default: 0
-    },
-    target: {
-      type: String,
-      required: false,
-      default: "posts",
-      validator: function validator(value) {
-        return ["posts", "sheets", "journals"].indexOf(value) !== -1;
-      }
-    },
-    comment: {
-      type: Object,
-      required: false,
-      default: () => {}
-    },
-    options: {
-      type: Object,
-      required: false,
-      default: () => {}
-    },
-    configs: {
-      type: Object,
-      required: true
-    }
-  },
-
-  data() {
-    return {
-      editing: false
-    };
-  },
-
-  computed: {
-    avatar() {
-      return this.configs.gravatarSource + "/".concat(this.comment.gravatarMd5, "?s=256&d=") + this.options.comment_gravatar_default;
-    },
-
-    compileContent() {
-      var at = "";
-
-      if (this.comment.parentId !== null && this.comment.parentId > 0) {
-        at = '<a href="#comment-' + this.comment.parentId + '">#' + this.comment.parentId + "</a>";
-      }
-
-      return at + marked_default()(this.comment.content);
-    },
-
-    createTimeAgo() {
-      return timeAgo(this.comment.createTime);
-    },
-
-    compileUserAgent() {
-      var parser = new ua_parser_default.a();
-      parser.setUA(this.comment.userAgent);
-      var result = parser.getResult();
-      return result.browser.name + " " + result.browser.version + " in " + result.os.name + " " + result.os.version;
-    }
-
-  },
-  methods: {
-    handleReplyClick() {
-      this.editing = !this.editing;
-    }
-
-  }
-});
-// CONCATENATED MODULE: ./src/components/CommentNode.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_CommentNodevue_type_script_lang_js_ = (CommentNodevue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/CommentNode.vue
-
-
-
-
-
-/* normalize component */
-
-var CommentNode_component = normalizeComponent(
-  components_CommentNodevue_type_script_lang_js_,
-  CommentNodevue_type_template_id_08df163c_render,
-  CommentNodevue_type_template_id_08df163c_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  ,true
-)
-
-/* harmony default export */ var CommentNode = (CommentNode_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/CommentLoading.vue?vue&type=template&id=278b6f20&
-var CommentLoadingvue_type_template_id_278b6f20_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"comment-loader-container"},[(_vm.configs.loadingStyle==='default')?_c('div',{staticClass:"comment-loader-default"},[_c('span'),_c('span'),_c('span'),_c('span')]):(_vm.configs.loadingStyle==='circle')?_c('div',{staticClass:"comment-loader-circle"}):(_vm.configs.loadingStyle==='balls')?_c('div',{staticClass:"comment-loader-balls"},[_c('div'),_c('div'),_c('div')]):_vm._e()])}
-var CommentLoadingvue_type_template_id_278b6f20_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/CommentLoading.vue?vue&type=template&id=278b6f20&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/CommentLoading.vue?vue&type=script&lang=js&
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ var CommentLoadingvue_type_script_lang_js_ = ({
-  name: "CommentLoading",
-  props: {
-    configs: {
-      type: Object,
-      required: true
-    }
-  }
-});
-// CONCATENATED MODULE: ./src/components/CommentLoading.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_CommentLoadingvue_type_script_lang_js_ = (CommentLoadingvue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/CommentLoading.vue
-
-
-
-
-
-/* normalize component */
-
-var CommentLoading_component = normalizeComponent(
-  components_CommentLoadingvue_type_script_lang_js_,
-  CommentLoadingvue_type_template_id_278b6f20_render,
-  CommentLoadingvue_type_template_id_278b6f20_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  ,true
-)
-
-/* harmony default export */ var CommentLoading = (CommentLoading_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Pagination.vue?vue&type=template&id=922deadc&
-var Paginationvue_type_template_id_922deadc_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('ul',{staticClass:"page"},[_c('li',{staticClass:"page-item",class:{ disabled: !_vm.hasPrev }},[_c('button',{staticClass:"prev-button",attrs:{"tabindex":"-1"},on:{"click":_vm.handlePrevClick}},[_vm._v("上一页")])]),(_vm.firstPage != null)?_c('li',{staticClass:"page-item",class:{ active: _vm.page === _vm.firstPage}},[_c('button',{class:{ active: _vm.page === _vm.firstPage},on:{"click":function($event){return _vm.handlePageItemClick(_vm.firstPage)}}},[_vm._v(_vm._s(_vm.firstPage + 1))])]):_vm._e(),_c('li',{directives:[{name:"show",rawName:"v-show",value:(_vm.hasMorePrev),expression:"hasMorePrev"}],staticClass:"page-item"},[_c('span',[_vm._v("...")])]),_vm._l((_vm.middlePages),function(middlePage){return _c('li',{key:middlePage,staticClass:"page-item",class:{ active: middlePage === _vm.page }},[_c('button',{class:{ active: middlePage === _vm.page },on:{"click":function($event){return _vm.handlePageItemClick(middlePage)}}},[_vm._v(" "+_vm._s(middlePage + 1)+" ")])])}),_c('li',{directives:[{name:"show",rawName:"v-show",value:(_vm.hasMoreNext),expression:"hasMoreNext"}],staticClass:"page-item"},[_c('span',[_vm._v("...")])]),(_vm.lastPage)?_c('li',{staticClass:"page-item",class:{ active: _vm.page === _vm.lastPage}},[_c('button',{class:{ active: _vm.page === _vm.lastPage},on:{"click":function($event){return _vm.handlePageItemClick(_vm.lastPage)}}},[_vm._v(" "+_vm._s(_vm.lastPage + 1)+" ")])]):_vm._e(),_c('li',{staticClass:"page-item",class:{ disabled: !_vm.hasNext }},[_c('button',{staticClass:"next-button",on:{"click":_vm.handleNextClick}},[_vm._v("下一页")])])],2)}
-var Paginationvue_type_template_id_922deadc_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/Pagination.vue?vue&type=template&id=922deadc&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/Pagination.vue?vue&type=script&lang=js&
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ var Paginationvue_type_script_lang_js_ = ({
-  name: "Pagination",
-  model: {
-    prop: "page",
-    event: "change"
-  },
-  props: {
-    page: {
-      type: Number,
-      required: false,
-      default: 0
-    },
-    size: {
-      type: Number,
-      required: false,
-      default: 10
-    },
-    total: {
-      type: Number,
-      required: false,
-      default: 0
-    }
-  },
-
-  data() {
-    return {
-      middleSize: 3
-    };
-  },
-
-  computed: {
-    pages() {
-      return Math.ceil(this.total / this.size);
-    },
-
-    hasNext() {
-      return this.page < this.pages - 1;
-    },
-
-    hasPrev() {
-      return this.page > 0;
-    },
-
-    firstPage() {
-      if (this.pages === 0) {
-        return null;
-      }
-
-      return 0;
-    },
-
-    hasMorePrev() {
-      if (this.firstPage === null || this.pages <= this.middleSize + 2) {
-        return false;
-      }
-
-      return this.page >= 2 + this.middleSize / 2;
-    },
-
-    hasMoreNext() {
-      if (this.lastPage === null || this.pages <= this.middleSize + 2) {
-        return false;
-      }
-
-      return this.page < this.lastPage - 1 - this.middleSize / 2;
-    },
-
-    middlePages() {
-      if (this.pages <= 2) {
-        return [];
-      }
-
-      if (this.pages <= 2 + this.middleSize) {
-        return this.range(1, this.lastPage);
-      }
-
-      var halfMiddleSize = Math.floor(this.middleSize / 2);
-      var left = this.page - halfMiddleSize;
-      var right = this.page + halfMiddleSize;
-
-      if (this.page <= this.firstPage + halfMiddleSize + 1) {
-        left = this.firstPage + 1;
-        right = left + this.middleSize - 1;
-      } else if (this.page >= this.lastPage - halfMiddleSize - 1) {
-        right = this.lastPage - 1;
-        left = right - this.middleSize + 1;
-      }
-
-      return this.range(left, right + 1);
-    },
-
-    lastPage() {
-      if (this.pages === 0 || this.pages === 1) {
-        return 0;
-      }
-
-      return this.pages - 1;
-    }
-
-  },
-  methods: {
-    handleNextClick() {
-      if (this.hasNext) {
-        this.$emit("change", this.page + 1);
-      }
-    },
-
-    handlePrevClick() {
-      if (this.hasPrev) {
-        this.$emit("change", this.page - 1);
-      }
-    },
-
-    handlePageItemClick(page) {
-      this.$emit("change", page);
-    },
-
-    range(left, right) {
-      if (left >= right) {
-        return [];
-      }
-
-      var result = [];
-
-      for (var i = left; i < right; i++) {
-        result.push(i);
-      }
-
-      return result;
-    }
-
-  }
-});
-// CONCATENATED MODULE: ./src/components/Pagination.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_Paginationvue_type_script_lang_js_ = (Paginationvue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/Pagination.vue
-
-
-
-function Pagination_injectStyles (context) {
-  
-  
-}
-
-/* normalize component */
-
-var Pagination_component = normalizeComponent(
-  components_Paginationvue_type_script_lang_js_,
-  Paginationvue_type_template_id_922deadc_render,
-  Paginationvue_type_template_id_922deadc_staticRenderFns,
-  false,
-  Pagination_injectStyles,
-  null,
-  null
-  ,true
-)
-
-/* harmony default export */ var Pagination = (Pagination_component.exports);
-// CONCATENATED MODULE: ./src/components/index.js
-
-// Register components
- // pro components
-
-
-
-
-
-var _components = {
-  CommentEditor: CommentEditor,
-  CommentNode: CommentNode,
-  CommentLoading: CommentLoading,
-  Pagination: Pagination
-};
-var components = {};
-Object.keys(_components).forEach(key => {
-  components[key] = external_Vue_default.a.component(key, _components[key]);
-});
-/* harmony default export */ var src_components = (components);
 // CONCATENATED MODULE: ./src/api/option.js
 
-var option_baseUrl = '/api/content/options';
+var baseUrl = '/api/content/options';
 var optionApi = {};
 
 optionApi.list = () => {
-  return utils_service({
-    url: "".concat(option_baseUrl, "/comment"),
+  return Object(service["a" /* default */])({
+    url: "".concat(baseUrl, "/comment"),
     method: 'get'
   });
 };
@@ -7053,7 +6802,7 @@ optionApi.list = () => {
     loadComments() {
       this.comments = [];
       this.commentLoading = true;
-      api_comment.listComments(this.target, this.id, "tree_view", this.pagination).then(response => {
+      comment["a" /* default */].listComments(this.target, this.id, "tree_view", this.pagination).then(response => {
         this.comments = response.data.data.content;
         this.pagination.size = response.data.data.rpp;
         this.pagination.total = response.data.data.total;
@@ -7083,7 +6832,7 @@ optionApi.list = () => {
 
 
 
-function Commentshadow_injectStyles (context) {
+function injectStyles (context) {
   
   var style0 = __webpack_require__("a85a")
 if (style0.__inject__) style0.__inject__(context)
@@ -7092,18 +6841,18 @@ if (style0.__inject__) style0.__inject__(context)
 
 /* normalize component */
 
-var Commentshadow_component = normalizeComponent(
+var component = Object(componentNormalizer["a" /* default */])(
   components_Commentvue_type_script_lang_js_shadow,
   render,
   staticRenderFns,
   false,
-  Commentshadow_injectStyles,
+  injectStyles,
   null,
   null
   ,true
 )
 
-/* harmony default export */ var Commentshadow = (Commentshadow_component.exports);
+/* harmony default export */ var Commentshadow = (component.exports);
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-wc.js
 
 
@@ -9535,6 +9284,64 @@ module.exports = function (IteratorConstructor, NAME, next) {
 
 /***/ }),
 
+/***/ "9efd":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("d3b7");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("e6cf");
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("bc3a");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+
+__webpack_require__("09bd").shim();
+
+var service = axios__WEBPACK_IMPORTED_MODULE_2___default.a.create({
+  baseURL:  true ? '' : undefined,
+  timeout: 5000,
+  withCredentials: true
+});
+service.interceptors.request.use(config => {
+  return config;
+}, error => {
+  return Promise.reject(error);
+});
+service.interceptors.response.use(response => {
+  return response;
+}, error => {
+  if (axios__WEBPACK_IMPORTED_MODULE_2___default.a.isCancel(error)) {
+    // Vue.$log.debug("Cancelled uploading by user.");
+    return Promise.reject(error);
+  } // Vue.$log.error("Response failed", error);
+
+
+  var response = error.response; // const status = response ? response.status : -1;
+  // Vue.$log.error("Server response status", status);
+
+  var data = response ? response.data : null;
+
+  if (data) {
+    // Business response
+    // Vue.$log.error("Business response status", data.status);
+    if (data.status === 400) {// TODO handle 400 status error
+    } else if (data.status === 401) {// TODO Handle 401 status error
+    } else if (data.status === 403) {// TODO handle 403 status error
+    } else if (data.status === 404) {// TODO handle 404 status error
+    } else if (data.status === 500) {// TODO handle 500 status error
+    }
+  } else {// TODO Server unavailable
+    }
+
+  return Promise.reject(error);
+});
+/* harmony default export */ __webpack_exports__["a"] = (service);
+
+/***/ }),
+
 /***/ "9f7f":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11599,6 +11406,130 @@ $({ target: 'Array', proto: true, forced: NEGATIVE_ZERO || SLOPPY_METHOD }, {
   }
 });
 
+
+/***/ }),
+
+/***/ "ca00":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return timeAgo; });
+/* unused harmony export isUrl */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return isEmpty; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return isObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return validEmail; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return queryStringify; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getUrlKey; });
+/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("99af");
+/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("d81d");
+/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_regexp_constructor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("4d63");
+/* harmony import */ var core_js_modules_es_regexp_constructor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_constructor__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("25f0");
+/* harmony import */ var core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_to_string__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("5319");
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+
+/**
+ * time ago
+ * @param {*} time
+ */
+function timeAgo(time) {
+  var currentTime = new Date().getTime();
+  var between = currentTime - time;
+  var days = Math.floor(between / (24 * 3600 * 1000));
+
+  if (days === 0) {
+    var leave1 = between % (24 * 3600 * 1000);
+    var hours = Math.floor(leave1 / (3600 * 1000));
+
+    if (hours === 0) {
+      var leave2 = leave1 % (3600 * 1000);
+      var minutes = Math.floor(leave2 / (60 * 1000));
+
+      if (minutes === 0) {
+        var leave3 = leave2 % (60 * 1000);
+        var seconds = Math.round(leave3 / 1000);
+        return seconds + ' 秒前';
+      }
+
+      return minutes + ' 分钟前';
+    }
+
+    return hours + ' 小时前';
+  }
+
+  if (days < 0) return '刚刚';
+
+  if (days < 1) {
+    return days + ' 天前';
+  } else {
+    return formatDate(time, 'yyyy/MM/dd hh:mm');
+  }
+}
+
+function formatDate(date, fmt) {
+  date = new Date(date);
+
+  if (/(y+)/.test(fmt)) {
+    fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
+  }
+
+  var o = {
+    'M+': date.getMonth() + 1,
+    'd+': date.getDate(),
+    'h+': date.getHours(),
+    'm+': date.getMinutes(),
+    's+': date.getSeconds()
+  };
+
+  for (var k in o) {
+    if (new RegExp("(".concat(k, ")")).test(fmt)) {
+      var str = o[k] + '';
+      fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? str : padLeftZero(str));
+    }
+  }
+
+  return fmt;
+}
+
+function padLeftZero(str) {
+  return ('00' + str).substr(str.length);
+} // From <https://www.w3resource.com/javascript-exercises/javascript-regexp-exercise-9.php>
+
+
+function isUrl(str) {
+  var regexp = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+
+  if (regexp.test(str)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+function isEmpty(content) {
+  return content === null || content === undefined || content === '';
+}
+function isObject(value) {
+  return value && typeof value === 'object' && value.constructor === Object;
+}
+function validEmail(email) {
+  var re = /^[A-Za-z1-9]+([-_.][A-Za-z1-9]+)*@([A-Za-z1-9]+[-.])+[A-Za-z]{2,8}$/;
+  return re.test(email);
+}
+var queryStringify = query => {
+  var queryString = Object.keys(query).map(key => "".concat(key, "=").concat(encodeURIComponent(query[key] || ''))).join('&');
+  return queryString;
+};
+function getUrlKey(name) {
+  return decodeURIComponent((new RegExp("[?|&]" + name + "=" + "([^&;]+?)(&|#|;|$)").exec(location.href) || "")[1].replace(/\+/g, "%20")) || null;
+}
 
 /***/ }),
 
@@ -14161,6 +14092,270 @@ module.exports = function (fn, that, length) {
   };
 };
 
+
+/***/ }),
+
+/***/ "f9af":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"661c0cb2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/CommentNode.vue?vue&type=template&id=0833370a&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('li',{staticClass:"comment",class:_vm.commentClass,attrs:{"id":'li-comment-'+_vm.comment.id,"itemtype":"http://schema.org/Comment","itemprop":"comment"}},[_c('div',{staticClass:"comment-body",attrs:{"id":'comment-'+_vm.comment.id}},[_c('div',{staticClass:"comment-avatar"},[_c('a',{attrs:{"href":_vm.comment.authorUrl,"rel":"nofollow","target":"_blank"}},[_c('img',{staticClass:"avatar",attrs:{"alt":_vm.comment.author+"'s avatar","src":_vm.avatar}})])]),_c('div',{staticClass:"contain-main"},[_c('div',{staticClass:"comment-meta"},[_c('div',{staticClass:"comment-author",attrs:{"itemprop":"author"}},[_c('a',{staticClass:"author-name",attrs:{"href":_vm.comment.authorUrl,"rel":"nofollow","target":"_blank"}},[_vm._v(_vm._s(_vm.comment.author))]),_c('span',{staticClass:"comment-reply",staticStyle:{"cursor":"pointer"},style:(_vm.editing?'display:block;':''),on:{"click":_vm.handleReplyClick}},[_vm._v(_vm._s(_vm.editing?'取消回复':'回复'))]),(_vm.comment.isAdmin)?_c('span',{staticClass:"is-admin"},[_c('svg',{staticClass:"icon",attrs:{"viewBox":"0 0 1024 1024","version":"1.1","xmlns":"http://www.w3.org/2000/svg","width":"14","height":"14"}},[_c('path',{attrs:{"d":"M512 0C229.248 0 0 229.248 0 512s229.248 512 512 512 512-229.248 512-512S794.752 0 512 0z m0 896c-212.032 0-384-171.968-384-384S299.968 128 512 128s384 171.968 384 384-171.968 384-384 384z m94.08-513.408L512 192.064l-94.016 190.528-210.304 30.592 152.192 148.288-35.968 209.344L512 672l188.032 98.88-35.904-209.344 152.128-148.288-210.176-30.656z","p-id":"6998","fill":"#1296db"}})])]):_vm._e(),(_vm.configs.showUserAgent)?_c('div',{staticClass:"useragent-info"},[_vm._v(_vm._s(_vm.compileUserAgent))]):_vm._e()]),_c('time',{staticClass:"comment-time",attrs:{"itemprop":"datePublished","datetime":_vm.comment.createTime}},[_vm._v(_vm._s(_vm.createTimeAgo))]),_c('a',{staticClass:"comment-id",attrs:{"href":'#comment-'+_vm.comment.id}},[_vm._v("#"+_vm._s(_vm.comment.id))])]),_c('div',{staticClass:"comment-content markdown-body",attrs:{"itemprop":"description"},domProps:{"innerHTML":_vm._s(_vm.compileContent)}})])]),(_vm.editing)?_c('comment-editor',{attrs:{"targetId":_vm.targetId,"target":_vm.target,"replyComment":_vm.comment,"options":_vm.options,"configs":_vm.configs}}):_vm._e(),(_vm.comment.children)?_c('ol',{staticClass:"children"},[_vm._l((_vm.comment.children),function(children,index){return [_c('CommentNode',{key:index,attrs:{"isChild":true,"targetId":_vm.targetId,"target":_vm.target,"comment":children,"options":_vm.options,"configs":_vm.configs}})]})],2):_vm._e()],1)}
+var staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/CommentNode.vue?vue&type=template&id=0833370a&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.index-of.js
+var es_array_index_of = __webpack_require__("c975");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
+var es_function_name = __webpack_require__("b0c0");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.number.constructor.js
+var es_number_constructor = __webpack_require__("a9e3");
+
+// EXTERNAL MODULE: ./src/components/index.js + 48 modules
+var components = __webpack_require__("2af9");
+
+// EXTERNAL MODULE: ./src/utils/util.js
+var util = __webpack_require__("ca00");
+
+// EXTERNAL MODULE: ./node_modules/ua-parser-js/src/ua-parser.js
+var ua_parser = __webpack_require__("2b80");
+var ua_parser_default = /*#__PURE__*/__webpack_require__.n(ua_parser);
+
+// EXTERNAL MODULE: ./node_modules/marked/src/marked.js
+var marked = __webpack_require__("e0c1");
+var marked_default = /*#__PURE__*/__webpack_require__.n(marked);
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/CommentNode.vue?vue&type=script&lang=js&
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ var CommentNodevue_type_script_lang_js_ = ({
+  name: "CommentNode",
+  props: {
+    isChild: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    targetId: {
+      type: Number,
+      required: false,
+      default: 0
+    },
+    target: {
+      type: String,
+      required: false,
+      default: "posts",
+      validator: function validator(value) {
+        return ["posts", "sheets", "journals"].indexOf(value) !== -1;
+      }
+    },
+    comment: {
+      type: Object,
+      required: false,
+      default: () => {}
+    },
+    options: {
+      type: Object,
+      required: false,
+      default: () => {}
+    },
+    configs: {
+      type: Object,
+      required: true
+    }
+  },
+
+  data() {
+    return {
+      editing: false
+    };
+  },
+
+  computed: {
+    avatar() {
+      return this.configs.gravatarSource + "/".concat(this.comment.gravatarMd5, "?s=256&d=") + this.options.comment_gravatar_default;
+    },
+
+    compileContent() {
+      var at = "";
+
+      if (this.comment.parentId !== null && this.comment.parentId > 0) {
+        at = '<a href="#comment-' + this.comment.parentId + '">#' + this.comment.parentId + "</a>";
+      }
+
+      return at + marked_default()(this.comment.content);
+    },
+
+    createTimeAgo() {
+      return Object(util["e" /* timeAgo */])(this.comment.createTime);
+    },
+
+    compileUserAgent() {
+      var parser = new ua_parser_default.a();
+      parser.setUA(this.comment.userAgent);
+      var result = parser.getResult();
+      return result.browser.name + " " + result.browser.version + " in " + result.os.name + " " + result.os.version;
+    },
+
+    commentClass() {
+      var isChild = this.isChild ? ' ' : ' index-1';
+      return " li-comment-" + this.comment.id + isChild;
+    }
+
+  },
+  methods: {
+    handleReplyClick() {
+      this.editing = !this.editing;
+    }
+
+  }
+});
+// CONCATENATED MODULE: ./src/components/CommentNode.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_CommentNodevue_type_script_lang_js_ = (CommentNodevue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+var componentNormalizer = __webpack_require__("2877");
+
+// CONCATENATED MODULE: ./src/components/CommentNode.vue
+
+
+
+
+
+/* normalize component */
+
+var component = Object(componentNormalizer["a" /* default */])(
+  components_CommentNodevue_type_script_lang_js_,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  ,true
+)
+
+/* harmony default export */ var CommentNode = __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
