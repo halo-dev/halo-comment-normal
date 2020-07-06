@@ -345,6 +345,14 @@ export default {
       });
       let dom;
       if(newComment.parentId == 0) {
+        if(this.$root.$el.getElementsByClassName("comment-nodes").length > 0) {
+          dom = this.$root.$el.getElementsByClassName("comment-nodes")[0];
+        } else {
+          dom = document.createElement("ol");
+          dom.setAttribute("class", "comment-nodes");
+          let emptyDom = this.$root.$el.getElementsByClassName("comment-empty")[0];
+          emptyDom.parentNode.replaceChild(dom, emptyDom);
+        }
         dom = this.$root.$el.getElementsByClassName("comment-nodes")[0];
       } else {
         let parentDom = this.$parent.$el;
