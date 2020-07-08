@@ -87,6 +87,57 @@
         vertical-align: baseline;
     }
 
+    ol.comment-nodes, ol.comment-nodes ol {
+        margin: 0;  
+        padding: 0 0 0 2em;  
+    }
+    
+    ol.comment-nodes {
+        padding: 0;
+        ol.children>li {
+            list-style: none;
+            position: relative;
+            &::before {
+                color: #C0C0C0;
+                position: absolute;
+                opacity: .5;
+                content: '';
+                top: -5.425em;
+                left: -0.5em;
+                width: 0.3em;
+                height: 7em;
+                border-style: none none dashed dashed;
+                border-width: 0.09em;
+            }
+    
+            &:not(:last-child) {
+                &::after {
+                    color: #C0C0C0;
+                    opacity: .5;
+                    position: absolute;
+                    content: '';
+                    top: 23px;
+                    left: -0.5em;
+                    bottom: 76px;
+                    width: 0.3em;
+                    border-style: none none none dashed;
+                    border-width: 0.09em;
+                }
+            }
+        }
+
+        .comment-editor {
+            + ol {
+                >li:first-child {
+                    &::before {
+                        border-style: none none solid none;
+                    }
+                }
+                
+            }
+        }
+    }
+
     button,
     input,
     textarea {
@@ -430,9 +481,9 @@
         border-bottom: 3px solid #f5f8fa;
     }
 
-    .comment-nodes li:last-child {
-        border: 0;
-    }
+    // .comment-nodes li:last-child {
+    //     border: 0;
+    // }
 
     .comment-nodes .commentator a:after,
     .comment-nodes .commentator a:before {
@@ -453,15 +504,15 @@
 
     .children {
         .comment-body {
-            &:before {
-                content: "";
-                width: 2px;
-                height: 500%;
-                background: $color;
-                left: 23px;
-                top: -500%;
-                position: absolute;
-            }
+            // &:before {
+            //     content: "";
+            //     width: 2px;
+            //     height: 500%;
+            //     background: $color;
+            //     left: 23px;
+            //     top: -500%;
+            //     position: absolute;
+            // }
         }
     }
 
