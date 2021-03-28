@@ -19,7 +19,6 @@
 | -------------- | ------------------------ | ------------------------- | -------------------------- |
 | autoLoad       | 是否自动加载评论列表     | true                      | `true` `false`             |
 | showUserAgent  | 是否显示评论者的 UA 信息 | true                      | `true` `false`             |
-| gravatarSource | Gravatar 源地址          | `//cdn.v2ex.com/gravatar` | -                          |
 | loadingStyle   | 评论加载样式             | `default`                 | `default` `circle` `balls` |
 
 配置方法：

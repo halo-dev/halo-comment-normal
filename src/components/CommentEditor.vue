@@ -1,14 +1,8 @@
 <template>
-  <section
-    class="comment-editor"
-    role="form"
-  >
+  <section class="comment-editor" role="form">
     <div class="inner">
       <div class="commentator">
-        <img
-          :src="avatar"
-          class="avatar"
-        >
+        <img :src="avatar" class="avatar" />
       </div>
       <form class="comment-form">
         <div class="author-info">
@@ -20,7 +14,7 @@
             required="required"
             aria-required="true"
             placeholder="* 昵称"
-          >
+          />
           <input
             type="text"
             id="email"
@@ -29,19 +23,16 @@
             required="required"
             aria-required="true"
             placeholder="* 电子邮件"
-          >
+          />
           <input
             type="text"
             id="authorUrl"
             v-model="comment.authorUrl"
             tabindex="3"
             placeholder="个人站点"
-          >
+          />
         </div>
-        <div
-          class="comment-textarea"
-          v-if="!previewMode"
-        >
+        <div class="comment-textarea" v-if="!previewMode">
           <textarea
             ref="commentTextarea"
             required="required"
@@ -65,17 +56,14 @@
           />
         </div>
         <ul class="comment-buttons">
-          <li
-            v-if="comment.content"
-            class="middle"
-            style="margin-right:5px"
-          >
+          <li v-if="comment.content" class="middle" style="margin-right:5px">
             <a
               class="button-preview-edit"
               href="javascript:void(0)"
               rel="nofollow noopener"
               @click="handlePreviewContent"
-            >{{previewMode?'编辑':'预览'}}</a>
+              >{{ previewMode ? "编辑" : "预览" }}</a
+            >
           </li>
           <!-- <li
             class="middle"
@@ -88,9 +76,9 @@
               @click="handleGithubLogin"
             >Github 登陆</a>
           </li> -->
-          <li>
+          <!-- <li>
             <button type="button" @click="handleToogleDialogEmoji">表情</button>
-          </li>
+          </li> -->
           <li class="middle">
             <a
               class="button-submit"
@@ -98,7 +86,8 @@
               tabindex="5"
               rel="nofollow noopener"
               @click="handleSubmitClick"
-            >提交</a>
+              >提交</a
+            >
           </li>
         </ul>
         <div class="comment-alert">
@@ -109,10 +98,7 @@
               v-for="(info, index) in infoes"
               :key="index"
             >
-              <span
-                class="closebtn"
-                @click="clearAlertClose"
-              >&times;</span>
+              <span class="closebtn" @click="clearAlertClose">&times;</span>
               <strong>{{ info }}</strong>
             </div>
           </template>
@@ -124,10 +110,7 @@
               v-for="(success, index) in successes"
               :key="index"
             >
-              <span
-                class="closebtn"
-                @click="clearAlertClose"
-              >&times;</span>
+              <span class="closebtn" @click="clearAlertClose">&times;</span>
               <strong>{{ success }}</strong>
             </div>
           </template>
@@ -139,10 +122,7 @@
               v-for="(warning, index) in warnings"
               :key="index"
             >
-              <span
-                class="closebtn"
-                @click="clearAlertClose"
-              >&times;</span>
+              <span class="closebtn" @click="clearAlertClose">&times;</span>
               <strong>{{ warning }}</strong>
             </div>
           </template>
@@ -152,7 +132,7 @@
   </section>
 </template>
 <script>
-import Vue from 'vue';
+import Vue from "vue";
 import marked from "marked";
 import md5 from "md5";
 import VEmojiPicker from "./EmojiPicker/VEmojiPicker";
@@ -166,13 +146,13 @@ import autosize from "autosize";
 export default {
   name: "CommentEditor",
   components: {
-    VEmojiPicker
+    VEmojiPicker,
   },
   props: {
     targetId: {
       type: Number,
       required: false,
-      default: 0
+      default: 0,
     },
     target: {
       type: String,
@@ -180,21 +160,21 @@ export default {
       default: "posts",
       validator: function(value) {
         return ["posts", "sheets", "journals"].indexOf(value) !== -1;
-      }
+      },
     },
     replyComment: {
       type: Object,
       required: false,
-      default: () => {}
+      default: () => {},
     },
     options: {
       required: false,
-      default: []
+      default: [],
     },
     configs: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -204,12 +184,12 @@ export default {
         author: null,
         authorUrl: null,
         email: null,
-        content: ""
+        content: "",
       },
       previewMode: false,
       infoes: [],
       warnings: [],
-      successes: []
+      successes: [],
     };
   },
   computed: {
@@ -217,19 +197,16 @@ export default {
       return this.comment.content ? marked(this.comment.content) : "";
     },
     avatar() {
+      const gravatarDefault = this.options.comment_gravatar_default;
+      const gravatarSource =
+        this.options.gravatar_source || "//cn.gravatar.com/avatar/";
+
       if (!this.comment.email || !validEmail(this.comment.email)) {
-        return (
-          this.configs.gravatarSource +
-          "?d=" +
-          this.options.comment_gravatar_default
-        );
+        return `${gravatarSource}?d=${gravatarDefault}`;
       }
+
       const gravatarMd5 = md5(this.comment.email);
-      return (
-        this.configs.gravatarSource +
-        `/${gravatarMd5}?s=256&d=` +
-        this.options.comment_gravatar_default
-      );
+      return `${gravatarSource}${gravatarMd5}?s=256&d=${gravatarDefault}`;
     },
     commentValid() {
       return (
@@ -246,7 +223,7 @@ export default {
     },
     successAlertVisiable() {
       return this.successes !== null && this.successes.length > 0;
-    }
+    },
   },
   created() {
     // Get info from local storage
@@ -284,7 +261,7 @@ export default {
       }
       commentApi
         .createComment(this.target, this.comment)
-        .then(response => {
+        .then((response) => {
           // Store comment author, email, authorUrl
           localStorage.setItem("comment-author", this.comment.author);
           localStorage.setItem("comment-email", this.comment.email);
@@ -294,7 +271,7 @@ export default {
           this.comment.content = "";
           this.handleCommentCreated(response.data.data);
         })
-        .catch(error => {
+        .catch((error) => {
           this.handleFailedToCreateComment(error.response);
         });
     },
@@ -306,7 +283,7 @@ export default {
 
       if (createdComment.status === "PUBLISHED") {
         try {
-          this.createdNewNode(createdComment)
+          this.createdNewNode(createdComment);
           this.successes.push("评论成功");
         } catch {
           this.successes.push("评论成功，刷新即可显示最新评论！");
@@ -317,56 +294,61 @@ export default {
       }
     },
     createdNewNode(newComment) {
-      let pr = { 
-          targetId: this.targetId,
-          target: this.target,
-          options: this.options,
-          configs: this.configs,
-          comment: newComment
-      }
+      let pr = {
+        targetId: this.targetId,
+        target: this.target,
+        options: this.options,
+        configs: this.configs,
+        comment: newComment,
+      };
 
-      pr = newComment.parentId == 0 ? pr : {...pr, ...{
-        isChild: true,
-        parent: this.replyComment,
-        depth: this.$parent.selfAddDepth
-      }}
-      
-      const CommentNode = () => import('./CommentNode.vue');
+      pr =
+        newComment.parentId == 0
+          ? pr
+          : {
+              ...pr,
+              ...{
+                isChild: true,
+                parent: this.replyComment,
+                depth: this.$parent.selfAddDepth,
+              },
+            };
+
+      const CommentNode = () => import("./CommentNode.vue");
       // 创建一个组件
       let comment = new Vue({
         render: (h) => {
-          return h(
-            CommentNode,
-            {
-              props: pr
-            }
-          )
-        }
+          return h(CommentNode, {
+            props: pr,
+          });
+        },
       });
       let dom;
-      if(newComment.parentId == 0) {
-        if(this.$root.$el.getElementsByClassName("comment-nodes").length > 0) {
+      if (newComment.parentId == 0) {
+        if (this.$root.$el.getElementsByClassName("comment-nodes").length > 0) {
           dom = this.$root.$el.getElementsByClassName("comment-nodes")[0];
         } else {
           dom = document.createElement("ol");
           dom.setAttribute("class", "comment-nodes");
-          let emptyDom = this.$root.$el.getElementsByClassName("comment-empty")[0];
+          let emptyDom = this.$root.$el.getElementsByClassName(
+            "comment-empty"
+          )[0];
           emptyDom.parentNode.replaceChild(dom, emptyDom);
         }
         dom = this.$root.$el.getElementsByClassName("comment-nodes")[0];
       } else {
         let parentDom = this.$parent.$el;
         let replyDom = parentDom.getElementsByTagName("ol");
-        if(replyDom.length > 0) {
+        if (replyDom.length > 0) {
           dom = replyDom[0];
         } else {
           dom = document.createElement("ol");
-          dom.setAttribute('class', 'children');
+          dom.setAttribute("class", "children");
           parentDom.appendChild(dom);
         }
       }
-      let nodeDom = document.createElement('div');
-      if(dom.children[0]) {
+      let nodeDom = document.createElement("div");
+      if (dom.children[0]) {
         dom.insertBefore(nodeDom, dom.children[0]);
       } else {
         dom.appendChild(nodeDom);
@@ -380,7 +362,7 @@ export default {
         if (response.data) {
           const errorDetail = response.data.data;
           if (isObject(errorDetail)) {
-            Object.keys(errorDetail).forEach(key => {
+            Object.keys(errorDetail).forEach((key) => {
               this.warnings.push(errorDetail[key]);
             });
           }
@@ -399,7 +381,7 @@ export default {
       const query = {
         client_id: "a1aacd842bc158abd65b",
         redirect_uri: window.location.href,
-        scope: "public_repo"
+        scope: "public_repo",
       };
       window.location.href = `${githubOauthUrl}?${queryStringify(query)}`;
     },
@@ -410,14 +392,14 @@ export default {
           "https://cors-anywhere.herokuapp.com/https://api.github.com/user",
           {
             params: {
-              access_token: accessToken
-            }
+              access_token: accessToken,
+            },
           }
         )
         .then(function(response) {
           alert(response);
         })
-        .catch(error => {
+        .catch((error) => {
           alert(error);
         });
     },
@@ -431,8 +413,8 @@ export default {
               params: {
                 client_id: "a1aacd842bc158abd65b",
                 client_secret: "0daedb3923a4cdeb72620df511bdb11685dfe282",
-                code: code
-              }
+                code: code,
+              },
             }
           )
           .then(function(response) {
@@ -442,7 +424,7 @@ export default {
             alert(access_token);
             return access_token;
           })
-          .catch(error => {
+          .catch((error) => {
             alert(error);
           });
       }
@@ -451,7 +433,7 @@ export default {
       this.infoes = [];
       this.warnings = [];
       this.successes = [];
-    }
-  }
+    },
+  },
 };
 </script>

@@ -1,49 +1,39 @@
 <template>
   <li
-    :id="'li-comment-'+comment.id"
+    :id="'li-comment-' + comment.id"
     class="comment"
     :class="commentClass"
     itemtype="http://schema.org/Comment"
     itemprop="comment"
   >
-    <div
-      :id="'comment-'+comment.id"
-      class="comment-body"
-    >
+    <div :id="'comment-' + comment.id" class="comment-body">
       <div class="comment-avatar">
-        <a
-          :href="comment.authorUrl"
-          rel="nofollow"
-          target="_blank"
-        ><img
-            :alt="comment.author+`'s avatar`"
+        <a :href="comment.authorUrl" rel="nofollow" target="_blank"
+          ><img
+            :alt="comment.author + `'s avatar`"
             :src="avatar"
             class="avatar"
-          >
+          />
         </a>
       </div>
       <div class="contain-main">
         <div class="comment-meta">
-          <div
-            class="comment-author"
-            itemprop="author"
-          >
+          <div class="comment-author" itemprop="author">
             <a
               :href="comment.authorUrl"
               rel="nofollow"
               target="_blank"
               class="author-name"
-            >{{ comment.author }}</a>
+              >{{ comment.author }}</a
+            >
             <span
               class="comment-reply"
               style="cursor: pointer;"
-              :style="editing?'display:block;':''"
+              :style="editing ? 'display:block;' : ''"
               @click="handleReplyClick"
-            >{{ editing?'取消回复':'回复' }}</span>
-            <span
-              v-if="comment.isAdmin"
-              class="is-admin"
+              >{{ editing ? "取消回复" : "回复" }}</span
             >
+            <span v-if="comment.isAdmin" class="is-admin">
               <svg
                 class="icon"
                 viewBox="0 0 1024 1024"
@@ -59,27 +49,25 @@
                 ></path>
               </svg>
             </span>
-            <div
-              v-if="configs.showUserAgent"
-              class="useragent-info"
-            >{{ compileUserAgent }}</div>
+            <div v-if="configs.showUserAgent" class="useragent-info">
+              {{ compileUserAgent }}
+            </div>
           </div>
           <time
             class="comment-time"
             itemprop="datePublished"
             :datetime="comment.createTime"
-          >{{ createTimeAgo }}</time>
-          <a
-            class="comment-id"
-            :href="'#comment-'+comment.id"
-          >#{{ comment.id }}</a>
+            >{{ createTimeAgo }}</time
+          >
+          <a class="comment-id" :href="'#comment-' + comment.id"
+            >#{{ comment.id }}</a
+          >
         </div>
         <div
           class="comment-content markdown-body"
           itemprop="description"
           v-html="compileContent"
-        >
-        </div>
+        ></div>
       </div>
     </div>
     <comment-editor
@@ -90,10 +78,7 @@
       :options="options"
       :configs="configs"
     />
-    <ol
-      v-if="comment.children"
-      class="children"
-    >
+    <ol v-if="comment.children" class="children">
       <template v-for="(children, index) in comment.children">
         <CommentNode
           :isChild="true"
@@ -119,12 +104,12 @@ export default {
     isChild: {
       type: Boolean,
       required: false,
-      default: false
+      default: false,
     },
     targetId: {
       type: Number,
       required: false,
-      default: 0
+      default: 0,
     },
     target: {
       type: String,
@@ -132,35 +117,37 @@ export default {
       default: "posts",
       validator: function(value) {
         return ["posts", "sheets", "journals"].indexOf(value) !== -1;
-      }
+      },
     },
     comment: {
       type: Object,
       required: false,
-      default: () => {}
+      default: () => {},
     },
     options: {
       type: Object,
       required: false,
-      default: () => {}
+      default: () => {},
     },
     configs: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      editing: false
+      editing: false,
     };
   },
   computed: {
     avatar() {
-      return (
-        this.configs.gravatarSource +
-        `/${this.comment.gravatarMd5}?s=256&d=` +
-        this.options.comment_gravatar_default
-      );
+      const gravatarDefault = this.options.comment_gravatar_default;
+      const gravatarSource =
+        this.options.gravatar_source || "//cn.gravatar.com/avatar/";
+      if (this.comment.avatar) {
+        return this.comment.avatar;
+      }
+      return `${gravatarSource}${this.comment.gravatarMd5}?s=256&d=${gravatarDefault}`;
     },
     compileContent() {
       var at = "";
@@ -192,14 +179,14 @@ export default {
       );
     },
     commentClass() {
-      let isChild = this.isChild ? ' ': ' index-1';
-      return " li-comment-"+ this.comment.id + isChild;
-    }
+      let isChild = this.isChild ? " " : " index-1";
+      return " li-comment-" + this.comment.id + isChild;
+    },
   },
   methods: {
     handleReplyClick() {
       this.editing = !this.editing;
-    }
-  }
+    },
+  },
 };
 </script>
