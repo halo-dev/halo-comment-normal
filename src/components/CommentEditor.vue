@@ -47,38 +47,16 @@
           v-else
           v-html="renderedContent"
         ></div>
-        <div class="comment-emoji-wrap">
-          <VEmojiPicker
-            :pack="emojiPack"
-            @select="handleSelectEmoji"
-            v-show="emojiDialogVisible"
-            labelSearch="搜索表情"
-          />
-        </div>
         <ul class="comment-buttons">
           <li v-if="comment.content" class="middle" style="margin-right:5px">
             <a
               class="button-preview-edit"
               href="javascript:void(0)"
               rel="nofollow noopener"
-              @click="handlePreviewContent"
+              @click="previewMode = !previewMode"
               >{{ previewMode ? "编辑" : "预览" }}</a
             >
           </li>
-          <!-- <li
-            class="middle"
-            style="margin-right:5px"
-          >
-            <a
-              class="button-preview-edit"
-              href="javascript:void(0)"
-              rel="nofollow noopener"
-              @click="handleGithubLogin"
-            >Github 登陆</a>
-          </li> -->
-          <!-- <li>
-            <button type="button" @click="handleToogleDialogEmoji">表情</button>
-          </li> -->
           <li class="middle">
             <a
               class="button-submit"
@@ -135,19 +113,13 @@
 import Vue from "vue";
 import marked from "marked";
 import md5 from "md5";
-import VEmojiPicker from "./EmojiPicker/VEmojiPicker";
-import emojiData from "./EmojiPicker/data/emojis.js";
-import { isEmpty, isObject, getUrlKey } from "../utils/util";
-import { validEmail, queryStringify } from "../utils/util";
+import { isEmpty, isObject } from "../utils/util";
+import { validEmail } from "../utils/util";
 import commentApi from "../api/comment";
-import axios from "axios";
 import autosize from "autosize";
 
 export default {
   name: "CommentEditor",
-  components: {
-    VEmojiPicker,
-  },
   props: {
     targetId: {
       type: Number,
@@ -178,8 +150,6 @@ export default {
   },
   data() {
     return {
-      emojiPack: emojiData,
-      emojiDialogVisible: false,
       comment: {
         author: null,
         authorUrl: null,
@@ -233,7 +203,6 @@ export default {
     this.comment.author = author ? author : "";
     this.comment.authorUrl = authorUrl ? authorUrl : "";
     this.comment.email = email ? email : "";
-    // this.handleGetGithubUser();
   },
   mounted() {
     // autosize(this.$refs.commentTextArea);
@@ -274,9 +243,6 @@ export default {
         .catch((error) => {
           this.handleFailedToCreateComment(error.response);
         });
-    },
-    handlePreviewContent() {
-      this.previewMode = !this.previewMode;
     },
     handleCommentCreated(createdComment) {
       this.clearAlertClose();
@@ -367,66 +333,6 @@ export default {
             });
           }
         }
-      }
-    },
-    handleToogleDialogEmoji() {
-      this.emojiDialogVisible = !this.emojiDialogVisible;
-    },
-    handleSelectEmoji(emoji) {
-      this.comment.content += emoji.emoji;
-      this.handleToogleDialogEmoji();
-    },
-    handleGithubLogin() {
-      const githubOauthUrl = "http://github.com/login/oauth/authorize";
-      const query = {
-        client_id: "a1aacd842bc158abd65b",
-        redirect_uri: window.location.href,
-        scope: "public_repo",
-      };
-      window.location.href = `${githubOauthUrl}?${queryStringify(query)}`;
-    },
-    handleGetGithubUser() {
-      const accessToken = this.handleGetGithubAccessToken();
-      axios
-        .get(
-          "https://cors-anywhere.herokuapp.com/https://api.github.com/user",
-          {
-            params: {
-              access_token: accessToken,
-            },
-          }
-        )
-        .then(function(response) {
-          alert(response);
-        })
-        .catch((error) => {
-          alert(error);
-        });
-    },
-    handleGetGithubAccessToken() {
-      const code = getUrlKey("code");
-      if (code) {
-        axios
-          .get(
-            "https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token",
-            {
-              params: {
-                client_id: "a1aacd842bc158abd65b",
-                client_secret: "0daedb3923a4cdeb72620df511bdb11685dfe282",
-                code: code,
-              },
-            }
-          )
-          .then(function(response) {
-            let args = response.split("&");
-            let arg = args[0].split("=");
-            let access_token = arg[1];
-            alert(access_token);
-            return access_token;
-          })
-          .catch((error) => {
-            alert(error);
-          });
       }
     },
     clearAlertClose() {
