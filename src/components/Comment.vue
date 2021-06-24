@@ -51,8 +51,6 @@
 </template>
 <script>
 import "./index";
-import commentApi from "../api/comment";
-import optionApi from "../api/option";
 export default {
   name: "Comment",
   props: {
@@ -125,13 +123,27 @@ export default {
     loadComments() {
       this.comments = [];
       this.commentLoading = true;
-      commentApi
-        .listComments(this.target, this.id, "tree_view", this.pagination)
+
+      let client = null;
+
+      switch (this.target) {
+        case "posts":
+          client = this.$apiClient.post;
+          break;
+        case "sheets":
+          client = this.$apiClient.sheet;
+          break;
+        case "journals":
+          client = this.$apiClient.journal;
+          break;
+      }
+
+      client
+        .listCommentsAsTree(this.id, this.pagination)
         .then((response) => {
-          this.comments = response.data.data.content;
-          this.pagination.size = response.data.data.rpp;
-          this.pagination.total = response.data.data.total;
-          this.pagination.pages = response.data.data.pages;
+          this.comments = response.data.content;
+          this.pagination.total = response.data.total;
+          this.pagination.pages = response.data.pages;
         })
         .finally(() => {
           this.commentLoading = false;
@@ -139,8 +151,8 @@ export default {
         });
     },
     loadOptions() {
-      optionApi.list().then((response) => {
-        this.options = response.data.data;
+      this.$apiClient.option.comment().then((response) => {
+        this.options = response.data;
       });
     },
     handlePaginationChange(page) {

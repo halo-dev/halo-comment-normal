@@ -115,7 +115,6 @@ import marked from "marked";
 import md5 from "md5";
 import { isEmpty, isObject } from "../utils/util";
 import { validEmail } from "../utils/util";
-import commentApi from "../api/comment";
 import autosize from "autosize";
 
 export default {
@@ -228,8 +227,23 @@ export default {
         // Set parent id if available
         this.comment.parentId = this.replyComment.id;
       }
-      commentApi
-        .createComment(this.target, this.comment)
+
+      let client = null;
+
+      switch (this.target) {
+        case "posts":
+          client = this.$apiClient.post;
+          break;
+        case "sheets":
+          client = this.$apiClient.sheet;
+          break;
+        case "journals":
+          client = this.$apiClient.journal;
+          break;
+      }
+
+      client
+        .comment(this.comment)
         .then((response) => {
           // Store comment author, email, authorUrl
           localStorage.setItem("comment-author", this.comment.author);
@@ -238,10 +252,10 @@ export default {
 
           // clear comment
           this.comment.content = "";
-          this.handleCommentCreated(response.data.data);
+          this.handleCommentCreated(response.data);
         })
         .catch((error) => {
-          this.handleFailedToCreateComment(error.response);
+          this.handleFailedToCreateComment(error);
         });
     },
     handleCommentCreated(createdComment) {
