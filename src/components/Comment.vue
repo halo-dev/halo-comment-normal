@@ -51,6 +51,7 @@
 </template>
 <script>
 import "./index";
+import apiClient from '@/plugins/api-client'
 export default {
   name: "Comment",
   props: {
@@ -128,13 +129,13 @@ export default {
 
       switch (this.target) {
         case "posts":
-          client = this.$apiClient.post;
+          client = apiClient.post;
           break;
         case "sheets":
-          client = this.$apiClient.sheet;
+          client = apiClient.sheet;
           break;
         case "journals":
-          client = this.$apiClient.journal;
+          client = apiClient.journal;
           break;
       }
 
@@ -151,7 +152,7 @@ export default {
         });
     },
     loadOptions() {
-      this.$apiClient.option.comment().then((response) => {
+      apiClient.option.comment().then((response) => {
         this.options = response.data;
       });
     },

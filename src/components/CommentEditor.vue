@@ -115,6 +115,7 @@ import marked from "marked";
 import md5 from "md5";
 import { isEmpty, isObject } from "../utils/util";
 import { validEmail } from "../utils/util";
+import apiClient from '@/plugins/api-client'
 import autosize from "autosize";
 
 export default {
@@ -232,13 +233,13 @@ export default {
 
       switch (this.target) {
         case "posts":
-          client = this.$apiClient.post;
+          client = apiClient.post;
           break;
         case "sheets":
-          client = this.$apiClient.sheet;
+          client = apiClient.sheet;
           break;
         case "journals":
-          client = this.$apiClient.journal;
+          client = apiClient.journal;
           break;
       }
 
