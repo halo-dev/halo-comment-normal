@@ -8,10 +8,10 @@ import CommentLoading from './CommentLoading'
 import Pagination from './Pagination'
 
 const _components = {
-    CommentEditor,
-    CommentNode,
-    CommentLoading,
-    Pagination
+  CommentEditor,
+  CommentNode,
+  CommentLoading,
+  Pagination
 }
 
 const components = {}

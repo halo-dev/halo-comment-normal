@@ -1,18 +1,14 @@
 <template>
   <div id="app">
-    <Comment
-      :id="1"
-      type="post"
-      :configs="configs"
-    />
+    <Comment :id="1" type="post" :configs="configs" />
   </div>
 </template>
 
 <script>
-import Comment from "./components/Comment";
+import Comment from './components/Comment'
 
 export default {
-  name: "app",
+  name: 'app',
   components: {
     Comment
   },
@@ -23,7 +19,7 @@ export default {
         showUserAgent: true,
         loadingStyle: 'default'
       }
-    };
+    }
   }
-};
+}
 </script>
