@@ -257,7 +257,7 @@ export default {
       }
 
       pr =
-        newComment.parentId == 0
+        newComment.parentId === 0
           ? pr
           : {
               ...pr,
@@ -278,7 +278,7 @@ export default {
         }
       })
       let dom
-      if (newComment.parentId == 0) {
+      if (newComment.parentId === 0) {
         if (this.$root.$el.getElementsByClassName('comment-nodes').length > 0) {
           dom = this.$root.$el.getElementsByClassName('comment-nodes')[0]
         } else {

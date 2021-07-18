@@ -38,6 +38,7 @@
 <script>
 import './index'
 import apiClient from '@/plugins/api-client'
+import 'github-markdown-css/github-markdown.css'
 export default {
   name: 'Comment',
   props: {
@@ -152,5 +153,4 @@ export default {
 <style lang="scss">
 $color: #898c7b;
 @import '../styles/global';
-@import '../styles/github-markdown';
 </style>
