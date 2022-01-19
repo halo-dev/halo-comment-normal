@@ -77,7 +77,7 @@
 import './index'
 import { timeAgo } from '@/utils/util'
 import ua from 'ua-parser-js'
-import marked from 'marked'
+import { marked } from 'marked'
 
 export default {
   name: 'CommentNode',
@@ -138,7 +138,7 @@ export default {
       if (this.parent) {
         at = `[@${this.parent.author}](#comment-${this.parent.id})`
       }
-      return marked(at + ' ' + this.comment.content)
+      return marked.parse(at + ' ' + this.comment.content)
     },
     createTimeAgo() {
       return timeAgo(this.comment.createTime)

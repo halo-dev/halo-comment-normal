@@ -89,7 +89,7 @@
 </template>
 <script>
 import Vue from 'vue'
-import marked from 'marked'
+import { marked } from 'marked'
 import md5 from 'md5'
 import { isEmpty, isObject } from '../utils/util'
 import { validEmail } from '../utils/util'
@@ -142,7 +142,7 @@ export default {
   },
   computed: {
     renderedContent() {
-      return this.comment.content ? marked(this.comment.content) : ''
+      return this.comment.content ? marked.parse(this.comment.content) : ''
     },
     avatar() {
       const gravatarDefault = this.options.comment_gravatar_default
