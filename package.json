@@ -9,7 +9,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@halo-dev/content-api": "^1.0.0-alpha.9",
+    "@halo-dev/content-api": "^1.0.0-alpha.47",
     "autosize": "^4.0.4",
     "github-markdown-css": "^4.0.0",
     "marked": "^4.0.10",
