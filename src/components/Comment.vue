@@ -1,22 +1,22 @@
 <template>
-  <div class="halo-comment" id="halo-comment">
-    <comment-editor :targetId="id" :target="target" :options="options" :configs="mergedConfigs" />
+  <div id="halo-comment" class="halo-comment">
+    <comment-editor :configs="mergedConfigs" :options="options" :target="target" :targetId="id" />
 
-    <div class="comment-load-button" v-if="!mergedConfigs.autoLoad && !loaded">
+    <div v-if="!mergedConfigs.autoLoad && !loaded" class="comment-load-button">
       <a class="button-load" href="javascript:void(0)" rel="nofollow noopener" @click="loadComments">加载评论</a>
     </div>
 
     <comment-loading v-show="commentLoading" :configs="configs" />
 
-    <ol class="comment-nodes" v-if="comments.length >= 1">
+    <ol v-if="comments.length >= 1" class="comment-nodes">
       <template v-for="(comment, index) in comments">
         <CommentNode
-          :targetId="id"
-          :target="target"
-          :comment="comment"
-          :options="options"
-          :configs="mergedConfigs"
           :key="index"
+          :comment="comment"
+          :configs="mergedConfigs"
+          :options="options"
+          :target="target"
+          :targetId="id"
         />
       </template>
     </ol>
@@ -39,6 +39,7 @@
 import './index'
 import apiClient from '@/plugins/api-client'
 import 'github-markdown-css/github-markdown.css'
+
 export default {
   name: 'Comment',
   props: {
@@ -112,22 +113,8 @@ export default {
       this.comments = []
       this.commentLoading = true
 
-      let client = null
-
-      switch (this.target) {
-        case 'posts':
-          client = apiClient.post
-          break
-        case 'sheets':
-          client = apiClient.sheet
-          break
-        case 'journals':
-          client = apiClient.journal
-          break
-      }
-
-      client
-        .listCommentsAsTree(this.id, this.pagination)
+      apiClient.comment
+        .listAsTreeView(this.target, this.id, this.pagination)
         .then(response => {
           this.comments = response.data.content
           this.pagination.total = response.data.total

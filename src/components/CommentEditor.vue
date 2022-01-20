@@ -7,36 +7,36 @@
       <form class="comment-form">
         <div class="author-info">
           <input
-            type="text"
             id="author"
             v-model="comment.author"
-            tabindex="1"
-            required="required"
             aria-required="true"
             placeholder="* 昵称"
+            required="required"
+            tabindex="1"
+            type="text"
           />
           <input
-            type="text"
             id="email"
             v-model="comment.email"
-            tabindex="2"
-            required="required"
             aria-required="true"
             placeholder="* 电子邮件"
+            required="required"
+            tabindex="2"
+            type="text"
           />
-          <input type="text" id="authorUrl" v-model="comment.authorUrl" tabindex="3" placeholder="个人站点" />
+          <input id="authorUrl" v-model="comment.authorUrl" placeholder="个人站点" tabindex="3" type="text" />
         </div>
-        <div class="comment-textarea" v-if="!previewMode">
+        <div v-if="!previewMode" class="comment-textarea">
           <textarea
             ref="commentTextarea"
-            required="required"
-            aria-required="true"
-            tabindex="4"
-            :placeholder="options.comment_content_placeholder || '撰写评论...'"
             v-model="comment.content"
+            :placeholder="options.comment_content_placeholder || '撰写评论...'"
+            aria-required="true"
+            required="required"
+            tabindex="4"
           ></textarea>
         </div>
-        <div class="comment-preview markdown-body" v-else v-html="renderedContent"></div>
+        <div v-else class="comment-preview markdown-body" v-html="renderedContent"></div>
         <ul class="comment-buttons">
           <li v-if="comment.content" class="middle" style="margin-right:5px">
             <a
@@ -51,8 +51,8 @@
             <a
               class="button-submit"
               href="javascript:void(0)"
-              tabindex="5"
               rel="nofollow noopener"
+              tabindex="5"
               @click="handleSubmitClick"
               >提交</a
             >
@@ -61,7 +61,7 @@
         <div class="comment-alert">
           <!-- Info -->
           <template v-if="infoAlertVisiable">
-            <div class="alert info" v-for="(info, index) in infoes" :key="index">
+            <div v-for="(info, index) in infoes" :key="index" class="alert info">
               <span class="closebtn" @click="clearAlertClose">&times;</span>
               <strong>{{ info }}</strong>
             </div>
@@ -69,7 +69,7 @@
 
           <!-- Success -->
           <template v-if="successAlertVisiable">
-            <div class="alert success" v-for="(success, index) in successes" :key="index">
+            <div v-for="(success, index) in successes" :key="index" class="alert success">
               <span class="closebtn" @click="clearAlertClose">&times;</span>
               <strong>{{ success }}</strong>
             </div>
@@ -77,7 +77,7 @@
 
           <!-- Warning -->
           <template v-if="warningAlertVisiable">
-            <div class="alert warning" v-for="(warning, index) in warnings" :key="index">
+            <div v-for="(warning, index) in warnings" :key="index" class="alert warning">
               <span class="closebtn" @click="clearAlertClose">&times;</span>
               <strong>{{ warning }}</strong>
             </div>
@@ -91,8 +91,7 @@
 import Vue from 'vue'
 import { marked } from 'marked'
 import md5 from 'md5'
-import { isEmpty, isObject } from '../utils/util'
-import { validEmail } from '../utils/util'
+import { isEmpty, isObject, validEmail } from '../utils/util'
 import apiClient from '@/plugins/api-client'
 import autosize from 'autosize'
 
@@ -202,22 +201,8 @@ export default {
         this.comment.parentId = this.replyComment.id
       }
 
-      let client = null
-
-      switch (this.target) {
-        case 'posts':
-          client = apiClient.post
-          break
-        case 'sheets':
-          client = apiClient.sheet
-          break
-        case 'journals':
-          client = apiClient.journal
-          break
-      }
-
-      client
-        .comment(this.comment)
+      apiClient.comment
+        .create(this.target, this.comment)
         .then(response => {
           // Store comment author, email, authorUrl
           localStorage.setItem('comment-author', this.comment.author)
