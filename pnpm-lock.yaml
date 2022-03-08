@@ -1,10 +1,10 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@halo-dev/content-api': ^1.0.0-alpha.47
-  '@vue/cli-plugin-babel': ^4.5.13
-  '@vue/cli-plugin-eslint': ^4.5.13
-  '@vue/cli-service': ^4.5.13
+  '@halo-dev/content-api': ^1.0.0-alpha.50
+  '@vue/cli-plugin-babel': ^4.5.15
+  '@vue/cli-plugin-eslint': ^4.5.15
+  '@vue/cli-service': ^4.5.15
   '@vue/eslint-config-prettier': ^6.0.0
   autosize: ^4.0.4
   babel-core: 7.0.0-bridge.0
@@ -12,26 +12,26 @@ specifiers:
   babel-jest: ^26.6.3
   babel-plugin-import: ^1.13.3
   eslint: ^5.16.0
-  eslint-plugin-html: ^6.1.2
-  eslint-plugin-prettier: ^3.4.0
+  eslint-plugin-html: ^6.2.0
+  eslint-plugin-prettier: ^3.4.1
   eslint-plugin-vue: ^5.2.3
   github-markdown-css: ^4.0.0
   husky: ^6.0.0
   lint-staged: ^10.5.4
-  marked: ^4.0.10
+  marked: ^4.0.12
   md5: ^2.3.0
   node-sass: ^4.14.1
   prettier: ^1.19.1
   sass-loader: ^8.0.2
-  ua-parser-js: ^0.7.28
+  ua-parser-js: ^0.7.31
   vue: ^2.6.14
   vue-template-compiler: ^2.6.14
 
 dependencies:
-  '@halo-dev/content-api': 1.0.0-alpha.47
+  '@halo-dev/content-api': 1.0.0-alpha.50
   autosize: 4.0.4
   github-markdown-css: 4.0.0
-  marked: 4.0.10
+  marked: 4.0.12
   md5: 2.3.0
   ua-parser-js: 0.7.31
   vue: 2.6.14
@@ -1340,28 +1340,28 @@ packages:
       minimist: 1.2.5
     dev: true
 
-  /@halo-dev/content-api/1.0.0-alpha.47:
-    resolution: {integrity: sha512-9D/R33CXSdmUV9gDTqSnzfLVtb/McUPy5BJ8MqFSpgy1gybJrU+/5KKeVh13CA0Q15y862wNTR9Vmgq98ZuCfg==}
+  /@halo-dev/content-api/1.0.0-alpha.50:
+    resolution: {integrity: sha512-wbr6HVl6x47H/JY3/otgSGFkXiLojOIqGNtI0bWebUwWag9LlLyhJTn4lSQ/6xZ835fdVX0wwK8P4/vMuETaWQ==}
     engines: {node: '>=12'}
     dependencies:
-      '@halo-dev/rest-api-client': 1.0.0-alpha.47
+      '@halo-dev/rest-api-client': 1.0.0-alpha.50
       tslib: 2.3.1
     transitivePeerDependencies:
       - debug
     dev: false
 
-  /@halo-dev/logger/1.0.0-alpha.47:
-    resolution: {integrity: sha512-LKhm/n3oUqOloIVVtDHwmCXOKvQHF7aFJqoMXmO+LneN6/s6FGDkcyluu7AhV6bQnsT5MoP714gAny5SHWAFlA==}
+  /@halo-dev/logger/1.0.0-alpha.50:
+    resolution: {integrity: sha512-Wl+MA6LfdCWecvmOdQkNzpWpddnfv3LlsM2AdmH8t5tznK984EAp2Zs+JgsIKyqyNdaFg3H70qoyAMiZQyzUVA==}
     engines: {node: '>=12.0.0'}
     dependencies:
       tslib: 2.3.1
     dev: false
 
-  /@halo-dev/rest-api-client/1.0.0-alpha.47:
-    resolution: {integrity: sha512-uH1CWrd8LS1Tbwzrm3fIFJV+UrvhfyOf1fH1I16OKUJrawgc2ldiz5zYrlATTsZheSAYu6mNiF7XCLcniUiNvA==}
+  /@halo-dev/rest-api-client/1.0.0-alpha.50:
+    resolution: {integrity: sha512-aEmCQAgboJ4rsjtSz3bCM2I97198bnxXvVAzpljReIUBk+W3bY1MNrJsvnqwBGGQqfcmjYnOoX2IPs7STyriKg==}
     engines: {node: '>=12'}
     dependencies:
-      '@halo-dev/logger': 1.0.0-alpha.47
+      '@halo-dev/logger': 1.0.0-alpha.50
       axios: 0.24.0
       form-data: 4.0.0
       js-base64: 3.7.2
@@ -3144,7 +3144,7 @@ packages:
 
   /chokidar/2.1.8:
     resolution: {integrity: sha512-ZmZUazfOzf0Nve7duiCKD23PFSCs4JPoYyccjUFF3aQkQadqBhfzhjkwBH2mNOG9cTBwhamM37EIsIkZw3nRgg==}
-    deprecated: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
+    deprecated: Chokidar 2 does not receive security updates since 2019. Upgrade to chokidar 3 with 15x fewer dependencies
     dependencies:
       anymatch: 2.0.0
       async-each: 1.0.3
@@ -6528,8 +6528,8 @@ packages:
       object-visit: 1.0.1
     dev: true
 
-  /marked/4.0.10:
-    resolution: {integrity: sha512-+QvuFj0nGgO970fySghXGmuw+Fd0gD2x3+MqCWLIPf5oxdv1Ka6b2q+z9RP01P/IaKPMEramy+7cNy/Lw8c3hw==}
+  /marked/4.0.12:
+    resolution: {integrity: sha512-hgibXWrEDNBWgGiK18j/4lkS6ihTe9sxtV4Q1OQppb/0zzyPSzoFANBa5MfsG/zgsWklmNnhm0XACZOH/0HBiQ==}
     engines: {node: '>= 12'}
     hasBin: true
     dev: false
