@@ -38,7 +38,7 @@
         </div>
         <div v-else class="comment-preview markdown-body" v-html="renderedContent"></div>
         <ul class="comment-buttons">
-          <li v-if="comment.content" class="middle" style="margin-right:5px">
+          <li v-if="comment.content" class="middle" style="margin-right: 5px">
             <a
               class="button-preview-edit"
               href="javascript:void(0)"
@@ -107,7 +107,7 @@ export default {
       type: String,
       required: false,
       default: 'posts',
-      validator: function(value) {
+      validator: function (value) {
         return ['posts', 'sheets', 'journals'].indexOf(value) !== -1
       }
     },

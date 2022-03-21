@@ -1,35 +1,35 @@
 <template>
   <ul class="page">
-    <li class="page-item" :class="{ disabled: !hasPrev }">
+    <li :class="{ disabled: !hasPrev }" class="page-item">
       <button class="prev-button" tabindex="-1" @click="handlePrevClick">上一页</button>
     </li>
     <!-- Show first page -->
-    <li class="page-item" v-if="firstPage != null" :class="{ active: page === firstPage }">
-      <button @click="handlePageItemClick(firstPage)" :class="{ active: page === firstPage }">
+    <li v-if="firstPage != null" :class="{ active: page === firstPage }" class="page-item">
+      <button :class="{ active: page === firstPage }" @click="handlePageItemClick(firstPage)">
         {{ firstPage + 1 }}
       </button>
     </li>
     <!-- Show middle page -->
-    <li class="page-item" v-show="hasMorePrev">
+    <li v-show="hasMorePrev" class="page-item">
       <span>...</span>
     </li>
-    <li class="page-item" v-for="middlePage in middlePages" :key="middlePage" :class="{ active: middlePage === page }">
-      <button @click="handlePageItemClick(middlePage)" :class="{ active: middlePage === page }">
+    <li v-for="middlePage in middlePages" :key="middlePage" :class="{ active: middlePage === page }" class="page-item">
+      <button :class="{ active: middlePage === page }" @click="handlePageItemClick(middlePage)">
         {{ middlePage + 1 }}
       </button>
     </li>
 
-    <li class="page-item" v-show="hasMoreNext">
+    <li v-show="hasMoreNext" class="page-item">
       <span>...</span>
     </li>
     <!-- Show last page -->
-    <li class="page-item" v-if="lastPage" :class="{ active: page === lastPage }">
-      <button @click="handlePageItemClick(lastPage)" :class="{ active: page === lastPage }">
+    <li v-if="lastPage" :class="{ active: page === lastPage }" class="page-item">
+      <button :class="{ active: page === lastPage }" @click="handlePageItemClick(lastPage)">
         {{ lastPage + 1 }}
       </button>
     </li>
 
-    <li class="page-item" :class="{ disabled: !hasNext }">
+    <li :class="{ disabled: !hasNext }" class="page-item">
       <button class="next-button" @click="handleNextClick">下一页</button>
     </li>
   </ul>

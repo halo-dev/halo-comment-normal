@@ -21,9 +21,7 @@
       </template>
     </ol>
 
-    <div v-if="loaded && !commentLoading && comments.length <= 0" class="comment-empty">
-      暂无评论
-    </div>
+    <div v-if="loaded && !commentLoading && comments.length <= 0" class="comment-empty">暂无评论</div>
 
     <div v-if="pagination.pages > 1" class="comment-page">
       <pagination
@@ -52,7 +50,7 @@ export default {
       type: String,
       required: false,
       default: 'post',
-      validator: function(value) {
+      validator: function (value) {
         return ['post', 'sheet', 'journal'].indexOf(value) !== -1
       }
     },

@@ -19,7 +19,7 @@
             <span
               :style="editing ? 'display:block;' : ''"
               class="comment-reply"
-              style="cursor: pointer;"
+              style="cursor: pointer"
               @click="handleReplyClick"
               >{{ editing ? '取消回复' : '回复' }}</span
             >
@@ -96,7 +96,7 @@ export default {
       type: String,
       required: false,
       default: 'posts',
-      validator: function(value) {
+      validator: function (value) {
         return ['posts', 'sheets', 'journals'].indexOf(value) !== -1
       }
     },
