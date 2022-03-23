@@ -6,12 +6,14 @@ import CommentEditor from './CommentEditor'
 import CommentNode from './CommentNode'
 import CommentLoading from './CommentLoading'
 import Pagination from './Pagination'
+import BaseButton from './BaseButton'
 
 const _components = {
   CommentEditor,
   CommentNode,
   CommentLoading,
-  Pagination
+  Pagination,
+  BaseButton
 }
 
 const components = {}

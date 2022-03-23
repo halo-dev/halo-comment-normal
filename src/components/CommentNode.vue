@@ -15,30 +15,34 @@
       <div class="contain-main">
         <div class="comment-meta">
           <div class="comment-author" itemprop="author">
-            <a :href="comment.authorUrl" class="author-name" rel="nofollow" target="_blank">{{ comment.author }}</a>
-            <span
-              :style="editing ? 'display:block;' : ''"
-              class="comment-reply"
-              style="cursor: pointer"
-              @click="handleReplyClick"
-              >{{ editing ? '取消回复' : '回复' }}</span
-            >
-            <span v-if="comment.isAdmin" class="is-admin">
-              <svg
-                class="icon"
-                height="14"
-                version="1.1"
-                viewBox="0 0 1024 1024"
-                width="14"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M512 0C229.248 0 0 229.248 0 512s229.248 512 512 512 512-229.248 512-512S794.752 0 512 0z m0 896c-212.032 0-384-171.968-384-384S299.968 128 512 128s384 171.968 384 384-171.968 384-384 384z m94.08-513.408L512 192.064l-94.016 190.528-210.304 30.592 152.192 148.288-35.968 209.344L512 672l188.032 98.88-35.904-209.344 152.128-148.288-210.176-30.656z"
-                  fill="#1296db"
-                  p-id="6998"
-                ></path>
-              </svg>
-            </span>
+            <div class="flex justify-between">
+              <div class="self-center inline-flex">
+                <a :href="comment.authorUrl" class="self-center author-name mr-2" rel="nofollow" target="_blank">
+                  {{ comment.author }}
+                </a>
+                <span v-if="comment.isAdmin" class="self-center is-admin">
+                  <svg
+                    class="icon"
+                    height="14"
+                    version="1.1"
+                    viewBox="0 0 1024 1024"
+                    width="14"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M512 0C229.248 0 0 229.248 0 512s229.248 512 512 512 512-229.248 512-512S794.752 0 512 0z m0 896c-212.032 0-384-171.968-384-384S299.968 128 512 128s384 171.968 384 384-171.968 384-384 384z m94.08-513.408L512 192.064l-94.016 190.528-210.304 30.592 152.192 148.288-35.968 209.344L512 672l188.032 98.88-35.904-209.344 152.128-148.288-210.176-30.656z"
+                      fill="#1296db"
+                      p-id="6998"
+                    ></path>
+                  </svg>
+                </span>
+              </div>
+              <div class="self-center">
+                <BaseButton @click="handleReplyClick" type="secondary" size="xs">
+                  {{ editing ? '取消回复' : '回复' }}
+                </BaseButton>
+              </div>
+            </div>
             <div v-if="configs.showUserAgent" class="useragent-info">
               {{ compileUserAgent }}
             </div>
@@ -46,7 +50,7 @@
           <time :datetime="comment.createTime" class="comment-time" itemprop="datePublished">{{ createTimeAgo }}</time>
           <a :href="'#comment-' + comment.id" class="comment-id">#{{ comment.id }}</a>
         </div>
-        <div class="comment-content markdown-body" itemprop="description" v-html="compileContent"></div>
+        <div class="comment-content yue" itemprop="description" v-html="compileContent"></div>
       </div>
     </div>
     <comment-editor

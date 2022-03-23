@@ -36,7 +36,7 @@
 <script>
 import './index'
 import apiClient from '@/plugins/api-client'
-import 'github-markdown-css/github-markdown.css'
+import 'yue.css/yue.css'
 
 export default {
   name: 'Comment',
@@ -136,6 +136,9 @@ export default {
 }
 </script>
 <style lang="scss">
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 $color: #898c7b;
 @import '../styles/global';
 </style>

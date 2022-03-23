@@ -19,8 +19,7 @@
             id="email"
             v-model="comment.email"
             aria-required="true"
-            placeholder="* 电子邮件"
-            required="required"
+            placeholder="电子邮件"
             tabindex="2"
             type="text"
           />
@@ -36,8 +35,8 @@
             tabindex="4"
           ></textarea>
         </div>
-        <div v-else class="comment-preview markdown-body" v-html="renderedContent"></div>
-        <ul class="comment-buttons">
+        <div v-else class="comment-preview yue" v-html="renderedContent"></div>
+        <ul>
           <li v-if="comment.content" class="middle" style="margin-right: 5px">
             <a
               class="button-preview-edit"
@@ -48,19 +47,12 @@
             >
           </li>
           <li class="middle">
-            <a
-              class="button-submit"
-              href="javascript:void(0)"
-              rel="nofollow noopener"
-              tabindex="5"
-              @click="handleSubmitClick"
-              >提交</a
-            >
+            <BaseButton type="secondary" @click="handleSubmitClick">提交</BaseButton>
           </li>
         </ul>
         <div class="comment-alert">
           <!-- Info -->
-          <template v-if="infoAlertVisiable">
+          <template v-if="infoAlertVisible">
             <div v-for="(info, index) in infoes" :key="index" class="alert info">
               <span class="closebtn" @click="clearAlertClose">&times;</span>
               <strong>{{ info }}</strong>
@@ -68,7 +60,7 @@
           </template>
 
           <!-- Success -->
-          <template v-if="successAlertVisiable">
+          <template v-if="successAlertVisible">
             <div v-for="(success, index) in successes" :key="index" class="alert success">
               <span class="closebtn" @click="clearAlertClose">&times;</span>
               <strong>{{ success }}</strong>
@@ -76,7 +68,7 @@
           </template>
 
           <!-- Warning -->
-          <template v-if="warningAlertVisiable">
+          <template v-if="warningAlertVisible">
             <div v-for="(warning, index) in warnings" :key="index" class="alert warning">
               <span class="closebtn" @click="clearAlertClose">&times;</span>
               <strong>{{ warning }}</strong>
@@ -154,40 +146,32 @@ export default {
       const gravatarMd5 = md5(this.comment.email)
       return `${gravatarSource}${gravatarMd5}?s=256&d=${gravatarDefault}`
     },
-    commentValid() {
-      return !isEmpty(this.comment.author) && !isEmpty(this.comment.email) && !isEmpty(this.comment.content)
-    },
-    infoAlertVisiable() {
+    infoAlertVisible() {
       return this.infoes !== null && this.infoes.length > 0
     },
-    warningAlertVisiable() {
+    warningAlertVisible() {
       return this.warnings !== null && this.warnings.length > 0
     },
-    successAlertVisiable() {
+    successAlertVisible() {
       return this.successes !== null && this.successes.length > 0
     }
   },
   created() {
     // Get info from local storage
-    var author = localStorage.getItem('comment-author')
-    var authorUrl = localStorage.getItem('comment-authorUrl')
-    var email = localStorage.getItem('comment-email')
+    const author = localStorage.getItem('comment-author')
+    const authorUrl = localStorage.getItem('comment-authorUrl')
+    const email = localStorage.getItem('comment-email')
     this.comment.author = author ? author : ''
     this.comment.authorUrl = authorUrl ? authorUrl : ''
     this.comment.email = email ? email : ''
   },
   mounted() {
-    // autosize(this.$refs.commentTextArea);
     autosize(document.querySelector('textarea'))
   },
   methods: {
     handleSubmitClick() {
       if (isEmpty(this.comment.author)) {
         this.warnings.push('评论者昵称不能为空')
-        return
-      }
-      if (isEmpty(this.comment.email)) {
-        this.warnings.push('邮箱不能为空')
         return
       }
       if (isEmpty(this.comment.content)) {
