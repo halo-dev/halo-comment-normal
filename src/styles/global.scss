@@ -354,12 +354,12 @@
     overflow: hidden;
     margin-top: 30px;
     padding-bottom: 20px;
-    border-bottom: 3px solid #f5f8fa;
+    border-bottom: 2px solid #f5f8fa;
   }
 
-  // .comment-nodes li:last-child {
-  //     border: 0;
-  // }
+  .comment-nodes li:last-child {
+    border: 0;
+  }
 
   .comment-nodes .commentator a:after,
   .comment-nodes .commentator a:before {
@@ -375,20 +375,6 @@
       .comment-reply {
         display: block;
       }
-    }
-  }
-
-  .children {
-    .comment-body {
-      // &:before {
-      //     content: "";
-      //     width: 2px;
-      //     height: 500%;
-      //     background: $color;
-      //     left: 23px;
-      //     top: -500%;
-      //     position: absolute;
-      // }
     }
   }
 

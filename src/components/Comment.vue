@@ -2,14 +2,14 @@
   <div id="halo-comment" class="halo-comment">
     <comment-editor :configs="mergedConfigs" :options="options" :target="target" :targetId="id" />
 
-    <div v-if="!mergedConfigs.autoLoad && !loaded" class="comment-load-button">
-      <a class="button-load" href="javascript:void(0)" rel="nofollow noopener" @click="loadComments">加载评论</a>
+    <div v-if="!mergedConfigs.autoLoad && !list.loaded" class="comment-load-button">
+      <a class="button-load" href="javascript:void(0)" rel="nofollow noopener" @click="handleGetComments">加载评论</a>
     </div>
 
-    <comment-loading v-show="commentLoading" :configs="configs" />
+    <comment-loading v-show="list.loading" :configs="configs" />
 
-    <ol v-if="comments.length >= 1" class="comment-nodes">
-      <template v-for="(comment, index) in comments">
+    <ol v-if="list.data.length >= 1" class="comment-nodes">
+      <template v-for="(comment, index) in list.data">
         <CommentNode
           :key="index"
           :comment="comment"
@@ -21,15 +21,10 @@
       </template>
     </ol>
 
-    <div v-if="loaded && !commentLoading && comments.length <= 0" class="comment-empty">暂无评论</div>
+    <div v-if="list.loaded && !list.loading && list.data.length <= 0" class="comment-empty">暂无评论</div>
 
-    <div v-if="pagination.pages > 1" class="comment-page">
-      <pagination
-        :page="pagination.page"
-        :size="pagination.size"
-        :total="pagination.total"
-        @change="handlePaginationChange"
-      />
+    <div v-if="list.pages > 1" class="comment-page">
+      <pagination :page="list.params.page" :size="list.size" :total="list.total" @change="handlePaginationChange" />
     </div>
   </div>
 </template>
@@ -67,16 +62,18 @@ export default {
   },
   data() {
     return {
-      comments: [],
-      pagination: {
+      list: {
+        data: [],
+        loading: false,
+        loaded: false,
+        params: {
+          page: 0
+        },
         pages: 0,
-        page: 0,
-        sort: '',
-        size: 5,
-        total: 0
+        total: 0,
+        size: 10
       },
-      commentLoading: false,
-      loaded: false,
+
       repliedSuccess: null,
       replyingComment: null,
       options: {
@@ -102,35 +99,34 @@ export default {
   },
   created() {
     if (this.mergedConfigs.autoLoad) {
-      this.loadComments()
+      this.handleGetComments()
     }
     this.loadOptions()
   },
   methods: {
-    loadComments() {
-      this.comments = []
-      this.commentLoading = true
+    async handleGetComments() {
+      this.list.loading = true
 
-      apiClient.comment
-        .listAsTreeView(this.target, this.id, this.pagination)
-        .then(response => {
-          this.comments = response.data.content
-          this.pagination.total = response.data.total
-          this.pagination.pages = response.data.pages
-        })
-        .finally(() => {
-          this.commentLoading = false
-          this.loaded = true
-        })
+      const { data } = await apiClient.comment.listAsTreeView(this.target, this.id, this.list.params)
+
+      this.list.data = data.content
+      this.list.total = data.total
+      this.list.pages = data.pages
+      this.list.size = data.size
+
+      this.list.loading = false
+      this.list.loaded = true
     },
+
     loadOptions() {
       apiClient.option.comment().then(response => {
         this.options = response.data
       })
     },
+
     handlePaginationChange(page) {
-      this.pagination.page = page
-      this.loadComments()
+      this.list.params.page = page
+      this.handleGetComments()
     }
   }
 }
@@ -139,6 +135,5 @@ export default {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-$color: #898c7b;
 @import '../styles/global';
 </style>
