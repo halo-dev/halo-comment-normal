@@ -49,7 +49,7 @@
           </div>
           <time :datetime="comment.createTime" class="comment-time" itemprop="datePublished">{{ createTimeAgo }}</time>
         </div>
-        <div class="comment-content markdown-body" itemprop="description" v-html="compileContent"></div>
+        <div class="comment-content yue" itemprop="description" v-html="compileContent"></div>
       </div>
     </div>
     <comment-editor

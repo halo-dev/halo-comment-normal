@@ -131,5 +131,5 @@ export default {
 @tailwind components;
 @tailwind utilities;
 @import '../styles/global';
-@import 'github-markdown-css/github-markdown-light.css';
+@import 'yue.css/yue.css';
 </style>

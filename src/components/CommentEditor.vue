@@ -37,7 +37,7 @@
             tabindex="4"
           ></textarea>
         </div>
-        <div v-else class="comment-preview markdown-body mb-2 w-full" v-html="renderedContent"></div>
+        <div v-else class="comment-preview yue mb-2 w-full" v-html="renderedContent"></div>
         <ul>
           <li class="inline-flex mr-2">
             <BaseButton type="secondary" @click="handleSubmitClick">提交</BaseButton>
