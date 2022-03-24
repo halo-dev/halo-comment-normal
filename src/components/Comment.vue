@@ -2,8 +2,8 @@
   <div id="halo-comment" class="halo-comment">
     <comment-editor :configs="mergedConfigs" :options="options" :target="target" :targetId="id" />
 
-    <div v-if="!mergedConfigs.autoLoad && !list.loaded" class="comment-load-button">
-      <a class="button-load" href="javascript:void(0)" rel="nofollow noopener" @click="handleGetComments">加载评论</a>
+    <div v-if="!mergedConfigs.autoLoad && !list.loaded" class="text-center py-10">
+      <BaseButton type="secondary" @click="handleGetComments">加载评论</BaseButton>
     </div>
 
     <comment-loading v-show="list.loading" :configs="configs" />
@@ -30,8 +30,14 @@
 </template>
 <script>
 import './index'
-import apiClient from '@/plugins/api-client'
+import apiClient from '../plugins/api-client'
 import 'yue.css/yue.css'
+
+const defaultConfig = {
+  autoLoad: true,
+  showUserAgent: true,
+  loadingStyle: 'default'
+}
 
 export default {
   name: 'Comment',
@@ -50,14 +56,9 @@ export default {
       }
     },
     configs: {
-      type: Object,
+      type: [Object, String],
       required: false,
-      default: () => ({
-        // auto load comment,default true
-        autoLoad: true,
-        showUserAgent: true,
-        loadingStyle: 'default'
-      })
+      default: () => defaultConfig
     }
   },
   data() {
@@ -74,10 +75,8 @@ export default {
         size: 10
       },
 
-      repliedSuccess: null,
-      replyingComment: null,
       options: {
-        comment_gravatar_default: 'mm'
+        comment_gravatar_default: ''
       }
     }
   },
@@ -87,21 +86,18 @@ export default {
       return `${this.type}s`
     },
     mergedConfigs() {
-      return Object.assign(
-        {
-          autoLoad: true,
-          showUserAgent: true,
-          loadingStyle: 'default'
-        },
-        this.configs
-      )
+      let externalConfigs = {}
+      if (Object.prototype.toString.call(this.configs) === '[object String]') {
+        externalConfigs = JSON.parse(this.configs)
+      }
+      return Object.assign(defaultConfig, externalConfigs)
     }
   },
   created() {
     if (this.mergedConfigs.autoLoad) {
       this.handleGetComments()
     }
-    this.loadOptions()
+    this.handleGetOptions()
   },
   methods: {
     async handleGetComments() {
@@ -118,7 +114,7 @@ export default {
       this.list.loaded = true
     },
 
-    loadOptions() {
+    handleGetOptions() {
       apiClient.option.comment().then(response => {
         this.options = response.data
       })

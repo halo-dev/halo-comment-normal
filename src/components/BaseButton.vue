@@ -1,5 +1,5 @@
 <template>
-  <button class="btn" :class="classes" :disabled="disabled" @click="handleClick">
+  <button class="btn" :class="classes" :disabled="disabled" type="button" @click="handleClick">
     <slot />
   </button>
 </template>
@@ -44,7 +44,7 @@ export default {
 </script>
 <style lang="scss">
 .btn {
-  border-radius: 4px;
+  border-radius: 3px;
   @apply inline-flex;
   @apply flex-shrink-0;
   @apply cursor-pointer;

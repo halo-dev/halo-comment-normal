@@ -103,21 +103,16 @@
 
     .inner {
       margin: auto;
-      padding: 20px 0;
     }
-  }
-
-  .comment-form {
-    margin-left: 56px;
   }
 
   .comment-form input,
   .comment-form textarea {
     box-shadow: none;
     border: 1px solid #e1e8ed;
-    border-radius: 5px;
+    border-radius: 3px;
     box-sizing: border-box;
-    padding: 10px;
+    padding: 5px 10px;
     resize: vertical;
     color: #657786;
   }
@@ -125,28 +120,6 @@
   .comment-form input:focus,
   .comment-form textarea:focus {
     border-color: #cccccc;
-  }
-
-  .commentator {
-    position: relative;
-    float: left;
-  }
-
-  .author-info {
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 10px;
-
-    input {
-      font-size: 14px;
-      float: left;
-      width: 32%;
-      margin-right: 2%;
-    }
-
-    input#authorUrl {
-      margin: 0;
-    }
   }
 
   .comment-textarea {
@@ -290,16 +263,7 @@
 
     .comment-editor {
       animation: bottom20 500ms;
-
-      .inner {
-        padding: 7px 0 12px;
-      }
     }
-  }
-
-  .comment-load-button {
-    margin: 30px 0;
-    text-align: center;
   }
 
   .comment-empty {

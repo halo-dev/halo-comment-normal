@@ -1,15 +1,16 @@
 <template>
   <section class="comment-editor" role="form">
-    <div class="inner">
-      <div class="commentator">
+    <div class="flex my-5">
+      <div class="mr-2">
         <img :src="avatar" class="avatar" />
       </div>
-      <form class="comment-form">
-        <div class="author-info">
+      <form class="comment-form flex-1">
+        <div class="grid grid-cols-3 gap-2 mb-2">
           <input
             id="author"
             v-model="comment.author"
             aria-required="true"
+            class="w-full"
             placeholder="* 昵称"
             required="required"
             tabindex="1"
@@ -19,11 +20,19 @@
             id="email"
             v-model="comment.email"
             aria-required="true"
+            class="w-full"
             placeholder="电子邮件"
             tabindex="2"
             type="text"
           />
-          <input id="authorUrl" v-model="comment.authorUrl" placeholder="个人站点" tabindex="3" type="text" />
+          <input
+            id="authorUrl"
+            v-model="comment.authorUrl"
+            class="w-full"
+            placeholder="个人站点"
+            tabindex="3"
+            type="text"
+          />
         </div>
         <div v-if="!previewMode" class="comment-textarea">
           <textarea
@@ -80,7 +89,6 @@
   </section>
 </template>
 <script>
-import Vue from 'vue'
 import { marked } from 'marked'
 import md5 from 'md5'
 import { isEmpty, isObject, validEmail } from '../utils/util'
@@ -205,76 +213,11 @@ export default {
       this.clearAlertClose()
 
       if (createdComment.status === 'PUBLISHED') {
-        try {
-          this.createdNewNode(createdComment)
-          this.successes.push('评论成功')
-        } catch {
-          this.successes.push('评论成功，刷新即可显示最新评论！')
-        }
+        this.successes.push('评论成功，刷新即可显示最新评论！')
       } else {
         // Show tips
         this.infoes.push('您的评论已经投递至博主，等待博主审核！')
       }
-    },
-    createdNewNode(newComment) {
-      let pr = {
-        targetId: this.targetId,
-        target: this.target,
-        options: this.options,
-        configs: this.configs,
-        comment: newComment
-      }
-
-      pr =
-        newComment.parentId === 0
-          ? pr
-          : {
-              ...pr,
-              ...{
-                isChild: true,
-                parent: this.replyComment,
-                depth: this.$parent.selfAddDepth
-              }
-            }
-
-      const CommentNode = () => import('./CommentNode.vue')
-      // 创建一个组件
-      let comment = new Vue({
-        render: h => {
-          return h(CommentNode, {
-            props: pr
-          })
-        }
-      })
-      let dom
-      if (newComment.parentId === 0) {
-        if (this.$root.$el.getElementsByClassName('comment-nodes').length > 0) {
-          dom = this.$root.$el.getElementsByClassName('comment-nodes')[0]
-        } else {
-          dom = document.createElement('ol')
-          dom.setAttribute('class', 'comment-nodes')
-          let emptyDom = this.$root.$el.getElementsByClassName('comment-empty')[0]
-          emptyDom.parentNode.replaceChild(dom, emptyDom)
-        }
-        dom = this.$root.$el.getElementsByClassName('comment-nodes')[0]
-      } else {
-        let parentDom = this.$parent.$el
-        let replyDom = parentDom.getElementsByTagName('ol')
-        if (replyDom.length > 0) {
-          dom = replyDom[0]
-        } else {
-          dom = document.createElement('ol')
-          dom.setAttribute('class', 'children')
-          parentDom.appendChild(dom)
-        }
-      }
-      let nodeDom = document.createElement('div')
-      if (dom.children[0]) {
-        dom.insertBefore(nodeDom, dom.children[0])
-      } else {
-        dom.appendChild(nodeDom)
-      }
-      comment.$mount(nodeDom)
     },
     handleFailedToCreateComment(response) {
       this.clearAlertClose()
