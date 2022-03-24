@@ -16,15 +16,7 @@
             tabindex="1"
             type="text"
           />
-          <input
-            id="email"
-            v-model="comment.email"
-            aria-required="true"
-            class="w-full"
-            placeholder="电子邮件"
-            tabindex="2"
-            type="text"
-          />
+          <input id="email" v-model="comment.email" class="w-full" placeholder="电子邮件" tabindex="2" type="text" />
           <input
             id="authorUrl"
             v-model="comment.authorUrl"
@@ -34,9 +26,10 @@
             type="text"
           />
         </div>
-        <div v-if="!previewMode" class="comment-textarea">
+        <div v-if="!previewMode" class="comment-textarea mb-2">
           <textarea
             ref="commentTextarea"
+            class="block w-full"
             v-model="comment.content"
             :placeholder="options.comment_content_placeholder || '撰写评论...'"
             aria-required="true"
@@ -44,19 +37,15 @@
             tabindex="4"
           ></textarea>
         </div>
-        <div v-else class="comment-preview yue" v-html="renderedContent"></div>
+        <div v-else class="comment-preview markdown-body mb-2 w-full" v-html="renderedContent"></div>
         <ul>
-          <li v-if="comment.content" class="middle" style="margin-right: 5px">
-            <a
-              class="button-preview-edit"
-              href="javascript:void(0)"
-              rel="nofollow noopener"
-              @click="previewMode = !previewMode"
-              >{{ previewMode ? '编辑' : '预览' }}</a
-            >
-          </li>
-          <li class="middle">
+          <li class="inline-flex mr-2">
             <BaseButton type="secondary" @click="handleSubmitClick">提交</BaseButton>
+          </li>
+          <li class="inline-flex" v-if="comment.content">
+            <BaseButton @click="previewMode = !previewMode">
+              {{ previewMode ? '编辑' : '预览' }}
+            </BaseButton>
           </li>
         </ul>
         <div class="comment-alert">

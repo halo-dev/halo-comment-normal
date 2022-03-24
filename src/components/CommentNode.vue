@@ -48,9 +48,8 @@
             </div>
           </div>
           <time :datetime="comment.createTime" class="comment-time" itemprop="datePublished">{{ createTimeAgo }}</time>
-          <a :href="'#comment-' + comment.id" class="comment-id">#{{ comment.id }}</a>
         </div>
-        <div class="comment-content yue" itemprop="description" v-html="compileContent"></div>
+        <div class="comment-content markdown-body" itemprop="description" v-html="compileContent"></div>
       </div>
     </div>
     <comment-editor
@@ -142,7 +141,7 @@ export default {
       if (this.parent) {
         at = `[@${this.parent.author}](#comment-${this.parent.id})`
       }
-      return marked.parse(at + ' ' + this.comment.content)
+      return marked.parse(at + ' ' + this.comment.content, { sanitize: true })
     },
     createTimeAgo() {
       return timeAgo(this.comment.createTime)

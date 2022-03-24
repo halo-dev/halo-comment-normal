@@ -31,7 +31,6 @@
 <script>
 import './index'
 import apiClient from '../plugins/api-client'
-import 'yue.css/yue.css'
 
 const defaultConfig = {
   autoLoad: true,
@@ -132,4 +131,5 @@ export default {
 @tailwind components;
 @tailwind utilities;
 @import '../styles/global';
+@import 'github-markdown-css/github-markdown-light.css';
 </style>
