@@ -16,13 +16,7 @@
             type="text"
           />
           <input id="email" v-model="comment.email" class="w-full" placeholder="电子邮件" type="text" />
-          <input
-            id="authorUrl"
-            v-model="comment.authorUrl"
-            class="w-full"
-            placeholder="个人站点"
-            type="text"
-          />
+          <input id="authorUrl" v-model="comment.authorUrl" class="w-full" placeholder="个人站点" type="text" />
         </div>
         <div v-if="!previewMode" class="comment-textarea mb-2">
           <textarea

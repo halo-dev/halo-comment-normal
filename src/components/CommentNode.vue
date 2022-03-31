@@ -54,10 +54,7 @@
           <span v-html="compileContent"></span>
         </div>
         <div class="flex">
-          <span
-            class="cursor-pointer select-none text-sm hover:font-bold transition-all"
-            @click="editing = !editing"
-          >
+          <span class="cursor-pointer select-none text-sm hover:font-bold transition-all" @click="editing = !editing">
             {{ editing ? '取消回复' : '回复' }}
           </span>
         </div>
