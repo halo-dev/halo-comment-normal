@@ -1,5 +1,5 @@
 <template>
-  <div id="halo-comment" class="halo-comment">
+  <div id="halo-comment" class="halo-comment" :class="mergedConfigs.dark ? 'dark' : 'light'">
     <comment-editor :configs="mergedConfigs" :options="options" :target="target" :targetId="id" />
 
     <div v-if="!mergedConfigs.autoLoad && !list.loaded" class="text-center py-10">
@@ -39,7 +39,8 @@ import apiClient from '../plugins/api-client'
 const defaultConfig = {
   autoLoad: true,
   showUserAgent: true,
-  loadingStyle: 'default'
+  loadingStyle: 'default',
+  dark: false
 }
 
 export default {
