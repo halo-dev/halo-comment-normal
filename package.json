@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@halo-dev/content-api": "^1.0.0",
+    "@joeattardi/emoji-button": "^4.6.4",
     "autosize": "^4.0.4",
     "marked": "^4.0.12",
     "md5": "^2.3.0",

@@ -26,7 +26,17 @@
             :placeholder="options.comment_content_placeholder || '撰写评论...'"
             aria-required="true"
             required="required"
-          ></textarea>
+          >
+          </textarea>
+          <span class="emoji-picker absolute right-0 bottom-7 cursor-pointer hover:opacity-80 transition-all">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18">
+              <path fill="none" d="M0 0h24v24H0z" />
+              <path
+                d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-5-7h2a3 3 0 0 0 6 0h2a5 5 0 0 1-10 0zm1-2a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm8 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                fill="rgba(174,174,174,1)"
+              />
+            </svg>
+          </span>
         </div>
         <div v-else class="comment-preview markdown-body mb-2 w-full" v-html="renderedContent"></div>
         <ul>
@@ -74,6 +84,7 @@ import md5 from 'md5'
 import { isEmpty, isObject, validEmail } from '../utils/util'
 import apiClient from '@/plugins/api-client'
 import autosize from 'autosize'
+import { EmojiButton } from '@joeattardi/emoji-button'
 
 export default {
   name: 'CommentEditor',
@@ -152,11 +163,24 @@ export default {
     this.comment.author = author ? author : ''
     this.comment.authorUrl = authorUrl ? authorUrl : ''
     this.comment.email = email ? email : ''
+
+    this.handleCreateEmojiPicker()
   },
   mounted() {
     autosize(document.querySelector('textarea'))
   },
   methods: {
+    handleCreateEmojiPicker() {
+      this.$nextTick(() => {
+        const picker = new EmojiButton({ zIndex: 9999, theme: this.configs.dark ? 'dark' : 'light' })
+        picker.on('emoji', selection => {
+          this.comment.content += selection.emoji
+        })
+        const trigger = this.$el.getElementsByClassName('emoji-picker')[0]
+        trigger.addEventListener('click', () => picker.togglePicker(trigger))
+      })
+    },
+
     handleSubmitClick() {
       if (isEmpty(this.comment.author)) {
         this.warnings.push('评论者昵称不能为空')
