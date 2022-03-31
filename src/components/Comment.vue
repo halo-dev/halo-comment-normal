@@ -1,5 +1,5 @@
 <template>
-  <div id="halo-comment" class="halo-comment dark">
+  <div id="halo-comment" class="halo-comment">
     <comment-editor :configs="mergedConfigs" :options="options" :target="target" :targetId="id" />
 
     <div v-if="!mergedConfigs.autoLoad && !list.loaded" class="text-center py-10">
