@@ -23,9 +23,13 @@
 
     <div v-if="list.loaded && !list.loading && list.data.length <= 0" class="comment-empty">暂无评论</div>
 
-    <div v-if="list.pages > 1" class="comment-page">
-      <pagination :page="list.params.page" :size="list.size" :total="list.total" @change="handlePaginationChange" />
-    </div>
+    <pagination
+      v-if="list.pages > 1"
+      :page="list.params.page"
+      :size="list.size"
+      :total="list.total"
+      @change="handlePaginationChange"
+    />
   </div>
 </template>
 <script>
@@ -93,10 +97,10 @@ export default {
     }
   },
   created() {
+    this.handleGetOptions()
     if (this.mergedConfigs.autoLoad) {
       this.handleGetComments()
     }
-    this.handleGetOptions()
   },
   methods: {
     async handleGetComments() {
@@ -113,10 +117,9 @@ export default {
       this.list.loaded = true
     },
 
-    handleGetOptions() {
-      apiClient.option.comment().then(response => {
-        this.options = response.data
-      })
+    async handleGetOptions() {
+      const { data } = await apiClient.option.comment()
+      this.options = data
     },
 
     handlePaginationChange(page) {
@@ -131,5 +134,5 @@ export default {
 @tailwind components;
 @tailwind utilities;
 @import '../styles/global';
-@import 'yue.css/yue.css';
+@import 'github-markdown-css/github-markdown-light.css';
 </style>

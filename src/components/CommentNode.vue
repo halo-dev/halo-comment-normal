@@ -4,15 +4,15 @@
     :class="commentClass"
     class="comment"
     itemprop="comment"
-    itemtype="http://schema.org/Comment"
+    itemtype="https://schema.org/Comment"
   >
-    <div :id="'comment-' + comment.id" class="comment-body">
-      <div class="comment-avatar">
+    <div :id="'comment-' + comment.id" class="comment-body !mb-5">
+      <div class="relative float-left p-0">
         <a :href="`${comment.authorUrl ? comment.authorUrl : 'javascript:void(0)'}`" rel="nofollow" target="_blank">
           <img :alt="comment.author + `'s avatar`" :src="avatar" class="avatar" />
         </a>
       </div>
-      <div class="contain-main">
+      <div class="comment-main">
         <div class="comment-meta">
           <div class="comment-author" itemprop="author">
             <div class="flex justify-between">
@@ -37,11 +37,6 @@
                   </svg>
                 </span>
               </div>
-              <div class="self-center">
-                <BaseButton @click="handleReplyClick" type="secondary" size="xs">
-                  {{ editing ? '取消回复' : '回复' }}
-                </BaseButton>
-              </div>
             </div>
             <div v-if="configs.showUserAgent" class="useragent-info">
               {{ compileUserAgent }}
@@ -49,7 +44,12 @@
           </div>
           <time :datetime="comment.createTime" class="comment-time" itemprop="datePublished">{{ createTimeAgo }}</time>
         </div>
-        <div class="comment-content yue" itemprop="description" v-html="compileContent"></div>
+        <div class="comment-content markdown-body" itemprop="description" v-html="compileContent"></div>
+        <div class="flex">
+          <div @click="editing = !editing">{{ editing ? '取消回复' : '回复' }}</div>
+          <div>•</div>
+          <div>回复</div>
+        </div>
       </div>
     </div>
     <comment-editor
@@ -60,7 +60,7 @@
       :target="target"
       :targetId="targetId"
     />
-    <ol v-if="comment.children" class="children">
+    <ol v-if="comment.children" class="children-nodes">
       <template v-for="(children, index) in comment.children">
         <CommentNode
           :key="index"
@@ -157,10 +157,6 @@ export default {
       return ' li-comment-' + this.comment.id + isChild
     }
   },
-  methods: {
-    handleReplyClick() {
-      this.editing = !this.editing
-    }
-  }
+  methods: {}
 }
 </script>

@@ -1,38 +1,45 @@
 <template>
-  <ul class="page">
-    <li :class="{ disabled: !hasPrev }" class="page-item">
-      <button class="prev-button" tabindex="-1" @click="handlePrevClick">上一页</button>
-    </li>
-    <!-- Show first page -->
-    <li v-if="firstPage != null" :class="{ active: page === firstPage }" class="page-item">
-      <button :class="{ active: page === firstPage }" @click="handlePageItemClick(firstPage)">
-        {{ firstPage + 1 }}
-      </button>
-    </li>
-    <!-- Show middle page -->
-    <li v-show="hasMorePrev" class="page-item">
-      <span>...</span>
-    </li>
-    <li v-for="middlePage in middlePages" :key="middlePage" :class="{ active: middlePage === page }" class="page-item">
-      <button :class="{ active: middlePage === page }" @click="handlePageItemClick(middlePage)">
-        {{ middlePage + 1 }}
-      </button>
-    </li>
+  <div class="comment-page">
+    <ul class="page">
+      <li :class="{ disabled: !hasPrev }" class="page-item">
+        <button class="prev-button" tabindex="-1" @click="handlePrevClick">上一页</button>
+      </li>
+      <!-- Show first page -->
+      <li v-if="firstPage != null" :class="{ active: page === firstPage }" class="page-item">
+        <button :class="{ active: page === firstPage }" @click="handlePageItemClick(firstPage)">
+          {{ firstPage + 1 }}
+        </button>
+      </li>
+      <!-- Show middle page -->
+      <li v-show="hasMorePrev" class="page-item">
+        <span>...</span>
+      </li>
+      <li
+        v-for="middlePage in middlePages"
+        :key="middlePage"
+        :class="{ active: middlePage === page }"
+        class="page-item"
+      >
+        <button :class="{ active: middlePage === page }" @click="handlePageItemClick(middlePage)">
+          {{ middlePage + 1 }}
+        </button>
+      </li>
 
-    <li v-show="hasMoreNext" class="page-item">
-      <span>...</span>
-    </li>
-    <!-- Show last page -->
-    <li v-if="lastPage" :class="{ active: page === lastPage }" class="page-item">
-      <button :class="{ active: page === lastPage }" @click="handlePageItemClick(lastPage)">
-        {{ lastPage + 1 }}
-      </button>
-    </li>
+      <li v-show="hasMoreNext" class="page-item">
+        <span>...</span>
+      </li>
+      <!-- Show last page -->
+      <li v-if="lastPage" :class="{ active: page === lastPage }" class="page-item">
+        <button :class="{ active: page === lastPage }" @click="handlePageItemClick(lastPage)">
+          {{ lastPage + 1 }}
+        </button>
+      </li>
 
-    <li :class="{ disabled: !hasNext }" class="page-item">
-      <button class="next-button" @click="handleNextClick">下一页</button>
-    </li>
-  </ul>
+      <li :class="{ disabled: !hasNext }" class="page-item">
+        <button class="next-button" @click="handleNextClick">下一页</button>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -146,4 +153,46 @@ export default {
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.comment-page {
+  margin-top: 30px;
+  text-align: center;
+  border-top: 3px solid #f5f8fa;
+
+  .page {
+    display: inline-block;
+    padding: 10px 0;
+    margin: 0;
+
+    li {
+      display: inline;
+      margin-right: 5px;
+    }
+
+    button {
+      margin-bottom: 8px;
+      position: relative;
+      font-size: inherit;
+      font-family: inherit;
+      padding: 5px 10px;
+      border: 1px solid #d9d9d9;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.8s;
+      font-weight: normal;
+      color: rgba(0, 0, 0, 0.65);
+      background-color: #fff;
+
+      &:hover {
+        color: #1890ff;
+        border-color: #1890ff;
+      }
+    }
+
+    .active {
+      color: #1890ff;
+      border-color: #1890ff;
+    }
+  }
+}
+</style>
