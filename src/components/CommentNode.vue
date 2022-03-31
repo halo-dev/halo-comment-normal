@@ -6,7 +6,7 @@
     itemprop="comment"
     itemtype="https://schema.org/Comment"
   >
-    <div :id="'comment-' + comment.id" class="comment-body !mb-5">
+    <div :id="'comment-' + comment.id" :ref="'comment-' + comment.id" class="comment-body markdown-body !mb-5">
       <div class="relative float-left p-0">
         <a :href="`${comment.authorUrl ? comment.authorUrl : 'javascript:void(0)'}`" rel="nofollow" target="_blank">
           <img :alt="comment.author + `'s avatar`" :src="avatar" class="avatar" />
@@ -44,11 +44,22 @@
           </div>
           <time :datetime="comment.createTime" class="comment-time" itemprop="datePublished">{{ createTimeAgo }}</time>
         </div>
-        <div class="comment-content markdown-body" itemprop="description" v-html="compileContent"></div>
+        <div class="comment-content" itemprop="description">
+          <span
+            v-if="parent"
+            @mouseenter="handleHighlightParent"
+            @mouseleave="handleHighlightParent(false)"
+            v-html="compileReference"
+          ></span>
+          <span v-html="compileContent"></span>
+        </div>
         <div class="flex">
-          <div @click="editing = !editing">{{ editing ? '取消回复' : '回复' }}</div>
-          <div>•</div>
-          <div>回复</div>
+          <span
+            class="cursor-pointer select-none text-sm hover:font-bold transition-all"
+            @click="editing = !editing"
+          >
+            {{ editing ? '取消回复' : '回复' }}
+          </span>
         </div>
       </div>
     </div>
@@ -136,12 +147,14 @@ export default {
       }
       return `${gravatarSource}${this.comment.gravatarMd5}?s=256&d=${gravatarDefault}`
     },
-    compileContent() {
-      let at = ''
+    compileReference() {
       if (this.parent) {
-        at = `[@${this.parent.author}](#comment-${this.parent.id})`
+        return marked.parse(`[@${this.parent.author}](#comment-${this.parent.id})`)
       }
-      return marked.parse(at + ' ' + this.comment.content, { sanitize: true })
+      return undefined
+    },
+    compileContent() {
+      return marked.parse(this.comment.content, { sanitize: true })
     },
     createTimeAgo() {
       return timeAgo(this.comment.createTime)
@@ -157,6 +170,18 @@ export default {
       return ' li-comment-' + this.comment.id + isChild
     }
   },
-  methods: {}
+  methods: {
+    handleHighlightParent(highlight) {
+      const shadowRoot = document.getElementById(this.targetId + '').shadowRoot
+      if (!shadowRoot) {
+        return
+      }
+      const commentRef = shadowRoot.getElementById(`comment-${this.parent.id}`)
+      if (commentRef) {
+        const classList = commentRef.classList
+        highlight ? classList.add('comment-ref') : classList.remove('comment-ref')
+      }
+    }
+  }
 }
 </script>

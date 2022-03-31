@@ -157,7 +157,7 @@ export default {
 .comment-page {
   margin-top: 30px;
   text-align: center;
-  border-top: 3px solid #f5f8fa;
+  border-top: 2px solid var(--color-border-muted);
 
   .page {
     display: inline-block;

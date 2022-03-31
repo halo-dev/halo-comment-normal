@@ -1,5 +1,5 @@
 <template>
-  <div id="halo-comment" class="halo-comment">
+  <div id="halo-comment" class="halo-comment dark">
     <comment-editor :configs="mergedConfigs" :options="options" :target="target" :targetId="id" />
 
     <div v-if="!mergedConfigs.autoLoad && !list.loaded" class="text-center py-10">
@@ -134,5 +134,5 @@ export default {
 @tailwind components;
 @tailwind utilities;
 @import '../styles/global';
-@import 'github-markdown-css/github-markdown-light.css';
+@import '../styles/github-markdown.css';
 </style>

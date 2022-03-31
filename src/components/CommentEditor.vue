@@ -13,16 +13,14 @@
             class="w-full"
             placeholder="* 昵称"
             required="required"
-            tabindex="1"
             type="text"
           />
-          <input id="email" v-model="comment.email" class="w-full" placeholder="电子邮件" tabindex="2" type="text" />
+          <input id="email" v-model="comment.email" class="w-full" placeholder="电子邮件" type="text" />
           <input
             id="authorUrl"
             v-model="comment.authorUrl"
             class="w-full"
             placeholder="个人站点"
-            tabindex="3"
             type="text"
           />
         </div>
@@ -34,10 +32,9 @@
             :placeholder="options.comment_content_placeholder || '撰写评论...'"
             aria-required="true"
             required="required"
-            tabindex="4"
           ></textarea>
         </div>
-        <div v-else class="comment-preview yue mb-2 w-full" v-html="renderedContent"></div>
+        <div v-else class="comment-preview markdown-body mb-2 w-full" v-html="renderedContent"></div>
         <ul>
           <li class="inline-flex mr-2">
             <BaseButton type="secondary" @click="handleSubmitClick">提交</BaseButton>
